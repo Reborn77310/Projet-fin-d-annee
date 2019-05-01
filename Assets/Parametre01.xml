@@ -1,0 +1,10 @@
+<root>
+  <Time>
+    <TimeMax>10</TimeMax>
+    <TimeMin>6</TimeMin>
+  </Time>
+  <Rand>
+    <RandMax>8</RandMax>
+    <RandMin>3</RandMin>
+  </Rand>
+</root>

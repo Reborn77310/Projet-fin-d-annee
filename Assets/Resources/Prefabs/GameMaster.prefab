@@ -1,0 +1,235 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1620229429194610}
+  m_IsPrefabAsset: 1
+--- !u!1 &1620229429194610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4771211702443298}
+  - component: {fileID: 114270891299052886}
+  - component: {fileID: 114883406015691536}
+  - component: {fileID: 114291032226212338}
+  - component: {fileID: 114368965807874684}
+  - component: {fileID: 114806505667294122}
+  - component: {fileID: 114418363248243820}
+  - component: {fileID: 114834346969603954}
+  - component: {fileID: 114726917615502608}
+  m_Layer: 0
+  m_Name: GameMaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4771211702443298
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620229429194610}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114270891299052886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620229429194610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58c1d65a62fd104396db42e82a40992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players:
+  - {fileID: 0}
+  - {fileID: 0}
+  persoScripts:
+  - {fileID: 0}
+  - {fileID: 0}
+  playerActif: 0
+  pc:
+  - {fileID: 0}
+  - {fileID: 0}
+  switching: 0
+  offset: {x: 0, y: 0, z: 0}
+  caj: {fileID: 0}
+  animButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  mainDuJoueur: {fileID: 0}
+  boutonSpecialeAction: {fileID: 0}
+  boutonSpecialeCancel: {fileID: 0}
+  flecheEtNum:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &114291032226212338
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620229429194610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ba086f32e94414e9ed8da10dffbe84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textADroite: {fileID: 0}
+  pistonAnim: {fileID: 0}
+  grappinAnim: {fileID: 0}
+  droneAnim: {fileID: 0}
+  baboums:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  explosionNav: {fileID: 0}
+  etincellesChoc:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  bouclier:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &114368965807874684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620229429194610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a6ae35849351c3458e099b29ec04cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 0}
+  CamScript: {fileID: 0}
+--- !u!114 &114418363248243820
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620229429194610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9acb49d4df267cf44a5adb931ecbccee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Select_Sound: event:/ambient_vehicule
+  Select_Sound2: event:/tempete sans eclair
+--- !u!114 &114726917615502608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620229429194610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f98fdc8895c0fdc4ba9bbab61ba0ad72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114806505667294122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620229429194610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990c058b154005e43836f9e30f61b07e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particuleFenetreGO:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cameraShake: {fileID: 0}
+  tempestGO:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  particuleMoteur:
+  - {fileID: 0}
+  - {fileID: 0}
+  etatTempestOn: 0
+--- !u!114 &114834346969603954
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620229429194610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26405113f913fde43b1bcb92dd2f170e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  d: {fileID: 0}
+  bombe: {fileID: 0}
+  explosion: {fileID: 0}
+  feuuuuuuu: {fileID: 0}
+  ecran: {fileID: 0}
+  ragnaros: {fileID: 0}
+  allChilds: []
+--- !u!114 &114883406015691536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620229429194610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 563f8761dd351164290cde8a5d0b528e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emplacements:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cartesIndicators:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cartesPhysiques:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  gameMaster: {fileID: 0}
+  allActions: {fileID: 0}
+  nouveauPlayerActif: 0
+  redCarteColor: {r: 1, g: 0.4862745, b: 0.4862745, a: 0.7254902}
+  bleuCarteColor: {r: 0.4862745, g: 0.4862745, b: 1, a: 0.7254902}
+  normalCarteColor: {r: 1, g: 1, b: 1, a: 0.7254902}

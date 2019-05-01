@@ -1,0 +1,211 @@
+fileFormatVersion: 2
+guid: e42cc24f953004946b3235eb363e7c67
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Base_Pince1
+    100002: Base_Pince2
+    100004: Boulon_Pince002
+    100006: Boulon_Pince003
+    100008: Boulon_Pince004
+    100010: Boulon_Pince005
+    100012: Boulon_Pince006
+    100014: Boulon_Pince007
+    100016: Boulon_Pince008
+    100018: Boulon_Pince1
+    100020: //RootNode
+    100022: Ecran
+    100024: Kit de pinces
+    100026: Kit de pinces001
+    100028: Milieu_Pince1
+    100030: Milieu_Pince2
+    100032: Pince
+    100034: Pince1_P1
+    100036: Pince1_P2
+    100038: Pince1_P3
+    100040: Pince2_P1
+    100042: Pince2_P2
+    100044: Pince2_P3
+    100046: Pointe_Pince1
+    100048: Pointe_Pince2
+    400000: Base_Pince1
+    400002: Base_Pince2
+    400004: Boulon_Pince002
+    400006: Boulon_Pince003
+    400008: Boulon_Pince004
+    400010: Boulon_Pince005
+    400012: Boulon_Pince006
+    400014: Boulon_Pince007
+    400016: Boulon_Pince008
+    400018: Boulon_Pince1
+    400020: //RootNode
+    400022: Ecran
+    400024: Kit de pinces
+    400026: Kit de pinces001
+    400028: Milieu_Pince1
+    400030: Milieu_Pince2
+    400032: Pince
+    400034: Pince1_P1
+    400036: Pince1_P2
+    400038: Pince1_P3
+    400040: Pince2_P1
+    400042: Pince2_P2
+    400044: Pince2_P3
+    400046: Pointe_Pince1
+    400048: Pointe_Pince2
+    2100000: No Name
+    2300000: Base_Pince1
+    2300002: Base_Pince2
+    2300004: Boulon_Pince002
+    2300006: Boulon_Pince003
+    2300008: Boulon_Pince004
+    2300010: Boulon_Pince005
+    2300012: Boulon_Pince006
+    2300014: Boulon_Pince007
+    2300016: Boulon_Pince008
+    2300018: Boulon_Pince1
+    2300020: Ecran
+    2300022: Kit de pinces
+    2300024: Kit de pinces001
+    2300026: Milieu_Pince1
+    2300028: Milieu_Pince2
+    2300030: Pince
+    2300032: Pince1_P1
+    2300034: Pince1_P2
+    2300036: Pince1_P3
+    2300038: Pince2_P1
+    2300040: Pince2_P2
+    2300042: Pince2_P3
+    2300044: Pointe_Pince1
+    2300046: Pointe_Pince2
+    3300000: Base_Pince1
+    3300002: Base_Pince2
+    3300004: Boulon_Pince002
+    3300006: Boulon_Pince003
+    3300008: Boulon_Pince004
+    3300010: Boulon_Pince005
+    3300012: Boulon_Pince006
+    3300014: Boulon_Pince007
+    3300016: Boulon_Pince008
+    3300018: Boulon_Pince1
+    3300020: Ecran
+    3300022: Kit de pinces
+    3300024: Kit de pinces001
+    3300026: Milieu_Pince1
+    3300028: Milieu_Pince2
+    3300030: Pince
+    3300032: Pince1_P1
+    3300034: Pince1_P2
+    3300036: Pince1_P3
+    3300038: Pince2_P1
+    3300040: Pince2_P2
+    3300042: Pince2_P3
+    3300044: Pointe_Pince1
+    3300046: Pointe_Pince2
+    4300000: Pince
+    4300002: Kit de pinces
+    4300004: Kit de pinces001
+    4300006: Ecran
+    4300008: Pointe_Pince1
+    4300010: Milieu_Pince1
+    4300012: Base_Pince1
+    4300014: Boulon_Pince1
+    4300016: Boulon_Pince002
+    4300018: Pince1_P1
+    4300020: Pince1_P2
+    4300022: Pince1_P3
+    4300024: Boulon_Pince003
+    4300026: Boulon_Pince004
+    4300028: Boulon_Pince005
+    4300030: Boulon_Pince006
+    4300032: Boulon_Pince007
+    4300034: Boulon_Pince008
+    4300036: Pointe_Pince2
+    4300038: Milieu_Pince2
+    4300040: Base_Pince2
+    4300042: Pince2_P1
+    4300044: Pince2_P2
+    4300046: Pince2_P3
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
