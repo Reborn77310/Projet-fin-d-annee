@@ -22,26 +22,21 @@ public class Cartes
 public class Salles
 {
     public GameObject MyGo;
-    public SetupBaseSalle MySetup;
+    public SetupManager SM;
     
-    public Salles(GameObject go, SetupBaseSalle setup)
+    public Salles(GameObject go)
     {
         MyGo = go;
-        MySetup = setup;
+
+        SM = MyGo.transform.GetChild(1).GetComponent<SetupManager>();
     }
 }
 
-//Cercle = Defense 1 et Triangle = attaque 2
-public enum SetupBaseSalle
-{
-    Cercle,Carre,Triangle  
-}
 
 public class CartesManager : MonoBehaviour
 {
     [Header("Lists")]
     public List<Salles> allSalles = new List<Salles>();
-    public List<SetupBaseSalle> LeSetupDesSalles = new List<SetupBaseSalle>();
     public List<Cartes> allCards = new List<Cartes>();
     CartesButtons[] cartesButtonsScripts = new CartesButtons[3];
     
@@ -73,7 +68,7 @@ public class CartesManager : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            Salles newSalle = new Salles(GameObject.Find("Salle" + i.ToString()),LeSetupDesSalles[i]);
+            Salles newSalle = new Salles(GameObject.Find("Salle" + i.ToString()));
             allSalles.Add(newSalle);
         }
     }
@@ -99,7 +94,7 @@ public class CartesManager : MonoBehaviour
                     {
                         if (MM.MyModules[0].CarteType != -1 && MM.MyModules[1].CarteType != -1)
                         {
-                            ThirdCardAction(MM,i);
+                            ThirdCardAction(MM);
                         }
                     }
                 }
@@ -114,11 +109,11 @@ public class CartesManager : MonoBehaviour
         }
     }
 
-    void ThirdCardAction(ModuleManager mm, int i)
+    void ThirdCardAction(ModuleManager mm)
     {
-        int type =  mm.MyModules[i].CarteType;
-        mm.MyModules[i].CarteType = -1;
-        mm.MyModules[i].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+        int type =  mm.MyModules[2].CarteType;
+        mm.MyModules[2].CarteType = -1;
+        mm.MyModules[2].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
             Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
 
         
@@ -126,157 +121,94 @@ public class CartesManager : MonoBehaviour
         {
             if (mm.transform.parent.gameObject == allSalles[j].MyGo)
             {
-                SelectSetup(allSalles[j].MySetup,mm.MyModules[1],type);
+                SelectSetup(type,mm);
             }
         }
     }
 
-    public void SelectSetup(SetupBaseSalle setup,Modules mod1,int type)
+    public void SelectSetup(int type,ModuleManager mm)
     {
         bool Attack = false;
-        if (setup == SetupBaseSalle.Cercle)
-        {
-            //defense
-            print("def");
-        }
-        else if (setup == SetupBaseSalle.Triangle)
+        if (mm.MyModules[0].CarteType == 0)
         {
             //Attaque
-            print("att");
             Attack = true;
         }
-        SelectCible(Attack,mod1,type);
+        else if (mm.MyModules[0].CarteType == 1)
+        {
+            //Def
+        }
+        else if (mm.MyModules[0].CarteType == 2)
+        {
+            //Alteration
+        }
+        
+        SelectCible(Attack,type,mm);
     }
 
-    public void SelectCible(bool shouldIAttack,Modules mod1,int type)
+    public void SelectCible(bool shouldIAttack,int type,ModuleManager mm)
     {
+        string wantedName;
         if (shouldIAttack)
         {
             for (int i = 0; i < EnnemiManager.CurrentSpawns.Count; i++)
             {
-                if (mod1.CarteType == 0)
+                var calculTest = mm.MyModules[1].rotationCompteur % 4;
+                if (Mathf.Abs(calculTest) == 0)
                 {
-                    //Carré
-                    //Cible 1-2
-                  //  EnnemiManager.CurrentSpawns[i].MyChilds.myRooms[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/CercleBlanc");
-                   // EnnemiManager.CurrentSpawns[i].MyChilds.myRooms[1].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/CercleBlanc");
-                    var typeSalle0 = EnnemiManager.CurrentSpawns[i].MyChilds.myTypes[0];
-                    var typeSalle1 = EnnemiManager.CurrentSpawns[i].MyChilds.myTypes[1];
-                    CalculDeDegats(type, typeSalle0,typeSalle1,i);
+                    print(1);
+                    //premier salle
                 }
-                else if (mod1.CarteType == 1)
+                else if (Mathf.Abs(calculTest) == 1)
                 {
-                    //Cercle
-                    //cible 1-3
-                  //  EnnemiManager.CurrentSpawns[i].MyChilds.myRooms[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/CercleBlanc");
-                  //  EnnemiManager.CurrentSpawns[i].MyChilds.myRooms[2].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/CercleBlanc");
-                    var typeSalle0 = EnnemiManager.CurrentSpawns[i].MyChilds.myTypes[0];
-                    var typeSalle2 = EnnemiManager.CurrentSpawns[i].MyChilds.myTypes[2];
-                    CalculDeDegats(type, typeSalle0,typeSalle2,i);
+                    print(2);
+                   //deuxieme salle
                 }
-                else if (mod1.CarteType == 2)
+                else if (Mathf.Abs(calculTest) == 2)
                 {
-                    //Triangle
-                    //Cible 1-4
-                   // EnnemiManager.CurrentSpawns[i].MyChilds.myRooms[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/CercleBlanc");
-                  //  EnnemiManager.CurrentSpawns[i].MyChilds.myRooms[3].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/CercleBlanc");
-                    var typeSalle0 = EnnemiManager.CurrentSpawns[i].MyChilds.myTypes[0];
-                    var typeSalle2 = EnnemiManager.CurrentSpawns[i].MyChilds.myTypes[3];
-                    CalculDeDegats(type, typeSalle0,typeSalle2,i);
+                    print(3);
+                    //troisieme salle
+                }
+                else if (Mathf.Abs(calculTest) == 3)
+                {
+                    print(4);
+                    //quatrieme salle
                 }
             }
-            EnnemiManager.CheckPdv();
+
+            mm.MyCompteurInt -= 1;
+            if (mm.MyCompteurInt <= 0)
+            {
+                mm.MyModules[1].CarteType = -1;
+                mm.MyModules[1].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+                    Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
+                mm.MyCompteurInt = 2;
+            }
+
+            mm.MyCompteur.text = mm.MyCompteurInt.ToString();
+
+            wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupAttack.MyName;
         }
+        else
+        {
+            mm.MyCompteurInt -= 1;
+            if (mm.MyCompteurInt <= 0)
+            {
+                mm.MyModules[1].CarteType = -1;
+                mm.MyModules[1].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+                    Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
+                mm.MyCompteurInt = 2;
+            }
+
+            mm.MyCompteur.text = mm.MyCompteurInt.ToString();
+
+            wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupDefense.MyName;
+        }
+        
+        GetComponent<AllSetupsActions>().FindEffect(wantedName);
     }
 
-    void CalculDeDegats(int myType, int theirType1, int theirType2,int i)
-    {
-        int degats = 0;
-        if (myType == 0)
-        {
-            if (theirType1 == 0)
-            {
-                degats += 10;
-            }
-            else if (theirType1 == 1)
-            {
-                degats += 15;
-            }
-            else if (theirType1 == 2)
-            {
-                degats += 5;
-            }
-            if (theirType2 == 0)
-            {
-                degats += 10;
-            }
-            else if (theirType2 == 1)
-            {
-                degats += 15;
-            }
-            else if (theirType2 == 2)
-            {
-                degats += 5;
-            }
-           
-        }
-        if (myType == 1)
-        {
-            if (theirType1 == 0)
-            {
-                degats += 5;
-            }
-            else if (theirType1 == 1)
-            {
-                degats += 10;
-            }
-            else if (theirType1 == 2)
-            {
-                degats += 15;
-            }
-            if (theirType2 == 0)
-            {
-                degats += 5;
-            }
-            else if (theirType2 == 1)
-            {
-                degats += 10;
-            }
-            else if (theirType2 == 2)
-            {
-                degats += 15;
-            }
-           
-        }
-        if (myType == 2)
-        {
-            if (theirType1 == 0)
-            {
-                degats += 15;
-            }
-            else if (theirType1 == 1)
-            {
-                degats += 5;
-            }
-            else if (theirType1 == 2)
-            {
-                degats += 10;
-            }
-            if (theirType2 == 0)
-            {
-                degats += 15;
-            }
-            else if (theirType2 == 1)
-            {
-                degats += 5;
-            }
-            else if (theirType2 == 2)
-            {
-                degats += 10;
-            }
-        }
-        EnnemiManager.PerdrePv(degats,i);
-    }
+    
     #endregion
     
     #region Gestion Des Cartes

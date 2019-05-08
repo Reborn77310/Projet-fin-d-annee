@@ -23,7 +23,8 @@ public class GameMaster : MonoBehaviour
     CartesManager cartesManager;
 
     private CardSound cardSound;
-
+    private GameObject touchedByZoomRaycast;
+    
     void Awake()
     {
         cardSound = Camera.main.GetComponent<CardSound>();
@@ -33,6 +34,11 @@ public class GameMaster : MonoBehaviour
 
     void Update()
     {
+        var moletteSouris = Input.GetAxis("Mouse ScrollWheel");
+        if (Mathf.Abs(moletteSouris) > 0)
+        {
+            RotateSecondModule(moletteSouris);
+        }
         if (isPlayingACard)
         {
             PlayerLine();
@@ -58,10 +64,65 @@ public class GameMaster : MonoBehaviour
         {
             TakeCardFromModule();
         }
+        
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.transform.tag == "Module")
+            {
+                touchedByZoomRaycast = hit.transform.gameObject;
+                var text = hit.transform.GetChild(1).GetComponent<TextMesh>();
+                text.fontSize = 12;
+            }
+            else
+            {
+                if (touchedByZoomRaycast != null)
+                {
+                    var text = touchedByZoomRaycast.transform.GetChild(1).GetComponent<TextMesh>();
+                    text.fontSize = 2;
+                    touchedByZoomRaycast = null;
+                }
+            }
+        }
+        else
+        {
+            if (touchedByZoomRaycast != null)
+            {
+                var text = touchedByZoomRaycast.transform.GetChild(1).GetComponent<TextMesh>();
+                text.fontSize = 2;
+                touchedByZoomRaycast = null;
+            }
+        }
 
     }
 
     #region Actions
+
+    public void RotateSecondModule(float valeur)
+    {
+        var origin = new Vector3(2.3f, -2.095f, -16.11f);
+        Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
+
+
+        RaycastHit hit;
+        var dist = Vector3.Distance(origin, point);
+        var dir = (point - Camera.main.transform.position);
+
+        caj.transform.position = point + dir;
+
+        if (Physics.Raycast(caj.transform.position, dir, out hit, dist))
+        {
+            if (hit.transform.tag == "Salles")
+            {
+                ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
+                mm.MyModules[1].MyObject.transform.Rotate(0,0,90 * (valeur * 10));
+                mm.MyModules[1].rotationCompteur += 1 * (Mathf.RoundToInt(valeur * 10));
+            }
+        }
+    }
+    
     public void TakeCardFromModule()
     {
         var origin = new Vector3(2.3f, -2.095f, -16.11f);
@@ -76,23 +137,25 @@ public class GameMaster : MonoBehaviour
 
         if (Physics.Raycast(caj.transform.position, dir, out hit, dist))
         {
-            if (hit.transform.tag == "Module")
+            if (hit.transform.tag == "Salles")
             {
-                ModuleManager MM = hit.transform.parent.GetComponent<ModuleManager>();
-                for (int i = 0; i < MM.MyModules.Length; i++)
+                ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
+                var testBool = false;
+                for (int i = mm.MyModules.Length - 1; i >= 0; i--)
                 {
-                    if (hit.transform.gameObject == MM.MyModules[i].MyObject && MM.MyModules[i].MyType != Modules.Type.Droite)
+                    if (mm.MyModules[i].CarteType != -1 && !testBool && mm.MyModules[i].MyType != Modules.Type.Droite)
                     {
-                        if (!cartesManager.CheckHandisFull() && MM.MyModules[i].CarteType >= 0)
+                        if (!cartesManager.CheckHandisFull())
                         {
+                            testBool = true;
                             if (!CartesManager.PhaseLente)
                             {
-                                cartesManager.AjouterUneCarteDansLaMain(1,MM.MyModules[i].CarteType);
+                                cartesManager.AjouterUneCarteDansLaMain(1,mm.MyModules[i].CarteType);
                             }
                             
-                            MM.MyModules[i].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+                            mm.MyModules[i].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
                                 Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
-                            MM.MyModules[i].CarteType = -1;
+                            mm.MyModules[i].CarteType = -1;
                         }
                     }
                 }
@@ -120,16 +183,18 @@ public class GameMaster : MonoBehaviour
         
         if (Physics.Raycast(caj.transform.position, dir, out hit, dist))
         {
-            if (hit.transform.tag == "Module")
+            if (hit.transform.tag == "Salles")
             {
-                ModuleManager mm = hit.transform.parent.GetComponent<ModuleManager>();
+                ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
+                var testBool = false;
                 for (int i = 0; i < mm.MyModules.Length; i++)
                 {
-                    if (hit.transform.gameObject == mm.MyModules[i].MyObject)
+                    if (mm.MyModules[i].CarteType == -1 && !testBool)
                     {
+                        testBool = true;
                         caj.GetComponent<Animator>().SetBool("Dance", true);
                         hittingAModule = true;
-                        moduleHit = hit.transform.gameObject;
+                        moduleHit = mm.MyModules[i].MyObject;
                     }
                 }
             } 
