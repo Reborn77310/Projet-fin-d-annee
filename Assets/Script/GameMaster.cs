@@ -118,7 +118,12 @@ public class GameMaster : MonoBehaviour
             {
                 ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
                 mm.MyModules[1].MyObject.transform.Rotate(0,0,90 * (valeur * 10));
+                if (valeur < 0 && mm.MyModules[1].rotationCompteur == 0)
+                {
+                    mm.MyModules[1].rotationCompteur = 400000;
+                }
                 mm.MyModules[1].rotationCompteur += 1 * (Mathf.RoundToInt(valeur * 10));
+                print(Mathf.Abs(mm.MyModules[1].rotationCompteur) % 4);
             }
         }
     }

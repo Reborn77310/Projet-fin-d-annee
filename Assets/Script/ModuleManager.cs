@@ -20,7 +20,7 @@ public class Modules
         CarteType = _CarteType;
     }
 
-    public int rotationCompteur = 0;
+    public int rotationCompteur = 400000;
 }
 
 public class ModuleManager : MonoBehaviour

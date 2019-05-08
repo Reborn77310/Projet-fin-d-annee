@@ -128,84 +128,81 @@ public class CartesManager : MonoBehaviour
 
     public void SelectSetup(int type,ModuleManager mm)
     {
-        bool Attack = false;
+        int selectionOfSetup = 0;
         if (mm.MyModules[0].CarteType == 0)
         {
             //Attaque
-            Attack = true;
+            selectionOfSetup = 0;
         }
         else if (mm.MyModules[0].CarteType == 1)
         {
             //Def
+            selectionOfSetup = 1;
         }
         else if (mm.MyModules[0].CarteType == 2)
         {
             //Alteration
+            selectionOfSetup = 2; 
         }
         
-        SelectCible(Attack,type,mm);
+        SelectCible(selectionOfSetup,type,mm);
     }
 
-    public void SelectCible(bool shouldIAttack,int type,ModuleManager mm)
+    public void SelectCible(int selectionOfSetup,int type,ModuleManager mm)
     {
         string wantedName;
-        if (shouldIAttack)
+        var calculTest = (Mathf.Abs(mm.MyModules[1].rotationCompteur) % 4);
+        int wantedRoom = 0;
+        if (Mathf.Abs(calculTest) == 0)
         {
-            for (int i = 0; i < EnnemiManager.CurrentSpawns.Count; i++)
-            {
-                var calculTest = mm.MyModules[1].rotationCompteur % 4;
-                if (Mathf.Abs(calculTest) == 0)
-                {
-                    print(1);
-                    //premier salle
-                }
-                else if (Mathf.Abs(calculTest) == 1)
-                {
-                    print(2);
-                   //deuxieme salle
-                }
-                else if (Mathf.Abs(calculTest) == 2)
-                {
-                    print(3);
-                    //troisieme salle
-                }
-                else if (Mathf.Abs(calculTest) == 3)
-                {
-                    print(4);
-                    //quatrieme salle
-                }
-            }
-
-            mm.MyCompteurInt -= 1;
-            if (mm.MyCompteurInt <= 0)
-            {
-                mm.MyModules[1].CarteType = -1;
-                mm.MyModules[1].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
-                    Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
-                mm.MyCompteurInt = 2;
-            }
-
-            mm.MyCompteur.text = mm.MyCompteurInt.ToString();
-
+            wantedRoom = 0;
+        }
+        else if (Mathf.Abs(calculTest) == 1)
+        {
+            wantedRoom = 1;
+        }
+        else if (Mathf.Abs(calculTest) == 2)
+        {
+            wantedRoom = 2;
+        }
+        else if (Mathf.Abs(calculTest) == 3)
+        {
+            wantedRoom = 3;
+        }
+        print(wantedRoom);
+        mm.MyCompteurInt -= 1;
+        if (mm.MyCompteurInt <= 0)
+        {
+            mm.MyModules[1].CarteType = -1;
+            mm.MyModules[1].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+                Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
+            mm.MyCompteurInt = 2;
+        }
+        mm.MyCompteur.text = mm.MyCompteurInt.ToString();
+        
+        
+        if (selectionOfSetup == 0)
+        {
             wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupAttack.MyName;
+        }
+        else if (selectionOfSetup == 1)
+        {
+            wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupDefense.MyName;
         }
         else
         {
-            mm.MyCompteurInt -= 1;
-            if (mm.MyCompteurInt <= 0)
-            {
-                mm.MyModules[1].CarteType = -1;
-                mm.MyModules[1].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
-                    Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
-                mm.MyCompteurInt = 2;
-            }
-
-            mm.MyCompteur.text = mm.MyCompteurInt.ToString();
-
-            wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupDefense.MyName;
+            wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupAlteration.MyName;
         }
         
-        GetComponent<AllSetupsActions>().FindEffect(wantedName);
+        if (mm.MyModules[0].CarteType == type)
+        {
+            print("effet ++");
+            GetComponent<AllSetupsActions>().FindEffect(wantedName);
+        }
+        else
+        {
+            GetComponent<AllSetupsActions>().FindEffect(wantedName);
+        }
     }
 
     
