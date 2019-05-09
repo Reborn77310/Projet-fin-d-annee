@@ -134,11 +134,11 @@ public class CartesManager : MonoBehaviour
         }
         else if (Mathf.Abs(calculTest) == 2)
         {
-            wantedRoom = 2;
+            wantedRoom = 3;
         }
         else if (Mathf.Abs(calculTest) == 3)
         {
-            wantedRoom = 3;
+            wantedRoom = 2;
         }
 
         mm.MyCompteurInt -= 1;

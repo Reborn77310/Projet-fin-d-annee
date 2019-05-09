@@ -285,9 +285,9 @@ public class GameMaster : MonoBehaviour
                     var moletteSouris = Input.GetAxis("Mouse ScrollWheel");
                     GameObject aTourner = uiPlaceHolder.transform.GetChild(0).gameObject;
                     ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
-                    float z = mm.MyModules[1].MyObject.transform.rotation.eulerAngles.z;
-                    aTourner.transform.rotation = Quaternion.Euler(0,0,z);
-
+                    var pouett = mm.MyModules[1].MyObject.transform.rotation;
+                    aTourner.transform.rotation = pouett;
+                    
                     if (Mathf.Abs(moletteSouris) > 0)
                     {
                         mm.MyModules[1].MyObject.transform.Rotate(0, 0, 90 * (moletteSouris * 10));
@@ -296,9 +296,11 @@ public class GameMaster : MonoBehaviour
                             mm.MyModules[1].rotationCompteur = 400000;
                         }
                         mm.MyModules[1].rotationCompteur += 1 * (Mathf.RoundToInt(moletteSouris * 10));
-                        float zz = mm.MyModules[1].MyObject.transform.rotation.eulerAngles.z;
-                        aTourner.transform.rotation = Quaternion.Euler(0,0,zz);
+                        
+                        
                     }
+
+                    
 
                 }
                 else
