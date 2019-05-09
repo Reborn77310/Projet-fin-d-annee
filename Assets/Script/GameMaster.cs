@@ -21,7 +21,7 @@ public class GameMaster : MonoBehaviour
     public GameObject caj;
     SpriteRenderer cajSR;
     CartesManager cartesManager;
-
+    SalleManager salleManager;
     private CardSound cardSound;
     private GameObject touchedByZoomRaycast;
     
@@ -30,6 +30,7 @@ public class GameMaster : MonoBehaviour
         cardSound = Camera.main.GetComponent<CardSound>();
         cartesManager = GetComponent<CartesManager>();
         cajSR = caj.GetComponent<SpriteRenderer>();
+        salleManager = GetComponent<SalleManager>();
     }
 
     void Update()
@@ -190,11 +191,12 @@ public class GameMaster : MonoBehaviour
             if (hit.transform.tag == "Salles")
             {
                 bool canPlay = true;
-                for (int i = 0; i < cartesManager.allSalles.Count; i++)
+                for (int i = 0; i < salleManager.allSalles.Count; i++)
                 {
-                    if (hit.transform.gameObject == cartesManager.allSalles[i].MyGo)
+                    Debug.Log(i);
+                    if (hit.transform.gameObject == salleManager.allSalles[i].MyGo)
                     {
-                        if (!cartesManager.allSalles[i].CanPlayHere)
+                        if (!salleManager.allSalles[i].CanPlayHere)
                         {
                             canPlay = false;
                         }
@@ -219,6 +221,7 @@ public class GameMaster : MonoBehaviour
             } 
             else
             {
+                Debug.Log("non");
                 if (moduleHit != null)
                 {
                     moduleHit = null;
@@ -229,6 +232,7 @@ public class GameMaster : MonoBehaviour
         }
         else
         {
+            
             if (moduleHit != null)
             {
                 moduleHit = null;

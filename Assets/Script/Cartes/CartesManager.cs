@@ -19,28 +19,13 @@ public class Cartes
     }
 }
 
-public class Salles
-{
-    public GameObject MyGo;
-    public SetupManager SM;
-    public bool CanPlayHere = true;
-    
-    public Salles(GameObject go)
-    {
-        MyGo = go;
-
-        SM = MyGo.transform.GetChild(1).GetComponent<SetupManager>();
-    }
-}
-
 
 public class CartesManager : MonoBehaviour
 {
     [Header("Lists")]
-    public List<Salles> allSalles = new List<Salles>();
     public List<Cartes> allCards = new List<Cartes>();
     CartesButtons[] cartesButtonsScripts = new CartesButtons[3];
-    
+
     [Header("Other")]
     public GameObject prefabCarte;
     public Canvas canvas;
@@ -49,7 +34,7 @@ public class CartesManager : MonoBehaviour
     public Text ChangeBool;
     public GameObject SpawnEnnemiButton;
     public GameObject EnnemiHolder;
-    
+
     public static bool PhaseLente = true;
 
     #region Initialisation
@@ -60,21 +45,13 @@ public class CartesManager : MonoBehaviour
 
     void Start()
     {
-        InitializeSalles();
         DrawCards();
         scannerUI.gameObject.SetActive(false);
     }
 
-    void InitializeSalles()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            Salles newSalle = new Salles(GameObject.Find("Salle" + i.ToString()));
-            allSalles.Add(newSalle);
-        }
-    }
+
     #endregion
-    
+
     #region Actions
     public void PlayACardOnModule(int id, GameObject go)
     {
@@ -82,13 +59,13 @@ public class CartesManager : MonoBehaviour
         GameObject mGO = go;
 
         mGO.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = allCards[id].picto;
-        
+
         var MM = mGO.transform.parent.GetComponent<ModuleManager>();
         for (int i = 0; i < MM.MyModules.Length; i++)
         {
             if (mGO == MM.MyModules[i].MyObject)
             {
-                if (!PhaseLente || ((mGO == MM.MyModules[0].MyObject)||(mGO == MM.MyModules[1].MyObject)))
+                if (!PhaseLente || ((mGO == MM.MyModules[0].MyObject) || (mGO == MM.MyModules[1].MyObject)))
                 {
                     MM.MyModules[i].CarteType = allCards[id].cartesTypes;
                     if (MM.MyModules[i].MyType == Modules.Type.Droite)
@@ -112,22 +89,15 @@ public class CartesManager : MonoBehaviour
 
     void ThirdCardAction(ModuleManager mm)
     {
-        int type =  mm.MyModules[2].CarteType;
+        int type = mm.MyModules[2].CarteType;
         mm.MyModules[2].CarteType = -1;
         mm.MyModules[2].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
             Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
+        SelectSetup(type, mm);
 
-        
-        for (int j = 0; j < allSalles.Count; j++)
-        {
-            if (mm.transform.parent.gameObject == allSalles[j].MyGo)
-            {
-                SelectSetup(type,mm);
-            }
-        }
     }
 
-    public void SelectSetup(int type,ModuleManager mm)
+    public void SelectSetup(int type, ModuleManager mm)
     {
         int selectionOfSetup = 0;
         if (mm.MyModules[0].CarteType == 0)
@@ -143,13 +113,13 @@ public class CartesManager : MonoBehaviour
         else if (mm.MyModules[0].CarteType == 2)
         {
             //Alteration
-            selectionOfSetup = 2; 
+            selectionOfSetup = 2;
         }
-        
-        SelectCible(selectionOfSetup,type,mm);
+
+        SelectCible(selectionOfSetup, type, mm);
     }
 
-    public void SelectCible(int selectionOfSetup,int type,ModuleManager mm)
+    public void SelectCible(int selectionOfSetup, int type, ModuleManager mm)
     {
         string wantedName;
         var calculTest = (Mathf.Abs(mm.MyModules[1].rotationCompteur) % 4);
@@ -170,7 +140,7 @@ public class CartesManager : MonoBehaviour
         {
             wantedRoom = 3;
         }
-        
+
         mm.MyCompteurInt -= 1;
         if (mm.MyCompteurInt <= 0)
         {
@@ -180,8 +150,8 @@ public class CartesManager : MonoBehaviour
             mm.MyCompteurInt = 2;
         }
         mm.MyCompteur.text = mm.MyCompteurInt.ToString();
-        
-        
+
+
         if (selectionOfSetup == 0)
         {
             wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupAttack.MyName;
@@ -194,18 +164,18 @@ public class CartesManager : MonoBehaviour
         {
             wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupAlteration.MyName;
         }
-        
+
         if (mm.MyModules[0].CarteType == type)
         {
-            GetComponent<AllSetupsActions>().FindEffect(wantedName,wantedRoom);
+            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom);
         }
         else
         {
-            GetComponent<AllSetupsActions>().FindEffect(wantedName,wantedRoom);
+            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom);
         }
     }
     #endregion
-    
+
     #region Gestion Des Cartes
     public void DrawCards()
     {
@@ -213,24 +183,24 @@ public class CartesManager : MonoBehaviour
         {
             if (!CheckHandisFull())
             {
-                AjouterUneCarteDansLaMain(1,i); 
+                AjouterUneCarteDansLaMain(1, i);
             }
         }
 
         if (!PhaseLente)
         {
-           StartCoroutine("Draw");
+            StartCoroutine("Draw");
         }
-       
+
     }
-    
+
     IEnumerator Draw()
     {
         yield return new WaitForSeconds(drawTimer);
         DrawCards();
         yield break;
     }
-    
+
     public void AjouterUneCarteDansLaMain(int cardsToDraw, int carteType)
     {
         for (int i = 0; i < cardsToDraw; i++)
@@ -247,7 +217,7 @@ public class CartesManager : MonoBehaviour
         }
         SortCartes();
     }
-    
+
     public bool CheckHandisFull()
     {
         bool toReturn = false;
@@ -257,7 +227,7 @@ public class CartesManager : MonoBehaviour
         }
         return toReturn;
     }
-    
+
     void SortCartes()
     {
         float startingXpos = ((allCards.Count - 1) / 2) * -70;
@@ -281,7 +251,7 @@ public class CartesManager : MonoBehaviour
             allCards[i].go.GetComponent<CartesButtons>().id = i;
         }
     }
-    
+
     float CalculGap(float max)
     {
         float toReturn = max;
@@ -291,7 +261,7 @@ public class CartesManager : MonoBehaviour
         }
         return toReturn;
     }
-    
+
     public void BaisserLesCartes()
     {
         for (int i = 0; i < cartesButtonsScripts.Length; i++)
@@ -325,7 +295,7 @@ public class CartesManager : MonoBehaviour
             scannerUI.gameObject.SetActive(false);
             SpawnEnnemiButton.SetActive(false);
         }
-        
+
         PhaseLente = !PhaseLente;
         foreach (var go in allCards)
         {
@@ -333,7 +303,7 @@ public class CartesManager : MonoBehaviour
         }
         allCards.Clear();
         DrawCards();
-        
+
     }
 }
 
