@@ -117,6 +117,7 @@ public class AllSetupsActions : MonoBehaviour
 
     IEnumerator BlindeMaximalAndCloak(float timer,int i)
     {
+        print("Je me défends!");
         yield return new WaitForSeconds(timer);
         salleManager.allSalles[i].isDefendu = false;
     }
