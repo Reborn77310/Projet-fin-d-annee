@@ -7,16 +7,16 @@ using UnityEngine.UI;
 public class GameMaster : MonoBehaviour
 {
     Camera cam;
-    
+
     public Vector3 offset;
-    
+
     public static bool cursorIsOnCard = false;
     public static bool isPlayingACard = false;
     public static bool hittingAModule = false;
     public static bool endPlayingCard = false;
-    
+
     public static int cardIDBeingPlayed = -1;
-    
+
     public static GameObject moduleHit;
     public GameObject caj;
     SpriteRenderer cajSR;
@@ -25,7 +25,8 @@ public class GameMaster : MonoBehaviour
     private CardSound cardSound;
     private GameObject touchedByZoomRaycast;
     EnnemiManager ennemiManager;
-    
+    public GameObject uiPlaceHolder;
+
     void Awake()
     {
         cardSound = Camera.main.GetComponent<CardSound>();
@@ -36,11 +37,9 @@ public class GameMaster : MonoBehaviour
 
     void Update()
     {
-        var moletteSouris = Input.GetAxis("Mouse ScrollWheel");
-        if (Mathf.Abs(moletteSouris) > 0)
-        {
-            RotateSecondModule(moletteSouris);
-        }
+
+
+        placeHolderUICiblage();
         if (isPlayingACard)
         {
             PlayerLine();
@@ -66,10 +65,10 @@ public class GameMaster : MonoBehaviour
         {
             TakeCardFromModule();
         }
-        
+
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
+
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.transform.tag == "Module")
@@ -119,7 +118,7 @@ public class GameMaster : MonoBehaviour
             if (hit.transform.tag == "Salles")
             {
                 ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
-                mm.MyModules[1].MyObject.transform.Rotate(0,0,90 * (valeur * 10));
+                mm.MyModules[1].MyObject.transform.Rotate(0, 0, 90 * (valeur * 10));
                 if (valeur < 0 && mm.MyModules[1].rotationCompteur == 0)
                 {
                     mm.MyModules[1].rotationCompteur = 400000;
@@ -128,7 +127,7 @@ public class GameMaster : MonoBehaviour
             }
         }
     }
-    
+
     public void TakeCardFromModule()
     {
         var origin = new Vector3(2.3f, -2.095f, -16.11f);
@@ -156,9 +155,9 @@ public class GameMaster : MonoBehaviour
                             testBool = true;
                             if (!CartesManager.PhaseLente)
                             {
-                                cartesManager.AjouterUneCarteDansLaMain(1,mm.MyModules[i].CarteType);
+                                cartesManager.AjouterUneCarteDansLaMain(1, mm.MyModules[i].CarteType);
                             }
-                            
+
                             mm.MyModules[i].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
                                 Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
                             mm.MyModules[i].CarteType = -1;
@@ -168,7 +167,7 @@ public class GameMaster : MonoBehaviour
             }
         }
     }
-    
+
 
     public void PlayerLine()
     {
@@ -186,7 +185,7 @@ public class GameMaster : MonoBehaviour
         var dir = (point - Camera.main.transform.position);
 
         caj.transform.position = point + dir;
-        
+
         if (Physics.Raycast(caj.transform.position, dir, out hit, dist))
         {
             if (hit.transform.tag == "Salles")
@@ -219,7 +218,7 @@ public class GameMaster : MonoBehaviour
                         }
                     }
                 }
-            } 
+            }
             else
             {
                 Debug.Log("non");
@@ -233,7 +232,7 @@ public class GameMaster : MonoBehaviour
         }
         else
         {
-            
+
             if (moduleHit != null)
             {
                 moduleHit = null;
@@ -247,20 +246,71 @@ public class GameMaster : MonoBehaviour
     {
         var c = moduleHit;
         ModuleManager mm = moduleHit.transform.parent.GetComponent<ModuleManager>();
-        
+
         if (mm.MyModules[0].CarteType != -1 && mm.MyModules[1].CarteType != -1 && mm.MyModules[2].MyObject == moduleHit && !CartesManager.PhaseLente)
         {
             cartesManager.PlayACardOnModule(cardIDBeingPlayed, c);
-            cardSound.GoingToPlayACard();     
+            cardSound.GoingToPlayACard();
             cardIDBeingPlayed = -1;
         }
         else if (mm.MyModules[2].MyObject != moduleHit)
         {
             cartesManager.PlayACardOnModule(cardIDBeingPlayed, c);
-            cardSound.GoingToPlayACard();     
+            cardSound.GoingToPlayACard();
             cardIDBeingPlayed = -1;
         }
     }
     #endregion
+
+    void placeHolderUICiblage()
+    {
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            var origin = new Vector3(2.3f, -2.095f, -16.11f);
+            Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
+
+
+            RaycastHit hit;
+            var dist = Vector3.Distance(origin, point);
+            var dir = (point - Camera.main.transform.position);
+
+            caj.transform.position = point + dir;
+
+            if (Physics.Raycast(caj.transform.position, dir, out hit, dist))
+            {
+                if (hit.transform.tag == "Salles")
+                {
+
+                    uiPlaceHolder.SetActive(true);
+                    var moletteSouris = Input.GetAxis("Mouse ScrollWheel");
+                    GameObject aTourner = uiPlaceHolder.transform.GetChild(0).gameObject;
+                    ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
+                    float z = mm.MyModules[1].MyObject.transform.rotation.eulerAngles.z;
+                    aTourner.transform.rotation = Quaternion.Euler(0,0,z);
+
+                    if (Mathf.Abs(moletteSouris) > 0)
+                    {
+                        mm.MyModules[1].MyObject.transform.Rotate(0, 0, 90 * (moletteSouris * 10));
+                        if (moletteSouris < 0 && mm.MyModules[1].rotationCompteur == 0)
+                        {
+                            mm.MyModules[1].rotationCompteur = 400000;
+                        }
+                        mm.MyModules[1].rotationCompteur += 1 * (Mathf.RoundToInt(moletteSouris * 10));
+                        float zz = mm.MyModules[1].MyObject.transform.rotation.eulerAngles.z;
+                        aTourner.transform.rotation = Quaternion.Euler(0,0,zz);
+                    }
+
+                }
+                else
+                {
+                    uiPlaceHolder.SetActive(false);
+                }
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.Mouse0) && uiPlaceHolder.activeInHierarchy)
+        {
+            uiPlaceHolder.SetActive(false);
+        }
+    }
 
 }
