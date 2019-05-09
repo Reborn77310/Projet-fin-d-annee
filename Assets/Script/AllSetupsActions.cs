@@ -4,43 +4,55 @@ using UnityEngine;
 
 public class AllSetupsActions : MonoBehaviour
 {
+    public static AllSetupsActions instance;
+    private SalleManager salleManager;
     
+    void Awake()
+    {
+        instance = this;
+        salleManager = GameObject.Find("GameMaster").GetComponent<SalleManager>();
+    }
     public void FindEffect(string wantedName, int wantedRoom)
     {
-        for (int i = 0; i < EnnemiManager.CurrentSpawns.Count; i++)
-        {
-            if (!EnnemiManager.CurrentSpawns[i].MyChilds.isDead[wantedRoom])
-            {
-                EnnemiManager.PerdrePvGlobal(50,i);
-                EnnemiManager.PerdrePvLocal(i,wantedRoom,50);
-                EnnemiManager.CheckPdv();
-            }
-        }
-       
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Attack
         if (wantedName == "Attaque 01")
         {
             string effet = "Inflige des dégâts sur la salle ciblée";
+            DealDamage(wantedRoom, 20);
+            // 10 % * 2
+            // 15 % * 2
             print(effet);
         }
         else if (wantedName == "Attaque 02")
         {
             string effet = "Inflige des dégâts sur la salle ciblée";
+            // 10% 
+            // 15% proc attaque
+            DealDamage(wantedRoom, 10);
             print(effet);
         }
         else if (wantedName == "Attaque 03")
         {
             string effet = "Tir des projectiles sur des cibles aléatoire (peut toucher plusieurs fois la même salle)";
+            //3 proj à 10% aléa
+            //4proj
+            DealDamage(Random.Range(0, 4),10);
+            DealDamage(Random.Range(0, 4),10);
+            DealDamage(Random.Range(0, 4),10);
             print(effet);
         }
         else if (wantedName == "Attaque 04")
         {
             string effet = "Si 2 symboles différents ont été posé et burn précedemment, le troisième symbole déclenche un tir puissant.";
+            //Jouer les trois cartes dans le slot 3
             print(effet);
         }
         else if (wantedName == "Attaque 05")
         {
             string effet = "Tir un projectile, inflige des dégâts sur la salle ciblé.";
+            //20 %
+            //Augmente 10% 
+            DealDamage(wantedRoom, 20);
             print(effet);
         }
         
@@ -48,11 +60,15 @@ public class AllSetupsActions : MonoBehaviour
         else if (wantedName == "Blindage maximal")
         {
             string effet = "Rend la salle visée insensible aux dégâts et aux altérations";
+            salleManager.allSalles[wantedRoom].isDefendu = true;
+            StartCoroutine(instance.BlindeMaximalAndCloak(4.0f,wantedRoom));
             print(effet);
         }
         else if (wantedName == "Cape d'invisibilité")
         {
             string effet = "Empêche l'ennemi de cibler la salle visée et d'avoir n'importe quelle info dessus";
+            salleManager.allSalles[wantedRoom].isDefendu = true;
+            StartCoroutine(instance.BlindeMaximalAndCloak(5.0f,wantedRoom));
             print(effet);
         }
         else if (wantedName == "Defense 03")
@@ -96,6 +112,25 @@ public class AllSetupsActions : MonoBehaviour
         {
             string effet = "La salle visée subira 50% de dégâts en plus lors de la prochaine attaque";
             print(effet);
+        }
+    }
+
+    IEnumerator BlindeMaximalAndCloak(float timer,int i)
+    {
+        yield return new WaitForSeconds(timer);
+        salleManager.allSalles[i].isDefendu = false;
+    }
+    
+    void DealDamage(int wantedRoom,int damage)
+    {
+        for (int i = 0; i < EnnemiManager.CurrentSpawns.Count; i++)
+        {
+            if (!EnnemiManager.CurrentSpawns[i].MyChilds.isDead[wantedRoom])
+            {
+                EnnemiManager.PerdrePvGlobal(damage,i);
+                EnnemiManager.PerdrePvLocal(i,wantedRoom,damage);
+                EnnemiManager.CheckPdv();
+            }
         }
     }
 }

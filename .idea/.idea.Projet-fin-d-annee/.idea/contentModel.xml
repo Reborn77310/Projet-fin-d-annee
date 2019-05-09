@@ -277,6 +277,7 @@
             <e p="InstantiatePictos.cs" t="Include" />
           </e>
           <e p="RotateDesTrucs.cs" t="Include" />
+          <e p="SalleManager.cs" t="Include" />
           <e p="Salles et actions" t="Include">
             <e p="AllActions.cs" t="Include" />
             <e p="SalleScript.cs" t="Include" />
