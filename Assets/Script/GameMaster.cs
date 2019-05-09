@@ -193,7 +193,6 @@ public class GameMaster : MonoBehaviour
                 bool canPlay = true;
                 for (int i = 0; i < salleManager.allSalles.Count; i++)
                 {
-                    Debug.Log(i);
                     if (hit.transform.gameObject == salleManager.allSalles[i].MyGo)
                     {
                         if (!salleManager.allSalles[i].CanPlayHere)
@@ -221,7 +220,6 @@ public class GameMaster : MonoBehaviour
             }
             else
             {
-                Debug.Log("non");
                 if (moduleHit != null)
                 {
                     moduleHit = null;
