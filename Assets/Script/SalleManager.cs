@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Salles
 {
@@ -8,10 +9,13 @@ public class Salles
     public bool CanPlayHere = true;
     public int pv;
 
+    public bool isDefendu;
+
     public Salles(GameObject go)
     {
         MyGo = go;
         pv = 100;
+        isDefendu = false;
     }
 }
 
@@ -19,10 +23,13 @@ public class SalleManager : MonoBehaviour
 {
 
     public List<Salles> allSalles = new List<Salles>();
+    public GameObject[] pvSalles;
+    public TextMesh pvDuVehiculeText;
     public int pvDuVehicule = 300;
     void Start()
     {
         InitializeSalles();
+        pvDuVehiculeText.text = pvDuVehicule.ToString();
     }
 
     void InitializeSalles()
@@ -31,6 +38,7 @@ public class SalleManager : MonoBehaviour
         {
             Salles newSalle = new Salles(GameObject.Find("Salle" + i.ToString()));
             allSalles.Add(newSalle);
+            pvSalles[i].GetComponent<TextMesh>().text = allSalles[i].pv.ToString();
         }
     }
 
@@ -38,6 +46,7 @@ public class SalleManager : MonoBehaviour
     {
         allSalles[salleVisee].pv -= damage;
         pvDuVehicule -= damage;
+        pvDuVehiculeText.text = pvDuVehicule.ToString();
         if (pvDuVehicule <= 0)
         {
             Debug.Log("MISSANDEI ?!?");
@@ -47,6 +56,7 @@ public class SalleManager : MonoBehaviour
         {
             allSalles[salleVisee].pv = 0;
             allSalles[salleVisee].CanPlayHere = false;
+            pvSalles[salleVisee].GetComponent<TextMesh>().text = allSalles[salleVisee].pv.ToString();
             ReparationSalle(salleVisee);
         }
     }

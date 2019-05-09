@@ -131,4 +131,8 @@ public class EnnemiManager : MonoBehaviour
             }
         }
     }
+
+    // Coroutine toutes x secondes (x = entre 10 et 20s)
+    // Au début de la coroutine on affiche l'intention de l'ennemi (salle visée)
+    // A la fin de la coroutine 
 }
