@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class AllSetupsActions : MonoBehaviour
 {
-    public void FindEffect(string wantedName)
+    
+    public void FindEffect(string wantedName, int wantedRoom)
     {
+        for (int i = 0; i < EnnemiManager.CurrentSpawns.Count; i++)
+        {
+            EnnemiManager.PerdrePvGlobal(10,i);
+            EnnemiManager.PerdrePvLocal(i,wantedRoom);
+            EnnemiManager.CheckPdv();
+        }
+       
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Attack
         if (wantedName == "Attaque 01")
         {

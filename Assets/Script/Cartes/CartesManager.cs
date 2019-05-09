@@ -23,6 +23,7 @@ public class Salles
 {
     public GameObject MyGo;
     public SetupManager SM;
+    public bool CanPlayHere = true;
     
     public Salles(GameObject go)
     {
@@ -169,7 +170,7 @@ public class CartesManager : MonoBehaviour
         {
             wantedRoom = 3;
         }
-        print(wantedRoom);
+        
         mm.MyCompteurInt -= 1;
         if (mm.MyCompteurInt <= 0)
         {
@@ -196,16 +197,13 @@ public class CartesManager : MonoBehaviour
         
         if (mm.MyModules[0].CarteType == type)
         {
-            print("effet ++");
-            GetComponent<AllSetupsActions>().FindEffect(wantedName);
+            GetComponent<AllSetupsActions>().FindEffect(wantedName,wantedRoom);
         }
         else
         {
-            GetComponent<AllSetupsActions>().FindEffect(wantedName);
+            GetComponent<AllSetupsActions>().FindEffect(wantedName,wantedRoom);
         }
     }
-
-    
     #endregion
     
     #region Gestion Des Cartes

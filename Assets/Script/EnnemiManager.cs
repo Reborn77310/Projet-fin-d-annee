@@ -1,12 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class EnnemiRooms
 {
     public GameObject[] myRooms = new GameObject[4];
     public int[] myTypes =  new int[4];
+    public int[] myPdv = new int[4];
+    public Text[] myText = new Text[4];
+    public bool[] isDead = new bool[4];
     public EnnemiRooms()
     {
         
@@ -26,19 +31,23 @@ public class Spawns
     {
         go = _go;
         id = _id;
-        myHP = go.transform.GetChild(2).GetComponent<Image>();
-        myPV = 100;
+        myHP = go.transform.GetChild(6).GetComponent<Image>();
+        myPV = 300;
         myHP.fillAmount = myPV;
         myText = myHP.transform.GetChild(0).GetComponent<Text>();
         myText.text = "Hp : " + myPV;
         
-        var childs = go.transform.GetChild(1);
+        var childs = go.transform.GetChild(5);
         for (int i = 0; i < 4; i++)
         {
             MyChilds.myRooms[i] = childs.transform.GetChild(i).gameObject;
             int randomRange = Random.Range(0, 3);
             MyChilds.myTypes[i] = randomRange;
+            MyChilds.myPdv[i] = 100;
+            MyChilds.isDead[i] = false;
+            MyChilds.myText[i] = _go.transform.GetChild(i).GetComponent<Text>();
             MyChilds.myRooms[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/Picto" + randomRange);
+            MyChilds.myText[i].text = "Salle " + i + " = " + MyChilds.myPdv[i] + " pdv.";
         }
     }
 }
@@ -48,7 +57,12 @@ public class EnnemiManager : MonoBehaviour
     public GameObject ParentSpawner;
     public GameObject PrefabSpawn;
     public static List<Spawns> CurrentSpawns = new List<Spawns>();
-    
+
+    private void Update()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void SpawnMob()
     {
         var randomPos = Vector3.zero;
@@ -60,11 +74,34 @@ public class EnnemiManager : MonoBehaviour
         CurrentSpawns.Add(spawn);
     }
 
-    public static void PerdrePv(int numberOfPv,int wantedSpawn)
+    public static void PerdrePvLocal(int i,int wantedRoom)
+    {
+        CurrentSpawns[i].MyChilds.myPdv[wantedRoom] -= 15;
+        CurrentSpawns[i].MyChilds.myText[wantedRoom].text = "Salle " + wantedRoom + " = " + CurrentSpawns[i].MyChilds.myPdv[wantedRoom] + " pdv.";;
+        CurrentSpawns[i].myPV -= 10;
+
+        if (CurrentSpawns[i].MyChilds.myPdv[wantedRoom] <= 0)
+        {
+            CurrentSpawns[i].MyChilds.isDead[wantedRoom] = true;
+        }
+    }
+    
+    public static void PerdrePvGlobal(int numberOfPv,int wantedSpawn)
     {
         CurrentSpawns[wantedSpawn].myPV -= numberOfPv;
-        CurrentSpawns[wantedSpawn].myHP.fillAmount = CurrentSpawns[wantedSpawn].myPV;
+        CurrentSpawns[wantedSpawn].myHP.fillAmount = CurrentSpawns[wantedSpawn].myPV/3;
         CurrentSpawns[wantedSpawn].myText.text = "Hp : " + CurrentSpawns[wantedSpawn].myPV;
+    }
+
+    IEnumerator RespawnSalle(int wantedSpawn)
+    {
+        float timer = 20;
+        while (timer > 0)
+        {
+            CurrentSpawns[wantedSpawn].myText.text = "Hp : " + CurrentSpawns[wantedSpawn].myPV;
+            yield return new WaitForSeconds(1);
+        }
+        
     }
 
     public static void CheckPdv()

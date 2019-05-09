@@ -123,7 +123,6 @@ public class GameMaster : MonoBehaviour
                     mm.MyModules[1].rotationCompteur = 400000;
                 }
                 mm.MyModules[1].rotationCompteur += 1 * (Mathf.RoundToInt(valeur * 10));
-                print(Mathf.Abs(mm.MyModules[1].rotationCompteur) % 4);
             }
         }
     }
@@ -190,16 +189,31 @@ public class GameMaster : MonoBehaviour
         {
             if (hit.transform.tag == "Salles")
             {
-                ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
-                var testBool = false;
-                for (int i = 0; i < mm.MyModules.Length; i++)
+                bool canPlay = true;
+                for (int i = 0; i < cartesManager.allSalles.Count; i++)
                 {
-                    if (mm.MyModules[i].CarteType == -1 && !testBool)
+                    if (hit.transform.gameObject == cartesManager.allSalles[i].MyGo)
                     {
-                        testBool = true;
-                        caj.GetComponent<Animator>().SetBool("Dance", true);
-                        hittingAModule = true;
-                        moduleHit = mm.MyModules[i].MyObject;
+                        if (!cartesManager.allSalles[i].CanPlayHere)
+                        {
+                            canPlay = false;
+                        }
+                    }
+                }
+
+                if (canPlay)
+                {
+                    ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
+                    var testBool = false;
+                    for (int i = 0; i < mm.MyModules.Length; i++)
+                    {
+                        if (mm.MyModules[i].CarteType == -1 && !testBool)
+                        {
+                            testBool = true;
+                            caj.GetComponent<Animator>().SetBool("Dance", true);
+                            hittingAModule = true;
+                            moduleHit = mm.MyModules[i].MyObject;
+                        }
                     }
                 }
             } 
