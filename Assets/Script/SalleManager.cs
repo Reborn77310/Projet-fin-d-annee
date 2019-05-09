@@ -44,21 +44,29 @@ public class SalleManager : MonoBehaviour
 
     public void DamageSurSalle(int salleVisee, int damage)
     {
-        allSalles[salleVisee].pv -= damage;
-        pvDuVehicule -= damage;
-        pvDuVehiculeText.text = pvDuVehicule.ToString();
-        if (pvDuVehicule <= 0)
+        if (allSalles[salleVisee].isDefendu)
         {
-            Debug.Log("MISSANDEI ?!?");
-            Time.timeScale = 0;
+            allSalles[salleVisee].isDefendu = false;
         }
-        if (allSalles[salleVisee].pv <= 0)
+        else
         {
-            allSalles[salleVisee].pv = 0;
-            allSalles[salleVisee].CanPlayHere = false;
+            allSalles[salleVisee].pv -= damage;
             pvSalles[salleVisee].GetComponent<TextMesh>().text = allSalles[salleVisee].pv.ToString();
-            ReparationSalle(salleVisee);
+            pvDuVehicule -= damage;
+            pvDuVehiculeText.text = pvDuVehicule.ToString();
+            if (pvDuVehicule <= 0)
+            {
+                pvDuVehiculeText.text = "MISSANDEI ?!?";
+                Time.timeScale = 0;
+            }
+            if (allSalles[salleVisee].pv <= 0)
+            {
+                allSalles[salleVisee].pv = 0;
+                allSalles[salleVisee].CanPlayHere = false;
+                ReparationSalle(salleVisee);
+            }
         }
+
     }
 
     IEnumerator ReparationSalle(int salleVisee)
@@ -67,5 +75,15 @@ public class SalleManager : MonoBehaviour
         allSalles[salleVisee].CanPlayHere = true;
         allSalles[salleVisee].pv = 100;
         yield break;
+    }
+
+    public void DefendreSalle(int salleVisee)
+    {
+        pvSalles[salleVisee].GetComponent<TextMesh>().text = "You shall not pass !";
+    }
+
+    public void CancelDefense(int salleVisee)
+    {
+        pvSalles[salleVisee].GetComponent<TextMesh>().text =  allSalles[salleVisee].pv.ToString();
     }
 }

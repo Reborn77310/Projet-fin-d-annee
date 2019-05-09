@@ -61,6 +61,7 @@ public class AllSetupsActions : MonoBehaviour
         {
             string effet = "Rend la salle visée insensible aux dégâts et aux altérations";
             salleManager.allSalles[wantedRoom].isDefendu = true;
+            salleManager.DefendreSalle(wantedRoom);
             StartCoroutine(instance.BlindeMaximalAndCloak(4.0f,wantedRoom));
             print(effet);
         }
@@ -68,6 +69,7 @@ public class AllSetupsActions : MonoBehaviour
         {
             string effet = "Empêche l'ennemi de cibler la salle visée et d'avoir n'importe quelle info dessus";
             salleManager.allSalles[wantedRoom].isDefendu = true;
+            salleManager.DefendreSalle(wantedRoom);
             StartCoroutine(instance.BlindeMaximalAndCloak(5.0f,wantedRoom));
             print(effet);
         }
@@ -120,6 +122,8 @@ public class AllSetupsActions : MonoBehaviour
         print("Je me défends!");
         yield return new WaitForSeconds(timer);
         salleManager.allSalles[i].isDefendu = false;
+        salleManager.CancelDefense(i);
+        yield break;
     }
     
     void DealDamage(int wantedRoom,int damage)

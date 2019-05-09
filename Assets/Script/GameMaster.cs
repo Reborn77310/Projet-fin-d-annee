@@ -24,6 +24,7 @@ public class GameMaster : MonoBehaviour
     SalleManager salleManager;
     private CardSound cardSound;
     private GameObject touchedByZoomRaycast;
+    EnnemiManager ennemiManager;
     
     void Awake()
     {

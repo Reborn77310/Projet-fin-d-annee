@@ -64,6 +64,11 @@ public class EnnemiManager : MonoBehaviour
         instance = this;
     }
 
+    void Start() {
+        ChooseFirstAttack();
+        SpawnMob();
+    }
+
     public void SpawnMob()
     {
         var randomPos = Vector3.zero;
@@ -132,7 +137,47 @@ public class EnnemiManager : MonoBehaviour
         }
     }
 
-    // Coroutine toutes x secondes (x = entre 10 et 20s)
-    // Au début de la coroutine on affiche l'intention de l'ennemi (salle visée)
-    // A la fin de la coroutine 
+    public TextMesh intentionMechantes;
+    public SalleManager salleManager;
+    public float nextAttack = 0;
+    public int salleFocus;
+    public int damage = 50;
+
+
+   void Update() {
+       if (nextAttack <= 0)
+       {
+           salleManager.DamageSurSalle(salleFocus, damage);
+           ChooseNextAttack();
+       }
+       else
+       {
+           nextAttack -= Time.deltaTime;
+           intentionMechantes.text = "Next Attack : Salle " + salleFocus.ToString() + " dans " + nextAttack.ToString()+"s";
+       }
+       
+   }
+
+   void ChooseNextAttack()
+   {
+       bool search = true;
+       while(search)
+       {
+           int rnd = Random.Range(0,4);
+           if (salleManager.allSalles[rnd].pv > 0)
+           {
+               salleFocus = rnd;
+               nextAttack = Random.Range(10,20);
+               search = false;
+           }
+       }
+   }
+
+   
+    void ChooseFirstAttack()
+    {
+        int rnd = Random.Range(0,4);
+        salleFocus = rnd;
+        nextAttack = Random.Range(10,20);
+    }
 }

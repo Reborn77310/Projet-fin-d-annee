@@ -283,6 +283,7 @@ public class CartesManager : MonoBehaviour
     {
         if (PhaseLente)
         {
+            gameObject.GetComponent<EnnemiManager>().enabled = true;
             ChangeBool.text = "Activer la phase lente.";
             scannerUI.gameObject.SetActive(false);
             scannerUI.gameObject.SetActive(true);
@@ -291,6 +292,7 @@ public class CartesManager : MonoBehaviour
         }
         else
         {
+            gameObject.GetComponent<EnnemiManager>().enabled = false;
             ChangeBool.text = "Activer la phase combat.";
             scannerUI.gameObject.SetActive(false);
             SpawnEnnemiButton.SetActive(false);
