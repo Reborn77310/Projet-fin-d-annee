@@ -9,9 +9,12 @@ public class AllSetupsActions : MonoBehaviour
     {
         for (int i = 0; i < EnnemiManager.CurrentSpawns.Count; i++)
         {
-            EnnemiManager.PerdrePvGlobal(10,i);
-            EnnemiManager.PerdrePvLocal(i,wantedRoom);
-            EnnemiManager.CheckPdv();
+            if (!EnnemiManager.CurrentSpawns[i].MyChilds.isDead[wantedRoom])
+            {
+                EnnemiManager.PerdrePvGlobal(50,i);
+                EnnemiManager.PerdrePvLocal(i,wantedRoom,50);
+                EnnemiManager.CheckPdv();
+            }
         }
        
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Attack

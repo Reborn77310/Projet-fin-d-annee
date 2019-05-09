@@ -57,10 +57,11 @@ public class EnnemiManager : MonoBehaviour
     public GameObject ParentSpawner;
     public GameObject PrefabSpawn;
     public static List<Spawns> CurrentSpawns = new List<Spawns>();
+    public static EnnemiManager instance;
 
-    private void Update()
+    private void Awake()
     {
-        throw new System.NotImplementedException();
+        instance = this;
     }
 
     public void SpawnMob()
@@ -74,15 +75,15 @@ public class EnnemiManager : MonoBehaviour
         CurrentSpawns.Add(spawn);
     }
 
-    public static void PerdrePvLocal(int i,int wantedRoom)
+    public static void PerdrePvLocal(int i,int wantedRoom,int wantedDamage)
     {
-        CurrentSpawns[i].MyChilds.myPdv[wantedRoom] -= 15;
-        CurrentSpawns[i].MyChilds.myText[wantedRoom].text = "Salle " + wantedRoom + " = " + CurrentSpawns[i].MyChilds.myPdv[wantedRoom] + " pdv.";;
-        CurrentSpawns[i].myPV -= 10;
+        CurrentSpawns[i].MyChilds.myPdv[wantedRoom] -= wantedDamage;
+        CurrentSpawns[i].MyChilds.myText[wantedRoom].text = "Salle " + wantedRoom + " = " + CurrentSpawns[i].MyChilds.myPdv[wantedRoom] + " pdv.";
 
         if (CurrentSpawns[i].MyChilds.myPdv[wantedRoom] <= 0)
         {
             CurrentSpawns[i].MyChilds.isDead[wantedRoom] = true;
+            instance.StartCoroutine(instance.RespawnSalle(i,wantedRoom));
         }
     }
     
@@ -93,15 +94,27 @@ public class EnnemiManager : MonoBehaviour
         CurrentSpawns[wantedSpawn].myText.text = "Hp : " + CurrentSpawns[wantedSpawn].myPV;
     }
 
-    IEnumerator RespawnSalle(int wantedSpawn)
+    IEnumerator RespawnSalle(int i,int wantedSpawn)
     {
         float timer = 20;
         while (timer > 0)
         {
-            CurrentSpawns[wantedSpawn].myText.text = "Hp : " + CurrentSpawns[wantedSpawn].myPV;
+            if (CurrentSpawns.Count > 0)
+            {
+                CurrentSpawns[i].MyChilds.myText[wantedSpawn].text = "Temps restant :" + timer;
+            }
+            
             yield return new WaitForSeconds(1);
+            timer -= 1;
         }
-        
+
+        if (CurrentSpawns.Count > 0)
+        {
+            CurrentSpawns[i].MyChilds.isDead[wantedSpawn] = false;
+            CurrentSpawns[i].MyChilds.myPdv[wantedSpawn] = 100;
+            CurrentSpawns[i].MyChilds.myText[wantedSpawn].text = "Salle " + wantedSpawn + " = " + CurrentSpawns[i].MyChilds.myPdv[wantedSpawn] + " pdv.";
+        }
+        yield break;
     }
 
     public static void CheckPdv()
