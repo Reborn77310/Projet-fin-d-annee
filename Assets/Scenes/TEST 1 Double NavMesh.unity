@@ -12356,7 +12356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1308100582
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12616,6 +12616,7 @@ MonoBehaviour:
   ChangeBool: {fileID: 133273354}
   SpawnEnnemiButton: {fileID: 1308100581}
   EnnemiHolder: {fileID: 0}
+  ennemiManager: {fileID: 1335090933}
 --- !u!114 &1335090933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12628,14 +12629,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5eb1ee442fece242aec50eab3549aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParentSpawner: {fileID: 1934546455}
-  PrefabSpawn: {fileID: 1097485959164112, guid: 80c69e740e99ff0488c42ea036fb8a32,
-    type: 3}
-  intentionMechantes: {fileID: 284079002}
+  intentionMechantes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   salleManager: {fileID: 1335090935}
-  nextAttack: 0
-  salleFocus: 0
-  damage: 50
+  pv: 0
+  badGuy: {fileID: 0}
+  badGuyPrefab: {fileID: 5619870489566302709, guid: c166ef6c17edc1a4aad32d090557e767,
+    type: 3}
+  myCanvas: {fileID: 1619270387}
 --- !u!114 &1335090934
 MonoBehaviour:
   m_ObjectHideFlags: 0

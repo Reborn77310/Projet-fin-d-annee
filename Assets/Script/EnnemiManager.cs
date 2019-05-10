@@ -7,177 +7,211 @@ using Random = UnityEngine.Random;
 
 public class EnnemiRooms
 {
-    public GameObject[] myRooms = new GameObject[4];
-    public int[] myTypes =  new int[4];
-    public int[] myPdv = new int[4];
-    public Text[] myText = new Text[4];
-    public bool[] isDead = new bool[4];
-    public EnnemiRooms()
+    public GameObject myRoom;
+    public int myType;
+    public Image pictoFormule;
+    public float myPdv = 100;
+    public Image myImagePv;
+    public bool isDead = false;
+    public float timer;
+    public int etat = 1;
+    public int salleFocus;
+    public EnnemiRooms(float _timer)
     {
-        
+        timer = _timer;
     }
 }
 
-public class Spawns
-{
-    public GameObject go;
-    public int id;
-    public Image myHP;
-    public Text myText;
-    public int myPV;
-    public EnnemiRooms MyChilds  = new EnnemiRooms();
-    
-    public Spawns(GameObject _go, int _id)
-    {
-        go = _go;
-        id = _id;
-        myHP = go.transform.GetChild(6).GetComponent<Image>();
-        myPV = 300;
-        myHP.fillAmount = myPV;
-        myText = myHP.transform.GetChild(0).GetComponent<Text>();
-        myText.text = "Hp : " + myPV;
-        
-        var childs = go.transform.GetChild(5);
-        for (int i = 0; i < 4; i++)
-        {
-            MyChilds.myRooms[i] = childs.transform.GetChild(i).gameObject;
-            int randomRange = Random.Range(0, 3);
-            MyChilds.myTypes[i] = randomRange;
-            MyChilds.myPdv[i] = 100;
-            MyChilds.isDead[i] = false;
-            MyChilds.myText[i] = _go.transform.GetChild(i).GetComponent<Text>();
-            MyChilds.myRooms[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/Picto" + randomRange);
-            MyChilds.myText[i].text = "Salle " + i + " = " + MyChilds.myPdv[i] + " pdv.";
-        }
-    }
-}
+// public class Spawns
+// {
+//     public GameObject go;
+//     public int id;
+//     public Image myHP;
+//     public Text myText;
+//     public int myPV;
+//     public EnnemiRooms MyChilds = new EnnemiRooms();
+
+
+//     public Spawns(GameObject _go, int _id)
+//     {
+//         go = _go;
+//         id = _id;
+//         myHP = go.transform.GetChild(6).GetComponent<Image>();
+//         myPV = 300;
+//         myHP.fillAmount = myPV;
+//         myText = myHP.transform.GetChild(0).GetComponent<Text>();
+//         myText.text = "Hp : " + myPV;
+
+//         var childs = go.transform.GetChild(5);
+//         for (int i = 0; i < 4; i++)
+//         {
+//             MyChilds.myRooms[i] = childs.transform.GetChild(i).gameObject;
+//             int randomRange = Random.Range(0, 3);
+//             MyChilds.myTypes[i] = randomRange;
+//             MyChilds.myPdv[i] = 100;
+//             MyChilds.isDead[i] = false;
+//             MyChilds.myText[i] = _go.transform.GetChild(i).GetComponent<Text>();
+//             MyChilds.myRooms[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/Picto" + randomRange);
+//             MyChilds.myText[i].text = "Salle " + i + " = " + MyChilds.myPdv[i] + " pdv.";
+//             MyChilds.etat[i] = 1;
+//             MyChilds.timer[i] = Random.Range(1, 4) + i * 3; // s0 : 1,4   s1 : 4,7  s2 : 7,11  s3 : 10,13
+//         }
+//     }
+// }
 
 public class EnnemiManager : MonoBehaviour
 {
-    public GameObject ParentSpawner;
-    public GameObject PrefabSpawn;
-    public static List<Spawns> CurrentSpawns = new List<Spawns>();
-    public static EnnemiManager instance;
+    public List<EnnemiRooms> ennemiRooms = new List<EnnemiRooms>();
+    public Text[] intentionMechantes;
+    public SalleManager salleManager;
+    public int pv;
+    public GameObject badGuy;
+    public GameObject badGuyPrefab;
+    public Canvas myCanvas;
 
-    private void Awake()
+    void Start()
     {
-        instance = this;
+        SpawnMob(4);
     }
 
-    void Start() {
-        ChooseFirstAttack();
-        SpawnMob();
+    void Update() {
+        CheckPdv();
+        GestionDesSalles();
     }
 
-    public void SpawnMob()
+    public void SpawnMob(int nbSalles)
     {
-        var randomPos = Vector3.zero;
-        randomPos.y = Random.Range(-226, 231);
-        randomPos.x = Random.Range(330, 853);
-        var go = Instantiate(PrefabSpawn, Vector3.zero, Quaternion.identity,ParentSpawner.transform);
-        go.GetComponent<RectTransform>().anchoredPosition = randomPos;
-        Spawns spawn = new Spawns(go,CurrentSpawns.Count);
-        CurrentSpawns.Add(spawn);
-    }
+        badGuy = GameObject.Instantiate(badGuyPrefab, myCanvas.transform, false);
+        intentionMechantes = badGuy.transform.GetChild(1).GetComponentsInChildren<Text>();
 
-    public static void PerdrePvLocal(int i,int wantedRoom,int wantedDamage)
-    {
-        CurrentSpawns[i].MyChilds.myPdv[wantedRoom] -= wantedDamage;
-        CurrentSpawns[i].MyChilds.myText[wantedRoom].text = "Salle " + wantedRoom + " = " + CurrentSpawns[i].MyChilds.myPdv[wantedRoom] + " pdv.";
-
-        if (CurrentSpawns[i].MyChilds.myPdv[wantedRoom] <= 0)
+        for (int i = 0; i < nbSalles; i++)
         {
-            CurrentSpawns[i].MyChilds.isDead[wantedRoom] = true;
-            instance.StartCoroutine(instance.RespawnSalle(i,wantedRoom));
+            intentionMechantes[i].text = "";
+            EnnemiRooms a = new EnnemiRooms((Random.Range(1,4)+i*3));
+            int randomRange = Random.Range(0, 3);
+            a.myType = randomRange;
+            a.pictoFormule = badGuy.transform.GetChild(3).GetChild(i).GetComponent<Image>();
+            a.pictoFormule.sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/Picto" + randomRange);
+            a.myImagePv = badGuy.transform.GetChild(0).GetChild(i).GetComponent<Image>();
+            ennemiRooms.Add(a);
+        }
+        pv = 300;
+    }
+
+    public void PerdrePvLocal(int wantedRoom, int wantedDamage)
+    {
+        ennemiRooms[wantedRoom].myPdv -= wantedDamage;
+        float fill = ennemiRooms[wantedRoom].myPdv / 100;
+        ennemiRooms[wantedRoom].myImagePv.fillAmount = ennemiRooms[wantedRoom].myPdv / 100;
+
+        if (ennemiRooms[wantedRoom].myPdv <= 0)
+        {
+            ennemiRooms[wantedRoom].isDead = true;
+            intentionMechantes[wantedRoom].text = "";
+            ennemiRooms[wantedRoom].timer = 20;
+            ennemiRooms[wantedRoom].etat = 0;
         }
     }
-    
-    public static void PerdrePvGlobal(int numberOfPv,int wantedSpawn)
+
+    public void PerdrePvGlobal(int numberOfPv)
     {
-        CurrentSpawns[wantedSpawn].myPV -= numberOfPv;
-        CurrentSpawns[wantedSpawn].myHP.fillAmount = CurrentSpawns[wantedSpawn].myPV/3;
-        CurrentSpawns[wantedSpawn].myText.text = "Hp : " + CurrentSpawns[wantedSpawn].myPV;
+        pv -= numberOfPv;
+        badGuy.transform.GetChild(2).GetComponent<Image>().fillAmount = pv / 300;
+        badGuy.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = pv.ToString();
     }
 
-    IEnumerator RespawnSalle(int i,int wantedSpawn)
+
+    public void CheckPdv()
     {
-        float timer = 20;
-        while (timer > 0)
+        if (pv <= 0)
         {
-            if (CurrentSpawns.Count > 0)
+            Time.timeScale = 0;
+            Debug.Log("Dracarys");
+            pv = 1;
+        }
+    }
+
+    void GestionDesSalles()
+    {
+        for (int i = 0; i < ennemiRooms.Count; i++)
+        {
+            // dead =0
+            // elle font rien = 1
+            // elle preparent une attack = 2
+
+            ennemiRooms[i].timer -= Time.deltaTime;
+
+            if (ennemiRooms[i].etat == 0)
             {
-                CurrentSpawns[i].MyChilds.myText[wantedSpawn].text = "Temps restant :" + timer;
+                intentionMechantes[i].text = "Repair..." + "\n" + ennemiRooms[i].timer;
+                if (ennemiRooms[i].timer <= 0)
+                {
+                    // salle réparée
+                    ennemiRooms[i].isDead = false;
+                    ennemiRooms[i].myPdv = 100;
+                    ennemiRooms[i].etat = 1;
+                    intentionMechantes[i].text = "";
+                }
+            }
+            else if (ennemiRooms[i].etat == 1)
+            {
+                if (ennemiRooms[i].timer <= 0)
+                {
+                    // Choosenextattaque
+                    bool search = true;
+                    while (search)
+                    {
+                        int rnd = Random.Range(0, 4);
+                        if (salleManager.allSalles[rnd].pv > 0)
+                        {
+                            ennemiRooms[i].salleFocus = rnd;
+                            ennemiRooms[i].timer = Random.Range(10, 20);
+                            search = false;
+                        }
+                    }
+                    ennemiRooms[i].etat = 2;
+
+                }
+
+            }
+            else if (ennemiRooms[i].etat == 2)
+            {
+                intentionMechantes[i].text = "Next Attack" + "\n" + ennemiRooms[i].timer + "\n" + "Salle " + ennemiRooms[i].salleFocus.ToString();
+                if (ennemiRooms[i].timer <= 0)
+                {
+                    // attaque lancée
+                    salleManager.DamageSurSalle(ennemiRooms[i].salleFocus, 50);
+                    intentionMechantes[i].text = "";
+                    // cooldown
+                    ennemiRooms[i].timer = Random.Range(8, 16);
+                    ennemiRooms[i].etat = 1;
+                }
+            }
+        }
+    }
+
+    public int[] GiveInfosForDraw()
+    {
+        int nbSalleAlive = 0;
+        for (int i = 0; i < ennemiRooms.Count; i++)
+        {
+            if (!ennemiRooms[i].isDead)
+            {
+                nbSalleAlive++;
+            }
+        }
+
+        int[] typesToDraw = new int[nbSalleAlive];
+        int j = 0;
+        for (int h = 0; h < ennemiRooms.Count; h++)
+        {
+            if (!ennemiRooms[h].isDead)
+            {
+                typesToDraw[j] = ennemiRooms[h].myType;
+                j++;
             }
             
-            yield return new WaitForSeconds(1);
-            timer -= 1;
         }
-
-        if (CurrentSpawns.Count > 0)
-        {
-            CurrentSpawns[i].MyChilds.isDead[wantedSpawn] = false;
-            CurrentSpawns[i].MyChilds.myPdv[wantedSpawn] = 100;
-            CurrentSpawns[i].MyChilds.myText[wantedSpawn].text = "Salle " + wantedSpawn + " = " + CurrentSpawns[i].MyChilds.myPdv[wantedSpawn] + " pdv.";
-        }
-        yield break;
-    }
-
-    public static void CheckPdv()
-    {
-        int count = CurrentSpawns.Count;
-        int compteur = 0;
-        for (int i = 0; i < count ; i++)
-        {
-            if (CurrentSpawns[i - compteur].myPV <= 0)
-            {
-                Destroy(CurrentSpawns[i - compteur].go);
-                CurrentSpawns.RemoveAt(i - compteur);
-                compteur += 1;
-            }
-        }
-    }
-
-    public TextMesh intentionMechantes;
-    public SalleManager salleManager;
-    public float nextAttack = 0;
-    public int salleFocus;
-    public int damage = 50;
-
-
-   void Update() {
-       if (nextAttack <= 0)
-       {
-           salleManager.DamageSurSalle(salleFocus, damage);
-           ChooseNextAttack();
-       }
-       else
-       {
-           nextAttack -= Time.deltaTime;
-           intentionMechantes.text = "Next Attack : Salle " + salleFocus.ToString() + " dans " + nextAttack.ToString()+"s";
-       }
-       
-   }
-
-   void ChooseNextAttack()
-   {
-       bool search = true;
-       while(search)
-       {
-           int rnd = Random.Range(0,4);
-           if (salleManager.allSalles[rnd].pv > 0)
-           {
-               salleFocus = rnd;
-               nextAttack = Random.Range(10,20);
-               search = false;
-           }
-       }
-   }
-
-   
-    void ChooseFirstAttack()
-    {
-        int rnd = Random.Range(0,4);
-        salleFocus = rnd;
-        nextAttack = Random.Range(10,20);
+        return typesToDraw;
     }
 }

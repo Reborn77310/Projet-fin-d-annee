@@ -34,6 +34,7 @@ public class CartesManager : MonoBehaviour
     public Text ChangeBool;
     public GameObject SpawnEnnemiButton;
     public GameObject EnnemiHolder;
+    public EnnemiManager ennemiManager;
 
     public static bool PhaseLente = true;
 
@@ -140,7 +141,7 @@ public class CartesManager : MonoBehaviour
         {
             wantedRoom = 3;
         }
-        
+
         mm.MyCompteurInt -= 1;
         if (mm.MyCompteurInt <= 0)
         {
@@ -179,17 +180,26 @@ public class CartesManager : MonoBehaviour
     #region Gestion Des Cartes
     public void DrawCards()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            if (!CheckHandisFull())
-            {
-                AjouterUneCarteDansLaMain(1, i);
-            }
-        }
-
         if (!PhaseLente)
         {
+            int[] toDraw = ennemiManager.GiveInfosForDraw();
+            for (int i = 0; i < toDraw.Length; i++)
+            {
+                if (!CheckHandisFull())
+                {
+                    AjouterUneCarteDansLaMain(1, toDraw[i]);
+                }
+            }
             StartCoroutine("Draw");
+        }
+        else{
+            for (int i = 0; i < 3; i++)
+            {
+                if (!CheckHandisFull())
+                {
+                    AjouterUneCarteDansLaMain(1, i);
+                }
+            }
         }
 
     }

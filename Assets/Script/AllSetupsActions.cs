@@ -6,11 +6,13 @@ public class AllSetupsActions : MonoBehaviour
 {
     public static AllSetupsActions instance;
     private SalleManager salleManager;
+    EnnemiManager ennemiManager;
     
     void Awake()
     {
         instance = this;
         salleManager = GameObject.Find("GameMaster").GetComponent<SalleManager>();
+        ennemiManager = GameObject.Find("GameMaster").GetComponent<EnnemiManager>();
     }
     public void FindEffect(string wantedName, int wantedRoom)
     {
@@ -36,9 +38,10 @@ public class AllSetupsActions : MonoBehaviour
             string effet = "Tir des projectiles sur des cibles aléatoire (peut toucher plusieurs fois la même salle)";
             //3 proj à 10% aléa
             //4proj
-            DealDamage(Random.Range(0, 4),10);
-            DealDamage(Random.Range(0, 4),10);
-            DealDamage(Random.Range(0, 4),10);
+            // DealDamage(Random.Range(0, 4),10);
+            // DealDamage(Random.Range(0, 4),10);
+            // DealDamage(Random.Range(0, 4),10);
+            DealDamage(wantedRoom, 50);
             print(effet);
         }
         else if (wantedName == "Attaque 04")
@@ -125,16 +128,15 @@ public class AllSetupsActions : MonoBehaviour
         yield break;
     }
     
-    void DealDamage(int wantedRoom,int damage)
+    public void DealDamage(int wantedRoom,int damage)
     {
-        for (int i = 0; i < EnnemiManager.CurrentSpawns.Count; i++)
-        {
-            if (!EnnemiManager.CurrentSpawns[i].MyChilds.isDead[wantedRoom])
+
+            if (!ennemiManager.ennemiRooms[wantedRoom].isDead)
             {
-                EnnemiManager.PerdrePvGlobal(damage,i);
-                EnnemiManager.PerdrePvLocal(i,wantedRoom,damage);
-                EnnemiManager.CheckPdv();
+                ennemiManager.PerdrePvGlobal(damage);
+                ennemiManager.PerdrePvLocal(wantedRoom,damage);
+                ennemiManager.CheckPdv();
             }
-        }
+        
     }
 }
