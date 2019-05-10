@@ -64,10 +64,15 @@ public class EnnemiManager : MonoBehaviour
     public List<EnnemiRooms> ennemiRooms = new List<EnnemiRooms>();
     public Text[] intentionMechantes;
     public SalleManager salleManager;
-    public int pv;
+    public float pv;
     public GameObject badGuy;
     public GameObject badGuyPrefab;
     public Canvas myCanvas;
+    CartesManager cartesManager;
+
+    private void Awake() {
+        cartesManager = GetComponent<CartesManager>();
+    }
 
     void Start()
     {
@@ -93,9 +98,11 @@ public class EnnemiManager : MonoBehaviour
             a.pictoFormule = badGuy.transform.GetChild(3).GetChild(i).GetComponent<Image>();
             a.pictoFormule.sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/Picto" + randomRange);
             a.myImagePv = badGuy.transform.GetChild(0).GetChild(i).GetComponent<Image>();
+            Debug.Log(badGuy.transform.GetChild(0).GetChild(i).name);
             ennemiRooms.Add(a);
         }
         pv = 300;
+        cartesManager.DrawCards();
     }
 
     public void PerdrePvLocal(int wantedRoom, int wantedDamage)
@@ -125,9 +132,8 @@ public class EnnemiManager : MonoBehaviour
     {
         if (pv <= 0)
         {
-            Time.timeScale = 0;
+            Destroy(badGuy);
             Debug.Log("Dracarys");
-            pv = 1;
         }
     }
 

@@ -35,7 +35,7 @@ public class CartesManager : MonoBehaviour
     public GameObject SpawnEnnemiButton;
     public GameObject EnnemiHolder;
     public EnnemiManager ennemiManager;
-
+    public Image grilleRadar;
     public static bool PhaseLente = true;
 
     #region Initialisation
@@ -183,6 +183,7 @@ public class CartesManager : MonoBehaviour
         if (!PhaseLente)
         {
             int[] toDraw = ennemiManager.GiveInfosForDraw();
+            print(toDraw.Length);
             for (int i = 0; i < toDraw.Length; i++)
             {
                 if (!CheckHandisFull())
@@ -299,6 +300,7 @@ public class CartesManager : MonoBehaviour
             scannerUI.gameObject.SetActive(true);
             scannerUI.GetComponent<Animator>().SetFloat("speedDraw", 1 / (drawTimer - 1));
             SpawnEnnemiButton.SetActive(true);
+            grilleRadar.enabled = false;
         }
         else
         {
@@ -306,6 +308,7 @@ public class CartesManager : MonoBehaviour
             ChangeBool.text = "Activer la phase combat.";
             scannerUI.gameObject.SetActive(false);
             SpawnEnnemiButton.SetActive(false);
+            grilleRadar.enabled = true;
         }
 
         PhaseLente = !PhaseLente;
@@ -314,8 +317,6 @@ public class CartesManager : MonoBehaviour
             Destroy(go.go);
         }
         allCards.Clear();
-        DrawCards();
-
     }
 }
 

@@ -12617,6 +12617,7 @@ MonoBehaviour:
   SpawnEnnemiButton: {fileID: 1308100581}
   EnnemiHolder: {fileID: 0}
   ennemiManager: {fileID: 1335090933}
+  grilleRadar: {fileID: 386933401}
 --- !u!114 &1335090933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12637,7 +12638,7 @@ MonoBehaviour:
   salleManager: {fileID: 1335090935}
   pv: 0
   badGuy: {fileID: 0}
-  badGuyPrefab: {fileID: 5619870489566302709, guid: c166ef6c17edc1a4aad32d090557e767,
+  badGuyPrefab: {fileID: 1980780320862220620, guid: e7f059c5b5cd34c40aadb57182560a19,
     type: 3}
   myCanvas: {fileID: 1619270387}
 --- !u!114 &1335090934

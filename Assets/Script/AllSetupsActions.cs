@@ -130,13 +130,11 @@ public class AllSetupsActions : MonoBehaviour
     
     public void DealDamage(int wantedRoom,int damage)
     {
-
             if (!ennemiManager.ennemiRooms[wantedRoom].isDead)
             {
                 ennemiManager.PerdrePvGlobal(damage);
                 ennemiManager.PerdrePvLocal(wantedRoom,damage);
                 ennemiManager.CheckPdv();
             }
-        
     }
 }
