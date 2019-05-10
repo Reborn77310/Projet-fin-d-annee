@@ -6,21 +6,24 @@ public class AllSetupsActions : MonoBehaviour
 {
     public static AllSetupsActions instance;
     private SalleManager salleManager;
-    EnnemiManager ennemiManager;
+    public EnnemiManager ennemiManager;
+    private int SalleQuiEffectueAction = 0;
     
     void Awake()
     {
         instance = this;
         salleManager = GameObject.Find("GameMaster").GetComponent<SalleManager>();
-        ennemiManager = GameObject.Find("GameMaster").GetComponent<EnnemiManager>();
     }
-    public void FindEffect(string wantedName, int wantedRoom)
+    
+    public void FindEffect(string wantedName, int wantedRoom, ModuleManager mm)
     {
+         SalleQuiEffectueAction = mm.MySalleNumber;
+        
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Attack
         if (wantedName == "Attaque 01")
         {
             string effet = "Inflige des dégâts sur la salle ciblée";
-            DealDamage(wantedRoom, 20);
+            DealDamage(wantedRoom, 20,5);
             // 10 % * 2
             // 15 % * 2
             print(effet);
@@ -30,7 +33,7 @@ public class AllSetupsActions : MonoBehaviour
             string effet = "Inflige des dégâts sur la salle ciblée";
             // 10% 
             // 15% proc attaque
-            DealDamage(wantedRoom, 10);
+            DealDamage(wantedRoom, 10,5);
             print(effet);
         }
         else if (wantedName == "Attaque 03")
@@ -41,7 +44,7 @@ public class AllSetupsActions : MonoBehaviour
             // DealDamage(Random.Range(0, 4),10);
             // DealDamage(Random.Range(0, 4),10);
             // DealDamage(Random.Range(0, 4),10);
-            DealDamage(wantedRoom, 50);
+            DealDamage(wantedRoom, 50,5);
             print(effet);
         }
         else if (wantedName == "Attaque 04")
@@ -55,7 +58,7 @@ public class AllSetupsActions : MonoBehaviour
             string effet = "Tir un projectile, inflige des dégâts sur la salle ciblé.";
             //20 %
             //Augmente 10% 
-            DealDamage(wantedRoom, 20);
+            DealDamage(wantedRoom, 20,5);
             print(effet);
         }
         
@@ -128,13 +131,12 @@ public class AllSetupsActions : MonoBehaviour
         yield break;
     }
     
-    public void DealDamage(int wantedRoom,int damage)
+    public void DealDamage(int wantedRoom,int damage,int cooldown)
     {
-            if (!ennemiManager.ennemiRooms[wantedRoom].isDead)
-            {
-                ennemiManager.PerdrePvGlobal(damage);
-                ennemiManager.PerdrePvLocal(wantedRoom,damage);
-                ennemiManager.CheckPdv();
-            }
+        ennemiManager.PerdrePvGlobal(damage);
+        ennemiManager.PerdrePvLocal(wantedRoom,damage);
+        ennemiManager.CheckPdv();
+           
+        salleManager.MakeCooldownSalle(SalleQuiEffectueAction,cooldown);
     }
 }

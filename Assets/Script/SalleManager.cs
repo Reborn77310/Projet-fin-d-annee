@@ -24,10 +24,14 @@ public class SalleManager : MonoBehaviour
 
     public List<Salles> allSalles = new List<Salles>();
     public GameObject[] pvSalles;
+    public TextMesh[] SalleOnCooldown = new TextMesh[4];
     public TextMesh pvDuVehiculeText;
     public int pvDuVehicule = 300;
+    private SalleManager instance;
+    
     void Start()
     {
+        instance = this;
         InitializeSalles();
         pvDuVehiculeText.text = pvDuVehicule.ToString();
     }
@@ -39,6 +43,7 @@ public class SalleManager : MonoBehaviour
             Salles newSalle = new Salles(GameObject.Find("Salle" + i.ToString()));
             allSalles.Add(newSalle);
             pvSalles[i].GetComponent<TextMesh>().text = allSalles[i].pv.ToString();
+            SalleOnCooldown[i] = allSalles[i].MyGo.transform.GetChild(12).GetComponent<TextMesh>();
         }
     }
 
@@ -66,14 +71,33 @@ public class SalleManager : MonoBehaviour
                 ReparationSalle(salleVisee);
             }
         }
-
     }
 
+    public void MakeCooldownSalle(int SalleVisee,int Cooldown)
+    {
+        StartCoroutine(instance.CooldownSalle(SalleVisee,Cooldown));
+    }
+
+    IEnumerator CooldownSalle(int salleVisee, int cooldown)
+    {
+        allSalles[salleVisee].CanPlayHere = false;
+        SalleOnCooldown[salleVisee].text = "YES";
+        yield return new WaitForSeconds(cooldown);
+        if (allSalles[salleVisee].pv > 0)
+        {
+            allSalles[salleVisee].CanPlayHere = true;
+            SalleOnCooldown[salleVisee].text = "NO";
+        }
+        yield break;
+    }
+    
     IEnumerator ReparationSalle(int salleVisee)
     {
+        SalleOnCooldown[salleVisee].text = "YES";
         yield return new WaitForSeconds(30);
         allSalles[salleVisee].CanPlayHere = true;
         allSalles[salleVisee].pv = 100;
+        SalleOnCooldown[salleVisee].text = "NO";
         yield break;
     }
 

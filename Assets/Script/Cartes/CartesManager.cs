@@ -32,7 +32,6 @@ public class CartesManager : MonoBehaviour
     public float drawTimer;
     public Image scannerUI;
     public Text ChangeBool;
-    public GameObject SpawnEnnemiButton;
     public GameObject EnnemiHolder;
     public EnnemiManager ennemiManager;
     public Image grilleRadar;
@@ -168,11 +167,11 @@ public class CartesManager : MonoBehaviour
 
         if (mm.MyModules[0].CarteType == type)
         {
-            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom);
+            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom,mm);
         }
         else
         {
-            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom);
+            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom,mm);
         }
     }
     #endregion
@@ -183,7 +182,6 @@ public class CartesManager : MonoBehaviour
         if (!PhaseLente)
         {
             int[] toDraw = ennemiManager.GiveInfosForDraw();
-            print(toDraw.Length);
             for (int i = 0; i < toDraw.Length; i++)
             {
                 if (!CheckHandisFull())
@@ -202,7 +200,6 @@ public class CartesManager : MonoBehaviour
                 }
             }
         }
-
     }
 
     IEnumerator Draw()
@@ -292,31 +289,30 @@ public class CartesManager : MonoBehaviour
 
     public void ChangeBoolPhases()
     {
-        if (PhaseLente)
-        {
-            gameObject.GetComponent<EnnemiManager>().enabled = true;
-            ChangeBool.text = "Activer la phase lente.";
-            scannerUI.gameObject.SetActive(false);
-            scannerUI.gameObject.SetActive(true);
-            scannerUI.GetComponent<Animator>().SetFloat("speedDraw", 1 / (drawTimer - 1));
-            SpawnEnnemiButton.SetActive(true);
-            grilleRadar.enabled = false;
-        }
-        else
-        {
-            gameObject.GetComponent<EnnemiManager>().enabled = false;
-            ChangeBool.text = "Activer la phase combat.";
-            scannerUI.gameObject.SetActive(false);
-            SpawnEnnemiButton.SetActive(false);
-            grilleRadar.enabled = true;
-        }
-
-        PhaseLente = !PhaseLente;
         foreach (var go in allCards)
         {
             Destroy(go.go);
         }
         allCards.Clear();
+        
+        if (PhaseLente)
+        {
+            PhaseLente = false;
+            this.gameObject.AddComponent<EnnemiManager>();
+            ChangeBool.text = "Activer la phase lente.";
+            scannerUI.gameObject.SetActive(false);
+            scannerUI.gameObject.SetActive(true);
+            scannerUI.GetComponent<Animator>().SetFloat("speedDraw", 1 / (drawTimer - 1));
+            grilleRadar.enabled = false;
+        }
+        else
+        {
+            PhaseLente = true;
+            ChangeBool.text = "Activer la phase combat.";
+            scannerUI.gameObject.SetActive(false);
+            grilleRadar.enabled = true;
+            Destroy(this.GetComponent<EnnemiManager>());
+        }
     }
 }
 

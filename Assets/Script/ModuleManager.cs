@@ -28,6 +28,7 @@ public class ModuleManager : MonoBehaviour
     public Modules[] MyModules = new Modules[3];
     public TextMesh MyCompteur;
     public int MyCompteurInt = 2;
+    public int MySalleNumber;
     
     void Awake()
     {

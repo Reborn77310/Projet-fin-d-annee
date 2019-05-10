@@ -100,34 +100,59 @@ public class GameMaster : MonoBehaviour
     }
 
     #region Actions
-
-    public void RotateSecondModule(float valeur)
+    
+    void placeHolderUICiblage()
     {
-        var origin = new Vector3(2.3f, -2.095f, -16.11f);
-        Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
-
-
-        RaycastHit hit;
-        var dist = Vector3.Distance(origin, point);
-        var dir = (point - Camera.main.transform.position);
-
-        caj.transform.position = point + dir;
-
-        if (Physics.Raycast(caj.transform.position, dir, out hit, dist))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
-            if (hit.transform.tag == "Salles")
+            var origin = new Vector3(2.3f, -2.095f, -16.11f);
+            Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
+
+
+            RaycastHit hit;
+            var dist = Vector3.Distance(origin, point);
+            var dir = (point - Camera.main.transform.position);
+
+            caj.transform.position = point + dir;
+
+            if (Physics.Raycast(caj.transform.position, dir, out hit, dist))
             {
-                ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
-                mm.MyModules[1].MyObject.transform.Rotate(0, 0, 90 * (valeur * 10));
-                if (valeur < 0 && mm.MyModules[1].rotationCompteur == 0)
+                if (hit.transform.tag == "Salles")
                 {
-                    mm.MyModules[1].rotationCompteur = 400000;
+                    bool canPlay = TestIfCanPlay(hit);
+                    
+                    if (canPlay)
+                    {
+                        uiPlaceHolder.SetActive(true);
+                        var moletteSouris = Input.GetAxis("Mouse ScrollWheel");
+                        GameObject aTourner = uiPlaceHolder.transform.GetChild(0).gameObject;
+                        ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
+                        var pouett = mm.MyModules[1].MyObject.transform.rotation;
+                        aTourner.transform.rotation = pouett;
+                    
+                        if (Mathf.Abs(moletteSouris) > 0)
+                        {
+                            mm.MyModules[1].MyObject.transform.Rotate(0, 0, 90 * (moletteSouris * 10));
+                            if (moletteSouris < 0 && mm.MyModules[1].rotationCompteur == 0)
+                            {
+                                mm.MyModules[1].rotationCompteur = 400000;
+                            }
+                            mm.MyModules[1].rotationCompteur += 1 * (Mathf.RoundToInt(moletteSouris * 10));
+                        }
+                    }
                 }
-                mm.MyModules[1].rotationCompteur += 1 * (Mathf.RoundToInt(valeur * 10));
+                else
+                {
+                    uiPlaceHolder.SetActive(false);
+                }
             }
         }
+        if (Input.GetKeyUp(KeyCode.Mouse0) && uiPlaceHolder.activeInHierarchy)
+        {
+            uiPlaceHolder.SetActive(false);
+        }
     }
-
+    
     public void TakeCardFromModule()
     {
         var origin = new Vector3(2.3f, -2.095f, -16.11f);
@@ -144,23 +169,28 @@ public class GameMaster : MonoBehaviour
         {
             if (hit.transform.tag == "Salles")
             {
-                ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
-                var testBool = false;
-                for (int i = mm.MyModules.Length - 1; i >= 0; i--)
-                {
-                    if (mm.MyModules[i].CarteType != -1 && !testBool && mm.MyModules[i].MyType != Modules.Type.Droite)
-                    {
-                        if (!cartesManager.CheckHandisFull())
-                        {
-                            testBool = true;
-                            if (!CartesManager.PhaseLente)
-                            {
-                                cartesManager.AjouterUneCarteDansLaMain(1, mm.MyModules[i].CarteType);
-                            }
+                bool canPlay = TestIfCanPlay(hit);
 
-                            mm.MyModules[i].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
-                                Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
-                            mm.MyModules[i].CarteType = -1;
+                if (canPlay)
+                {
+                    ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
+                    var testBool = false;
+                    for (int i = mm.MyModules.Length - 1; i >= 0; i--)
+                    {
+                        if (mm.MyModules[i].CarteType != -1 && !testBool && mm.MyModules[i].MyType != Modules.Type.Droite)
+                        {
+                            if (!cartesManager.CheckHandisFull())
+                            {
+                                testBool = true;
+                                if (!CartesManager.PhaseLente)
+                                {
+                                    cartesManager.AjouterUneCarteDansLaMain(1, mm.MyModules[i].CarteType);
+                                }
+
+                                mm.MyModules[i].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+                                    Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
+                                mm.MyModules[i].CarteType = -1;
+                            }
                         }
                     }
                 }
@@ -190,17 +220,7 @@ public class GameMaster : MonoBehaviour
         {
             if (hit.transform.tag == "Salles")
             {
-                bool canPlay = true;
-                for (int i = 0; i < salleManager.allSalles.Count; i++)
-                {
-                    if (hit.transform.gameObject == salleManager.allSalles[i].MyGo)
-                    {
-                        if (!salleManager.allSalles[i].CanPlayHere)
-                        {
-                            canPlay = false;
-                        }
-                    }
-                }
+                bool canPlay = TestIfCanPlay(hit);
 
                 if (canPlay)
                 {
@@ -240,6 +260,23 @@ public class GameMaster : MonoBehaviour
         }
     }
 
+    public bool TestIfCanPlay(RaycastHit hit)
+    {
+        bool toReturn = true;
+        
+        for (int i = 0; i < salleManager.allSalles.Count; i++)
+        {
+            if (hit.transform.gameObject == salleManager.allSalles[i].MyGo)
+            {
+                if (!salleManager.allSalles[i].CanPlayHere)
+                {
+                    toReturn = false;
+                }
+            }
+        }
+        
+        return toReturn;
+    }
     public void PlayCard()
     {
         var c = moduleHit;
@@ -259,58 +296,4 @@ public class GameMaster : MonoBehaviour
         }
     }
     #endregion
-
-    void placeHolderUICiblage()
-    {
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            var origin = new Vector3(2.3f, -2.095f, -16.11f);
-            Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
-
-
-            RaycastHit hit;
-            var dist = Vector3.Distance(origin, point);
-            var dir = (point - Camera.main.transform.position);
-
-            caj.transform.position = point + dir;
-
-            if (Physics.Raycast(caj.transform.position, dir, out hit, dist))
-            {
-                if (hit.transform.tag == "Salles")
-                {
-
-                    uiPlaceHolder.SetActive(true);
-                    var moletteSouris = Input.GetAxis("Mouse ScrollWheel");
-                    GameObject aTourner = uiPlaceHolder.transform.GetChild(0).gameObject;
-                    ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
-                    var pouett = mm.MyModules[1].MyObject.transform.rotation;
-                    aTourner.transform.rotation = pouett;
-                    
-                    if (Mathf.Abs(moletteSouris) > 0)
-                    {
-                        mm.MyModules[1].MyObject.transform.Rotate(0, 0, 90 * (moletteSouris * 10));
-                        if (moletteSouris < 0 && mm.MyModules[1].rotationCompteur == 0)
-                        {
-                            mm.MyModules[1].rotationCompteur = 400000;
-                        }
-                        mm.MyModules[1].rotationCompteur += 1 * (Mathf.RoundToInt(moletteSouris * 10));
-                        
-                        
-                    }
-
-                    
-
-                }
-                else
-                {
-                    uiPlaceHolder.SetActive(false);
-                }
-            }
-        }
-        if (Input.GetKeyUp(KeyCode.Mouse0) && uiPlaceHolder.activeInHierarchy)
-        {
-            uiPlaceHolder.SetActive(false);
-        }
-    }
-
 }

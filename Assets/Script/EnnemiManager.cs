@@ -62,19 +62,25 @@ public class EnnemiRooms
 public class EnnemiManager : MonoBehaviour
 {
     public List<EnnemiRooms> ennemiRooms = new List<EnnemiRooms>();
-    public Text[] intentionMechantes;
+    public Text[] intentionMechantes = new Text[4];
     public SalleManager salleManager;
-    public float pv;
+    public float pv = 300;
     public GameObject badGuy;
     public GameObject badGuyPrefab;
     public Canvas myCanvas;
     CartesManager cartesManager;
+    private AllSetupsActions allSetup;
 
-    private void Awake() {
+    private void Awake()
+    {
+        allSetup = GetComponent<AllSetupsActions>();
         cartesManager = GetComponent<CartesManager>();
+        salleManager = GetComponent<SalleManager>();
+        badGuyPrefab = Resources.Load<GameObject>("Prefabs/Radar/badGuy");
+        myCanvas = GameObject.Find("Canvas").GetComponent<Canvas>();
     }
 
-    void Start()
+    private void OnEnable()
     {
         SpawnMob(4);
     }
@@ -86,6 +92,9 @@ public class EnnemiManager : MonoBehaviour
 
     public void SpawnMob(int nbSalles)
     {
+        cartesManager.ennemiManager = this;
+        allSetup.ennemiManager = this;
+        
         badGuy = GameObject.Instantiate(badGuyPrefab, myCanvas.transform, false);
         intentionMechantes = badGuy.transform.GetChild(1).GetComponentsInChildren<Text>();
 
@@ -98,7 +107,6 @@ public class EnnemiManager : MonoBehaviour
             a.pictoFormule = badGuy.transform.GetChild(3).GetChild(i).GetComponent<Image>();
             a.pictoFormule.sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/Picto" + randomRange);
             a.myImagePv = badGuy.transform.GetChild(0).GetChild(i).GetComponent<Image>();
-            Debug.Log(badGuy.transform.GetChild(0).GetChild(i).name);
             ennemiRooms.Add(a);
         }
         pv = 300;
@@ -134,6 +142,8 @@ public class EnnemiManager : MonoBehaviour
         {
             Destroy(badGuy);
             Debug.Log("Dracarys");
+            pv = 1;
+            cartesManager.ChangeBoolPhases();
         }
     }
 
