@@ -16,6 +16,7 @@ public class EnnemiRooms
     public float timer;
     public int etat = 1;
     public int salleFocus;
+    public bool isAttacking = false;
     public EnnemiRooms(float _timer)
     {
         timer = _timer;
@@ -70,9 +71,11 @@ public class EnnemiManager : MonoBehaviour
     public Canvas myCanvas;
     CartesManager cartesManager;
     private AllSetupsActions allSetup;
-
+    private RectTransform ParentOfBadGuy;
+    
     private void Awake()
     {
+        ParentOfBadGuy = GameObject.Find("ParentOfBadGuy").GetComponent<RectTransform>();
         allSetup = GetComponent<AllSetupsActions>();
         cartesManager = GetComponent<CartesManager>();
         salleManager = GetComponent<SalleManager>();
@@ -94,8 +97,11 @@ public class EnnemiManager : MonoBehaviour
     {
         cartesManager.ennemiManager = this;
         allSetup.ennemiManager = this;
+        salleManager.ennemiManager = this;
         
         badGuy = GameObject.Instantiate(badGuyPrefab, myCanvas.transform, false);
+        badGuy.GetComponent<RectTransform>().position = ParentOfBadGuy.position;
+        
         intentionMechantes = badGuy.transform.GetChild(1).GetComponentsInChildren<Text>();
 
         for (int i = 0; i < nbSalles; i++)
@@ -159,7 +165,10 @@ public class EnnemiManager : MonoBehaviour
 
             if (ennemiRooms[i].etat == 0)
             {
+                ennemiRooms[i].isAttacking = false;
                 intentionMechantes[i].text = "Repair..." + "\n" + ennemiRooms[i].timer;
+                intentionMechantes[i].color = Color.green;
+                
                 if (ennemiRooms[i].timer <= 0)
                 {
                     // salle réparée
@@ -192,18 +201,24 @@ public class EnnemiManager : MonoBehaviour
             }
             else if (ennemiRooms[i].etat == 2)
             {
-                intentionMechantes[i].text = "Next Attack" + "\n" + ennemiRooms[i].timer + "\n" + "Salle " + ennemiRooms[i].salleFocus.ToString();
+                
+                ennemiRooms[i].isAttacking = true;
+                intentionMechantes[i].text = "Next Attack" + "\n" + Mathf.RoundToInt(ennemiRooms[i].timer) + "\n" + "Salle " + ennemiRooms[i].salleFocus.ToString();
+                intentionMechantes[i].color = Color.red;
                 if (ennemiRooms[i].timer <= 0)
                 {
                     // attaque lancée
                     salleManager.DamageSurSalle(ennemiRooms[i].salleFocus, 50);
+                    //Play son quand touché
                     intentionMechantes[i].text = "";
+                    ennemiRooms[i].isAttacking = false;
                     // cooldown
                     ennemiRooms[i].timer = Random.Range(8, 16);
                     ennemiRooms[i].etat = 1;
                 }
             }
         }
+        salleManager.CheckRoomIfAttacked();
     }
 
     public int[] GiveInfosForDraw()

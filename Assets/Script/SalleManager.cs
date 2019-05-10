@@ -8,9 +8,13 @@ public class Salles
     public GameObject MyGo;
     public bool CanPlayHere = true;
     public int pv;
-
+    
+    public Color[] myMaterials = new Color[2];
     public bool isDefendu;
-
+    public int DefendingAmount = 0;
+    
+    public bool isAttacked = false;
+    
     public Salles(GameObject go)
     {
         MyGo = go;
@@ -28,12 +32,50 @@ public class SalleManager : MonoBehaviour
     public TextMesh pvDuVehiculeText;
     public int pvDuVehicule = 300;
     private SalleManager instance;
+    public EnnemiManager ennemiManager;
     
     void Start()
     {
         instance = this;
         InitializeSalles();
         pvDuVehiculeText.text = pvDuVehicule.ToString();
+    }
+    
+    public void CheckRoomIfAttacked()
+    {
+        for (int i = 0; i < allSalles.Count; i++)
+        {
+            bool test = false;
+            for (int a = 0; a < ennemiManager.ennemiRooms.Count; a++)
+            {
+                if (ennemiManager.ennemiRooms[a].isAttacking)
+                {
+                    if (ennemiManager.ennemiRooms[a].salleFocus == i)
+                    {
+                        test = true;
+                    }
+                }
+            }
+            allSalles[i].isAttacked = test;
+        }
+        ChangeMaterial();
+    }
+
+    void ChangeMaterial()
+    {
+        for (int i = 0; i < allSalles.Count; i++)
+        {
+            if (allSalles[i].isAttacked)
+            {
+                allSalles[i].MyGo.transform.GetChild(2).GetComponent<Renderer>().material.color =
+                    allSalles[i].myMaterials[1];
+            }
+            else
+            {
+                allSalles[i].MyGo.transform.GetChild(2).GetComponent<Renderer>().material.color =
+                    allSalles[i].myMaterials[0];
+            }
+        }
     }
 
     void InitializeSalles()
@@ -44,14 +86,38 @@ public class SalleManager : MonoBehaviour
             allSalles.Add(newSalle);
             pvSalles[i].GetComponent<TextMesh>().text = allSalles[i].pv.ToString();
             SalleOnCooldown[i] = allSalles[i].MyGo.transform.GetChild(12).GetComponent<TextMesh>();
+            allSalles[i].myMaterials[0] = allSalles[i].MyGo.transform.GetChild(2).GetComponent<Renderer>().material.color;
+            allSalles[i].myMaterials[1] = allSalles[i].myMaterials[0] + Color.red;
         }
     }
-
+    
     public void DamageSurSalle(int salleVisee, int damage)
     {
         if (allSalles[salleVisee].isDefendu)
         {
             allSalles[salleVisee].isDefendu = false;
+            if (allSalles[salleVisee].DefendingAmount < damage)
+            {
+                var wantedDamage = damage - allSalles[salleVisee].DefendingAmount;
+                allSalles[salleVisee].pv -= wantedDamage;
+                pvDuVehicule -= wantedDamage;
+            }
+            
+            pvSalles[salleVisee].GetComponent<TextMesh>().text = allSalles[salleVisee].pv.ToString();
+            pvDuVehiculeText.text = pvDuVehicule.ToString();
+            if (pvDuVehicule <= 0)
+            {
+                pvDuVehiculeText.text = "MISSANDEI ?!?";
+                Time.timeScale = 0;
+            }
+            if (allSalles[salleVisee].pv <= 0)
+            {
+                allSalles[salleVisee].pv = 0;
+                allSalles[salleVisee].CanPlayHere = false;
+                ReparationSalle(salleVisee);
+            }
+
+            allSalles[salleVisee].DefendingAmount = 0;
         }
         else
         {
@@ -73,12 +139,12 @@ public class SalleManager : MonoBehaviour
         }
     }
 
-    public void MakeCooldownSalle(int SalleVisee,int Cooldown)
+    public void MakeCooldownSalle(int SalleVisee,float Cooldown)
     {
         StartCoroutine(instance.CooldownSalle(SalleVisee,Cooldown));
     }
 
-    IEnumerator CooldownSalle(int salleVisee, int cooldown)
+    IEnumerator CooldownSalle(int salleVisee, float cooldown)
     {
         allSalles[salleVisee].CanPlayHere = false;
         SalleOnCooldown[salleVisee].text = "YES";

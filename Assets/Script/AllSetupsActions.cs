@@ -15,7 +15,7 @@ public class AllSetupsActions : MonoBehaviour
         salleManager = GameObject.Find("GameMaster").GetComponent<SalleManager>();
     }
     
-    public void FindEffect(string wantedName, int wantedRoom, ModuleManager mm)
+    public void FindEffect(string wantedName, int wantedRoom, ModuleManager mm,bool superEffect)
     {
          SalleQuiEffectueAction = mm.MySalleNumber;
         
@@ -44,8 +44,17 @@ public class AllSetupsActions : MonoBehaviour
             // DealDamage(Random.Range(0, 4),10);
             // DealDamage(Random.Range(0, 4),10);
             // DealDamage(Random.Range(0, 4),10);
-            DealDamage(wantedRoom, 50,5);
-            print(effet);
+            if (superEffect)
+            {
+                DealDamage(wantedRoom, 75,5);
+                print(effet + " super ++");
+            }
+            else
+            {
+                DealDamage(wantedRoom, 35,5);
+                print(effet);
+            }
+            
         }
         else if (wantedName == "Attaque 04")
         {
@@ -75,6 +84,16 @@ public class AllSetupsActions : MonoBehaviour
         {
             string effet = "Empêche l'ennemi de cibler la salle visée et d'avoir n'importe quelle info dessus";
             salleManager.allSalles[wantedRoom].isDefendu = true;
+            if (superEffect)
+            {
+                salleManager.allSalles[wantedRoom].DefendingAmount = 100;
+            }
+            else
+            {
+                salleManager.allSalles[wantedRoom].DefendingAmount = 50;
+            }
+            
+            print(salleManager.allSalles[wantedRoom].DefendingAmount);
             salleManager.DefendreSalle(wantedRoom);
             StartCoroutine(instance.BlindeMaximalAndCloak(5.0f,wantedRoom));
             print(effet);
@@ -131,7 +150,7 @@ public class AllSetupsActions : MonoBehaviour
         yield break;
     }
     
-    public void DealDamage(int wantedRoom,int damage,int cooldown)
+    public void DealDamage(int wantedRoom,int damage,float cooldown)
     {
         ennemiManager.PerdrePvGlobal(damage);
         ennemiManager.PerdrePvLocal(wantedRoom,damage);

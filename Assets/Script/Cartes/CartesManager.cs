@@ -167,11 +167,11 @@ public class CartesManager : MonoBehaviour
 
         if (mm.MyModules[0].CarteType == type)
         {
-            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom,mm);
+            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom,mm,true);
         }
         else
         {
-            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom,mm);
+            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom,mm,false);
         }
     }
     #endregion
