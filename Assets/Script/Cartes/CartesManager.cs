@@ -298,20 +298,18 @@ public class CartesManager : MonoBehaviour
         if (PhaseLente)
         {
             PhaseLente = false;
-            this.gameObject.AddComponent<EnnemiManager>();
             ChangeBool.text = "Activer la phase lente.";
             scannerUI.gameObject.SetActive(false);
             scannerUI.gameObject.SetActive(true);
             scannerUI.GetComponent<Animator>().SetFloat("speedDraw", 1 / (drawTimer - 1));
-            grilleRadar.enabled = false;
+            ennemiManager.PassageEnPhaseCombat();
         }
         else
         {
             PhaseLente = true;
             ChangeBool.text = "Activer la phase combat.";
             scannerUI.gameObject.SetActive(false);
-            grilleRadar.enabled = true;
-            Destroy(this.GetComponent<EnnemiManager>());
+            ennemiManager.PassageEnPhaseLente();
         }
     }
 }
