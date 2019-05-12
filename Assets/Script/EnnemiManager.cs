@@ -29,7 +29,7 @@ public class EnnemiRooms
     public Image[] symbole;
     public float pv = 100;
     public float pvMax = 100;
-    public TextMeshPro pvText;
+    public TextMeshProUGUI pvText;
     public bool isDead = false;
     public float timer;
     public int etat = 1;
@@ -88,7 +88,7 @@ public class EnnemiManager : MonoBehaviour
 
     }
 
-    public void RecupInfosADV(RectTransform _ui, Sprite _normale, Sprite _HL, float _pv, GameObject _text)
+    public void RecupInfosADV(RectTransform _ui, Sprite _normale, Sprite _HL, float _pv, TextMeshProUGUI _text)
     {
         EnnemiRooms a = new EnnemiRooms(ennemiRooms.Count * 3 + Random.Range(1, 5));
         a.ui = _ui;
@@ -96,7 +96,7 @@ public class EnnemiManager : MonoBehaviour
         a.hightlight = _HL;
         a.pvMax = _pv;
         a.pv = _pv;
-        a.pvText = _text.GetComponent<TextMeshPro>();
+        a.pvText = _text;
         ennemiRooms.Add(a);
     }
 
@@ -119,32 +119,6 @@ public class EnnemiManager : MonoBehaviour
         cartesManager.DrawCards();
     }
 
-    // public void SpawnMob(int nbSalles)
-    // {
-    //     cartesManager.ennemiManager = this;
-    //     allSetup.ennemiManager = this;
-    //     salleManager.ennemiManager = this;
-
-    //     badGuy = GameObject.Instantiate(badGuyPrefab, myCanvas.transform, false);
-    //     badGuy.GetComponent<RectTransform>().position = ParentOfBadGuy.position;
-
-    //     intentionMechantes = badGuy.transform.GetChild(1).GetComponentsInChildren<Text>();
-
-    //     for (int i = 0; i < nbSalles; i++)
-    //     {
-    //         intentionMechantes[i].text = "";
-    //         EnnemiRooms a = new EnnemiRooms((Random.Range(1,4)+i*3));
-    //         int randomRange = Random.Range(0, 3);
-    //         a.myType = randomRange;
-    //         a.pictoFormule = badGuy.transform.GetChild(3).GetChild(i).GetComponent<Image>();
-    //         a.pictoFormule.sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/Picto" + randomRange);
-    //         a.myImagePv = badGuy.transform.GetChild(0).GetChild(i).GetComponent<Image>();
-    //         ennemiRooms.Add(a);
-    //     }
-    //     pv = 300;
-    //     cartesManager.DrawCards();
-    // }
-
     public void PerdrePvLocal(int wantedRoom, int wantedDamage)
     {
         ennemiRooms[wantedRoom].pv -= wantedDamage;
@@ -153,6 +127,7 @@ public class EnnemiManager : MonoBehaviour
 
         if (ennemiRooms[wantedRoom].pv <= 0)
         {
+            ennemiRooms[wantedRoom].pv = 0;
             ennemiRooms[wantedRoom].isDead = true;
             CancelAction(wantedRoom);
             ennemiRooms[wantedRoom].etat = 0;
@@ -209,19 +184,6 @@ public class EnnemiManager : MonoBehaviour
                 {
                     // ChooseNextAttaque
                     ChooseAction(i);
-                    //ennemiRooms[i].salleFocus = rnd;
-                    ennemiRooms[i].timer = Random.Range(10, 20);
-                    // bool search = true;
-                    // while (search)
-                    // {
-                    //     int rnd = Random.Range(0, 4);
-                    //     if (salleManager.allSalles[rnd].pv > 0)
-                    //     {
-                    //         ennemiRooms[i].salleFocus = rnd;
-                    //         ennemiRooms[i].timer = Random.Range(10, 20);
-                    //         search = false;
-                    //     }
-                    // }
                     ennemiRooms[i].etat = 2;
                     ennemiRooms[i].isAttacking = true;
                 }
@@ -237,7 +199,6 @@ public class EnnemiManager : MonoBehaviour
                 }
             }
         }
-        //salleManager.CheckRoomIfAttacked();
     }
 
     public int[] GiveInfosForDraw()
@@ -300,31 +261,32 @@ public class EnnemiManager : MonoBehaviour
         a.origine = _origine;
         a.cible = Random.Range(0, 4);
         a.id = Random.Range(0, 2);
+        ennemiRooms[_origine].timer = a.timer;
 
         if (a.id % 2 != 0)
         {
             salleManager.allSalles[a.cible].isAttacked = true;
             salleManager.ChangeMaterial();
         }
-
-        if (actionPrevues.Count == 0)
-        {
-            actionPrevues.Add(a);
-        }
-        else
-        {
-            for (int i = 0; i < actionPrevues.Count; i++)
-            {
-                if (a.timer < actionPrevues[i].timer)
-                {
-                    actionPrevues.Insert(i, a);
-                }
-            }
-            if (!actionPrevues.Contains(a))
-            {
-                actionPrevues.Add(a);
-            }
-        }
+        actionPrevues.Add(a);
+        // if (actionPrevues.Count == 0)
+        // {
+        //     actionPrevues.Add(a);
+        // }
+        // else
+        // {
+        //     for (int i = 0; i < actionPrevues.Count; i++)
+        //     {
+        //         if (a.timer < actionPrevues[i].timer)
+        //         {
+        //             actionPrevues.Insert(i, a);
+        //         }
+        //     }
+        //     if (!actionPrevues.Contains(a))
+        //     {
+        //         actionPrevues.Add(a);
+        //     }
+        // }
     }
 
     public void MajDBM()
@@ -335,13 +297,14 @@ public class EnnemiManager : MonoBehaviour
             {
                 if (actionPrevues[i].id % 2 != 0)
                 {
-                    DBM_Cible[i].text = "<color=#BC1910>Room " + actionPrevues[i].cible.ToString()+"</color>";
+                    DBM_Cible[i].text = "<color=#BC1910>Room " + actionPrevues[i].cible.ToString() + "</color>";
                 }
-                else{
-                    DBM_Cible[i].text = "<color=#126A0A>Room " + actionPrevues[i].cible.ToString()+"</color>";
+                else
+                {
+                    DBM_Cible[i].text = "<color=#126A0A>Room " + actionPrevues[i].cible.ToString() + "</color>";
                 }
-                
-                DBM_timer[i].text = actionPrevues[i].timer.ToString("F3") + "s";
+
+                DBM_timer[i].text = actionPrevues[i].timer.ToString("F3") + "s " + actionPrevues[i].origine;
             }
             else
             {
@@ -362,7 +325,7 @@ public class EnnemiManager : MonoBehaviour
                 {
                     salleManager.allSalles[go.cible].isAttacked = false;
                     salleManager.ChangeMaterial();
-                    salleManager.DamageSurSalle(go.cible, 50);
+                    salleManager.DamageSurSalle(go.cible, 00); // DEGATS SET A 0 ATTENTION
                     ennemiRooms[go.origine].isAttacking = false;
                 }
             }
@@ -371,28 +334,34 @@ public class EnnemiManager : MonoBehaviour
                 // C'est une défense
             }
         }
-        // foreach (var go in actionPrevues)
-        // {
-        //     if (go.timer <= 0)
-        //     {
-        //         actionPrevues.Remove(go);
-        //     }
-        // }
+        foreach (var go in actionPrevues)
+        {
+            if (go.timer <= 0)
+            {
+                actionPrevues.Remove(go);
+            }
+        }
     }
 
     public void CancelAction(int _indexSalle)
     {
-        foreach(var go in actionPrevues)
+        int toRemove = -1;
+        for (int i = 0; i < actionPrevues.Count; i++)
         {
-            if (go.origine == _indexSalle)
+            if (actionPrevues[i].origine == _indexSalle)
             {
-                if(go.id % 2 != 0)
+                toRemove = i;
+                if (actionPrevues[i].id % 2 != 0)
                 {
-                    salleManager.allSalles[go.cible].isAttacked = false;
+                    salleManager.allSalles[actionPrevues[i].cible].isAttacked = false;
                     salleManager.ChangeMaterial();
                 }
-                actionPrevues.Remove(go);
             }
+        }
+        if (toRemove >= 0)
+        {
+            actionPrevues.RemoveAt(toRemove);
+            print(actionPrevues.Count);
         }
     }
 }

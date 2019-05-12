@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class Adversaire1 : MonoBehaviour
@@ -11,7 +12,7 @@ public class Adversaire1 : MonoBehaviour
     public RectTransform[] ui;
     public float[] pvSalles;
     public float pvTotaux;
-    public GameObject[] textPV;
+    public TextMeshProUGUI[] textPV;
     public Image[] symbolesSalles;
     public int[] formuleTotale;
     public int[] nbSymbolesParSalle;
