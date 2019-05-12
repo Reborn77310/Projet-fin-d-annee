@@ -6,6 +6,20 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using TMPro;
 
+public class DBM
+{
+    public int origine; // index de la salle d'origine dans ennemiRooms
+    public int cible; // index de la cible
+    public float timer; // Temps restant avant lancement de l'action
+    public int id; //Correspond à l'id de l'action qui servira à appeler la fonction correspondante.
+                   // Si l'ID est pair la cible se trouve sur l'ADV sinon c'est sur NEST
+
+    public DBM()
+    {
+
+    }
+}
+
 public class EnnemiRooms
 {
     public RectTransform ui;
@@ -51,15 +65,6 @@ public class EnnemiManager : MonoBehaviour
     public TextMeshProUGUI pvTotauxText;
     public TextMeshProUGUI infosNext;
 
-    public struct DBM
-    {
-        public int origine; // index de la salle d'origine dans ennemiRooms
-        public int cible; // index de la cible
-        public int timer; // Temps restant avant lancement de l'action
-        public int id; //Correspond à l'id de l'action qui servira à appeler la fonction correspondante.
-                       // Si l'ID est pair la cible se trouve sur l'ADV sinon c'est sur NEST
-    }
-
     public List<DBM> actionPrevues = new List<DBM>();
 
     private void Awake()
@@ -76,7 +81,8 @@ public class EnnemiManager : MonoBehaviour
         if (badGuy != null)
         {
             CheckPdv();
-            //GestionDesSalles();
+            GestionDesActions();
+            GestionDesSalles();
             MajDBM();
         }
 
@@ -99,13 +105,18 @@ public class EnnemiManager : MonoBehaviour
         int index = 0;
         for (int i = 0; i < ennemiRooms.Count; i++)
         {
+            ennemiRooms[i].myType = new int[_nb[i]];
+            ennemiRooms[i].symbole = new Image[_nb[i]];
+
             for (int h = 0; h < _nb[i]; h++)
             {
+
                 ennemiRooms[i].myType[h] = _types[index];
                 ennemiRooms[i].symbole[h] = _symboles[index];
                 index++;
             }
         }
+        cartesManager.DrawCards();
     }
 
     // public void SpawnMob(int nbSalles)
@@ -143,8 +154,7 @@ public class EnnemiManager : MonoBehaviour
         if (ennemiRooms[wantedRoom].pv <= 0)
         {
             ennemiRooms[wantedRoom].isDead = true;
-            //intentionMechantes[wantedRoom].text = "";
-            ennemiRooms[wantedRoom].timer = 20;
+            CancelAction(wantedRoom);
             ennemiRooms[wantedRoom].etat = 0;
         }
     }
@@ -181,59 +191,53 @@ public class EnnemiManager : MonoBehaviour
             {
                 ennemiRooms[i].isAttacking = false;
                 ennemiRooms[i].pv += 5 * Time.deltaTime;
-
+                float fill = (ennemiRooms[i].pv / ennemiRooms[i].pvMax) * 100;
+                ennemiRooms[i].pvText.text = Mathf.RoundToInt(fill).ToString() + " %";
 
                 if (ennemiRooms[i].pv >= ennemiRooms[i].pvMax)
                 {
                     // salle réparée
                     ennemiRooms[i].pv = ennemiRooms[i].pvMax;
                     ennemiRooms[i].isDead = false;
-                    ennemiRooms[i].pv = 100;
                     ennemiRooms[i].etat = 1;
-                    // intentionMechantes[i].text = "";
+                    ennemiRooms[i].timer = Random.Range(8, 16);
                 }
             }
             else if (ennemiRooms[i].etat == 1)
             {
                 if (ennemiRooms[i].timer <= 0)
                 {
-                    // Choosenextattaque
-                    bool search = true;
-                    while (search)
-                    {
-                        int rnd = Random.Range(0, 4);
-                        if (salleManager.allSalles[rnd].pv > 0)
-                        {
-                            ennemiRooms[i].salleFocus = rnd;
-                            ennemiRooms[i].timer = Random.Range(10, 20);
-                            search = false;
-                        }
-                    }
+                    // ChooseNextAttaque
+                    ChooseAction(i);
+                    //ennemiRooms[i].salleFocus = rnd;
+                    ennemiRooms[i].timer = Random.Range(10, 20);
+                    // bool search = true;
+                    // while (search)
+                    // {
+                    //     int rnd = Random.Range(0, 4);
+                    //     if (salleManager.allSalles[rnd].pv > 0)
+                    //     {
+                    //         ennemiRooms[i].salleFocus = rnd;
+                    //         ennemiRooms[i].timer = Random.Range(10, 20);
+                    //         search = false;
+                    //     }
+                    // }
                     ennemiRooms[i].etat = 2;
-
+                    ennemiRooms[i].isAttacking = true;
                 }
 
             }
             else if (ennemiRooms[i].etat == 2)
             {
-
-                ennemiRooms[i].isAttacking = true;
-                // intentionMechantes[i].text = "Next Attack" + "\n" + Mathf.RoundToInt(ennemiRooms[i].timer) + "\n" + "Salle " + ennemiRooms[i].salleFocus.ToString();
-                // intentionMechantes[i].color = Color.red;
-                if (ennemiRooms[i].timer <= 0)
+                if (ennemiRooms[i].isAttacking == false)
                 {
-                    // attaque lancée
-                    salleManager.DamageSurSalle(ennemiRooms[i].salleFocus, 50);
-                    //Play son quand touché
-                    // intentionMechantes[i].text = "";
-                    ennemiRooms[i].isAttacking = false;
-                    // cooldown
+                    // attaque a été lancée, on passe en cooldown
                     ennemiRooms[i].timer = Random.Range(8, 16);
                     ennemiRooms[i].etat = 1;
                 }
             }
         }
-        salleManager.CheckRoomIfAttacked();
+        //salleManager.CheckRoomIfAttacked();
     }
 
     public int[] GiveInfosForDraw()
@@ -284,6 +288,8 @@ public class EnnemiManager : MonoBehaviour
     public void SpawnAdversaire()
     {
         badGuy = GameObject.Instantiate(prefabADV);
+        badGuy.transform.SetParent(myCanvas.transform, false);
+        badGuy.SetActive(true);
         boutonSpawn.SetActive(false);
     }
 
@@ -294,6 +300,12 @@ public class EnnemiManager : MonoBehaviour
         a.origine = _origine;
         a.cible = Random.Range(0, 4);
         a.id = Random.Range(0, 2);
+
+        if (a.id % 2 != 0)
+        {
+            salleManager.allSalles[a.cible].isAttacked = true;
+            salleManager.ChangeMaterial();
+        }
 
         if (actionPrevues.Count == 0)
         {
@@ -321,7 +333,14 @@ public class EnnemiManager : MonoBehaviour
         {
             if (i < actionPrevues.Count)
             {
-                DBM_Cible[i].text = "Room " + actionPrevues[i].cible.ToString();
+                if (actionPrevues[i].id % 2 != 0)
+                {
+                    DBM_Cible[i].text = "<color=#BC1910>Room " + actionPrevues[i].cible.ToString()+"</color>";
+                }
+                else{
+                    DBM_Cible[i].text = "<color=#126A0A>Room " + actionPrevues[i].cible.ToString()+"</color>";
+                }
+                
                 DBM_timer[i].text = actionPrevues[i].timer.ToString("F3") + "s";
             }
             else
@@ -329,9 +348,51 @@ public class EnnemiManager : MonoBehaviour
                 DBM_Cible[i].text = "";
                 DBM_timer[i].text = "";
             }
-
         }
     }
 
+    public void GestionDesActions()
+    {
+        foreach (var go in actionPrevues)
+        {
+            go.timer -= Time.deltaTime;
+            if (go.id % 2 != 0) // C'est une attaque
+            {
+                if (go.timer <= 0)
+                {
+                    salleManager.allSalles[go.cible].isAttacked = false;
+                    salleManager.ChangeMaterial();
+                    salleManager.DamageSurSalle(go.cible, 50);
+                    ennemiRooms[go.origine].isAttacking = false;
+                }
+            }
+            else
+            {
+                // C'est une défense
+            }
+        }
+        // foreach (var go in actionPrevues)
+        // {
+        //     if (go.timer <= 0)
+        //     {
+        //         actionPrevues.Remove(go);
+        //     }
+        // }
+    }
 
+    public void CancelAction(int _indexSalle)
+    {
+        foreach(var go in actionPrevues)
+        {
+            if (go.origine == _indexSalle)
+            {
+                if(go.id % 2 != 0)
+                {
+                    salleManager.allSalles[go.cible].isAttacked = false;
+                    salleManager.ChangeMaterial();
+                }
+                actionPrevues.Remove(go);
+            }
+        }
+    }
 }

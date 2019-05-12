@@ -40,28 +40,8 @@ public class SalleManager : MonoBehaviour
         InitializeSalles();
         pvDuVehiculeText.text = pvDuVehicule.ToString();
     }
-    
-    public void CheckRoomIfAttacked()
-    {
-        for (int i = 0; i < allSalles.Count; i++)
-        {
-            bool test = false;
-            for (int a = 0; a < ennemiManager.ennemiRooms.Count; a++)
-            {
-                if (ennemiManager.ennemiRooms[a].isAttacking)
-                {
-                    if (ennemiManager.ennemiRooms[a].salleFocus == i)
-                    {
-                        test = true;
-                    }
-                }
-            }
-            allSalles[i].isAttacked = test;
-        }
-        ChangeMaterial();
-    }
 
-    void ChangeMaterial()
+    public void ChangeMaterial()
     {
         for (int i = 0; i < allSalles.Count; i++)
         {

@@ -23,13 +23,15 @@ public class Adversaire1 : MonoBehaviour
         for (int i = 0; i < ui.Length; i++)
         {
             ennemiManager.RecupInfosADV(ui[i], normales[i], highlighted[i], pvSalles[i], textPV[i]);
-            ennemiManager.pvTotaux = pvTotaux;
-            ennemiManager.pvTotauxMax = pvTotaux;
-            ennemiManager.badGuy = gameObject;
-            ennemiManager.RecupFormule(nbSymbolesParSalle, formuleTotale, symbolesSalles);
         }
+        ennemiManager.pvTotaux = pvTotaux;
+        ennemiManager.pvTotauxMax = pvTotaux;
+        ennemiManager.badGuy = gameObject;
+        ennemiManager.RecupFormule(nbSymbolesParSalle, formuleTotale, symbolesSalles);
 
     }
+
+
 
 
     // Fonctions pour ses moves -> Comment on va faire pour choisir parmis les fonctions ?
