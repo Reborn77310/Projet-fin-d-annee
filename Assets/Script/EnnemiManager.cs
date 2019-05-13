@@ -10,10 +10,9 @@ public class DBM
 {
     public int origine; // index de la salle d'origine dans ennemiRooms
     public int cible; // index de la cible
-    public float timer; // Temps restant avant lancement de l'action
-    public int id; //Correspond à l'id de l'action qui servira à appeler la fonction correspondante.
-                   // Si l'ID est pair la cible se trouve sur l'ADV sinon c'est sur NEST
-
+    public float timer = 50000; // Temps restant avant lancement de l'action
+    public int id = -1; //Correspond à l'id de l'action qui servira à appeler la fonction correspondante.
+                        // Si l'ID est pair la cible se trouve sur l'ADV sinon c'est sur NEST
     public DBM()
     {
 
@@ -33,7 +32,6 @@ public class EnnemiRooms
     public bool isDead = false;
     public float timer;
     public int etat = 1;
-    public int salleFocus;
     public bool isAttacking = false;
     public EnnemiRooms(float _timer)
     {
@@ -44,7 +42,7 @@ public class EnnemiRooms
 public class EnnemiManager : MonoBehaviour
 {
     public List<EnnemiRooms> ennemiRooms = new List<EnnemiRooms>();
-    public SalleManager salleManager;
+    SalleManager salleManager;
     public float pvTotaux;
     public float pvTotauxMax;
     public GameObject badGuy = null;
@@ -116,6 +114,7 @@ public class EnnemiManager : MonoBehaviour
                 index++;
             }
         }
+        PoolingDBM();
         cartesManager.DrawCards();
     }
 
@@ -147,6 +146,8 @@ public class EnnemiManager : MonoBehaviour
         if (pvTotaux <= 0)
         {
             Destroy(badGuy);
+            ennemiRooms.Clear();
+            actionPrevues.Clear();
             Debug.Log("Dracarys");
             boutonSpawn.SetActive(true);
         }
@@ -256,37 +257,19 @@ public class EnnemiManager : MonoBehaviour
 
     public void ChooseAction(int _origine)
     {
-        DBM a = new DBM();
-        a.timer = Random.Range(10, 20);
-        a.origine = _origine;
-        a.cible = Random.Range(0, 4);
-        a.id = Random.Range(0, 2);
-        ennemiRooms[_origine].timer = a.timer;
+        var a = IndexActionToDBM();
+        actionPrevues[a].timer = Random.Range(10, 20);
+        actionPrevues[a].origine = _origine;
+        actionPrevues[a].cible = Random.Range(0, 4);
+        actionPrevues[a].id = Random.Range(1, 3);
+        ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
-        if (a.id % 2 != 0)
+        if (actionPrevues[a].id % 2 != 0)
         {
-            salleManager.allSalles[a.cible].isAttacked = true;
+            salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
             salleManager.ChangeMaterial();
         }
-        actionPrevues.Add(a);
-        // if (actionPrevues.Count == 0)
-        // {
-        //     actionPrevues.Add(a);
-        // }
-        // else
-        // {
-        //     for (int i = 0; i < actionPrevues.Count; i++)
-        //     {
-        //         if (a.timer < actionPrevues[i].timer)
-        //         {
-        //             actionPrevues.Insert(i, a);
-        //         }
-        //     }
-        //     if (!actionPrevues.Contains(a))
-        //     {
-        //         actionPrevues.Add(a);
-        //     }
-        // }
+        SortDBMActionByTimer();
     }
 
     public void MajDBM()
@@ -295,73 +278,115 @@ public class EnnemiManager : MonoBehaviour
         {
             if (i < actionPrevues.Count)
             {
-                if (actionPrevues[i].id % 2 != 0)
+                if (actionPrevues[i].id > 0)
                 {
-                    DBM_Cible[i].text = "<color=#BC1910>Room " + actionPrevues[i].cible.ToString() + "</color>";
+                    if (actionPrevues[i].id % 2 != 0)
+                    {
+                        DBM_Cible[i].text = "<color=#BC1910>Room " + actionPrevues[i].cible.ToString() + "</color>";
+                    }
+                    else
+                    {
+                        DBM_Cible[i].text = "<color=#126A0A>Room " + actionPrevues[i].cible.ToString() + "</color>";
+                    }
+
+                    DBM_timer[i].text = actionPrevues[i].timer.ToString("F3") + "s " + actionPrevues[i].origine;
                 }
                 else
                 {
-                    DBM_Cible[i].text = "<color=#126A0A>Room " + actionPrevues[i].cible.ToString() + "</color>";
+                    DBM_Cible[i].text = "";
+                    DBM_timer[i].text = "";
                 }
-
-                DBM_timer[i].text = actionPrevues[i].timer.ToString("F3") + "s " + actionPrevues[i].origine;
-            }
-            else
-            {
-                DBM_Cible[i].text = "";
-                DBM_timer[i].text = "";
             }
         }
     }
 
     public void GestionDesActions()
     {
-        foreach (var go in actionPrevues)
+        for (int i = 0; i < actionPrevues.Count; i++)
         {
-            go.timer -= Time.deltaTime;
-            if (go.id % 2 != 0) // C'est une attaque
+            if (actionPrevues[i].id > 0)
             {
-                if (go.timer <= 0)
+                actionPrevues[i].timer -= Time.deltaTime;
+                if (actionPrevues[i].id % 2 != 2)
                 {
-                    salleManager.allSalles[go.cible].isAttacked = false;
-                    salleManager.ChangeMaterial();
-                    salleManager.DamageSurSalle(go.cible, 00); // DEGATS SET A 0 ATTENTION
-                    ennemiRooms[go.origine].isAttacking = false;
+                    if (actionPrevues[i].timer <= 0)
+                    {
+                        salleManager.allSalles[actionPrevues[i].cible].isAttacked = false;
+                        salleManager.ChangeMaterial();
+                        salleManager.DamageSurSalle(actionPrevues[i].cible, 00); // DEGATS SET A 0 ATTENTION
+                        ennemiRooms[actionPrevues[i].origine].isAttacking = false;
+                        actionPrevues[i].id = -1;
+                        actionPrevues[i].timer = 50000;
+                    }
+
+                }
+                else
+                {
+                    if (actionPrevues[i].timer <= 0)
+                    {
+                        ennemiRooms[actionPrevues[i].origine].isAttacking = false;
+                        actionPrevues[i].id = -1;
+                        actionPrevues[i].timer = 50000;
+                    }
                 }
             }
-            else
-            {
-                // C'est une défense
-            }
         }
-        foreach (var go in actionPrevues)
-        {
-            if (go.timer <= 0)
-            {
-                actionPrevues.Remove(go);
-            }
-        }
+        SortDBMActionByTimer();
     }
 
     public void CancelAction(int _indexSalle)
     {
-        int toRemove = -1;
         for (int i = 0; i < actionPrevues.Count; i++)
         {
             if (actionPrevues[i].origine == _indexSalle)
             {
-                toRemove = i;
                 if (actionPrevues[i].id % 2 != 0)
                 {
                     salleManager.allSalles[actionPrevues[i].cible].isAttacked = false;
                     salleManager.ChangeMaterial();
                 }
+                actionPrevues[i].id = -1;
+                actionPrevues[i].timer = 50000;
+                i = actionPrevues.Count;
             }
         }
-        if (toRemove >= 0)
+        SortDBMActionByTimer();
+    }
+
+    // object pooling pour DBM semble une meilleure solution pour éviter les crash
+    // Créer le nombre de DBM correspondant au nombre de la salles adverses
+    // On se sert de ID pour définir si l'object DBM est libre ou non de stocker une action :
+    // DBM.id = -1 DBM LIBRE
+    // DBM.id > 0 DBM A UNE ACTION STOCKEE
+    // DBM.id > 0 && DBM.id % 2 == 0 DBM A UNE DEFENSE STOCKEE
+    // DBM.id > 0 && DBM.id % 2 != 0 DBM A UNE ATTAQUE STOCKEE
+
+    void PoolingDBM()
+    {
+        for (int i = 0; i < ennemiRooms.Count; i++)
         {
-            actionPrevues.RemoveAt(toRemove);
-            print(actionPrevues.Count);
+            var a = new DBM();
+            actionPrevues.Add(a);
         }
     }
+
+    int IndexActionToDBM()
+    {
+        int index = 0;
+        for (int i = 0; i < actionPrevues.Count; i++)
+        {
+            if (actionPrevues[i].id < 0)
+            {
+                index = i;
+                i = actionPrevues.Count;
+            }
+        }
+        return index;
+    }
+
+    void SortDBMActionByTimer()
+    {
+        actionPrevues.Sort((p1, p2) => p1.timer.CompareTo(p2.timer)); // THIS WILL WORKS ?!????
+    }
+
 }
