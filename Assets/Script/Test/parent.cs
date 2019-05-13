@@ -17,19 +17,19 @@ public class parent : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            for (int i=0; i < zones.Length; i++)
-            {
-                zones[i].SetParent(gameObject.transform, true);
-            }
-            transform.Rotate(0,0,90);
-            for (int i=0; i < zones.Length; i++)
-            {
-                zones[i].SetParent(myCanvas.transform, true);
-            }
-            CheckOverlap();
-        }
+        // if (Input.GetKeyDown(KeyCode.Mouse0))
+        // {
+        //     for (int i = 0; i < zones.Length; i++)
+        //     {
+        //         zones[i].SetParent(gameObject.transform, true);
+        //     }
+        //     transform.Rotate(0, 0, 90);
+        //     for (int i = 0; i < zones.Length; i++)
+        //     {
+        //         zones[i].SetParent(myCanvas.transform, true);
+        //     }
+        //     CheckOverlap();
+        // }
     }
 
     public bool rectOverlaps(RectTransform rectTrans1, RectTransform rectTrans2)
@@ -40,7 +40,7 @@ public class parent : MonoBehaviour
         return rect1.Overlaps(rect2);
     }
 
-    void CheckOverlap()
+    public void CheckOverlap()
     {
         for (int i = 0; i < sallesRT.Length; i++)
         {
@@ -54,5 +54,33 @@ public class parent : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void RotateHoraire()
+    {
+        for (int i = 0; i < zones.Length; i++)
+        {
+            zones[i].SetParent(gameObject.transform, true);
+        }
+        transform.Rotate(0, 0, 90);
+        for (int i = 0; i < zones.Length; i++)
+        {
+            zones[i].SetParent(myCanvas.transform, true);
+        }
+        CheckOverlap();
+    }
+
+    public void RotateAntihoraire()
+    {
+        for (int i = 0; i < zones.Length; i++)
+        {
+            zones[i].SetParent(gameObject.transform, true);
+        }
+        transform.Rotate(0, 0, 90);
+        for (int i = 0; i < zones.Length; i++)
+        {
+            zones[i].SetParent(myCanvas.transform, true);
+        }
+        CheckOverlap();
     }
 }

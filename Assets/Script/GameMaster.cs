@@ -26,6 +26,7 @@ public class GameMaster : MonoBehaviour
     private GameObject touchedByZoomRaycast;
     EnnemiManager ennemiManager;
     public GameObject uiPlaceHolder;
+    public GameObject zoneSelectionADV;
 
     void Awake()
     {
@@ -123,12 +124,20 @@ public class GameMaster : MonoBehaviour
                     
                     if (canPlay)
                     {
-                        uiPlaceHolder.SetActive(true);
+                        //uiPlaceHolder.SetActive(true);
                         var moletteSouris = Input.GetAxis("Mouse ScrollWheel");
-                        GameObject aTourner = uiPlaceHolder.transform.GetChild(0).gameObject;
+                        //GameObject aTourner = uiPlaceHolder.transform.GetChild(0).gameObject;
                         ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
                         var pouett = mm.MyModules[1].MyObject.transform.rotation;
-                        aTourner.transform.rotation = pouett;
+                        //aTourner.transform.rotation = pouett;
+
+                        if(mm.MyModules[1].CarteIndex != -1)
+                        {
+                            if(mm.MyModules[0].CarteIndex == 0)
+                            {
+                                //zoneSelectionADV
+                            }
+                        }
                     
                         if (Mathf.Abs(moletteSouris) > 0)
                         {
@@ -143,13 +152,13 @@ public class GameMaster : MonoBehaviour
                 }
                 else
                 {
-                    uiPlaceHolder.SetActive(false);
+                    //uiPlaceHolder.SetActive(false);
                 }
             }
         }
         if (Input.GetKeyUp(KeyCode.Mouse0) && uiPlaceHolder.activeInHierarchy)
         {
-            uiPlaceHolder.SetActive(false);
+            //uiPlaceHolder.SetActive(false);
         }
     }
     
@@ -177,19 +186,19 @@ public class GameMaster : MonoBehaviour
                     var testBool = false;
                     for (int i = mm.MyModules.Length - 1; i >= 0; i--)
                     {
-                        if (mm.MyModules[i].CarteType != -1 && !testBool && mm.MyModules[i].MyType != Modules.Type.Droite)
+                        if (mm.MyModules[i].CarteIndex != -1 && !testBool && mm.MyModules[i].MyType != Modules.Type.Droite)
                         {
                             if (!cartesManager.CheckHandisFull())
                             {
                                 testBool = true;
                                 if (!CartesManager.PhaseLente)
                                 {
-                                    cartesManager.AjouterUneCarteDansLaMain(1, mm.MyModules[i].CarteType);
+                                    cartesManager.AjouterUneCarteDansLaMain(1, mm.MyModules[i].CarteIndex);
                                 }
 
                                 mm.MyModules[i].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
                                     Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
-                                mm.MyModules[i].CarteType = -1;
+                                mm.MyModules[i].CarteIndex = -1;
                             }
                         }
                     }
@@ -228,7 +237,7 @@ public class GameMaster : MonoBehaviour
                     var testBool = false;
                     for (int i = 0; i < mm.MyModules.Length; i++)
                     {
-                        if (mm.MyModules[i].CarteType == -1 && !testBool)
+                        if (mm.MyModules[i].CarteIndex == -1 && !testBool)
                         {
                             testBool = true;
                             caj.GetComponent<Animator>().SetBool("Dance", true);
@@ -282,7 +291,7 @@ public class GameMaster : MonoBehaviour
         var c = moduleHit;
         ModuleManager mm = moduleHit.transform.parent.GetComponent<ModuleManager>();
 
-        if (mm.MyModules[0].CarteType != -1 && mm.MyModules[1].CarteType != -1 && mm.MyModules[2].MyObject == moduleHit && !CartesManager.PhaseLente)
+        if (mm.MyModules[0].CarteIndex != -1 && mm.MyModules[1].CarteIndex != -1 && mm.MyModules[2].MyObject == moduleHit && !CartesManager.PhaseLente)
         {
             cartesManager.PlayACardOnModule(cardIDBeingPlayed, c);
             cardSound.GoingToPlayACard();
@@ -296,4 +305,16 @@ public class GameMaster : MonoBehaviour
         }
     }
     #endregion
+
+    public void LancerActionJoueur(ModuleManager mm)
+    {
+        // DELEGUER AU GAMEMASTER LA CHARGE DE :
+        // Check equipement selectionné par 1e module
+        // Check salles touchées par 2nd module
+        // Check Overdrive par 3e module
+        // Lancer action
+        // Lancer CD
+        // Burn 3e carte
+        // Check durabilité => Burn 2e carte
+    }
 }

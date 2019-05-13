@@ -15827,6 +15827,7 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   caj: {fileID: 111821992}
   uiPlaceHolder: {fileID: 957513929}
+  zoneSelectionADV: {fileID: 0}
 --- !u!4 &1335090931
 Transform:
   m_ObjectHideFlags: 0
@@ -15874,7 +15875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5eb1ee442fece242aec50eab3549aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  salleManager: {fileID: 1335090935}
   pvTotaux: 300
   pvTotauxMax: 0
   badGuy: {fileID: 0}
@@ -15884,7 +15884,7 @@ MonoBehaviour:
   prefabADV: {fileID: 3255594942482689738, guid: 28dd186ea4f8dec4fb4ee59ce39e301d,
     type: 3}
   boutonSpawn: {fileID: 463553541}
-  BDM_Symbole:
+  DBM_Symbole:
   - {fileID: 906833978}
   - {fileID: 716963379}
   - {fileID: 698316864}

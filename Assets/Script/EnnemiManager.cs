@@ -56,7 +56,7 @@ public class EnnemiManager : MonoBehaviour
     public GameObject prefabADV;
     public GameObject boutonSpawn;
 
-    public Image[] BDM_Symbole;
+    public Image[] DBM_Symbole;
     public TextMeshProUGUI[] DBM_Cible;
     public TextMeshProUGUI[] DBM_timer;
 
@@ -145,12 +145,17 @@ public class EnnemiManager : MonoBehaviour
     {
         if (pvTotaux <= 0)
         {
-            Destroy(badGuy);
-            ennemiRooms.Clear();
-            actionPrevues.Clear();
+            EndCombat();
             Debug.Log("Dracarys");
             boutonSpawn.SetActive(true);
         }
+    }
+
+    public void EndCombat()
+    {
+        Destroy(badGuy);
+        ennemiRooms.Clear();
+        actionPrevues.Clear();
     }
 
     void GestionDesSalles()
@@ -282,19 +287,28 @@ public class EnnemiManager : MonoBehaviour
                 {
                     if (actionPrevues[i].id % 2 != 0)
                     {
-                        DBM_Cible[i].text = "<color=#BC1910>Room " + actionPrevues[i].cible.ToString() + "</color>";
+                        DBM_Cible[i].text = "<color=#126A0A>Room " + actionPrevues[i].cible.ToString() + "</color>";
                     }
                     else
                     {
-                        DBM_Cible[i].text = "<color=#126A0A>Room " + actionPrevues[i].cible.ToString() + "</color>";
+                        DBM_Cible[i].text = "<color=#BC1910>Room " + actionPrevues[i].cible.ToString() + "</color>";
                     }
 
-                    DBM_timer[i].text = actionPrevues[i].timer.ToString("F3") + "s " + actionPrevues[i].origine;
+                    DBM_timer[i].text = actionPrevues[i].timer.ToString("F3") + "s ";
+                    if (!DBM_Symbole[i].enabled)
+                    {
+                        DBM_Symbole[i].enabled = true;
+                        DBM_Symbole[i].sprite = ennemiRooms[actionPrevues[i].origine].symbole[0].sprite;
+                    }
                 }
                 else
                 {
-                    DBM_Cible[i].text = "";
-                    DBM_timer[i].text = "";
+                    if (DBM_Symbole[i].enabled)
+                    {
+                        DBM_Cible[i].text = "";
+                        DBM_timer[i].text = "";
+                        DBM_Symbole[i].enabled = false;
+                    }
                 }
             }
         }

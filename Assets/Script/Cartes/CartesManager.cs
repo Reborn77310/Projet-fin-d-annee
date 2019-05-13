@@ -3,27 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Cartes
-{
-    public int id;
-    public int cartesTypes;
-    public Sprite illu;
-    public Sprite picto;
-    public GameObject go;
-    public Cartes(int _id, int _cartesTypes)
-    {
-        id = _id;
-        cartesTypes = _cartesTypes;
-        illu = Resources.Load<Sprite>("Sprites/Cartes/V5/Carte" + _cartesTypes);
-        picto = Resources.Load<Sprite>("Sprites/Cartes/Picto/Picto" + _cartesTypes);
-    }
-}
+
 
 
 public class CartesManager : MonoBehaviour
 {
+    public class Cartes
+    {
+        public int id; // L'index dans la liste à laquelle elle appartient (allCards ou onModule)
+        public int cartesTypes; // 0,1,2 = types basiques // 10+ = types spéciaux
+        public Sprite illu;
+        public Sprite picto;
+        public GameObject go;
+
+        // A SETUP :
+        public int durability;
+        public GameObject prefabZoneSelection;
+        public int rarity;
+        public int overdriveEffect;
+
+
+        public Cartes(int _id, int _cartesTypes)
+        {
+            id = _id;
+            cartesTypes = _cartesTypes;
+            illu = Resources.Load<Sprite>("Sprites/Cartes/V5/Carte" + _cartesTypes);
+            picto = Resources.Load<Sprite>("Sprites/Cartes/Picto/Picto" + _cartesTypes);
+        }
+    }
     [Header("Lists")]
     public List<Cartes> allCards = new List<Cartes>();
+    //public List<Cartes> onModules = new List<Cartes>();
     CartesButtons[] cartesButtonsScripts = new CartesButtons[3];
 
     [Header("Other")]
@@ -63,36 +73,42 @@ public class CartesManager : MonoBehaviour
         var MM = mGO.transform.parent.GetComponent<ModuleManager>();
         for (int i = 0; i < MM.MyModules.Length; i++)
         {
-            if (mGO == MM.MyModules[i].MyObject)
+            if (mGO == MM.MyModules[i])
             {
-                if (!PhaseLente || ((mGO == MM.MyModules[0].MyObject) || (mGO == MM.MyModules[1].MyObject)))
+                if (!PhaseLente)
                 {
-                    MM.MyModules[i].CarteType = allCards[id].cartesTypes;
-                    if (MM.MyModules[i].MyType == Modules.Type.Droite)
+                    HandToModule(cardID, MM);
+                    if (MM.cartesModule.Count == 3)
                     {
-                        if (MM.MyModules[0].CarteType != -1 && MM.MyModules[1].CarteType != -1)
-                        {
-                            ThirdCardAction(MM);
-                        }
+                        ThirdCardAction(MM);
+                    }
+                    SortCartes();
+                }
+                else
+                {
+                    if (mGO == MM.MyModules[0] || mGO == MM.MyModules[1])
+                    {
+                        // il vaudrait mieux coder l'almanach maintenant
                     }
                 }
             }
-        }
-
-        if (!PhaseLente)
-        {
-            Destroy(allCards[cardID].go);
-            allCards.Remove(allCards[cardID]);
-            SortCartes();
         }
     }
 
     void ThirdCardAction(ModuleManager mm)
     {
-        int type = mm.MyModules[2].CarteType;
-        mm.MyModules[2].CarteType = -1;
-        mm.MyModules[2].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
-            Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
+        mm.MyModules[2].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
+        
+        // DELEGUER AU GAMEMASTER LA CHARGE DE :
+        // Check equipement selectionné par 1e module
+        // Check salles touchées par 2nd module
+        // Check Overdrive par 3e module
+        // Lancer action
+        // Lancer CD
+        // Burn 3e carte
+        // Check durabilité => Burn 2e carte
+
+
         SelectSetup(type, mm);
 
     }
@@ -100,17 +116,18 @@ public class CartesManager : MonoBehaviour
     public void SelectSetup(int type, ModuleManager mm)
     {
         int selectionOfSetup = 0;
-        if (mm.MyModules[0].CarteType == 0)
+        int carteTypeFirstModule = onModules[mm.MyModules[0].CarteIndex].cartesTypes;
+        if (carteTypeFirstModule == 0)
         {
             //Attaque
             selectionOfSetup = 0;
         }
-        else if (mm.MyModules[0].CarteType == 1)
+        else if (mm.MyModules[0].CarteIndex == 1)
         {
             //Def
             selectionOfSetup = 1;
         }
-        else if (mm.MyModules[0].CarteType == 2)
+        else if (mm.MyModules[0].CarteIndex == 2)
         {
             //Alteration
             selectionOfSetup = 2;
@@ -122,7 +139,7 @@ public class CartesManager : MonoBehaviour
     public void SelectCible(int selectionOfSetup, int type, ModuleManager mm)
     {
         string wantedName;
-        var calculTest = (Mathf.Abs(mm.MyModules[1].rotationCompteur) % 4);
+        var calculTest = (Mathf.Abs(mm.rotationCompteur) % 4);
         int wantedRoom = 0;
         if (Mathf.Abs(calculTest) == 0)
         {
@@ -142,9 +159,9 @@ public class CartesManager : MonoBehaviour
         }
 
         mm.MyCompteurInt -= 1;
-        if (mm.MyCompteurInt <= 0)
+        if (mm.MyCompteurInt <= 0) // GESTION DURABILITE
         {
-            mm.MyModules[1].CarteType = -1;
+            mm.MyModules[1].CarteIndex = -1;
             mm.MyModules[1].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
                 Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
             mm.MyCompteurInt = 2;
@@ -165,13 +182,13 @@ public class CartesManager : MonoBehaviour
             wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupAlteration.MyName;
         }
 
-        if (mm.MyModules[0].CarteType == type)
+        if (mm.MyModules[0].CarteIndex == type)
         {
-            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom,mm,true);
+            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom, mm, true);
         }
         else
         {
-            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom,mm,false);
+            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom, mm, false);
         }
     }
     #endregion
@@ -191,7 +208,8 @@ public class CartesManager : MonoBehaviour
             }
             StartCoroutine("Draw");
         }
-        else{
+        else
+        {
             for (int i = 0; i < 3; i++)
             {
                 if (!CheckHandisFull())
@@ -294,7 +312,7 @@ public class CartesManager : MonoBehaviour
             Destroy(go.go);
         }
         allCards.Clear();
-        
+
         if (PhaseLente)
         {
             PhaseLente = false;
@@ -306,11 +324,35 @@ public class CartesManager : MonoBehaviour
         }
         else
         {
+            ennemiManager.EndCombat();
             PhaseLente = true;
             ChangeBool.text = "Activer la phase combat.";
             scannerUI.gameObject.SetActive(false);
             ennemiManager.PassageEnPhaseLente();
         }
     }
+
+
+    public void HandToModule(int index, ModuleManager mm)
+    {
+        var c = allCards[index];
+        mm.cartesModule.Add(c);
+        Destroy(allCards[index].go);
+        allCards.RemoveAt(index);
+        // print("allcards : " + allCards.Count);
+        // print("onModules : " + onModules.Count);
+    }
+
+    public void ModuleToHand(int index, ModuleManager mm)
+    {
+        var c = mm.cartesModule[index];
+        AjouterUneCarteDansLaMain(1, c.cartesTypes);
+        mm.cartesModule.RemoveAt(index);
+        // print("allcards : " + allCards.Count);
+        // print("onModules : " + onModules.Count);
+    }
+
+
+    
 }
 

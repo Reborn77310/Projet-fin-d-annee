@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class Salles
 {
+    public class Equipement
+    {
+        
+    }
+
+
     public GameObject MyGo;
     public bool CanPlayHere = true;
     public int pv;
