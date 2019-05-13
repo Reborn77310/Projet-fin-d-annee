@@ -1,19 +1,16 @@
 fileFormatVersion: 2
-guid: 9c9dfc34fdd4413408ef04a1dd635e8f
+guid: 798649709db92f7419cc7d9a2c447cf9
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Tileset_Border_Noir_0
-    21300002: Tileset_Border_Noir_1
-    21300004: Tileset_Border_Noir_2
-    21300006: Tileset_Border_Noir_3
-    21300008: Tileset_Border_Noir_4
-    21300010: Tileset_Border_Noir_5
-    21300012: Tileset_Border_Noir_6
-    21300014: Tileset_Border_Noir_7
-    21300016: Tileset_Border_Noir_8
-    21300018: Tileset_Border_Noir_9
-    21300020: Tileset_Border_Noir_10
-    21300022: Tileset_Border_Noir_11
+    21300000: TilesetRoomBlack_0
+    21300002: TilesetRoomBlack_1
+    21300004: TilesetRoomBlack_2
+    21300006: TilesetRoomBlack_3
+    21300008: TilesetRoomBlack_4
+    21300010: TilesetRoomBlack_5
+    21300012: TilesetRoomBlack_6
+    21300014: TilesetRoomBlack_7
+    21300016: TilesetRoomBlack_8
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -59,7 +56,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 800
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -96,7 +93,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tileset_Border_Noir_0
+      name: TilesetRoomBlack_0
       rect:
         serializedVersion: 2
         x: 788
@@ -110,19 +107,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c941746a0e93344387529ad9d3337a8
+      spriteID: c22aa02c6a064e4409cb635b51af2299
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Border_Noir_1
+      name: TilesetRoomBlack_1
       rect:
         serializedVersion: 2
         x: 1208
-        y: 1608
-        width: 4
-        height: 4
+        y: 1602
+        width: 10
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,53 +127,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5edc56228a32594e8b20846511f9dca
+      spriteID: 8ea630d9aceced646af3c6c2cf89ecef
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Border_Noir_2
-      rect:
-        serializedVersion: 2
-        x: 1208
-        y: 1600
-        width: 5
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: abef3059b09a15b41aafceeda10f832c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Border_Noir_3
-      rect:
-        serializedVersion: 2
-        x: 1215
-        y: 1601
-        width: 4
-        height: 4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0d9334c504856184e9d7e5e3815c0166
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Border_Noir_4
+      name: TilesetRoomBlack_2
       rect:
         serializedVersion: 2
         x: 330
@@ -190,33 +147,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d18876c1cf2626d4daa695c95974d551
+      spriteID: b2a9ab3ea89c2734ea901dfbd9c37ffc
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Border_Noir_5
-      rect:
-        serializedVersion: 2
-        x: 1208
-        y: 1461
-        width: 4
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 46e2167b56a9624498dd094f02c18206
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tileset_Border_Noir_6
+      name: TilesetRoomBlack_3
       rect:
         serializedVersion: 2
         x: 1210
@@ -230,18 +167,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 839e0bf8e25bac545a7d9872f82f613d
+      spriteID: 00812df33cfb1b249bbe25d267dc8c32
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Border_Noir_7
+      name: TilesetRoomBlack_4
       rect:
         serializedVersion: 2
-        x: 302
+        x: 303
         y: 732
-        width: 182
+        width: 181
         height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -250,18 +187,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8edbc1264a0e34441bfb0cdf6bc5b8a6
+      spriteID: 10e526a3a69a32045a982dbf1cdadcc2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Border_Noir_8
+      name: TilesetRoomBlack_5
       rect:
         serializedVersion: 2
         x: 1490
         y: 723
-        width: 252
+        width: 251
         height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -270,13 +207,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bd5577dec266b44495216159a70d9e2
+      spriteID: da83f0a94bbc26045be69077dd5589e5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Border_Noir_9
+      name: TilesetRoomBlack_6
       rect:
         serializedVersion: 2
         x: 331
@@ -290,13 +227,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1762e21ab274354b9802bbcd02f2237
+      spriteID: a0a5508a2326ee44b9a162d13cbe29d4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Border_Noir_10
+      name: TilesetRoomBlack_7
       rect:
         serializedVersion: 2
         x: 784
@@ -310,13 +247,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 758a8f56d31593045bb7b1efa48f042c
+      spriteID: 247ccfd6505063b4f97b6b99b93f41a1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Border_Noir_11
+      name: TilesetRoomBlack_8
       rect:
         serializedVersion: 2
         x: 1202
@@ -330,7 +267,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84fa744b82156fa488c94fb49f9be2d1
+      spriteID: ae8f1f8c98af91f478a8435d81530873
       vertices: []
       indices: 
       edges: []
@@ -338,7 +275,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 556720692c767384c8bafc512345eec8
+    spriteID: 786107cab65beb0448985d0778fa16a2
     vertices: []
     indices: 
     edges: []
