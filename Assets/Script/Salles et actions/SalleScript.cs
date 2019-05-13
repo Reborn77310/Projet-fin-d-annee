@@ -43,21 +43,21 @@ public class SalleScript : MonoBehaviour
         textConsole.enabled = true;
     }
 
-    public void CheckMaterial()
-    {
-        if (mr.material.name.Contains(normalMaterial.name))
-        {
-            if (GameMaster.moduleHit == null)
-            {
-                OnExitCardOnMe();
-            }
-            else
-            {
-                if (GameMaster.moduleHit != myModule)
-                {
-                    OnExitCardOnMe();
-                }
-            }
-        }
-    }
+    // public void CheckMaterial()
+    // {
+    //     if (mr.material.name.Contains(normalMaterial.name))
+    //     {
+    //         if (GameMaster.moduleHit == null)
+    //         {
+    //             OnExitCardOnMe();
+    //         }
+    //         else
+    //         {
+    //             if (GameMaster.moduleHit != myModule)
+    //             {
+    //                 OnExitCardOnMe();
+    //             }
+    //         }
+    //     }
+    // }
 }

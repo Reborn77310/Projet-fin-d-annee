@@ -43,7 +43,6 @@ public class CartesManager : MonoBehaviour
     public float drawTimer;
     public Image scannerUI;
     public Text ChangeBool;
-    public GameObject EnnemiHolder;
     public EnnemiManager ennemiManager;
     public Image grilleRadar;
     public static bool PhaseLente = true;
@@ -64,37 +63,34 @@ public class CartesManager : MonoBehaviour
     #endregion
 
     #region Actions
-    public void PlayACardOnModule(int id, GameObject go)
+    public void PlayACardOnModule(int id, ModuleManager MM)
     {
         int cardID = id;
-        GameObject mGO = go;
-
-        mGO.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = allCards[id].picto;
-
-        var MM = mGO.transform.parent.GetComponent<ModuleManager>();
-        for (int i = 0; i < MM.MyModules.Length; i++)
+        print(MM.MySalleNumber);
+        if (!PhaseLente)
         {
-            if (mGO == MM.MyModules[i])
+            HandToModule(cardID, MM);
+            if (MM.cartesModule.Count == 3)
             {
-                if (!PhaseLente)
-                {
-                    HandToModule(cardID, MM);
-                    if (MM.cartesModule.Count == 3)
-                    {
-                        ThirdCardAction(MM);
-                    }
-                    SortCartes();
-                }
-                else
-                {
-                    if (mGO == MM.MyModules[0] || mGO == MM.MyModules[1])
-                    {
-                        // il vaudrait mieux coder l'almanach maintenant
-                    }
-                }
+                ThirdCardAction(MM);
             }
+            SortCartes();
+        }
+        else
+        {
+            
+            if (MM.cartesModule.Count < 2)
+            {
+                HandToModule(cardID, MM);
+                SortCartes();
+            }
+
+            // il vaudrait mieux coder l'almanach maintenant
+
         }
     }
+
+
 
     void ThirdCardAction(ModuleManager mm)
     {
@@ -336,20 +332,27 @@ public class CartesManager : MonoBehaviour
 
     public void HandToModule(int index, ModuleManager mm)
     {
+        print("j'ai joué");
         var c = allCards[index];
         mm.cartesModule.Add(c);
+        mm.MyModules[mm.cartesModule.Count - 1].GetComponent<Image>().sprite = mm.cartesModule[mm.cartesModule.Count - 1].illu;
         Destroy(allCards[index].go);
         allCards.RemoveAt(index);
     }
 
     public void ModuleToHand(ModuleManager mm)
     {
-        var c = mm.cartesModule[mm.cartesModule.Count-1];
-        AjouterUneCarteDansLaMain(1, c.cartesTypes);
-        mm.cartesModule.RemoveAt(mm.cartesModule.Count-1);
+        if (mm.cartesModule.Count > 0)
+        {
+            // CHANGER PICTO MODULE
+            var c = mm.cartesModule[mm.cartesModule.Count - 1];
+            AjouterUneCarteDansLaMain(1, c.cartesTypes);
+            mm.cartesModule.RemoveAt(mm.cartesModule.Count - 1);
+        }
+
     }
 
 
-    
+
 }
 

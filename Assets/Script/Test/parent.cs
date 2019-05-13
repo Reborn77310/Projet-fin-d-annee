@@ -63,7 +63,7 @@ public class parent : MonoBehaviour
         {
             zones[i].SetParent(myCanvas.transform, true);
         }
-        CheckOverlap();
+        //CheckOverlap();
     }
 
     public void RotateAntihoraire()
@@ -77,6 +77,6 @@ public class parent : MonoBehaviour
         {
             zones[i].SetParent(myCanvas.transform, true);
         }
-        CheckOverlap();
+        //CheckOverlap();
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Salles
 {
@@ -10,7 +11,6 @@ public class Salles
     public bool CanPlayHere = true;
     public int pv;
 
-    public Color[] myMaterials = new Color[2];
     public bool isDefendu;
     public int DefendingAmount = 0;
 
@@ -29,8 +29,8 @@ public class SalleManager : MonoBehaviour
 {
 
     public List<Salles> allSalles = new List<Salles>();
-    public GameObject[] pvSalles;
-    public TextMesh[] SalleOnCooldown = new TextMesh[4];
+    public TextMeshProUGUI[] pvSalles; // A ASSIGNER
+    public TextMesh[] SalleOnCooldown = new TextMesh[4]; // A ASSIGNER
     public TextMesh pvDuVehiculeText;
     public int pvDuVehicule = 300;
     private SalleManager instance;
@@ -53,13 +53,11 @@ public class SalleManager : MonoBehaviour
         {
             if (allSalles[i].isAttacked)
             {
-                allSalles[i].MyGo.transform.GetChild(2).GetComponent<Renderer>().material.color =
-                    allSalles[i].myMaterials[1];
+                
             }
             else
             {
-                allSalles[i].MyGo.transform.GetChild(2).GetComponent<Renderer>().material.color =
-                    allSalles[i].myMaterials[0];
+                
             }
         }
     }
@@ -70,10 +68,7 @@ public class SalleManager : MonoBehaviour
         {
             Salles newSalle = new Salles(GameObject.Find("Salle" + i.ToString()));
             allSalles.Add(newSalle);
-            pvSalles[i].GetComponent<TextMesh>().text = allSalles[i].pv.ToString();
-            SalleOnCooldown[i] = allSalles[i].MyGo.transform.GetChild(12).GetComponent<TextMesh>();
-            allSalles[i].myMaterials[0] = allSalles[i].MyGo.transform.GetChild(2).GetComponent<Renderer>().material.color;
-            allSalles[i].myMaterials[1] = allSalles[i].myMaterials[0] + Color.red;
+            //pvSalles[i].GetComponent<TextMesh>().text = allSalles[i].pv.ToString();
         }
     }
 

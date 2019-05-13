@@ -17,14 +17,13 @@ public class GameMaster : MonoBehaviour
 
     public static int cardIDBeingPlayed = -1;
 
-    public static GameObject moduleHit;
+    public static ModuleManager moduleHit;
     public GameObject caj;
     SpriteRenderer cajSR;
     CartesManager cartesManager;
     SalleManager salleManager;
     AllSetupsActions allSetupsActions;
     private CardSound cardSound;
-    private GameObject touchedByZoomRaycast;
     EnnemiManager ennemiManager;
     public GameObject uiPlaceHolder;
     public GameObject zoneSelectionADV;
@@ -36,6 +35,7 @@ public class GameMaster : MonoBehaviour
         cartesManager = GetComponent<CartesManager>();
         cajSR = caj.GetComponent<SpriteRenderer>();
         salleManager = GetComponent<SalleManager>();
+        ennemiManager = GetComponent<EnnemiManager>();
     }
 
     void Update()
@@ -68,38 +68,6 @@ public class GameMaster : MonoBehaviour
         {
             TakeCardFromModule();
         }
-
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            if (hit.transform.tag == "Module")
-            {
-                touchedByZoomRaycast = hit.transform.gameObject;
-                var text = hit.transform.GetChild(1).GetComponent<TextMesh>();
-                text.fontSize = 12;
-            }
-            else
-            {
-                if (touchedByZoomRaycast != null)
-                {
-                    var text = touchedByZoomRaycast.transform.GetChild(1).GetComponent<TextMesh>();
-                    text.fontSize = 2;
-                    touchedByZoomRaycast = null;
-                }
-            }
-        }
-        else
-        {
-            if (touchedByZoomRaycast != null)
-            {
-                var text = touchedByZoomRaycast.transform.GetChild(1).GetComponent<TextMesh>();
-                text.fontSize = 2;
-                touchedByZoomRaycast = null;
-            }
-        }
-
     }
 
     #region Actions
@@ -127,7 +95,7 @@ public class GameMaster : MonoBehaviour
                     if (canPlay)
                     {
                         var moletteSouris = Input.GetAxis("Mouse ScrollWheel");
-                        ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
+                        ModuleManager mm = hit.transform.gameObject.GetComponent<ModuleManager>();
 
                         if (mm.cartesModule.Count >= 2)
                         {
@@ -186,7 +154,7 @@ public class GameMaster : MonoBehaviour
 
                 if (canPlay)
                 {
-                    ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
+                    ModuleManager mm = hit.transform.GetComponent<ModuleManager>();
 
 
                     if (!cartesManager.CheckHandisFull())
@@ -235,10 +203,9 @@ public class GameMaster : MonoBehaviour
 
                 if (canPlay)
                 {
-                    ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
                     caj.GetComponent<Animator>().SetBool("Dance", true);
                     hittingAModule = true;
-                    moduleHit = mm.MyModules[mm.cartesModule.Count-1];
+                    moduleHit = hit.transform.GetComponent<ModuleManager>();
 
                 }
             }
@@ -283,9 +250,7 @@ public class GameMaster : MonoBehaviour
     }
     public void PlayCard()
     {
-        var c = moduleHit;
-        ModuleManager mm = moduleHit.transform.parent.GetComponent<ModuleManager>();
-        cartesManager.PlayACardOnModule(cardIDBeingPlayed, c);
+        cartesManager.PlayACardOnModule(cardIDBeingPlayed, moduleHit);
         cardSound.GoingToPlayACard();
         cardIDBeingPlayed = -1;
     }
