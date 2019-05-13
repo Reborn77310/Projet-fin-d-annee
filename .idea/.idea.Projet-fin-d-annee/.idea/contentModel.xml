@@ -255,6 +255,9 @@
         </e>
         <e p="Script" t="Include">
           <e p="AllSetupsActions.cs" t="Include" />
+          <e p="BadGuys" t="Include">
+            <e p="Adversaire1.cs" t="Include" />
+          </e>
           <e p="BarreDeChargement.cs" t="Include" />
           <e p="Basic Shake.cs" t="Include" />
           <e p="Camera" t="Include">
@@ -302,7 +305,10 @@
             <e p="SonEclair.cs" t="Include" />
           </e>
           <e p="Test" t="Include">
+            <e p="LaPuissanceDesMaths.cs" t="Include" />
             <e p="main.cs" t="Include" />
+            <e p="parent.cs" t="Include" />
+            <e p="zoneSelectUI.cs" t="Include" />
           </e>
           <e p="XML&amp;PlayerPrefs" t="Include">
             <e p="oui.cs" t="Include" />
@@ -384,6 +390,7 @@
         <e p="bin" t="ExcludeRecursive" />
       </e>
     </e>
+    <e p="C:\Users\damie\.Rider2018.2\config\extensions" t="IncludeRecursive" />
     <e p="C:\Users\damie\.Rider2018.2\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\damie\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_Projet-fin-d-annee.-40545137.00" t="ExcludeRecursive" />
   </component>
