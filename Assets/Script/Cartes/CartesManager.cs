@@ -38,6 +38,7 @@ public class CartesManager : MonoBehaviour
 
     [Header("Other")]
     public GameObject prefabCarte;
+    public GameMaster gameMaster;
     public Canvas canvas;
     public float drawTimer;
     public Image scannerUI;
@@ -98,7 +99,7 @@ public class CartesManager : MonoBehaviour
     void ThirdCardAction(ModuleManager mm)
     {
         mm.MyModules[2].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
-        
+        gameMaster.LancerActionJoueur(mm);
         // DELEGUER AU GAMEMASTER LA CHARGE DE :
         // Check equipement selectionné par 1e module
         // Check salles touchées par 2nd module
@@ -109,87 +110,87 @@ public class CartesManager : MonoBehaviour
         // Check durabilité => Burn 2e carte
 
 
-        SelectSetup(type, mm);
+        //SelectSetup(type, mm);
 
     }
 
-    public void SelectSetup(int type, ModuleManager mm)
-    {
-        int selectionOfSetup = 0;
-        int carteTypeFirstModule = onModules[mm.MyModules[0].CarteIndex].cartesTypes;
-        if (carteTypeFirstModule == 0)
-        {
-            //Attaque
-            selectionOfSetup = 0;
-        }
-        else if (mm.MyModules[0].CarteIndex == 1)
-        {
-            //Def
-            selectionOfSetup = 1;
-        }
-        else if (mm.MyModules[0].CarteIndex == 2)
-        {
-            //Alteration
-            selectionOfSetup = 2;
-        }
+    // public void SelectSetup(int type, ModuleManager mm)
+    // {
+    //     int selectionOfSetup = 0;
+    //     int carteTypeFirstModule = onModules[mm.MyModules[0].CarteIndex].cartesTypes;
+    //     if (carteTypeFirstModule == 0)
+    //     {
+    //         //Attaque
+    //         selectionOfSetup = 0;
+    //     }
+    //     else if (mm.MyModules[0].CarteIndex == 1)
+    //     {
+    //         //Def
+    //         selectionOfSetup = 1;
+    //     }
+    //     else if (mm.MyModules[0].CarteIndex == 2)
+    //     {
+    //         //Alteration
+    //         selectionOfSetup = 2;
+    //     }
 
-        SelectCible(selectionOfSetup, type, mm);
-    }
+    //     SelectCible(selectionOfSetup, type, mm);
+    // }
 
     public void SelectCible(int selectionOfSetup, int type, ModuleManager mm)
     {
-        string wantedName;
-        var calculTest = (Mathf.Abs(mm.rotationCompteur) % 4);
-        int wantedRoom = 0;
-        if (Mathf.Abs(calculTest) == 0)
-        {
-            wantedRoom = 0;
-        }
-        else if (Mathf.Abs(calculTest) == 1)
-        {
-            wantedRoom = 1;
-        }
-        else if (Mathf.Abs(calculTest) == 2)
-        {
-            wantedRoom = 2;
-        }
-        else if (Mathf.Abs(calculTest) == 3)
-        {
-            wantedRoom = 3;
-        }
+        // string wantedName;
+        // var calculTest = (Mathf.Abs(mm.rotationCompteur) % 4);
+        // int wantedRoom = 0;
+        // if (Mathf.Abs(calculTest) == 0)
+        // {
+        //     wantedRoom = 0;
+        // }
+        // else if (Mathf.Abs(calculTest) == 1)
+        // {
+        //     wantedRoom = 1;
+        // }
+        // else if (Mathf.Abs(calculTest) == 2)
+        // {
+        //     wantedRoom = 2;
+        // }
+        // else if (Mathf.Abs(calculTest) == 3)
+        // {
+        //     wantedRoom = 3;
+        // }
 
-        mm.MyCompteurInt -= 1;
-        if (mm.MyCompteurInt <= 0) // GESTION DURABILITE
-        {
-            mm.MyModules[1].CarteIndex = -1;
-            mm.MyModules[1].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
-                Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
-            mm.MyCompteurInt = 2;
-        }
-        mm.MyCompteur.text = mm.MyCompteurInt.ToString();
+        // mm.MyCompteurInt -= 1;
+        // if (mm.MyCompteurInt <= 0) // GESTION DURABILITE
+        // {
+        //     mm.MyModules[1].CarteIndex = -1;
+        //     mm.MyModules[1].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+        //         Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
+        //     mm.MyCompteurInt = 2;
+        // }
+        // mm.MyCompteur.text = mm.MyCompteurInt.ToString();
 
 
-        if (selectionOfSetup == 0)
-        {
-            wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupAttack.MyName;
-        }
-        else if (selectionOfSetup == 1)
-        {
-            wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupDefense.MyName;
-        }
-        else
-        {
-            wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupAlteration.MyName;
-        }
+        // if (selectionOfSetup == 0)
+        // {
+        //     wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupAttack.MyName;
+        // }
+        // else if (selectionOfSetup == 1)
+        // {
+        //     wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupDefense.MyName;
+        // }
+        // else
+        // {
+        //     wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupAlteration.MyName;
+        // }
 
-        if (mm.MyModules[0].CarteIndex == type)
-        {
-            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom, mm, true);
-        }
-        else
-        {
-            GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom, mm, false);
-        }
+        // if (mm.MyModules[0].CarteIndex == type)
+        // {
+        //     GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom, mm, true);
+        // }
+        // else
+        // {
+        //     GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom, mm, false);
+        // }
     }
     #endregion
 
@@ -339,17 +340,13 @@ public class CartesManager : MonoBehaviour
         mm.cartesModule.Add(c);
         Destroy(allCards[index].go);
         allCards.RemoveAt(index);
-        // print("allcards : " + allCards.Count);
-        // print("onModules : " + onModules.Count);
     }
 
-    public void ModuleToHand(int index, ModuleManager mm)
+    public void ModuleToHand(ModuleManager mm)
     {
-        var c = mm.cartesModule[index];
+        var c = mm.cartesModule[mm.cartesModule.Count-1];
         AjouterUneCarteDansLaMain(1, c.cartesTypes);
-        mm.cartesModule.RemoveAt(index);
-        // print("allcards : " + allCards.Count);
-        // print("onModules : " + onModules.Count);
+        mm.cartesModule.RemoveAt(mm.cartesModule.Count-1);
     }
 
 

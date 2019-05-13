@@ -7,29 +7,16 @@ public class parent : MonoBehaviour
 {
     RectTransform[] zones;
     public Canvas myCanvas;
-    RectTransform[] sallesRT;
     public GameObject salles;
-    void Start()
+    void Awake()
     {
         zones = GetComponentsInChildren<RectTransform>();
-        sallesRT = salles.GetComponentsInChildren<RectTransform>();
     }
+
 
     void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.Mouse0))
-        // {
-        //     for (int i = 0; i < zones.Length; i++)
-        //     {
-        //         zones[i].SetParent(gameObject.transform, true);
-        //     }
-        //     transform.Rotate(0, 0, 90);
-        //     for (int i = 0; i < zones.Length; i++)
-        //     {
-        //         zones[i].SetParent(myCanvas.transform, true);
-        //     }
-        //     CheckOverlap();
-        // }
+
     }
 
     public bool rectOverlaps(RectTransform rectTrans1, RectTransform rectTrans2)
@@ -40,21 +27,30 @@ public class parent : MonoBehaviour
         return rect1.Overlaps(rect2);
     }
 
-    public void CheckOverlap()
+    public int[] CheckOverlapADV(RectTransform[] rt)
     {
-        for (int i = 0; i < sallesRT.Length; i++)
+
+        int[] toReturn = new int[4];
+        for (int i = 0; i < rt.Length; i++)
         {
-            sallesRT[i].gameObject.GetComponent<Image>().color = Color.white;
+            toReturn[i] = -1;
             for (int h = 0; h < zones.Length; h++)
             {
-                if (rectOverlaps(sallesRT[i], zones[h]))
+                if (rectOverlaps(rt[i], zones[h]))
                 {
-                    sallesRT[i].gameObject.GetComponent<Image>().color = Color.red;
+                    toReturn[i] = i;
                     h = zones.Length;
                 }
             }
         }
+        return toReturn;
     }
+
+    public void CheckOverlap(RectTransform[] rt)
+    {
+        // Check salle touchées et les feedback
+    }
+
 
     public void RotateHoraire()
     {

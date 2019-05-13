@@ -22,11 +22,13 @@ public class GameMaster : MonoBehaviour
     SpriteRenderer cajSR;
     CartesManager cartesManager;
     SalleManager salleManager;
+    AllSetupsActions allSetupsActions;
     private CardSound cardSound;
     private GameObject touchedByZoomRaycast;
     EnnemiManager ennemiManager;
     public GameObject uiPlaceHolder;
     public GameObject zoneSelectionADV;
+
 
     void Awake()
     {
@@ -101,7 +103,7 @@ public class GameMaster : MonoBehaviour
     }
 
     #region Actions
-    
+
     void placeHolderUICiblage()
     {
         if (Input.GetKey(KeyCode.Mouse0))
@@ -121,37 +123,39 @@ public class GameMaster : MonoBehaviour
                 if (hit.transform.tag == "Salles")
                 {
                     bool canPlay = TestIfCanPlay(hit);
-                    
+
                     if (canPlay)
                     {
-                        //uiPlaceHolder.SetActive(true);
                         var moletteSouris = Input.GetAxis("Mouse ScrollWheel");
-                        //GameObject aTourner = uiPlaceHolder.transform.GetChild(0).gameObject;
                         ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
-                        var pouett = mm.MyModules[1].MyObject.transform.rotation;
-                        //aTourner.transform.rotation = pouett;
 
-                        if(mm.MyModules[1].CarteIndex != -1)
+                        if (mm.cartesModule.Count >= 2)
                         {
-                            if(mm.MyModules[0].CarteIndex == 0)
+                            if (zoneSelectionADV == null) // Si on vise adversaire
                             {
-                                //zoneSelectionADV
+                                zoneSelectionADV = GameObject.Instantiate(mm.cartesModule[2].prefabZoneSelection);
+                                zoneSelectionADV.GetComponent<parent>().CheckOverlap(ennemiManager.sallesRT);
+                                var pouett = mm.MyModules[1].transform.rotation;
+                                zoneSelectionADV.transform.rotation = pouett;
                             }
+                            // else sur nest
+
                         }
-                    
+
                         if (Mathf.Abs(moletteSouris) > 0)
                         {
-                            mm.MyModules[1].MyObject.transform.Rotate(0, 0, 90 * (moletteSouris * 10));
-                            if (moletteSouris < 0 && mm.MyModules[1].rotationCompteur == 0)
+                            mm.MyModules[1].transform.Rotate(0, 0, 90 * (moletteSouris * 10));
+                            if (moletteSouris < 0 && mm.rotationCompteur == 0)
                             {
-                                mm.MyModules[1].rotationCompteur = 400000;
+                                mm.rotationCompteur = 400000;
                             }
-                            mm.MyModules[1].rotationCompteur += 1 * (Mathf.RoundToInt(moletteSouris * 10));
+                            mm.rotationCompteur += 1 * (Mathf.RoundToInt(moletteSouris * 10));
                         }
                     }
                 }
                 else
                 {
+
                     //uiPlaceHolder.SetActive(false);
                 }
             }
@@ -161,7 +165,7 @@ public class GameMaster : MonoBehaviour
             //uiPlaceHolder.SetActive(false);
         }
     }
-    
+
     public void TakeCardFromModule()
     {
         var origin = new Vector3(2.3f, -2.095f, -16.11f);
@@ -183,29 +187,27 @@ public class GameMaster : MonoBehaviour
                 if (canPlay)
                 {
                     ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
-                    var testBool = false;
-                    for (int i = mm.MyModules.Length - 1; i >= 0; i--)
-                    {
-                        if (mm.MyModules[i].CarteIndex != -1 && !testBool && mm.MyModules[i].MyType != Modules.Type.Droite)
-                        {
-                            if (!cartesManager.CheckHandisFull())
-                            {
-                                testBool = true;
-                                if (!CartesManager.PhaseLente)
-                                {
-                                    cartesManager.AjouterUneCarteDansLaMain(1, mm.MyModules[i].CarteIndex);
-                                }
 
-                                mm.MyModules[i].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
-                                    Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
-                                mm.MyModules[i].CarteIndex = -1;
-                            }
+
+                    if (!cartesManager.CheckHandisFull())
+                    {
+                        mm.MyModules[mm.cartesModule.Count - 1].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+                            Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
+                        if (!CartesManager.PhaseLente)
+                        {
+
+                            cartesManager.AjouterUneCarteDansLaMain(1, mm.cartesModule[mm.cartesModule.Count - 1].cartesTypes);
+                            cartesManager.ModuleToHand(mm);
                         }
+
+
                     }
                 }
             }
         }
     }
+
+
 
 
     public void PlayerLine()
@@ -234,17 +236,10 @@ public class GameMaster : MonoBehaviour
                 if (canPlay)
                 {
                     ModuleManager mm = hit.transform.GetChild(0).GetComponent<ModuleManager>();
-                    var testBool = false;
-                    for (int i = 0; i < mm.MyModules.Length; i++)
-                    {
-                        if (mm.MyModules[i].CarteIndex == -1 && !testBool)
-                        {
-                            testBool = true;
-                            caj.GetComponent<Animator>().SetBool("Dance", true);
-                            hittingAModule = true;
-                            moduleHit = mm.MyModules[i].MyObject;
-                        }
-                    }
+                    caj.GetComponent<Animator>().SetBool("Dance", true);
+                    hittingAModule = true;
+                    moduleHit = mm.MyModules[mm.cartesModule.Count-1];
+
                 }
             }
             else
@@ -272,7 +267,7 @@ public class GameMaster : MonoBehaviour
     public bool TestIfCanPlay(RaycastHit hit)
     {
         bool toReturn = true;
-        
+
         for (int i = 0; i < salleManager.allSalles.Count; i++)
         {
             if (hit.transform.gameObject == salleManager.allSalles[i].MyGo)
@@ -283,38 +278,66 @@ public class GameMaster : MonoBehaviour
                 }
             }
         }
-        
+
         return toReturn;
     }
     public void PlayCard()
     {
         var c = moduleHit;
         ModuleManager mm = moduleHit.transform.parent.GetComponent<ModuleManager>();
-
-        if (mm.MyModules[0].CarteIndex != -1 && mm.MyModules[1].CarteIndex != -1 && mm.MyModules[2].MyObject == moduleHit && !CartesManager.PhaseLente)
-        {
-            cartesManager.PlayACardOnModule(cardIDBeingPlayed, c);
-            cardSound.GoingToPlayACard();
-            cardIDBeingPlayed = -1;
-        }
-        else if (mm.MyModules[2].MyObject != moduleHit)
-        {
-            cartesManager.PlayACardOnModule(cardIDBeingPlayed, c);
-            cardSound.GoingToPlayACard();
-            cardIDBeingPlayed = -1;
-        }
+        cartesManager.PlayACardOnModule(cardIDBeingPlayed, c);
+        cardSound.GoingToPlayACard();
+        cardIDBeingPlayed = -1;
     }
     #endregion
 
     public void LancerActionJoueur(ModuleManager mm)
     {
-        // DELEGUER AU GAMEMASTER LA CHARGE DE :
         // Check equipement selectionné par 1e module
         // Check salles touchées par 2nd module
         // Check Overdrive par 3e module
         // Lancer action
-        // Lancer CD
         // Burn 3e carte
         // Check durabilité => Burn 2e carte
+
+        string wantedName = salleManager.allSalles[mm.MySalleNumber].equipement[0];
+        if (wantedName == "Attaque 01") // Pour viser adversaire (il va falloir trouver mieux)
+        {
+            zoneSelectionADV = GameObject.Instantiate(mm.cartesModule[2].prefabZoneSelection);
+            parent overlapScript = zoneSelectionADV.GetComponent<parent>();
+            var calculTest = (Mathf.Abs(mm.rotationCompteur) % 4);
+            zoneSelectionADV.transform.Rotate(0, 0, 90 * calculTest);
+            var sallesTouchees = overlapScript.CheckOverlapADV(ennemiManager.sallesRT);
+            Destroy(zoneSelectionADV);
+            for (int i = 0; i < sallesTouchees.Length; i++)
+            {
+                if (sallesTouchees[i] >= 0)
+                {
+                    if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
+                    {
+                        allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, true);
+                    }
+                    else
+                    {
+                        allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, false);
+                    }
+
+                }
+            }
+
+        }
+        else // Pour viser NEST (il va falloir trouver mieux)
+        {
+
+        }
+
+        mm.cartesModule.RemoveAt(2);
+        mm.MyCompteurInt -= 1;
+        mm.MyCompteur.text = mm.MyCompteurInt.ToString();
+
+        if (mm.MyCompteurInt <= 0)
+        {
+            mm.cartesModule.RemoveAt(1);
+        }
     }
 }

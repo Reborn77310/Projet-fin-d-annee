@@ -64,6 +64,7 @@ public class EnnemiManager : MonoBehaviour
     public TextMeshProUGUI infosNext;
 
     public List<DBM> actionPrevues = new List<DBM>();
+    public RectTransform[] sallesRT;
 
     private void Awake()
     {
@@ -101,10 +102,12 @@ public class EnnemiManager : MonoBehaviour
     public void RecupFormule(int[] _nb, int[] _types, Image[] _symboles)
     {
         int index = 0;
+        sallesRT = new RectTransform[ennemiRooms.Count];
         for (int i = 0; i < ennemiRooms.Count; i++)
         {
             ennemiRooms[i].myType = new int[_nb[i]];
             ennemiRooms[i].symbole = new Image[_nb[i]];
+            sallesRT[i] = ennemiRooms[i].ui;
 
             for (int h = 0; h < _nb[i]; h++)
             {

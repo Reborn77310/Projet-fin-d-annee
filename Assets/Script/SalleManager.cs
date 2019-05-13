@@ -5,22 +5,18 @@ using UnityEngine.UI;
 
 public class Salles
 {
-    public class Equipement
-    {
-        
-    }
-
 
     public GameObject MyGo;
     public bool CanPlayHere = true;
     public int pv;
-    
+
     public Color[] myMaterials = new Color[2];
     public bool isDefendu;
     public int DefendingAmount = 0;
-    
+
     public bool isAttacked = false;
-    
+    public string[] equipement = new string[2];
+
     public Salles(GameObject go)
     {
         MyGo = go;
@@ -39,12 +35,16 @@ public class SalleManager : MonoBehaviour
     public int pvDuVehicule = 300;
     private SalleManager instance;
     public EnnemiManager ennemiManager;
-    
+
     void Start()
     {
         instance = this;
         InitializeSalles();
         pvDuVehiculeText.text = pvDuVehicule.ToString();
+        allSalles[0].equipement[0] = "Cape d'invisibilité";
+        allSalles[1].equipement[0] = "Cape d'invisibilité";
+        allSalles[2].equipement[0] = "Attaque 01";
+        allSalles[3].equipement[0] = "Attaque 01";
     }
 
     public void ChangeMaterial()
@@ -76,7 +76,7 @@ public class SalleManager : MonoBehaviour
             allSalles[i].myMaterials[1] = allSalles[i].myMaterials[0] + Color.red;
         }
     }
-    
+
     public void DamageSurSalle(int salleVisee, int damage)
     {
         if (allSalles[salleVisee].isDefendu)
@@ -88,7 +88,7 @@ public class SalleManager : MonoBehaviour
                 allSalles[salleVisee].pv -= wantedDamage;
                 pvDuVehicule -= wantedDamage;
             }
-            
+
             pvSalles[salleVisee].GetComponent<TextMesh>().text = allSalles[salleVisee].pv.ToString();
             pvDuVehiculeText.text = pvDuVehicule.ToString();
             if (pvDuVehicule <= 0)
@@ -125,9 +125,9 @@ public class SalleManager : MonoBehaviour
         }
     }
 
-    public void MakeCooldownSalle(int SalleVisee,float Cooldown)
+    public void MakeCooldownSalle(int SalleVisee, float Cooldown)
     {
-        StartCoroutine(instance.CooldownSalle(SalleVisee,Cooldown));
+        StartCoroutine(instance.CooldownSalle(SalleVisee, Cooldown));
     }
 
     IEnumerator CooldownSalle(int salleVisee, float cooldown)
@@ -142,7 +142,7 @@ public class SalleManager : MonoBehaviour
         }
         yield break;
     }
-    
+
     IEnumerator ReparationSalle(int salleVisee)
     {
         SalleOnCooldown[salleVisee].text = "YES";
@@ -160,6 +160,6 @@ public class SalleManager : MonoBehaviour
 
     public void CancelDefense(int salleVisee)
     {
-        pvSalles[salleVisee].GetComponent<TextMesh>().text =  allSalles[salleVisee].pv.ToString();
+        pvSalles[salleVisee].GetComponent<TextMesh>().text = allSalles[salleVisee].pv.ToString();
     }
 }
