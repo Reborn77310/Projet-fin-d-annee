@@ -55,6 +55,7 @@ public class EnnemiManager : MonoBehaviour
 
     public GameObject prefabADV;
     public GameObject boutonSpawn;
+    public GameObject NEST;
 
     public Image[] DBM_Symbole;
     public TextMeshProUGUI[] DBM_Cible;
@@ -156,6 +157,8 @@ public class EnnemiManager : MonoBehaviour
 
     public void EndCombat()
     {
+        NEST.SetActive(false);
+        pvTotauxText.gameObject.SetActive(false);
         Destroy(badGuy);
         ennemiRooms.Clear();
         actionPrevues.Clear();
@@ -257,6 +260,7 @@ public class EnnemiManager : MonoBehaviour
 
     public void SpawnAdversaire()
     {
+        NEST.SetActive(true);
         badGuy = GameObject.Instantiate(prefabADV);
         badGuy.transform.SetParent(myCanvas.transform, false);
         badGuy.SetActive(true);

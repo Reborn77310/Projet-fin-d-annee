@@ -16,6 +16,7 @@ public class Salles
 
     public bool isAttacked = false;
     public string[] equipement = new string[2];
+    public bool[] equipementATK = new bool[2];
 
     public Salles(GameObject go)
     {
@@ -31,10 +32,11 @@ public class SalleManager : MonoBehaviour
     public List<Salles> allSalles = new List<Salles>();
     public TextMeshProUGUI[] pvSalles; // A ASSIGNER
     public TextMesh[] SalleOnCooldown = new TextMesh[4]; // A ASSIGNER
-    public TextMesh pvDuVehiculeText;
+    public TextMeshProUGUI pvDuVehiculeText;
     public int pvDuVehicule = 300;
     private SalleManager instance;
     public EnnemiManager ennemiManager;
+    public RectTransform[] sallesRT;
 
     void Start()
     {
@@ -45,6 +47,10 @@ public class SalleManager : MonoBehaviour
         allSalles[1].equipement[0] = "Cape d'invisibilité";
         allSalles[2].equipement[0] = "Attaque 01";
         allSalles[3].equipement[0] = "Attaque 01";
+        allSalles[0].equipementATK[0] = false;
+        allSalles[1].equipementATK[0] = false;
+        allSalles[2].equipementATK[0] = true;
+        allSalles[3].equipementATK[0] = true;
     }
 
     public void ChangeMaterial()

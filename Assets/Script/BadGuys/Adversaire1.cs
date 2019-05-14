@@ -27,6 +27,7 @@ public class Adversaire1 : MonoBehaviour
         }
         ennemiManager.pvTotaux = pvTotaux;
         ennemiManager.pvTotauxMax = pvTotaux;
+        ennemiManager.pvTotauxText.gameObject.SetActive(true);
         ennemiManager.badGuy = gameObject;
         ennemiManager.RecupFormule(nbSymbolesParSalle, formuleTotale, symbolesSalles);
 

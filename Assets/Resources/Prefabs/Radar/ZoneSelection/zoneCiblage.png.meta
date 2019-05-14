@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 01f360b3c29d54d4a8849a12182ed3ee
+guid: b928b74c4d1219a41a72fb69b707c7c4
 TextureImporter:
   fileIDToRecycleName:
-    21300000: CadresCartes_0
-    21300002: CadresCartes_1
-    21300004: CadresCartes_2
-    21300006: CadresCartes_3
+    21300000: zoneCiblage_0
+    21300002: zoneCiblage_1
+    21300004: zoneCiblage_2
+    21300006: zoneCiblage_3
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -49,7 +49,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 800
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -64,7 +64,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -75,7 +75,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -88,81 +88,81 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CadresCartes_0
+      name: zoneCiblage_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 291
-        width: 77
-        height: 106
+        x: 0
+        y: 0
+        width: 213
+        height: 213
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41bc9d4ebeb7e5640865189444a8ccb1
+      spriteID: 454d2de2a0c46dd41a68ffb84f800ce8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CadresCartes_1
+      name: zoneCiblage_1
       rect:
         serializedVersion: 2
-        x: 21
-        y: 159
-        width: 77
-        height: 106
+        x: 304
+        y: 0
+        width: 213
+        height: 213
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30e672bae534b9047af6e2f78eab4b7f
+      spriteID: 5e6f869356915e54f9442c17d9d288b9
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CadresCartes_2
+      name: zoneCiblage_2
       rect:
         serializedVersion: 2
-        x: 56
-        y: 129
-        width: 19
-        height: 14
+        x: 616
+        y: 0
+        width: 213
+        height: 213
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c712b976cdf21343b41dfd593ccd4fa
+      spriteID: 0eda5efdefa0a7b49ae0f873ea9e2579
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CadresCartes_3
+      name: zoneCiblage_3
       rect:
         serializedVersion: 2
-        x: 21
-        y: 17
-        width: 77
-        height: 106
+        x: 920
+        y: 0
+        width: 213
+        height: 213
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 701b64e595562c348a3a722be63c3678
+      spriteID: bb7049f60963e3640a493f905cdb9b51
       vertices: []
       indices: 
       edges: []
@@ -170,7 +170,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 689ae5e4336a93c478629e4feddf9923
+    spriteID: a989ee533bd07ba4f91c30436b8ac4e3
     vertices: []
     indices: 
     edges: []

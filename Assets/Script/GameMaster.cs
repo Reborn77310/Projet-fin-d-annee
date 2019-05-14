@@ -27,6 +27,7 @@ public class GameMaster : MonoBehaviour
     EnnemiManager ennemiManager;
     public GameObject uiPlaceHolder;
     public GameObject zoneSelectionADV;
+    public Canvas myCanvas;
 
 
     void Awake()
@@ -97,22 +98,42 @@ public class GameMaster : MonoBehaviour
                         var moletteSouris = Input.GetAxis("Mouse ScrollWheel");
                         ModuleManager mm = hit.transform.gameObject.GetComponent<ModuleManager>();
 
+
                         if (mm.cartesModule.Count >= 2)
                         {
-                            if (zoneSelectionADV == null) // Si on vise adversaire
+
+                            if (zoneSelectionADV == null)
                             {
-                                zoneSelectionADV = GameObject.Instantiate(mm.cartesModule[2].prefabZoneSelection);
-                                zoneSelectionADV.GetComponent<parent>().CheckOverlap(ennemiManager.sallesRT);
-                                var pouett = mm.MyModules[1].transform.rotation;
-                                zoneSelectionADV.transform.rotation = pouett;
+                                zoneSelectionADV = GameObject.Instantiate(mm.cartesModule[1].prefabZoneSelection, myCanvas.transform, false);
+                                if (salleManager.allSalles[mm.MySalleNumber].equipementATK[0])
+                                {
+                                    zoneSelectionADV.transform.position = new Vector3(1447, 744, 0);
+                                }
+                                else
+                                {
+                                    zoneSelectionADV.transform.position = new Vector3(1647, 292, 0);
+                                }
+
                             }
-                            // else sur nest
+
+                            zoneSelectionADV.GetComponent<parent>().RotationZones(mm.MyModules[1].transform);
+                            if (salleManager.allSalles[mm.MySalleNumber].equipementATK[0])
+                            {
+                                zoneSelectionADV.GetComponent<parent>().CheckOverlap(ennemiManager.sallesRT);
+                            }
+                            else
+                            {
+                                zoneSelectionADV.GetComponent<parent>().CheckOverlap(salleManager.sallesRT);
+                            }
+
+
+                            // ADD else sur nest
 
                         }
 
                         if (Mathf.Abs(moletteSouris) > 0)
                         {
-                            mm.MyModules[1].transform.Rotate(0, 0, 90 * (moletteSouris * 10));
+                            mm.MyModules[1].transform.Rotate(0, 0, -90 * (moletteSouris * 10));
                             if (moletteSouris < 0 && mm.rotationCompteur == 0)
                             {
                                 mm.rotationCompteur = 400000;
@@ -123,14 +144,15 @@ public class GameMaster : MonoBehaviour
                 }
                 else
                 {
-
-                    //uiPlaceHolder.SetActive(false);
+                    Destroy(zoneSelectionADV);
+                    zoneSelectionADV = null;
                 }
             }
         }
-        if (Input.GetKeyUp(KeyCode.Mouse0) && uiPlaceHolder.activeInHierarchy)
+        if (Input.GetKeyUp(KeyCode.Mouse0) && zoneSelectionADV != null)
         {
-            //uiPlaceHolder.SetActive(false);
+            Destroy(zoneSelectionADV);
+            zoneSelectionADV = null;
         }
     }
 
@@ -159,8 +181,9 @@ public class GameMaster : MonoBehaviour
 
                     if (!cartesManager.CheckHandisFull())
                     {
-                        mm.MyModules[mm.cartesModule.Count - 1].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
-                            Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
+                        mm.MyModules[mm.cartesModule.Count - 1].transform.GetComponent<Image>().sprite =
+                            Resources.Load<Sprite>("MiniUi/CadresCartes_0");
+
                         if (!CartesManager.PhaseLente)
                         {
 
@@ -266,14 +289,16 @@ public class GameMaster : MonoBehaviour
         // Check durabilité => Burn 2e carte
 
         string wantedName = salleManager.allSalles[mm.MySalleNumber].equipement[0];
-        if (wantedName == "Attaque 01") // Pour viser adversaire (il va falloir trouver mieux)
+        if (salleManager.allSalles[mm.MySalleNumber].equipementATK[0])
         {
-            zoneSelectionADV = GameObject.Instantiate(mm.cartesModule[2].prefabZoneSelection);
+            zoneSelectionADV = GameObject.Instantiate(mm.cartesModule[1].prefabZoneSelection, myCanvas.transform, false);
+            zoneSelectionADV.transform.position = new Vector3(1447, 744, 0);
             parent overlapScript = zoneSelectionADV.GetComponent<parent>();
-            var calculTest = (Mathf.Abs(mm.rotationCompteur) % 4);
-            zoneSelectionADV.transform.Rotate(0, 0, 90 * calculTest);
-            var sallesTouchees = overlapScript.CheckOverlapADV(ennemiManager.sallesRT);
+            overlapScript.RotationZones(mm.MyModules[1].transform);
+            var sallesTouchees = overlapScript.CheckOverlap(ennemiManager.sallesRT);
             Destroy(zoneSelectionADV);
+            zoneSelectionADV = null;
+
             for (int i = 0; i < sallesTouchees.Length; i++)
             {
                 if (sallesTouchees[i] >= 0)
@@ -291,9 +316,30 @@ public class GameMaster : MonoBehaviour
             }
 
         }
-        else // Pour viser NEST (il va falloir trouver mieux)
+        else
         {
+            zoneSelectionADV = GameObject.Instantiate(mm.cartesModule[1].prefabZoneSelection, myCanvas.transform, false);
+            zoneSelectionADV.transform.position = new Vector3(1647, 292, 0);
+            parent overlapScript = zoneSelectionADV.GetComponent<parent>();
+            overlapScript.RotationZones(mm.MyModules[1].transform);
+            var sallesTouchees = overlapScript.CheckOverlap(salleManager.sallesRT);
+            Destroy(zoneSelectionADV);
+            zoneSelectionADV = null;
 
+            for (int i = 0; i < sallesTouchees.Length; i++)
+            {
+                if (sallesTouchees[i] >= 0)
+                {
+                    if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
+                    {
+                        allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, true);
+                    }
+                    else
+                    {
+                        allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, false);
+                    }
+                }
+            }
         }
 
         mm.cartesModule.RemoveAt(2);

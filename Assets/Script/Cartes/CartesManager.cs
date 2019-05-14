@@ -29,6 +29,7 @@ public class CartesManager : MonoBehaviour
             cartesTypes = _cartesTypes;
             illu = Resources.Load<Sprite>("Sprites/Cartes/V5/Carte" + _cartesTypes);
             picto = Resources.Load<Sprite>("Sprites/Cartes/Picto/Picto" + _cartesTypes);
+            prefabZoneSelection = Resources.Load("Prefabs/Radar/ZoneSelection/Ciblage_ADV") as GameObject;
         }
     }
     [Header("Lists")]
@@ -66,7 +67,6 @@ public class CartesManager : MonoBehaviour
     public void PlayACardOnModule(int id, ModuleManager MM)
     {
         int cardID = id;
-        print(MM.MySalleNumber);
         if (!PhaseLente)
         {
             HandToModule(cardID, MM);
@@ -94,100 +94,10 @@ public class CartesManager : MonoBehaviour
 
     void ThirdCardAction(ModuleManager mm)
     {
-        mm.MyModules[2].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
+        mm.MyModules[2].transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("MiniUi/CadresCartes_0");
         gameMaster.LancerActionJoueur(mm);
-        // DELEGUER AU GAMEMASTER LA CHARGE DE :
-        // Check equipement selectionné par 1e module
-        // Check salles touchées par 2nd module
-        // Check Overdrive par 3e module
-        // Lancer action
-        // Lancer CD
-        // Burn 3e carte
-        // Check durabilité => Burn 2e carte
-
-
-        //SelectSetup(type, mm);
-
     }
 
-    // public void SelectSetup(int type, ModuleManager mm)
-    // {
-    //     int selectionOfSetup = 0;
-    //     int carteTypeFirstModule = onModules[mm.MyModules[0].CarteIndex].cartesTypes;
-    //     if (carteTypeFirstModule == 0)
-    //     {
-    //         //Attaque
-    //         selectionOfSetup = 0;
-    //     }
-    //     else if (mm.MyModules[0].CarteIndex == 1)
-    //     {
-    //         //Def
-    //         selectionOfSetup = 1;
-    //     }
-    //     else if (mm.MyModules[0].CarteIndex == 2)
-    //     {
-    //         //Alteration
-    //         selectionOfSetup = 2;
-    //     }
-
-    //     SelectCible(selectionOfSetup, type, mm);
-    // }
-
-    public void SelectCible(int selectionOfSetup, int type, ModuleManager mm)
-    {
-        // string wantedName;
-        // var calculTest = (Mathf.Abs(mm.rotationCompteur) % 4);
-        // int wantedRoom = 0;
-        // if (Mathf.Abs(calculTest) == 0)
-        // {
-        //     wantedRoom = 0;
-        // }
-        // else if (Mathf.Abs(calculTest) == 1)
-        // {
-        //     wantedRoom = 1;
-        // }
-        // else if (Mathf.Abs(calculTest) == 2)
-        // {
-        //     wantedRoom = 2;
-        // }
-        // else if (Mathf.Abs(calculTest) == 3)
-        // {
-        //     wantedRoom = 3;
-        // }
-
-        // mm.MyCompteurInt -= 1;
-        // if (mm.MyCompteurInt <= 0) // GESTION DURABILITE
-        // {
-        //     mm.MyModules[1].CarteIndex = -1;
-        //     mm.MyModules[1].MyObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
-        //         Resources.Load<Sprite>("Sprites/Cartes/Picto/cercleBlanc");
-        //     mm.MyCompteurInt = 2;
-        // }
-        // mm.MyCompteur.text = mm.MyCompteurInt.ToString();
-
-
-        // if (selectionOfSetup == 0)
-        // {
-        //     wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupAttack.MyName;
-        // }
-        // else if (selectionOfSetup == 1)
-        // {
-        //     wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupDefense.MyName;
-        // }
-        // else
-        // {
-        //     wantedName = mm.gameObject.transform.parent.transform.GetChild(1).GetComponent<SetupManager>().MySetupAlteration.MyName;
-        // }
-
-        // if (mm.MyModules[0].CarteIndex == type)
-        // {
-        //     GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom, mm, true);
-        // }
-        // else
-        // {
-        //     GetComponent<AllSetupsActions>().FindEffect(wantedName, wantedRoom, mm, false);
-        // }
-    }
     #endregion
 
     #region Gestion Des Cartes
@@ -332,7 +242,6 @@ public class CartesManager : MonoBehaviour
 
     public void HandToModule(int index, ModuleManager mm)
     {
-        print("j'ai joué");
         var c = allCards[index];
         mm.cartesModule.Add(c);
         mm.MyModules[mm.cartesModule.Count - 1].GetComponent<Image>().sprite = mm.cartesModule[mm.cartesModule.Count - 1].illu;

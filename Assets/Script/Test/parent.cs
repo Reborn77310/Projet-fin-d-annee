@@ -7,16 +7,11 @@ public class parent : MonoBehaviour
 {
     RectTransform[] zones;
     public Canvas myCanvas;
-    public GameObject salles;
+
     void Awake()
     {
+        myCanvas = GameObject.Find("GameMaster").GetComponent<GameMaster>().myCanvas;
         zones = GetComponentsInChildren<RectTransform>();
-    }
-
-
-    void Update()
-    {
-
     }
 
     public bool rectOverlaps(RectTransform rectTrans1, RectTransform rectTrans2)
@@ -27,9 +22,8 @@ public class parent : MonoBehaviour
         return rect1.Overlaps(rect2);
     }
 
-    public int[] CheckOverlapADV(RectTransform[] rt)
+    public int[] CheckOverlap(RectTransform[] rt)
     {
-
         int[] toReturn = new int[4];
         for (int i = 0; i < rt.Length; i++)
         {
@@ -46,37 +40,18 @@ public class parent : MonoBehaviour
         return toReturn;
     }
 
-    public void CheckOverlap(RectTransform[] rt)
-    {
-        // Check salle touchées et les feedback
-    }
 
-
-    public void RotateHoraire()
+    public void RotationZones(Transform t)
     {
+        // The mighty trick : Technique très ancienne V2
         for (int i = 0; i < zones.Length; i++)
         {
             zones[i].SetParent(gameObject.transform, true);
         }
-        transform.Rotate(0, 0, 90);
+        transform.rotation = t.rotation;
         for (int i = 0; i < zones.Length; i++)
         {
             zones[i].SetParent(myCanvas.transform, true);
         }
-        //CheckOverlap();
-    }
-
-    public void RotateAntihoraire()
-    {
-        for (int i = 0; i < zones.Length; i++)
-        {
-            zones[i].SetParent(gameObject.transform, true);
-        }
-        transform.Rotate(0, 0, 90);
-        for (int i = 0; i < zones.Length; i++)
-        {
-            zones[i].SetParent(myCanvas.transform, true);
-        }
-        //CheckOverlap();
     }
 }
