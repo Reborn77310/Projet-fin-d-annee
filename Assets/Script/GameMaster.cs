@@ -108,11 +108,11 @@ public class GameMaster : MonoBehaviour
                                 zoneSelectionADV = GameObject.Instantiate(mm.cartesModule[1].prefabZoneSelection, myCanvas.transform, false);
                                 if (salleManager.allSalles[mm.MySalleNumber].equipementATK[0])
                                 {
-                                    zoneSelectionADV.transform.position = new Vector3(1447, 744, 0);
+                                    zoneSelectionADV.transform.position = new Vector3(1447, 743, 0);
                                 }
                                 else
                                 {
-                                    zoneSelectionADV.transform.position = new Vector3(1647, 292, 0);
+                                    zoneSelectionADV.transform.position = new Vector3(1647, 293, 0);
                                 }
 
                             }
@@ -126,9 +126,6 @@ public class GameMaster : MonoBehaviour
                             {
                                 zoneSelectionADV.GetComponent<parent>().CheckOverlap(salleManager.sallesRT);
                             }
-
-
-                            // ADD else sur nest
 
                         }
 
@@ -304,13 +301,15 @@ public class GameMaster : MonoBehaviour
             {
                 if (sallesTouchees[i] >= 0)
                 {
+                    print("i :" + i + "// salles : " + sallesTouchees[i]);
                     if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
                     {
-                        allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, true);
+                        allSetupsActions.FindEffect(wantedName, i, mm, true);
                     }
                     else
                     {
-                        allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, false);
+                        
+                        allSetupsActions.FindEffect(wantedName, i, mm, false);
                     }
 
                 }
@@ -331,6 +330,7 @@ public class GameMaster : MonoBehaviour
             {
                 if (sallesTouchees[i] >= 0)
                 {
+                    print("i :" + i + "// salles : " + sallesTouchees[i]);
                     if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
                     {
                         allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, true);

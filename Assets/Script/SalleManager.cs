@@ -60,11 +60,11 @@ public class SalleManager : MonoBehaviour
         {
             if (allSalles[i].isAttacked)
             {
-                
+
             }
             else
             {
-                
+
             }
         }
     }
@@ -129,6 +129,7 @@ public class SalleManager : MonoBehaviour
 
     public void MakeCooldownSalle(int SalleVisee, float Cooldown)
     {
+        allSalles[SalleVisee].MyGo.GetComponent<ModuleManager>().MyModules[0].transform.parent.transform.GetChild(2).GetComponent<Image>().color = Color.red;
         StartCoroutine(instance.CooldownSalle(SalleVisee, Cooldown));
     }
 
@@ -141,7 +142,9 @@ public class SalleManager : MonoBehaviour
         {
             allSalles[salleVisee].CanPlayHere = true;
             SalleOnCooldown[salleVisee].text = "NO";
+            allSalles[salleVisee].MyGo.GetComponent<ModuleManager>().MyModules[0].transform.parent.transform.GetChild(2).GetComponent<Image>().color = Color.white;
         }
+
         yield break;
     }
 
@@ -152,6 +155,7 @@ public class SalleManager : MonoBehaviour
         allSalles[salleVisee].CanPlayHere = true;
         allSalles[salleVisee].pv = 100;
         SalleOnCooldown[salleVisee].text = "NO";
+        allSalles[salleVisee].MyGo.GetComponent<ModuleManager>().MyModules[0].transform.parent.transform.GetChild(2).GetComponent<Image>().color = Color.white;
         yield break;
     }
 

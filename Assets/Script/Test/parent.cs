@@ -16,10 +16,18 @@ public class parent : MonoBehaviour
 
     public bool rectOverlaps(RectTransform rectTrans1, RectTransform rectTrans2)
     {
-        Rect rect1 = new Rect(rectTrans1.localPosition.x, rectTrans1.localPosition.y, rectTrans1.rect.width, rectTrans1.rect.height);
-        Rect rect2 = new Rect(rectTrans2.localPosition.x, rectTrans2.localPosition.y, rectTrans2.rect.width, rectTrans2.rect.height);
+        var r = rectTrans1.rect;
+        r.center =rectTrans1.TransformPoint(r.center);
+        r.size = rectTrans1.TransformVector(r.size);
 
-        return rect1.Overlaps(rect2);
+        var r2 = rectTrans2.rect;
+        r2.center =rectTrans2.TransformPoint(r2.center);
+        r2.size = rectTrans2.TransformVector(r2.size);
+
+        return r.Overlaps(r2);
+
+        
+
     }
 
     public int[] CheckOverlap(RectTransform[] rt)
@@ -32,8 +40,9 @@ public class parent : MonoBehaviour
             {
                 if (rectOverlaps(rt[i], zones[h]))
                 {
+                    zones[h].GetComponent<Image>().color = Color.red;
                     toReturn[i] = i;
-                    h = zones.Length;
+                    //h = zones.Length;
                 }
             }
         }
@@ -52,11 +61,14 @@ public class parent : MonoBehaviour
         for (int i = 0; i < zones.Length; i++)
         {
             zones[i].SetParent(myCanvas.transform, true);
+            zones[i].rotation = Quaternion.identity;
+            zones[i].localScale = new Vector3(1,1,1);
         }
     }
 
-    private void OnDestroy() {
-        for(int i = 0; i < zones.Length; i++)
+    private void OnDestroy()
+    {
+        for (int i = 0; i < zones.Length; i++)
         {
             Destroy(zones[i].gameObject);
         }

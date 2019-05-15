@@ -47,6 +47,7 @@ public class CartesManager : MonoBehaviour
     public EnnemiManager ennemiManager;
     public Image grilleRadar;
     public static bool PhaseLente = true;
+    public Image versus;
 
     #region Initialisation
     void Awake()
@@ -128,7 +129,14 @@ public class CartesManager : MonoBehaviour
 
     IEnumerator Draw()
     {
-        yield return new WaitForSeconds(drawTimer);
+        float timer = 0;
+        while (timer < drawTimer)
+        {
+            timer += Time.deltaTime;
+            versus.GetComponent<Image>().fillAmount = timer / drawTimer;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        
         DrawCards();
         yield break;
     }

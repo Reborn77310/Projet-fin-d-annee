@@ -57,7 +57,7 @@ public class EnnemiManager : MonoBehaviour
     public GameObject boutonSpawn;
     public GameObject NEST;
 
-    public Image[] DBM_Symbole;
+    public TextMeshProUGUI[] DBM_Symbole;
     public TextMeshProUGUI[] DBM_Cible;
     public TextMeshProUGUI[] DBM_timer;
 
@@ -294,27 +294,24 @@ public class EnnemiManager : MonoBehaviour
                 {
                     if (actionPrevues[i].id % 2 != 0)
                     {
-                        DBM_Cible[i].text = "<color=#126A0A>Room " + actionPrevues[i].cible.ToString() + "</color>";
+                        DBM_Cible[i].text = "<color=#126A0A>Room " + (actionPrevues[i].cible + 1).ToString() + "</color>";
                     }
                     else
                     {
-                        DBM_Cible[i].text = "<color=#BC1910>Room " + actionPrevues[i].cible.ToString() + "</color>";
+                        DBM_Cible[i].text = "<color=#BC1910>Room " + (actionPrevues[i].cible + 1).ToString() + "</color>";
                     }
 
                     DBM_timer[i].text = actionPrevues[i].timer.ToString("F3") + "s ";
-                    if (!DBM_Symbole[i].enabled)
-                    {
-                        DBM_Symbole[i].enabled = true;
-                        DBM_Symbole[i].sprite = ennemiRooms[actionPrevues[i].origine].symbole[0].sprite;
-                    }
+                    DBM_Symbole[i].text = (actionPrevues[i].origine + 1).ToString();
+                    
                 }
                 else
                 {
-                    if (DBM_Symbole[i].enabled)
+                    if (DBM_Symbole[i].text != "")
                     {
                         DBM_Cible[i].text = "";
                         DBM_timer[i].text = "";
-                        DBM_Symbole[i].enabled = false;
+                        DBM_Symbole[i].text = "";
                     }
                 }
             }
@@ -407,7 +404,7 @@ public class EnnemiManager : MonoBehaviour
 
     void SortDBMActionByTimer()
     {
-        actionPrevues.Sort((p1, p2) => p1.timer.CompareTo(p2.timer)); // THIS WILL WORKS ?!????
+        actionPrevues.Sort((p1, p2) => p1.timer.CompareTo(p2.timer));
     }
 
 }
