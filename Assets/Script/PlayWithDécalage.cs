@@ -11,7 +11,7 @@ public class PlayWithDécalage : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        AllLegs = GameObject.FindObjectsOfType<Animator>();
+        //AllLegs = GameObject.FindObjectsOfType<Animator>();
 
     }
 	
