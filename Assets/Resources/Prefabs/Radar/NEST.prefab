@@ -640,7 +640,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3679236505759418882}
-  - component: {fileID: 6509892851670813486}
   m_Layer: 5
   m_Name: NEST
   m_TagString: Untagged
@@ -671,53 +670,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6509892851670813486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4907399323907252314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fc3ff7a274afef4e857f0e0df219d87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  normales:
-  - {fileID: 21300008, guid: 8faad30552090374db431722e89fe119, type: 3}
-  - {fileID: 21300010, guid: 8faad30552090374db431722e89fe119, type: 3}
-  - {fileID: 21300026, guid: 8faad30552090374db431722e89fe119, type: 3}
-  - {fileID: 21300024, guid: 8faad30552090374db431722e89fe119, type: 3}
-  highlighted:
-  - {fileID: 21300012, guid: 8faad30552090374db431722e89fe119, type: 3}
-  - {fileID: 21300014, guid: 8faad30552090374db431722e89fe119, type: 3}
-  - {fileID: 21300030, guid: 8faad30552090374db431722e89fe119, type: 3}
-  - {fileID: 21300028, guid: 8faad30552090374db431722e89fe119, type: 3}
-  ui:
-  - {fileID: 8664087691220855575}
-  - {fileID: 4861440389433945864}
-  - {fileID: 2629998707723534764}
-  - {fileID: 7459339231934648102}
-  pvSalles:
-  - 150
-  - 150
-  - 100
-  - 100
-  pvTotaux: 350
-  textPV:
-  - {fileID: 4553076180148202474}
-  - {fileID: 7793055090180622031}
-  - {fileID: 2002718387210462141}
-  - {fileID: 925475010422332888}
-  symbolesSalles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  formuleTotale: 000000000000000001000000010000000200000002000000
-  nbSymbolesParSalle: 02000000020000000100000001000000
 --- !u!1 &5071816696351070289
 GameObject:
   m_ObjectHideFlags: 0

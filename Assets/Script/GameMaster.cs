@@ -37,6 +37,7 @@ public class GameMaster : MonoBehaviour
         cajSR = caj.GetComponent<SpriteRenderer>();
         salleManager = GetComponent<SalleManager>();
         ennemiManager = GetComponent<EnnemiManager>();
+        allSetupsActions = GetComponent<AllSetupsActions>();
     }
 
     void Update()
@@ -349,6 +350,8 @@ public class GameMaster : MonoBehaviour
         if (mm.MyCompteurInt <= 0)
         {
             mm.cartesModule.RemoveAt(1);
+            mm.MyModules[1].transform.GetComponent<Image>().sprite = 
+                        Resources.Load<Sprite>("MiniUi/CadresCartes_0");
         }
     }
 }
