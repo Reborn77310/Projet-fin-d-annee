@@ -54,4 +54,11 @@ public class parent : MonoBehaviour
             zones[i].SetParent(myCanvas.transform, true);
         }
     }
+
+    private void OnDestroy() {
+        for(int i = 0; i < zones.Length; i++)
+        {
+            Destroy(zones[i].gameObject);
+        }
+    }
 }

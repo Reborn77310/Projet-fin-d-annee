@@ -64,24 +64,25 @@ public class CartesManager : MonoBehaviour
     #endregion
 
     #region Actions
-    public void PlayACardOnModule(int id, ModuleManager MM)
+    public void PlayACardOnModule(int id, ModuleManager mm)
     {
-        int cardID = id;
         if (!PhaseLente)
         {
-            HandToModule(cardID, MM);
-            if (MM.cartesModule.Count == 3)
+            HandToModule(id, mm);
+            if (mm.cartesModule.Count == 3)
             {
-                ThirdCardAction(MM);
+                ThirdCardAction(mm);
             }
             SortCartes();
         }
         else
         {
-            
-            if (MM.cartesModule.Count < 2)
+
+            if (mm.cartesModule.Count < 2)
             {
-                HandToModule(cardID, MM);
+                var c = allCards[id];
+                mm.cartesModule.Add(c);
+                mm.MyModules[mm.cartesModule.Count - 1].GetComponent<Image>().sprite = mm.cartesModule[mm.cartesModule.Count - 1].illu;
                 SortCartes();
             }
 
@@ -253,10 +254,11 @@ public class CartesManager : MonoBehaviour
     {
         if (mm.cartesModule.Count > 0)
         {
-            // CHANGER PICTO MODULE
+            print(mm.cartesModule.Count);
             var c = mm.cartesModule[mm.cartesModule.Count - 1];
             AjouterUneCarteDansLaMain(1, c.cartesTypes);
             mm.cartesModule.RemoveAt(mm.cartesModule.Count - 1);
+            print(mm.cartesModule.Count);
         }
 
     }

@@ -43,7 +43,7 @@ public class GameMaster : MonoBehaviour
     {
 
 
-        placeHolderUICiblage();
+        RotateSecondModule();
         if (isPlayingACard)
         {
             PlayerLine();
@@ -73,7 +73,7 @@ public class GameMaster : MonoBehaviour
 
     #region Actions
 
-    void placeHolderUICiblage()
+    void RotateSecondModule()
     {
         if (Input.GetKey(KeyCode.Mouse0))
         {
@@ -186,11 +186,11 @@ public class GameMaster : MonoBehaviour
 
                         if (!CartesManager.PhaseLente)
                         {
-
-                            cartesManager.AjouterUneCarteDansLaMain(1, mm.cartesModule[mm.cartesModule.Count - 1].cartesTypes);
                             cartesManager.ModuleToHand(mm);
                         }
-
+                        else{
+                            mm.cartesModule.RemoveAt(mm.cartesModule.Count -1);
+                        }
 
                     }
                 }
