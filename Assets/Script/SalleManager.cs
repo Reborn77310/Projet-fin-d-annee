@@ -34,6 +34,7 @@ public class SalleManager : MonoBehaviour
     public TextMesh[] SalleOnCooldown = new TextMesh[4]; // A ASSIGNER
     public TextMeshProUGUI pvDuVehiculeText;
     public int pvDuVehicule = 300;
+    public int pvDuVehiculeMax = 300;
     private SalleManager instance;
     public EnnemiManager ennemiManager;
     public RectTransform[] sallesRT;
@@ -42,11 +43,11 @@ public class SalleManager : MonoBehaviour
     {
         instance = this;
         InitializeSalles();
-        pvDuVehiculeText.text = pvDuVehicule.ToString();
+        pvDuVehiculeText.text = (pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
         allSalles[0].equipement[0] = "Cape d'invisibilité";
         allSalles[1].equipement[0] = "Cape d'invisibilité";
-        allSalles[2].equipement[0] = "Attaque 01";
-        allSalles[3].equipement[0] = "Attaque 01";
+        allSalles[2].equipement[0] = "Attaque 03";
+        allSalles[3].equipement[0] = "Attaque 03";
         allSalles[0].equipementATK[0] = false;
         allSalles[1].equipementATK[0] = false;
         allSalles[2].equipementATK[0] = true;
@@ -90,8 +91,8 @@ public class SalleManager : MonoBehaviour
                 pvDuVehicule -= wantedDamage;
             }
 
-            pvSalles[salleVisee].GetComponent<TextMesh>().text = allSalles[salleVisee].pv.ToString();
-            pvDuVehiculeText.text = pvDuVehicule.ToString();
+            pvSalles[salleVisee].text = allSalles[salleVisee].pv.ToString() + " %";
+            pvDuVehiculeText.text = (pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
             if (pvDuVehicule <= 0)
             {
                 pvDuVehiculeText.text = "MISSANDEI ?!?";
@@ -109,9 +110,9 @@ public class SalleManager : MonoBehaviour
         else
         {
             allSalles[salleVisee].pv -= damage;
-            pvSalles[salleVisee].GetComponent<TextMesh>().text = allSalles[salleVisee].pv.ToString();
+            pvSalles[salleVisee].text = allSalles[salleVisee].pv.ToString() + " %";
             pvDuVehicule -= damage;
-            pvDuVehiculeText.text = pvDuVehicule.ToString();
+            pvDuVehiculeText.text = (pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
             if (pvDuVehicule <= 0)
             {
                 pvDuVehiculeText.text = "MISSANDEI ?!?";
@@ -156,11 +157,11 @@ public class SalleManager : MonoBehaviour
 
     public void DefendreSalle(int salleVisee)
     {
-        pvSalles[salleVisee].GetComponent<TextMesh>().text = "You shall not pass !";
+        pvSalles[salleVisee].text = "DEF";
     }
 
     public void CancelDefense(int salleVisee)
     {
-        pvSalles[salleVisee].GetComponent<TextMesh>().text = allSalles[salleVisee].pv.ToString();
+        pvSalles[salleVisee].text = allSalles[salleVisee].pv.ToString() + " %";
     }
 }

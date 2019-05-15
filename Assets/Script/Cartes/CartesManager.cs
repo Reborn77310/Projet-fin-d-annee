@@ -86,8 +86,6 @@ public class CartesManager : MonoBehaviour
                 SortCartes();
             }
 
-            // il vaudrait mieux coder l'almanach maintenant
-
         }
     }
 
