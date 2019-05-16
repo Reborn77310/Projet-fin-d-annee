@@ -185,9 +185,11 @@ public class GameMaster : MonoBehaviour
                         if (!CartesManager.PhaseLente)
                         {
                             cartesManager.ModuleToHand(mm);
+                            cardSound.CardPickUp();
                         }
                         else{
                             mm.cartesModule.RemoveAt(mm.cartesModule.Count -1);
+                            cardSound.CardPickUp();
                         }
 
                     }

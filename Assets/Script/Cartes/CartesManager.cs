@@ -260,11 +260,10 @@ public class CartesManager : MonoBehaviour
     {
         if (mm.cartesModule.Count > 0)
         {
-            print(mm.cartesModule.Count);
             var c = mm.cartesModule[mm.cartesModule.Count - 1];
             AjouterUneCarteDansLaMain(1, c.cartesTypes);
             mm.cartesModule.RemoveAt(mm.cartesModule.Count - 1);
-            print(mm.cartesModule.Count);
+            
         }
 
     }

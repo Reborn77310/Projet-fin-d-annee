@@ -11815,7 +11815,7 @@ MonoBehaviour:
   Select_Sound: event:/Card_Holding
   Select_Sound2: event:/Card_Cancel
   Select_Sound3: event:/Card_Hover
-  Select_Sound4: event:/Card_Ordered
+  Select_Sound4: event:/Card_Pose
   Select_Sound5: event:/Card_Pickup
 --- !u!114 &1266132771
 MonoBehaviour:

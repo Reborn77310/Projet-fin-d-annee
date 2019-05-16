@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Event" id="{81499f9f-6a13-4c79-b770-30d2ec2391ed}">
         <property name="name">
-            <value>Pose carte (2)</value>
+            <value>Card_Pose</value>
         </property>
         <property name="outputFormat">
             <value>2</value>
@@ -125,6 +125,10 @@
     </object>
     <object class="MixerBusPanner" id="{8a977340-4d35-4304-bb62-81bb5039a427}"/>
     <object class="MixerBusFader" id="{5555bb90-0760-4501-86f4-c2dc4caca80f}"/>
-    <object class="SpatialiserEffect" id="{9e57428b-5136-403d-a0a7-262ef045981c}"/>
+    <object class="SpatialiserEffect" id="{9e57428b-5136-403d-a0a7-262ef045981c}">
+        <property name="maximumDistance">
+            <value>10000</value>
+        </property>
+    </object>
     <object class="MixerBusFader" id="{a814cb72-fa42-4000-8d29-066786bc8c21}"/>
 </objects>
