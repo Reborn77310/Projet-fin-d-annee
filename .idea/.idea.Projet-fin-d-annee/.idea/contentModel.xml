@@ -14,6 +14,7 @@
         <e p="Parametre02.xml" t="Include" />
         <e p="Parametre03.xml" t="Include" />
         <e p="Parametre04.xml" t="Include" />
+        <e p="ParticleMaster.cs" t="Include" />
         <e p="Plugins" t="Include">
           <e p="Editor" t="Include">
             <e p="FMOD" t="Include">
