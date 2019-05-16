@@ -23,7 +23,6 @@ public class SalleSound : MonoBehaviour
         FMOD.Studio.PLAYBACK_STATE fmodPbState;
         SoundEvent.getPlaybackState(out fmodPbState);
         SoundEvent.start();		
-        print("rep");
     }
 
     public void DetruireLaSalle()
@@ -31,6 +30,5 @@ public class SalleSound : MonoBehaviour
         FMOD.Studio.PLAYBACK_STATE fmodPbState;
         SoundEvent2.getPlaybackState(out fmodPbState);
         SoundEvent2.start();
-        print("des");
     }
 }

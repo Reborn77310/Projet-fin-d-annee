@@ -9,7 +9,7 @@ public class Salles
 
     public GameObject MyGo;
     public bool CanPlayHere = true;
-    public int pv;
+    public float pv;
 
     public bool isDefendu;
     public int DefendingAmount = 0;
@@ -32,8 +32,8 @@ public class SalleManager : MonoBehaviour
     public List<Salles> allSalles = new List<Salles>();
     public TextMeshProUGUI[] pvSalles; // A ASSIGNER
     public TextMeshProUGUI pvDuVehiculeText;
-    public int pvDuVehicule = 300;
-    public int pvDuVehiculeMax = 300;
+    public float pvDuVehicule = 300;
+    public float pvDuVehiculeMax = 300;
     private SalleManager instance;
     public EnnemiManager ennemiManager;
     public RectTransform[] sallesRT;
@@ -43,7 +43,7 @@ public class SalleManager : MonoBehaviour
         salleSound = GameObject.Find("Salles V3").GetComponent<SalleSound>();
         instance = this;
         InitializeSalles();
-        pvDuVehiculeText.text = (pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
+        pvDuVehiculeText.text = Mathf.RoundToInt(pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
         allSalles[0].equipement[0] = "Cape d'invisibilité";
         allSalles[1].equipement[0] = "Cape d'invisibilité";
         allSalles[2].equipement[0] = "Attaque 03";
@@ -91,8 +91,8 @@ public class SalleManager : MonoBehaviour
                 pvDuVehicule -= wantedDamage;
             }
 
-            pvSalles[salleVisee].text = allSalles[salleVisee].pv.ToString() + " %";
-            pvDuVehiculeText.text = (pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
+            pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
+            pvDuVehiculeText.text = Mathf.RoundToInt(pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
             if (pvDuVehicule <= 0)
             {
                 pvDuVehiculeText.text = "MISSANDEI ?!?";
@@ -110,9 +110,9 @@ public class SalleManager : MonoBehaviour
         else
         {
             allSalles[salleVisee].pv -= damage;
-            pvSalles[salleVisee].text = allSalles[salleVisee].pv.ToString() + " %";
+            pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
             pvDuVehicule -= damage;
-            pvDuVehiculeText.text = (pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
+            pvDuVehiculeText.text = Mathf.RoundToInt(pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
             if (pvDuVehicule <= 0)
             {
                // pvDuVehiculeText.text = "MISSANDEI ?!?";
@@ -148,11 +148,21 @@ public class SalleManager : MonoBehaviour
 
     IEnumerator ReparationSalle(int salleVisee)
     {
+        allSalles[salleVisee].CanPlayHere = false;
+        allSalles[salleVisee].MyGo.GetComponent<ModuleManager>().MyModules[0].transform.parent.transform.GetChild(2).GetComponent<Image>().color = Color.red;
         salleSound.DetruireLaSalle();
-        yield return new WaitForSeconds(30);
+        
+       // ennemiManager.CancelAction2(salleVisee); // C CASSE
+        
+        while (allSalles[salleVisee].pv < 100)
+        {
+            allSalles[salleVisee].pv += 5 * Time.deltaTime;
+            pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
         allSalles[salleVisee].CanPlayHere = true;
         allSalles[salleVisee].pv = 100;
-        pvSalles[salleVisee].text = allSalles[salleVisee].pv.ToString() + " %";
+        pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
         salleSound.ReparerLaSalle();
         allSalles[salleVisee].MyGo.GetComponent<ModuleManager>().MyModules[0].transform.parent.transform.GetChild(2).GetComponent<Image>().color = Color.white;
         yield break;
@@ -165,6 +175,6 @@ public class SalleManager : MonoBehaviour
 
     public void CancelDefense(int salleVisee)
     {
-        pvSalles[salleVisee].text = allSalles[salleVisee].pv.ToString() + " %";
+        pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
     }
 }

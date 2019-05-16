@@ -331,7 +331,7 @@ public class EnnemiManager : MonoBehaviour
                     {
                         salleManager.allSalles[actionPrevues[i].cible].isAttacked = false;
                         salleManager.ChangeMaterial();
-                        salleManager.DamageSurSalle(actionPrevues[i].cible, 100); // DEGATS SET A 0 ATTENTION
+                        salleManager.DamageSurSalle(actionPrevues[i].cible, 20); // DEGATS SET A 0 ATTENTION
                         ennemiRooms[actionPrevues[i].origine].isAttacking = false;
                         actionPrevues[i].id = -1;
                         actionPrevues[i].timer = 50000;
@@ -371,6 +371,26 @@ public class EnnemiManager : MonoBehaviour
         SortDBMActionByTimer();
     }
 
+    public void CancelAction2(int _indexSalle)
+    {
+        for (int i = 0; i < actionPrevues.Count; i++)
+        {
+            if (actionPrevues[i].cible == _indexSalle)
+            {
+                print(actionPrevues[i].cible);
+               /* if (actionPrevues[i].id % 2 != 0)
+                {
+                    salleManager.allSalles[actionPrevues[i].cible].isAttacked = false;
+                    salleManager.ChangeMaterial();
+                }
+                actionPrevues[i].id = -1;
+                actionPrevues[i].timer = 50000;
+                i = actionPrevues.Count;*/
+            }
+        }
+        SortDBMActionByTimer();
+    }
+    
     // object pooling pour DBM semble une meilleure solution pour éviter les crash
     // Créer le nombre de DBM correspondant au nombre de la salles adverses
     // On se sert de ID pour définir si l'object DBM est libre ou non de stocker une action :

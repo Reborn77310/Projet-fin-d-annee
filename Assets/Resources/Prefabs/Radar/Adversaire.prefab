@@ -1631,7 +1631,7 @@ MonoBehaviour:
   - 150
   - 100
   - 100
-  pvTotaux: 1500
+  pvTotaux: 600
   textPV:
   - {fileID: 3255594940961972936}
   - {fileID: 3255594940759513773}
