@@ -15,6 +15,8 @@ public class CardSound : MonoBehaviour
 	public FMOD.Studio.EventInstance SoundEvent4;
 	[FMODUnity.EventRef] public string Select_Sound5;
 	public FMOD.Studio.EventInstance SoundEvent5;
+	[FMODUnity.EventRef] public string Select_Sound6;
+	public FMOD.Studio.EventInstance SoundEvent6;
 	
 	void Start ()
 	{
@@ -32,6 +34,9 @@ public class CardSound : MonoBehaviour
 		
 		SoundEvent5 = FMODUnity.RuntimeManager.CreateInstance(Select_Sound5);
 		SoundEvent5.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(this.transform));
+		
+		SoundEvent6 = FMODUnity.RuntimeManager.CreateInstance(Select_Sound6);
+		SoundEvent6.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(this.transform));
 	}
 
 	public void HoldCard()
@@ -66,6 +71,13 @@ public class CardSound : MonoBehaviour
 	{
 		FMOD.Studio.PLAYBACK_STATE fmodPbState;
         SoundEvent5.getPlaybackState(out fmodPbState);
+		SoundEvent5.start();
+	}
+	
+	public void CardBurn()
+	{
+		FMOD.Studio.PLAYBACK_STATE fmodPbState;
+		SoundEvent5.getPlaybackState(out fmodPbState);
 		SoundEvent5.start();
 	}
 }

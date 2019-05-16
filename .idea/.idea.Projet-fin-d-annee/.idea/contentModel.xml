@@ -91,24 +91,45 @@
                   <e p="{bb61594e-ec2a-48e2-ace6-1e636d98c34a}.xml" t="Include" />
                 </e>
                 <e p="AudioFile" t="Include">
+                  <e p="{006f42ae-f281-4a45-b045-4c4f7f9a8ba8}.xml" t="Include" />
                   <e p="{00d5f36a-ce0b-49b2-9712-9dba85db315b}.xml" t="Include" />
+                  <e p="{081ecdd9-4c07-4bbe-8534-c55a8637c239}.xml" t="Include" />
+                  <e p="{08bcc3a8-9d90-4e5b-a840-e79a8bbfd38b}.xml" t="Include" />
+                  <e p="{1020de91-d3e2-42ee-9a3d-f3dde4cbac1a}.xml" t="Include" />
                   <e p="{11508964-a650-41f3-aecf-cfe536f57fec}.xml" t="Include" />
                   <e p="{12bf988a-b2b5-4701-8d1c-3ab2bbde048b}.xml" t="Include" />
+                  <e p="{1626a205-8e09-4a14-98da-b20c395f5861}.xml" t="Include" />
+                  <e p="{1910d216-34a9-4455-8d5c-144cb04af0fa}.xml" t="Include" />
                   <e p="{1c1f56fe-4924-4029-9dc9-1f9a44b8075c}.xml" t="Include" />
                   <e p="{2a9d9124-8532-41b7-8786-9de3c8cb8ae6}.xml" t="Include" />
+                  <e p="{33e04559-0fe4-444d-9118-22d3a807c0a3}.xml" t="Include" />
                   <e p="{3f5e1161-3517-4da0-86ff-18a68b56d73b}.xml" t="Include" />
+                  <e p="{446932bc-f485-4ca1-a32f-bf8b0fbad993}.xml" t="Include" />
+                  <e p="{45c63c11-f33e-41e1-9415-231872c4e377}.xml" t="Include" />
                   <e p="{4735cf96-1b15-4be3-b789-2f02b1aa60e2}.xml" t="Include" />
+                  <e p="{5fca8735-b679-49bf-a7ee-6d722c8ffbf8}.xml" t="Include" />
                   <e p="{68bfb5ce-699d-4d82-8cad-baf43fb663c2}.xml" t="Include" />
+                  <e p="{6afa9b96-56f3-4bb9-aa6e-3a042d3e7872}.xml" t="Include" />
+                  <e p="{6c783761-9b5e-42d7-8ce8-e95ff6c5ae76}.xml" t="Include" />
                   <e p="{8be0bada-605e-4daa-932c-44766b0ec865}.xml" t="Include" />
+                  <e p="{8f52b360-84cc-4473-b1ab-27489de1f62f}.xml" t="Include" />
+                  <e p="{91bc2873-454a-4496-8dbc-c397a80c4f94}.xml" t="Include" />
+                  <e p="{95f3cba5-d187-443b-8c0b-479f0155c3c8}.xml" t="Include" />
                   <e p="{a29f9858-9709-4dd9-be7f-e43272e2ab44}.xml" t="Include" />
                   <e p="{a51d8aa5-8ed1-4860-b65f-02bbecc362ba}.xml" t="Include" />
                   <e p="{a5fc5c61-6996-4ef0-b025-c5d7c93f6cf8}.xml" t="Include" />
+                  <e p="{a6cce412-7dc1-42c7-a082-493c86fdc9b1}.xml" t="Include" />
+                  <e p="{b2c89476-0e30-4288-89c8-b0e6ae834cc9}.xml" t="Include" />
                   <e p="{c6506d0e-b63d-4726-bfac-40ed9e0e7afe}.xml" t="Include" />
+                  <e p="{d6105b04-497b-4192-a257-7cecf51b7863}.xml" t="Include" />
+                  <e p="{da0dea41-fca1-460e-a889-5209fe82b77f}.xml" t="Include" />
                   <e p="{dcfae95b-a4c9-429e-9e6e-8a51537e48c1}.xml" t="Include" />
+                  <e p="{e7aaa51f-2809-4fb4-8921-8e23c31751bb}.xml" t="Include" />
                   <e p="{ee511b1f-0cbf-4ab5-9104-1331a77199f7}.xml" t="Include" />
                   <e p="{f02040f7-7a68-46a4-a8ec-98cbafd2c40a}.xml" t="Include" />
                   <e p="{f3252463-4377-4bf5-882f-f33e558a5812}.xml" t="Include" />
                   <e p="{fab73f9a-c725-40c3-b2e4-a12794843679}.xml" t="Include" />
+                  <e p="{fe7f76be-98d2-4b90-9153-f950b615102c}.xml" t="Include" />
                 </e>
                 <e p="Bank" t="Include">
                   <e p="{8fb9b52c-12ad-4864-8fef-1c837bd77118}.xml" t="Include" />
@@ -123,21 +144,49 @@
                   <e p="{7928192a-8ca7-403e-ba07-4f2ad8a220c8}.xml" t="Include" />
                 </e>
                 <e p="Event" t="Include">
+                  <e p="{0de85cb1-d0e6-4de2-aed3-1d3ecc8d7aa1}.xml" t="Include" />
+                  <e p="{131ac28b-1ef7-4233-90b2-7cbc25aa66f3}.xml" t="Include" />
+                  <e p="{192a7cd7-b303-4e74-8e12-a5d6bfd2ffb2}.xml" t="Include" />
+                  <e p="{22b30676-9825-4cbc-a195-62cd19e04b70}.xml" t="Include" />
                   <e p="{25662c02-e1c1-42e4-9e8a-b28921a41a66}.xml" t="Include" />
+                  <e p="{2ad9ca9c-ee1c-4437-85e4-ee26bdbaa673}.xml" t="Include" />
+                  <e p="{324477f1-45d1-4d84-8dbb-0b6fd3dd96e3}.xml" t="Include" />
                   <e p="{3a731a71-13c6-4903-8c71-2fcd80e86aa5}.xml" t="Include" />
+                  <e p="{46f7b2f6-b9c6-4228-883c-f94900e0fa31}.xml" t="Include" />
+                  <e p="{49f92045-3a4f-425e-880c-b2fcb6523f1a}.xml" t="Include" />
                   <e p="{4a1817e7-1997-4f12-9a44-930fc0a1d404}.xml" t="Include" />
+                  <e p="{505988ec-286d-4453-84c0-41ca8217b277}.xml" t="Include" />
+                  <e p="{5995cab6-1e61-4ba3-a1ec-de6e572d02f1}.xml" t="Include" />
                   <e p="{619b6f1e-db32-41bc-bf21-0698d9eaf6cc}.xml" t="Include" />
+                  <e p="{667e0726-50b9-460c-838f-93e711d43041}.xml" t="Include" />
+                  <e p="{67f47ab3-9d7d-4dbb-a312-c48c85e386f6}.xml" t="Include" />
+                  <e p="{720ba7bf-7e81-4977-b7ef-9aa0d0273ebf}.xml" t="Include" />
+                  <e p="{76592458-62ae-4da5-8336-a69928425e37}.xml" t="Include" />
+                  <e p="{78aa76fc-9c3c-45be-b914-eecf52f1f0d1}.xml" t="Include" />
                   <e p="{81499f9f-6a13-4c79-b770-30d2ec2391ed}.xml" t="Include" />
+                  <e p="{88f881c6-f2b7-4b0c-9789-4746c24366fd}.xml" t="Include" />
                   <e p="{8d2263ed-31c2-484e-8d4a-e3b1403cefcb}.xml" t="Include" />
                   <e p="{97cb9065-b9f0-4219-874f-1cc3a3ae0e11}.xml" t="Include" />
+                  <e p="{9aead888-8b05-49bf-83b2-ed2495e46d9f}.xml" t="Include" />
                   <e p="{a0f7d34b-5b00-461a-8b3a-1c6baf4c61d8}.xml" t="Include" />
+                  <e p="{c048996c-07f2-4a7c-ace2-b90688155535}.xml" t="Include" />
+                  <e p="{c5d31c41-4178-4235-bb4b-0f5d2d073806}.xml" t="Include" />
                   <e p="{caf656e1-46da-4425-b726-2675a4380e65}.xml" t="Include" />
+                  <e p="{cfa4dfb7-9ca4-41ad-8407-63acfea6087e}.xml" t="Include" />
                   <e p="{d76abcb7-e757-403e-bfac-e8f8336b1123}.xml" t="Include" />
                   <e p="{d98a1e12-7f1c-4520-a94d-6ac216d444bd}.xml" t="Include" />
+                  <e p="{dd51346d-4137-4fa7-a0fc-d4250626c6f2}.xml" t="Include" />
                   <e p="{f0e2d8f0-4d79-4d6d-930d-9ee0d10fce86}.xml" t="Include" />
                   <e p="{f250640e-6c5f-40c8-b88a-a41578e819c4}.xml" t="Include" />
+                  <e p="{fab3c93f-e0c4-43c3-8105-c3dabe7a5e72}.xml" t="Include" />
                 </e>
                 <e p="EventFolder" t="Include">
+                  <e p="{1bfb7742-fb6c-4da1-b8c6-70bc44d216c6}.xml" t="Include" />
+                  <e p="{3f298063-8f44-4426-b1db-c9a9995da487}.xml" t="Include" />
+                  <e p="{79e9c45f-7e0f-47c0-aa96-54c0a1be151d}.xml" t="Include" />
+                  <e p="{9bc2d939-d268-46d3-b3ad-f1aa0a37ca28}.xml" t="Include" />
+                  <e p="{e950fe3d-72bc-4da4-be76-c7b05818b158}.xml" t="Include" />
+                  <e p="{f29b8fc5-0487-4d8b-a21e-aad36239fe40}.xml" t="Include" />
                   <e p="{ff23a132-bae8-4277-8ded-d601515fece0}.xml" t="Include" />
                 </e>
                 <e p="Master.xml" t="Include" />
@@ -193,6 +242,7 @@
             <e p="SalleScript.cs" t="Include" />
             <e p="VehiculeFB.cs" t="Include" />
           </e>
+          <e p="SalleSound.cs" t="Include" />
           <e p="ScriptsRendering" t="Include">
             <e p="VolumetricLight.cs" t="Include" />
             <e p="VolumetricLightRenderer.cs" t="Include" />

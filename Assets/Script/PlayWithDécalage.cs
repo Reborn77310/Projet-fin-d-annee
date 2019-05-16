@@ -23,7 +23,6 @@ public class PlayWithDécalage : MonoBehaviour {
         if (Timer > timebetweenlegs[0])
         {
             AllLegs[0].SetBool("AnimGo", true);
-            Debug.Log("JambeAvantGauche");
 
 
         }
@@ -31,19 +30,16 @@ public class PlayWithDécalage : MonoBehaviour {
         if (Timer > timebetweenlegs[1])
         {
             AllLegs[1].SetBool("AnimGo", true);
-            Debug.Log("JambeArrèreGauche");
         }
         //JambeAvantDroite
         if (Timer > timebetweenlegs[2])
         {
             AllLegs[2].SetBool("AnimGo", true);
-            Debug.Log("JambeAvantDroite");
         }
         //JambeArrièreDroite
         if (Timer > timebetweenlegs[3])
         {
             AllLegs[3].SetBool("AnimGo", true);
-            Debug.Log("JambeArrièreDroite");
         }
     }
 }

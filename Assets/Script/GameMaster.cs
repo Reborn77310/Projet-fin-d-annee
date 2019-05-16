@@ -177,7 +177,7 @@ public class GameMaster : MonoBehaviour
                     ModuleManager mm = hit.transform.GetComponent<ModuleManager>();
 
 
-                    if (!cartesManager.CheckHandisFull())
+                    if (!cartesManager.CheckHandisFull() && mm.cartesModule.Count > 0)
                     {
                         mm.MyModules[mm.cartesModule.Count - 1].transform.GetComponent<Image>().sprite =
                             Resources.Load<Sprite>("MiniUi/CadresCartes_0");
@@ -303,7 +303,6 @@ public class GameMaster : MonoBehaviour
             {
                 if (sallesTouchees[i] >= 0)
                 {
-                    print("i :" + i + "// salles : " + sallesTouchees[i]);
                     if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
                     {
                         allSetupsActions.FindEffect(wantedName, i, mm, true);
@@ -332,7 +331,6 @@ public class GameMaster : MonoBehaviour
             {
                 if (sallesTouchees[i] >= 0)
                 {
-                    print("i :" + i + "// salles : " + sallesTouchees[i]);
                     if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
                     {
                         allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, true);
@@ -351,6 +349,8 @@ public class GameMaster : MonoBehaviour
 
         if (mm.MyCompteurInt <= 0)
         {
+            mm.MyCompteurInt = 2;
+            cardSound.CardBurn();
             mm.cartesModule.RemoveAt(1);
             mm.MyModules[1].transform.GetComponent<Image>().sprite = 
                         Resources.Load<Sprite>("MiniUi/CadresCartes_0");

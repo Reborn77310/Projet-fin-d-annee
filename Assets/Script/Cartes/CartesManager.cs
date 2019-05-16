@@ -27,8 +27,8 @@ public class CartesManager : MonoBehaviour
         {
             id = _id;
             cartesTypes = _cartesTypes;
-            illu = Resources.Load<Sprite>("Sprites/Cartes/V5/Carte" + _cartesTypes);
-            picto = Resources.Load<Sprite>("Sprites/Cartes/Picto/Picto" + _cartesTypes);
+            illu = Resources.Load<Sprite>("Sprites/Cartes/Final/Common/Carte" + _cartesTypes);
+            picto = Resources.Load<Sprite>("Sprites/Cartes/Final//Carte" + _cartesTypes);
             prefabZoneSelection = Resources.Load("Prefabs/Radar/ZoneSelection/Ciblage_ADV") as GameObject;
         }
     }
@@ -146,7 +146,7 @@ public class CartesManager : MonoBehaviour
         for (int i = 0; i < cardsToDraw; i++)
         {
             GameObject a = Instantiate(prefabCarte, Vector3.zero, Quaternion.identity, canvas.transform);
-            a.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Cartes/V5/Carte" + carteType);
+            a.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Final/Common/Carte" + carteType);
             CartesButtons cb = a.GetComponent<CartesButtons>();
             cb.id = allCards.Count + i;
 
@@ -263,12 +263,7 @@ public class CartesManager : MonoBehaviour
             var c = mm.cartesModule[mm.cartesModule.Count - 1];
             AjouterUneCarteDansLaMain(1, c.cartesTypes);
             mm.cartesModule.RemoveAt(mm.cartesModule.Count - 1);
-            
         }
-
     }
-
-
-
 }
 

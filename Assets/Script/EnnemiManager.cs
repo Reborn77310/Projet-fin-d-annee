@@ -331,7 +331,7 @@ public class EnnemiManager : MonoBehaviour
                     {
                         salleManager.allSalles[actionPrevues[i].cible].isAttacked = false;
                         salleManager.ChangeMaterial();
-                        salleManager.DamageSurSalle(actionPrevues[i].cible, 00); // DEGATS SET A 0 ATTENTION
+                        salleManager.DamageSurSalle(actionPrevues[i].cible, 100); // DEGATS SET A 0 ATTENTION
                         ennemiRooms[actionPrevues[i].origine].isAttacking = false;
                         actionPrevues[i].id = -1;
                         actionPrevues[i].timer = 50000;

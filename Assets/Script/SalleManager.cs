@@ -28,10 +28,9 @@ public class Salles
 
 public class SalleManager : MonoBehaviour
 {
-
+    private SalleSound salleSound;
     public List<Salles> allSalles = new List<Salles>();
     public TextMeshProUGUI[] pvSalles; // A ASSIGNER
-    public TextMesh[] SalleOnCooldown = new TextMesh[4]; // A ASSIGNER
     public TextMeshProUGUI pvDuVehiculeText;
     public int pvDuVehicule = 300;
     public int pvDuVehiculeMax = 300;
@@ -41,6 +40,7 @@ public class SalleManager : MonoBehaviour
 
     void Start()
     {
+        salleSound = GameObject.Find("Salles V3").GetComponent<SalleSound>();
         instance = this;
         InitializeSalles();
         pvDuVehiculeText.text = (pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
@@ -115,14 +115,14 @@ public class SalleManager : MonoBehaviour
             pvDuVehiculeText.text = (pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
             if (pvDuVehicule <= 0)
             {
-                pvDuVehiculeText.text = "MISSANDEI ?!?";
-                Time.timeScale = 0;
+               // pvDuVehiculeText.text = "MISSANDEI ?!?";
+             //   Time.timeScale = 0;
             }
             if (allSalles[salleVisee].pv <= 0)
             {
                 allSalles[salleVisee].pv = 0;
                 allSalles[salleVisee].CanPlayHere = false;
-                ReparationSalle(salleVisee);
+                StartCoroutine("ReparationSalle",salleVisee);
             }
         }
     }
@@ -136,12 +136,10 @@ public class SalleManager : MonoBehaviour
     IEnumerator CooldownSalle(int salleVisee, float cooldown)
     {
         allSalles[salleVisee].CanPlayHere = false;
-        SalleOnCooldown[salleVisee].text = "YES";
         yield return new WaitForSeconds(cooldown);
         if (allSalles[salleVisee].pv > 0)
         {
             allSalles[salleVisee].CanPlayHere = true;
-            SalleOnCooldown[salleVisee].text = "NO";
             allSalles[salleVisee].MyGo.GetComponent<ModuleManager>().MyModules[0].transform.parent.transform.GetChild(2).GetComponent<Image>().color = Color.white;
         }
 
@@ -150,11 +148,12 @@ public class SalleManager : MonoBehaviour
 
     IEnumerator ReparationSalle(int salleVisee)
     {
-        SalleOnCooldown[salleVisee].text = "YES";
+        salleSound.DetruireLaSalle();
         yield return new WaitForSeconds(30);
         allSalles[salleVisee].CanPlayHere = true;
         allSalles[salleVisee].pv = 100;
-        SalleOnCooldown[salleVisee].text = "NO";
+        pvSalles[salleVisee].text = allSalles[salleVisee].pv.ToString() + " %";
+        salleSound.ReparerLaSalle();
         allSalles[salleVisee].MyGo.GetComponent<ModuleManager>().MyModules[0].transform.parent.transform.GetChild(2).GetComponent<Image>().color = Color.white;
         yield break;
     }
