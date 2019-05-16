@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{33e04559-0fe4-444d-9118-22d3a807c0a3}">
+        <property name="assetPath">
+            <value>Card_Remplacement.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.0480725623582767</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{bb61594e-ec2a-48e2-ace6-1e636d98c34a}</destination>
+        </relationship>
+    </object>
+</objects>

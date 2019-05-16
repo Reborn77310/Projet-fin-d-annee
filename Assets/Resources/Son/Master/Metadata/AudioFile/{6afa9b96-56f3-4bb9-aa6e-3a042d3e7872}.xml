@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{6afa9b96-56f3-4bb9-aa6e-3a042d3e7872}">
+        <property name="assetPath">
+            <value>Bombe_IEM.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>2.0860090702947844</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{bb61594e-ec2a-48e2-ace6-1e636d98c34a}</destination>
+        </relationship>
+    </object>
+</objects>

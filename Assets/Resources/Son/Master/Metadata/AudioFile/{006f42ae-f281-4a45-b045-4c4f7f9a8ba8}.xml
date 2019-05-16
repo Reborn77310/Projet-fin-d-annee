@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{006f42ae-f281-4a45-b045-4c4f7f9a8ba8}">
+        <property name="assetPath">
+            <value>Card_Burn.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.0048072562358277</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{bb61594e-ec2a-48e2-ace6-1e636d98c34a}</destination>
+        </relationship>
+    </object>
+</objects>
