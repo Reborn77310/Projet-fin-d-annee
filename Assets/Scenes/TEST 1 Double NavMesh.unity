@@ -4755,6 +4755,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turbine
       objectReference: {fileID: 0}
+    - target: {fileID: 7932889436650117148, guid: 025a307c6cc5f6942b387583ed946c81,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7932889436650117150, guid: 025a307c6cc5f6942b387583ed946c81,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4825,6 +4830,66 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7932889438418358613, guid: 025a307c6cc5f6942b387583ed946c81,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932889438418358613, guid: 025a307c6cc5f6942b387583ed946c81,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932889438418358613, guid: 025a307c6cc5f6942b387583ed946c81,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932889436599396426, guid: 025a307c6cc5f6942b387583ed946c81,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932889436599396426, guid: 025a307c6cc5f6942b387583ed946c81,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932889436599396426, guid: 025a307c6cc5f6942b387583ed946c81,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932889438176505850, guid: 025a307c6cc5f6942b387583ed946c81,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932889438176505850, guid: 025a307c6cc5f6942b387583ed946c81,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932889438176505850, guid: 025a307c6cc5f6942b387583ed946c81,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932889437154534917, guid: 025a307c6cc5f6942b387583ed946c81,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932889437154534917, guid: 025a307c6cc5f6942b387583ed946c81,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932889437154534917, guid: 025a307c6cc5f6942b387583ed946c81,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 025a307c6cc5f6942b387583ed946c81, type: 3}
 --- !u!1001 &756198670
@@ -4838,6 +4903,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BK2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799891204468007721, guid: 569acbc005ce8fd459ec473559c6e6db,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3799891204468007723, guid: 569acbc005ce8fd459ec473559c6e6db,
         type: 3}
@@ -5493,6 +5563,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanonIEM
       objectReference: {fileID: 0}
+    - target: {fileID: 8512885480775760861, guid: 0ca0c7c7031caea4eab0364f2a17594a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8512885480775760834, guid: 0ca0c7c7031caea4eab0364f2a17594a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5557,6 +5632,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8512885480597155097, guid: 0ca0c7c7031caea4eab0364f2a17594a,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8512885480597155097, guid: 0ca0c7c7031caea4eab0364f2a17594a,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca0c7c7031caea4eab0364f2a17594a, type: 3}
@@ -6618,6 +6703,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127777712}
   m_CullTransparentMesh: 0
+--- !u!1 &1131686330 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 884735856740836270, guid: fa5bbc6d2db88bb469c187a4f1bcfee8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2049072584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1131686334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131686330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ed54c826a89404e8b9817ac4b7ca4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Select_Sound: event:/Anciens Sons/Patte_sound
 --- !u!1 &1142821238
 GameObject:
   m_ObjectHideFlags: 0
@@ -6650,6 +6754,25 @@ Transform:
   m_Father: {fileID: 1061022306}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1144019202 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 884735855903730508, guid: fa5bbc6d2db88bb469c187a4f1bcfee8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2049072584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1144019206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144019202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ed54c826a89404e8b9817ac4b7ca4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Select_Sound: event:/Anciens Sons/Patte_sound
 --- !u!1 &1144866324
 GameObject:
   m_ObjectHideFlags: 0
@@ -11585,6 +11708,29 @@ Transform:
   m_Father: {fileID: 502892347}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1232539026 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5289339939430517162, guid: 3f30c428b486e0944b70bd293bea32bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1620733766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1232539031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232539026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9deb90d23e15f042aec64718dce3d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Using_Sound: event:/Sons de Setups/Brouillage
+  In_Sound: event:/Sons de Setups/Setup_Selected
+  Alteration_Sound: event:/Jeu de la carte/Setup_Alteration
+  Offensif_Sound: event:/Jeu de la carte/Setup_Offensive
+  Defensif_Sound: event:/Jeu de la carte/Setup_Defensive
 --- !u!1 &1235430015
 GameObject:
   m_ObjectHideFlags: 0
@@ -12694,6 +12840,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6406378916536967800}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1300698652 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 884735856686337105, guid: fa5bbc6d2db88bb469c187a4f1bcfee8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2049072584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1300698656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300698652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ed54c826a89404e8b9817ac4b7ca4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Select_Sound: event:/Anciens Sons/Patte_sound
 --- !u!1 &1308463174
 GameObject:
   m_ObjectHideFlags: 0
@@ -13803,6 +13968,48 @@ Transform:
   m_Father: {fileID: 5799365343891971052}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &1410876835 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8512885480775760861, guid: 0ca0c7c7031caea4eab0364f2a17594a,
+    type: 3}
+  m_PrefabInstance: {fileID: 912421654}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1410876839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410876835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9deb90d23e15f042aec64718dce3d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Using_Sound: event:/Sons de Setups/Bombe_IEM
+  In_Sound: event:/Sons de Setups/Setup_Selected
+  Alteration_Sound: event:/Jeu de la carte/Setup_Alteration
+  Offensif_Sound: event:/Jeu de la carte/Setup_Offensive
+  Defensif_Sound: event:/Jeu de la carte/Setup_Defensive
+--- !u!1 &1421663089 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 884735855135737678, guid: fa5bbc6d2db88bb469c187a4f1bcfee8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2049072584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1421663093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421663089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ed54c826a89404e8b9817ac4b7ca4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Select_Sound: event:/Anciens Sons/Patte_sound
 --- !u!1 &1446970961
 GameObject:
   m_ObjectHideFlags: 0
@@ -13835,6 +14042,29 @@ Transform:
   m_Father: {fileID: 2144388725}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1456268383 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3799891204468007721, guid: 569acbc005ce8fd459ec473559c6e6db,
+    type: 3}
+  m_PrefabInstance: {fileID: 756198670}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1456268386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456268383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9deb90d23e15f042aec64718dce3d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Using_Sound: event:/Sons de Setups/Gunshot
+  In_Sound: event:/Sons de Setups/Setup_Selected
+  Alteration_Sound: event:/Jeu de la carte/Setup_Alteration
+  Offensif_Sound: event:/Jeu de la carte/Setup_Offensive
+  Defensif_Sound: event:/Jeu de la carte/Setup_Defensive
 --- !u!1001 &1465552429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13846,6 +14076,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Virus
+      objectReference: {fileID: 0}
+    - target: {fileID: 4471210434888975946, guid: 144de1e25ce162843b889234ecfa8a10,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4471210434888975959, guid: 144de1e25ce162843b889234ecfa8a10,
         type: 3}
@@ -13919,6 +14154,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 144de1e25ce162843b889234ecfa8a10, type: 3}
+--- !u!1 &1468191561 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7932889436650117148, guid: 025a307c6cc5f6942b387583ed946c81,
+    type: 3}
+  m_PrefabInstance: {fileID: 755290875}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1468191565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468191561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9deb90d23e15f042aec64718dce3d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Using_Sound: "event:/Sons de Setups/Turbine \xE0 vapeur"
+  In_Sound: event:/Sons de Setups/Setup_Selected
+  Alteration_Sound: event:/Jeu de la carte/Setup_Alteration
+  Offensif_Sound: event:/Jeu de la carte/Setup_Offensive
+  Defensif_Sound: event:/Jeu de la carte/Setup_Defensive
 --- !u!1 &1469673856
 GameObject:
   m_ObjectHideFlags: 0
@@ -14017,6 +14275,29 @@ MonoBehaviour:
   MyCompteurInt: 2
   MySalleNumber: 0
   rotationCompteur: 400000
+--- !u!1 &1480889909 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4471210434888975946, guid: 144de1e25ce162843b889234ecfa8a10,
+    type: 3}
+  m_PrefabInstance: {fileID: 1465552429}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1480889913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480889909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9deb90d23e15f042aec64718dce3d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Using_Sound: event:/Sons de Setups/hgOS
+  In_Sound: event:/Sons de Setups/Setup_Selected
+  Alteration_Sound: event:/Jeu de la carte/Setup_Alteration
+  Offensif_Sound: event:/Jeu de la carte/Setup_Offensive
+  Defensif_Sound: event:/Jeu de la carte/Setup_Defensive
 --- !u!4 &1482442680
 Transform:
   m_ObjectHideFlags: 0
@@ -15078,6 +15359,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Brouilleur
       objectReference: {fileID: 0}
+    - target: {fileID: 5289339939430517162, guid: 3f30c428b486e0944b70bd293bea32bf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5289339939430517166, guid: 3f30c428b486e0944b70bd293bea32bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15263,6 +15549,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1673685024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5836686224815386583, guid: 110a21fffa899f444874adf80e25406c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1985830884}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1673685027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673685024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9deb90d23e15f042aec64718dce3d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Using_Sound: event:/Sons de Setups/Gunshot
+  In_Sound: event:/Sons de Setups/Setup_Selected
+  Alteration_Sound: event:/Jeu de la carte/Setup_Alteration
+  Offensif_Sound: event:/Jeu de la carte/Setup_Offensive
+  Defensif_Sound: event:/Jeu de la carte/Setup_Defensive
 --- !u!1 &1706041410
 GameObject:
   m_ObjectHideFlags: 0
@@ -16765,6 +17074,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BK_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836686224815386583, guid: 110a21fffa899f444874adf80e25406c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5836686224815386581, guid: 110a21fffa899f444874adf80e25406c,
         type: 3}
