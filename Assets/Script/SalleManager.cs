@@ -40,7 +40,7 @@ public class SalleManager : MonoBehaviour
 
     void Start()
     {
-        salleSound = GameObject.Find("Salles V3").GetComponent<SalleSound>();
+        salleSound = GameObject.Find("Salles V4").GetComponent<SalleSound>();
         instance = this;
         InitializeSalles();
         pvDuVehiculeText.text = Mathf.RoundToInt(pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";

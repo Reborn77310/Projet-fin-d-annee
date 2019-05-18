@@ -1,0 +1,1211 @@
+fileFormatVersion: 2
+guid: 346aa65b11c51f041b723b9ed556c47e
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: 101
+    100002: 102
+    100004: 105
+    100006: Base005
+    100008: Base006
+    100010: Base_Pince009
+    100012: Base_Pince010
+    100014: Base_Pince011
+    100016: Base_Pince012
+    100018: Boulon_Pince037
+    100020: Boulon_Pince038
+    100022: Boulon_Pince039
+    100024: Boulon_Pince040
+    100026: Boulon_Pince041
+    100028: Boulon_Pince042
+    100030: Boulon_Pince043
+    100032: Boulon_Pince044
+    100034: Boulon_Pince045
+    100036: Boulon_Pince046
+    100038: Boulon_Pince047
+    100040: Boulon_Pince048
+    100042: Boulon_Pince049
+    100044: Boulon_Pince050
+    100046: Boulon_Pince051
+    100048: Boutons005
+    100050: Boutons006
+    100052: Box004_Box004
+    100054: Box016
+    100056: Box059
+    100058: Box060
+    100060: Box062
+    100062: Box063
+    100064: Box064
+    100066: Box065
+    100068: Box066
+    100070: Box067
+    100072: Box068
+    100074: Box070
+    100076: Box095
+    100078: Box104
+    100080: Box117
+    100082: Box118
+    100084: Box119
+    100086: Box120
+    100088: Box121
+    100090: Box122
+    100092: Box123
+    100094: Box124
+    100096: Box125
+    100098: Box126
+    100100: Box127
+    100102: Box128
+    100104: Box248
+    100106: Box249
+    100108: Box250
+    100110: Box251
+    100112: Box252
+    100114: Box253
+    100116: Box254
+    100118: Box265
+    100120: Box266
+    100122: Box267
+    100124: Box270
+    100126: Box271
+    100128: Box272
+    100130: Box273
+    100132: cable
+    100134: ChamferBox001_ChamferBox001
+    100136: Clavier005
+    100138: Clavier006
+    100140: CONTAINER
+    100142: CornerRoof
+    100144: Cylinder001
+    100146: Cylinder001_Cylinder001
+    100148: Cylinder001_Cylinder004
+    100150: Cylinder001_Cylinder005
+    100152: Cylinder001_Cylinder010
+    100154: Cylinder001_Cylinder011
+    100156: Cylinder008
+    100158: Cylinder018
+    100160: Cylinder035
+    100162: Cylinder037
+    100164: Cylinder038
+    100166: Detonateur001
+    100168: Detonateur002
+    100170: Detonateur003
+    100172: Detonateur004
+    100174: Detonateur005
+    100176: Detonateur006
+    100178: Detonateur007
+    100180: Detonateur008
+    100182: Detonateur009
+    100184: Detonateur010
+    100186: Detonateur011
+    100188: Detonateur012
+    100190: Detonateur013
+    100192: Detonateur014
+    100194: Detonateur015
+    100196: Detonateur016
+    100198: Detonateur017
+    100200: Detonateur018
+    100202: Detonateur021
+    100204: Detonateur023
+    100206: Detonateur024
+    100208: Energies
+    100210: Kit de pinces004
+    100212: Kit de pinces005
+    100214: Line002_Line003
+    100216: Line002_Line004
+    100218: Line002_Line005
+    100220: Line002_Line006
+    100222: Line002_Line007
+    100224: Line002_Line008
+    100226: Line002_Line009
+    100228: Line002_Line010
+    100230: Line002_Line011
+    100232: Line002_Line012
+    100234: Line007
+    100236: "Lumi\xE8res003"
+    100238: "Lumi\xE8res_bombe001"
+    100240: "Lumi\xE8res_bombe002"
+    100242: "Lumi\xE8res_bombe003"
+    100244: "Lumi\xE8res_bombe004"
+    100246: "Lumi\xE8res_bombe005"
+    100248: "Lumi\xE8res_bombe006"
+    100250: "Lumi\xE8res_bombe007"
+    100252: "Lumi\xE8res_bombe008"
+    100254: "Lumi\xE8res_bombe009"
+    100256: "Lumi\xE8res_bombe010"
+    100258: "Lumi\xE8res_bombe011"
+    100260: "Lumi\xE8res_bombe012"
+    100262: "Lumi\xE8res_bombe013"
+    100264: "Lumi\xE8res_bombe014"
+    100266: "Lumi\xE8res_bombe015"
+    100268: "Lumi\xE8res_bombe016"
+    100270: "Lumi\xE8res_bombe017"
+    100272: "Lumi\xE8res_bombe019"
+    100274: "Lumi\xE8res_bombe021"
+    100276: "Lumi\xE8res_bombe022"
+    100278: "Lumi\xE8res_bombe023"
+    100280: "Lumi\xE8res_bombe024"
+    100282: Milieu_Pince015
+    100284: Milieu_Pince016
+    100286: Milieu_Pince017
+    100288: Milieu_Pince018
+    100290: Milieu_Pince019
+    100292: Milieu_Pince020
+    100294: Milieu_Pince021
+    100296: Object001_Object002
+    100298: Object002
+    100300: Object002_Object001
+    100302: Object003_Object003
+    100304: Oreiller
+    100306: //RootNode
+    100308: Pilier 1-1
+    100310: Pince1_P010
+    100312: Pince1_P011
+    100314: Pince1_P012
+    100316: Pince1_P013
+    100318: Pince1_P014
+    100320: Pince1_P015
+    100322: plaque d'armure
+    100324: plaque d'armure001
+    100326: plaque d'armure002
+    100328: plaque d'armure003
+    100330: plaque d'armure004
+    100332: plaque d'armure005
+    100334: plaque d'armure006
+    100336: plaque d'armure007
+    100338: plaque d'armure008
+    100340: plaque d'armure009
+    100342: plaque d'armure010
+    100344: plaque d'armure011
+    100346: plaque d'armure012
+    100348: plaque d'armure013
+    100350: plaque d'armure014
+    100352: plaque d'armure015
+    100354: plaque d'armure016
+    100356: plaque d'armure031
+    100358: plaque d'armure032
+    100360: plaque d'armure033
+    100362: plaque d'armure051
+    100364: plaque d'armure052
+    100366: plaque d'armure053
+    100368: Pointe_Pince014
+    100370: Pointe_Pince015
+    100372: Pointe_Pince016
+    100374: Pointe_Pince017
+    100376: Pointe_Pince018
+    100378: Pointe_Pince019
+    100380: Pointe_Pince020
+    100382: Romm
+    100384: Romm001
+    100386: Roue009
+    100388: Roue010
+    100390: Roue011
+    100392: Roue012
+    100394: Roue013
+    100396: Roue014
+    100398: sol003
+    100400: sol3
+    100402: Sphere007
+    100404: Sphere008
+    100406: Sphere009
+    100408: Sphere010
+    100410: Sphere011
+    100412: Sphere012
+    100414: Sphere013
+    100416: Sphere014
+    100418: Sphere015
+    100420: Sphere016
+    100422: Sphere017
+    100424: Sphere018
+    100426: Sphere019
+    100428: Sphere020
+    100430: Sphere021
+    100432: Sphere022
+    100434: Sphere024
+    100436: Sphere025
+    100438: Sphere027
+    100440: Sphere028
+    100442: Sphere029
+    100444: Sphere030
+    100446: Tube002_Tube002
+    400000: 101
+    400002: 102
+    400004: 105
+    400006: Base005
+    400008: Base006
+    400010: Base_Pince009
+    400012: Base_Pince010
+    400014: Base_Pince011
+    400016: Base_Pince012
+    400018: Boulon_Pince037
+    400020: Boulon_Pince038
+    400022: Boulon_Pince039
+    400024: Boulon_Pince040
+    400026: Boulon_Pince041
+    400028: Boulon_Pince042
+    400030: Boulon_Pince043
+    400032: Boulon_Pince044
+    400034: Boulon_Pince045
+    400036: Boulon_Pince046
+    400038: Boulon_Pince047
+    400040: Boulon_Pince048
+    400042: Boulon_Pince049
+    400044: Boulon_Pince050
+    400046: Boulon_Pince051
+    400048: Boutons005
+    400050: Boutons006
+    400052: Box004_Box004
+    400054: Box016
+    400056: Box059
+    400058: Box060
+    400060: Box062
+    400062: Box063
+    400064: Box064
+    400066: Box065
+    400068: Box066
+    400070: Box067
+    400072: Box068
+    400074: Box070
+    400076: Box095
+    400078: Box104
+    400080: Box117
+    400082: Box118
+    400084: Box119
+    400086: Box120
+    400088: Box121
+    400090: Box122
+    400092: Box123
+    400094: Box124
+    400096: Box125
+    400098: Box126
+    400100: Box127
+    400102: Box128
+    400104: Box248
+    400106: Box249
+    400108: Box250
+    400110: Box251
+    400112: Box252
+    400114: Box253
+    400116: Box254
+    400118: Box265
+    400120: Box266
+    400122: Box267
+    400124: Box270
+    400126: Box271
+    400128: Box272
+    400130: Box273
+    400132: cable
+    400134: ChamferBox001_ChamferBox001
+    400136: Clavier005
+    400138: Clavier006
+    400140: CONTAINER
+    400142: CornerRoof
+    400144: Cylinder001
+    400146: Cylinder001_Cylinder001
+    400148: Cylinder001_Cylinder004
+    400150: Cylinder001_Cylinder005
+    400152: Cylinder001_Cylinder010
+    400154: Cylinder001_Cylinder011
+    400156: Cylinder008
+    400158: Cylinder018
+    400160: Cylinder035
+    400162: Cylinder037
+    400164: Cylinder038
+    400166: Detonateur001
+    400168: Detonateur002
+    400170: Detonateur003
+    400172: Detonateur004
+    400174: Detonateur005
+    400176: Detonateur006
+    400178: Detonateur007
+    400180: Detonateur008
+    400182: Detonateur009
+    400184: Detonateur010
+    400186: Detonateur011
+    400188: Detonateur012
+    400190: Detonateur013
+    400192: Detonateur014
+    400194: Detonateur015
+    400196: Detonateur016
+    400198: Detonateur017
+    400200: Detonateur018
+    400202: Detonateur021
+    400204: Detonateur023
+    400206: Detonateur024
+    400208: Energies
+    400210: Kit de pinces004
+    400212: Kit de pinces005
+    400214: Line002_Line003
+    400216: Line002_Line004
+    400218: Line002_Line005
+    400220: Line002_Line006
+    400222: Line002_Line007
+    400224: Line002_Line008
+    400226: Line002_Line009
+    400228: Line002_Line010
+    400230: Line002_Line011
+    400232: Line002_Line012
+    400234: Line007
+    400236: "Lumi\xE8res003"
+    400238: "Lumi\xE8res_bombe001"
+    400240: "Lumi\xE8res_bombe002"
+    400242: "Lumi\xE8res_bombe003"
+    400244: "Lumi\xE8res_bombe004"
+    400246: "Lumi\xE8res_bombe005"
+    400248: "Lumi\xE8res_bombe006"
+    400250: "Lumi\xE8res_bombe007"
+    400252: "Lumi\xE8res_bombe008"
+    400254: "Lumi\xE8res_bombe009"
+    400256: "Lumi\xE8res_bombe010"
+    400258: "Lumi\xE8res_bombe011"
+    400260: "Lumi\xE8res_bombe012"
+    400262: "Lumi\xE8res_bombe013"
+    400264: "Lumi\xE8res_bombe014"
+    400266: "Lumi\xE8res_bombe015"
+    400268: "Lumi\xE8res_bombe016"
+    400270: "Lumi\xE8res_bombe017"
+    400272: "Lumi\xE8res_bombe019"
+    400274: "Lumi\xE8res_bombe021"
+    400276: "Lumi\xE8res_bombe022"
+    400278: "Lumi\xE8res_bombe023"
+    400280: "Lumi\xE8res_bombe024"
+    400282: Milieu_Pince015
+    400284: Milieu_Pince016
+    400286: Milieu_Pince017
+    400288: Milieu_Pince018
+    400290: Milieu_Pince019
+    400292: Milieu_Pince020
+    400294: Milieu_Pince021
+    400296: Object001_Object002
+    400298: Object002
+    400300: Object002_Object001
+    400302: Object003_Object003
+    400304: Oreiller
+    400306: //RootNode
+    400308: Pilier 1-1
+    400310: Pince1_P010
+    400312: Pince1_P011
+    400314: Pince1_P012
+    400316: Pince1_P013
+    400318: Pince1_P014
+    400320: Pince1_P015
+    400322: plaque d'armure
+    400324: plaque d'armure001
+    400326: plaque d'armure002
+    400328: plaque d'armure003
+    400330: plaque d'armure004
+    400332: plaque d'armure005
+    400334: plaque d'armure006
+    400336: plaque d'armure007
+    400338: plaque d'armure008
+    400340: plaque d'armure009
+    400342: plaque d'armure010
+    400344: plaque d'armure011
+    400346: plaque d'armure012
+    400348: plaque d'armure013
+    400350: plaque d'armure014
+    400352: plaque d'armure015
+    400354: plaque d'armure016
+    400356: plaque d'armure031
+    400358: plaque d'armure032
+    400360: plaque d'armure033
+    400362: plaque d'armure051
+    400364: plaque d'armure052
+    400366: plaque d'armure053
+    400368: Pointe_Pince014
+    400370: Pointe_Pince015
+    400372: Pointe_Pince016
+    400374: Pointe_Pince017
+    400376: Pointe_Pince018
+    400378: Pointe_Pince019
+    400380: Pointe_Pince020
+    400382: Romm
+    400384: Romm001
+    400386: Roue009
+    400388: Roue010
+    400390: Roue011
+    400392: Roue012
+    400394: Roue013
+    400396: Roue014
+    400398: sol003
+    400400: sol3
+    400402: Sphere007
+    400404: Sphere008
+    400406: Sphere009
+    400408: Sphere010
+    400410: Sphere011
+    400412: Sphere012
+    400414: Sphere013
+    400416: Sphere014
+    400418: Sphere015
+    400420: Sphere016
+    400422: Sphere017
+    400424: Sphere018
+    400426: Sphere019
+    400428: Sphere020
+    400430: Sphere021
+    400432: Sphere022
+    400434: Sphere024
+    400436: Sphere025
+    400438: Sphere027
+    400440: Sphere028
+    400442: Sphere029
+    400444: Sphere030
+    400446: Tube002_Tube002
+    2100000: 'Material #52'
+    2300000: 101
+    2300002: 102
+    2300004: 105
+    2300006: Base005
+    2300008: Base006
+    2300010: Base_Pince009
+    2300012: Base_Pince010
+    2300014: Base_Pince011
+    2300016: Base_Pince012
+    2300018: Boulon_Pince037
+    2300020: Boulon_Pince038
+    2300022: Boulon_Pince039
+    2300024: Boulon_Pince040
+    2300026: Boulon_Pince041
+    2300028: Boulon_Pince042
+    2300030: Boulon_Pince043
+    2300032: Boulon_Pince044
+    2300034: Boulon_Pince045
+    2300036: Boulon_Pince046
+    2300038: Boulon_Pince047
+    2300040: Boulon_Pince048
+    2300042: Boulon_Pince049
+    2300044: Boulon_Pince050
+    2300046: Boulon_Pince051
+    2300048: Boutons005
+    2300050: Boutons006
+    2300052: Box004_Box004
+    2300054: Box016
+    2300056: Box059
+    2300058: Box060
+    2300060: Box062
+    2300062: Box063
+    2300064: Box064
+    2300066: Box065
+    2300068: Box066
+    2300070: Box067
+    2300072: Box068
+    2300074: Box070
+    2300076: Box095
+    2300078: Box104
+    2300080: Box117
+    2300082: Box118
+    2300084: Box119
+    2300086: Box120
+    2300088: Box121
+    2300090: Box122
+    2300092: Box123
+    2300094: Box124
+    2300096: Box125
+    2300098: Box126
+    2300100: Box127
+    2300102: Box128
+    2300104: Box248
+    2300106: Box249
+    2300108: Box250
+    2300110: Box251
+    2300112: Box252
+    2300114: Box253
+    2300116: Box254
+    2300118: Box265
+    2300120: Box266
+    2300122: Box267
+    2300124: Box270
+    2300126: Box271
+    2300128: Box272
+    2300130: Box273
+    2300132: cable
+    2300134: ChamferBox001_ChamferBox001
+    2300136: Clavier005
+    2300138: Clavier006
+    2300140: CONTAINER
+    2300142: CornerRoof
+    2300144: Cylinder001
+    2300146: Cylinder001_Cylinder001
+    2300148: Cylinder001_Cylinder004
+    2300150: Cylinder001_Cylinder005
+    2300152: Cylinder001_Cylinder010
+    2300154: Cylinder001_Cylinder011
+    2300156: Cylinder008
+    2300158: Cylinder018
+    2300160: Cylinder035
+    2300162: Cylinder037
+    2300164: Cylinder038
+    2300166: Detonateur001
+    2300168: Detonateur002
+    2300170: Detonateur003
+    2300172: Detonateur004
+    2300174: Detonateur005
+    2300176: Detonateur006
+    2300178: Detonateur007
+    2300180: Detonateur008
+    2300182: Detonateur009
+    2300184: Detonateur010
+    2300186: Detonateur011
+    2300188: Detonateur012
+    2300190: Detonateur013
+    2300192: Detonateur014
+    2300194: Detonateur015
+    2300196: Detonateur016
+    2300198: Detonateur017
+    2300200: Detonateur018
+    2300202: Detonateur021
+    2300204: Detonateur023
+    2300206: Detonateur024
+    2300208: Energies
+    2300210: Kit de pinces004
+    2300212: Kit de pinces005
+    2300214: Line002_Line003
+    2300216: Line002_Line004
+    2300218: Line002_Line005
+    2300220: Line002_Line006
+    2300222: Line002_Line007
+    2300224: Line002_Line008
+    2300226: Line002_Line009
+    2300228: Line002_Line010
+    2300230: Line002_Line011
+    2300232: Line002_Line012
+    2300234: Line007
+    2300236: "Lumi\xE8res003"
+    2300238: "Lumi\xE8res_bombe001"
+    2300240: "Lumi\xE8res_bombe002"
+    2300242: "Lumi\xE8res_bombe003"
+    2300244: "Lumi\xE8res_bombe004"
+    2300246: "Lumi\xE8res_bombe005"
+    2300248: "Lumi\xE8res_bombe006"
+    2300250: "Lumi\xE8res_bombe007"
+    2300252: "Lumi\xE8res_bombe008"
+    2300254: "Lumi\xE8res_bombe009"
+    2300256: "Lumi\xE8res_bombe010"
+    2300258: "Lumi\xE8res_bombe011"
+    2300260: "Lumi\xE8res_bombe012"
+    2300262: "Lumi\xE8res_bombe013"
+    2300264: "Lumi\xE8res_bombe014"
+    2300266: "Lumi\xE8res_bombe015"
+    2300268: "Lumi\xE8res_bombe016"
+    2300270: "Lumi\xE8res_bombe017"
+    2300272: "Lumi\xE8res_bombe019"
+    2300274: "Lumi\xE8res_bombe021"
+    2300276: "Lumi\xE8res_bombe022"
+    2300278: "Lumi\xE8res_bombe023"
+    2300280: "Lumi\xE8res_bombe024"
+    2300282: Milieu_Pince015
+    2300284: Milieu_Pince016
+    2300286: Milieu_Pince017
+    2300288: Milieu_Pince018
+    2300290: Milieu_Pince019
+    2300292: Milieu_Pince020
+    2300294: Milieu_Pince021
+    2300296: Object001_Object002
+    2300298: Object002
+    2300300: Object002_Object001
+    2300302: Object003_Object003
+    2300304: Oreiller
+    2300306: Pilier 1-1
+    2300308: Pince1_P010
+    2300310: Pince1_P011
+    2300312: Pince1_P012
+    2300314: Pince1_P013
+    2300316: Pince1_P014
+    2300318: Pince1_P015
+    2300320: plaque d'armure
+    2300322: plaque d'armure001
+    2300324: plaque d'armure002
+    2300326: plaque d'armure003
+    2300328: plaque d'armure004
+    2300330: plaque d'armure005
+    2300332: plaque d'armure006
+    2300334: plaque d'armure007
+    2300336: plaque d'armure008
+    2300338: plaque d'armure009
+    2300340: plaque d'armure010
+    2300342: plaque d'armure011
+    2300344: plaque d'armure012
+    2300346: plaque d'armure013
+    2300348: plaque d'armure014
+    2300350: plaque d'armure015
+    2300352: plaque d'armure016
+    2300354: plaque d'armure031
+    2300356: plaque d'armure032
+    2300358: plaque d'armure033
+    2300360: plaque d'armure051
+    2300362: plaque d'armure052
+    2300364: plaque d'armure053
+    2300366: Pointe_Pince014
+    2300368: Pointe_Pince015
+    2300370: Pointe_Pince016
+    2300372: Pointe_Pince017
+    2300374: Pointe_Pince018
+    2300376: Pointe_Pince019
+    2300378: Pointe_Pince020
+    2300380: Romm
+    2300382: Romm001
+    2300384: Roue009
+    2300386: Roue010
+    2300388: Roue011
+    2300390: Roue012
+    2300392: Roue013
+    2300394: Roue014
+    2300396: sol003
+    2300398: sol3
+    2300400: Sphere007
+    2300402: Sphere008
+    2300404: Sphere009
+    2300406: Sphere010
+    2300408: Sphere011
+    2300410: Sphere012
+    2300412: Sphere013
+    2300414: Sphere014
+    2300416: Sphere015
+    2300418: Sphere016
+    2300420: Sphere017
+    2300422: Sphere018
+    2300424: Sphere019
+    2300426: Sphere020
+    2300428: Sphere021
+    2300430: Sphere022
+    2300432: Sphere024
+    2300434: Sphere025
+    2300436: Sphere027
+    2300438: Sphere028
+    2300440: Sphere029
+    2300442: Sphere030
+    2300444: Tube002_Tube002
+    3300000: 101
+    3300002: 102
+    3300004: 105
+    3300006: Base005
+    3300008: Base006
+    3300010: Base_Pince009
+    3300012: Base_Pince010
+    3300014: Base_Pince011
+    3300016: Base_Pince012
+    3300018: Boulon_Pince037
+    3300020: Boulon_Pince038
+    3300022: Boulon_Pince039
+    3300024: Boulon_Pince040
+    3300026: Boulon_Pince041
+    3300028: Boulon_Pince042
+    3300030: Boulon_Pince043
+    3300032: Boulon_Pince044
+    3300034: Boulon_Pince045
+    3300036: Boulon_Pince046
+    3300038: Boulon_Pince047
+    3300040: Boulon_Pince048
+    3300042: Boulon_Pince049
+    3300044: Boulon_Pince050
+    3300046: Boulon_Pince051
+    3300048: Boutons005
+    3300050: Boutons006
+    3300052: Box004_Box004
+    3300054: Box016
+    3300056: Box059
+    3300058: Box060
+    3300060: Box062
+    3300062: Box063
+    3300064: Box064
+    3300066: Box065
+    3300068: Box066
+    3300070: Box067
+    3300072: Box068
+    3300074: Box070
+    3300076: Box095
+    3300078: Box104
+    3300080: Box117
+    3300082: Box118
+    3300084: Box119
+    3300086: Box120
+    3300088: Box121
+    3300090: Box122
+    3300092: Box123
+    3300094: Box124
+    3300096: Box125
+    3300098: Box126
+    3300100: Box127
+    3300102: Box128
+    3300104: Box248
+    3300106: Box249
+    3300108: Box250
+    3300110: Box251
+    3300112: Box252
+    3300114: Box253
+    3300116: Box254
+    3300118: Box265
+    3300120: Box266
+    3300122: Box267
+    3300124: Box270
+    3300126: Box271
+    3300128: Box272
+    3300130: Box273
+    3300132: cable
+    3300134: ChamferBox001_ChamferBox001
+    3300136: Clavier005
+    3300138: Clavier006
+    3300140: CONTAINER
+    3300142: CornerRoof
+    3300144: Cylinder001
+    3300146: Cylinder001_Cylinder001
+    3300148: Cylinder001_Cylinder004
+    3300150: Cylinder001_Cylinder005
+    3300152: Cylinder001_Cylinder010
+    3300154: Cylinder001_Cylinder011
+    3300156: Cylinder008
+    3300158: Cylinder018
+    3300160: Cylinder035
+    3300162: Cylinder037
+    3300164: Cylinder038
+    3300166: Detonateur001
+    3300168: Detonateur002
+    3300170: Detonateur003
+    3300172: Detonateur004
+    3300174: Detonateur005
+    3300176: Detonateur006
+    3300178: Detonateur007
+    3300180: Detonateur008
+    3300182: Detonateur009
+    3300184: Detonateur010
+    3300186: Detonateur011
+    3300188: Detonateur012
+    3300190: Detonateur013
+    3300192: Detonateur014
+    3300194: Detonateur015
+    3300196: Detonateur016
+    3300198: Detonateur017
+    3300200: Detonateur018
+    3300202: Detonateur021
+    3300204: Detonateur023
+    3300206: Detonateur024
+    3300208: Energies
+    3300210: Kit de pinces004
+    3300212: Kit de pinces005
+    3300214: Line002_Line003
+    3300216: Line002_Line004
+    3300218: Line002_Line005
+    3300220: Line002_Line006
+    3300222: Line002_Line007
+    3300224: Line002_Line008
+    3300226: Line002_Line009
+    3300228: Line002_Line010
+    3300230: Line002_Line011
+    3300232: Line002_Line012
+    3300234: Line007
+    3300236: "Lumi\xE8res003"
+    3300238: "Lumi\xE8res_bombe001"
+    3300240: "Lumi\xE8res_bombe002"
+    3300242: "Lumi\xE8res_bombe003"
+    3300244: "Lumi\xE8res_bombe004"
+    3300246: "Lumi\xE8res_bombe005"
+    3300248: "Lumi\xE8res_bombe006"
+    3300250: "Lumi\xE8res_bombe007"
+    3300252: "Lumi\xE8res_bombe008"
+    3300254: "Lumi\xE8res_bombe009"
+    3300256: "Lumi\xE8res_bombe010"
+    3300258: "Lumi\xE8res_bombe011"
+    3300260: "Lumi\xE8res_bombe012"
+    3300262: "Lumi\xE8res_bombe013"
+    3300264: "Lumi\xE8res_bombe014"
+    3300266: "Lumi\xE8res_bombe015"
+    3300268: "Lumi\xE8res_bombe016"
+    3300270: "Lumi\xE8res_bombe017"
+    3300272: "Lumi\xE8res_bombe019"
+    3300274: "Lumi\xE8res_bombe021"
+    3300276: "Lumi\xE8res_bombe022"
+    3300278: "Lumi\xE8res_bombe023"
+    3300280: "Lumi\xE8res_bombe024"
+    3300282: Milieu_Pince015
+    3300284: Milieu_Pince016
+    3300286: Milieu_Pince017
+    3300288: Milieu_Pince018
+    3300290: Milieu_Pince019
+    3300292: Milieu_Pince020
+    3300294: Milieu_Pince021
+    3300296: Object001_Object002
+    3300298: Object002
+    3300300: Object002_Object001
+    3300302: Object003_Object003
+    3300304: Oreiller
+    3300306: Pilier 1-1
+    3300308: Pince1_P010
+    3300310: Pince1_P011
+    3300312: Pince1_P012
+    3300314: Pince1_P013
+    3300316: Pince1_P014
+    3300318: Pince1_P015
+    3300320: plaque d'armure
+    3300322: plaque d'armure001
+    3300324: plaque d'armure002
+    3300326: plaque d'armure003
+    3300328: plaque d'armure004
+    3300330: plaque d'armure005
+    3300332: plaque d'armure006
+    3300334: plaque d'armure007
+    3300336: plaque d'armure008
+    3300338: plaque d'armure009
+    3300340: plaque d'armure010
+    3300342: plaque d'armure011
+    3300344: plaque d'armure012
+    3300346: plaque d'armure013
+    3300348: plaque d'armure014
+    3300350: plaque d'armure015
+    3300352: plaque d'armure016
+    3300354: plaque d'armure031
+    3300356: plaque d'armure032
+    3300358: plaque d'armure033
+    3300360: plaque d'armure051
+    3300362: plaque d'armure052
+    3300364: plaque d'armure053
+    3300366: Pointe_Pince014
+    3300368: Pointe_Pince015
+    3300370: Pointe_Pince016
+    3300372: Pointe_Pince017
+    3300374: Pointe_Pince018
+    3300376: Pointe_Pince019
+    3300378: Pointe_Pince020
+    3300380: Romm
+    3300382: Romm001
+    3300384: Roue009
+    3300386: Roue010
+    3300388: Roue011
+    3300390: Roue012
+    3300392: Roue013
+    3300394: Roue014
+    3300396: sol003
+    3300398: sol3
+    3300400: Sphere007
+    3300402: Sphere008
+    3300404: Sphere009
+    3300406: Sphere010
+    3300408: Sphere011
+    3300410: Sphere012
+    3300412: Sphere013
+    3300414: Sphere014
+    3300416: Sphere015
+    3300418: Sphere016
+    3300420: Sphere017
+    3300422: Sphere018
+    3300424: Sphere019
+    3300426: Sphere020
+    3300428: Sphere021
+    3300430: Sphere022
+    3300432: Sphere024
+    3300434: Sphere025
+    3300436: Sphere027
+    3300438: Sphere028
+    3300440: Sphere029
+    3300442: Sphere030
+    3300444: Tube002_Tube002
+    4300000: Energies
+    4300002: Romm
+    4300004: Box016
+    4300006: Pilier 1-1
+    4300008: Romm001
+    4300010: sol003
+    4300012: CornerRoof
+    4300014: Box254
+    4300016: Box253
+    4300018: Milieu_Pince015
+    4300020: Milieu_Pince016
+    4300022: Milieu_Pince017
+    4300024: Milieu_Pince018
+    4300026: Milieu_Pince019
+    4300028: Milieu_Pince020
+    4300030: Milieu_Pince021
+    4300032: Pointe_Pince014
+    4300034: Pointe_Pince015
+    4300036: Pointe_Pince016
+    4300038: Pointe_Pince017
+    4300040: Pointe_Pince018
+    4300042: Pointe_Pince019
+    4300044: Pointe_Pince020
+    4300046: Pince1_P010
+    4300048: Pince1_P011
+    4300050: Pince1_P012
+    4300052: Pince1_P013
+    4300054: Pince1_P014
+    4300056: Pince1_P015
+    4300058: Box265
+    4300060: Cylinder038
+    4300062: Box266
+    4300064: Box267
+    4300066: Boulon_Pince037
+    4300068: Boulon_Pince038
+    4300070: Boulon_Pince039
+    4300072: Kit de pinces004
+    4300074: Boulon_Pince040
+    4300076: Boulon_Pince041
+    4300078: Boulon_Pince042
+    4300080: Boulon_Pince043
+    4300082: Base_Pince009
+    4300084: Base_Pince010
+    4300086: Boulon_Pince044
+    4300088: Boulon_Pince045
+    4300090: Base_Pince011
+    4300092: Boulon_Pince046
+    4300094: Kit de pinces005
+    4300096: Boulon_Pince047
+    4300098: Boulon_Pince048
+    4300100: Boulon_Pince049
+    4300102: Base_Pince012
+    4300104: Boulon_Pince050
+    4300106: Boulon_Pince051
+    4300108: Box270
+    4300110: Box271
+    4300112: Base005
+    4300114: Clavier005
+    4300116: Boutons005
+    4300118: Box272
+    4300120: Box273
+    4300122: Base006
+    4300124: Clavier006
+    4300126: Boutons006
+    4300128: plaque d'armure
+    4300130: plaque d'armure001
+    4300132: plaque d'armure002
+    4300134: plaque d'armure003
+    4300136: plaque d'armure004
+    4300138: plaque d'armure005
+    4300140: plaque d'armure006
+    4300142: plaque d'armure007
+    4300144: plaque d'armure008
+    4300146: plaque d'armure009
+    4300148: plaque d'armure010
+    4300150: plaque d'armure011
+    4300152: plaque d'armure012
+    4300154: plaque d'armure013
+    4300156: plaque d'armure014
+    4300158: plaque d'armure015
+    4300160: plaque d'armure016
+    4300162: plaque d'armure031
+    4300164: plaque d'armure032
+    4300166: plaque d'armure033
+    4300168: plaque d'armure051
+    4300170: plaque d'armure052
+    4300172: plaque d'armure053
+    4300174: Box248
+    4300176: Line002_Line003
+    4300178: Line002_Line004
+    4300180: Line002_Line006
+    4300182: Line002_Line005
+    4300184: Line002_Line007
+    4300186: Line002_Line012
+    4300188: Line002_Line011
+    4300190: Line002_Line010
+    4300192: Line002_Line009
+    4300194: Line002_Line008
+    4300196: Roue014
+    4300198: Roue013
+    4300200: Roue012
+    4300202: Roue011
+    4300204: Roue010
+    4300206: Roue009
+    4300208: Sphere008
+    4300210: "Lumi\xE8res_bombe002"
+    4300212: Sphere007
+    4300214: "Lumi\xE8res_bombe001"
+    4300216: Detonateur001
+    4300218: Detonateur002
+    4300220: Sphere010
+    4300222: Detonateur004
+    4300224: "Lumi\xE8res_bombe004"
+    4300226: Detonateur003
+    4300228: Sphere009
+    4300230: "Lumi\xE8res_bombe003"
+    4300232: Sphere012
+    4300234: Detonateur005
+    4300236: "Lumi\xE8res_bombe005"
+    4300238: "Lumi\xE8res_bombe007"
+    4300240: Sphere013
+    4300242: Detonateur007
+    4300244: Detonateur008
+    4300246: Sphere011
+    4300248: "Lumi\xE8res_bombe006"
+    4300250: "Lumi\xE8res_bombe008"
+    4300252: Sphere014
+    4300254: Detonateur006
+    4300256: Sphere021
+    4300258: "Lumi\xE8res_bombe015"
+    4300260: "Lumi\xE8res_bombe013"
+    4300262: Sphere020
+    4300264: Detonateur013
+    4300266: Detonateur014
+    4300268: Sphere022
+    4300270: "Lumi\xE8res_bombe016"
+    4300272: Detonateur015
+    4300274: Detonateur016
+    4300276: Sphere019
+    4300278: "Lumi\xE8res_bombe014"
+    4300280: "Lumi\xE8res_bombe009"
+    4300282: Sphere016
+    4300284: Detonateur009
+    4300286: Sphere017
+    4300288: "Lumi\xE8res_bombe011"
+    4300290: Detonateur010
+    4300292: Sphere018
+    4300294: "Lumi\xE8res_bombe012"
+    4300296: Detonateur011
+    4300298: Detonateur012
+    4300300: Sphere015
+    4300302: "Lumi\xE8res_bombe010"
+    4300304: Detonateur021
+    4300306: Sphere028
+    4300308: "Lumi\xE8res_bombe021"
+    4300310: Sphere029
+    4300312: "Lumi\xE8res_bombe023"
+    4300314: Detonateur024
+    4300316: Sphere027
+    4300318: "Lumi\xE8res_bombe022"
+    4300320: Detonateur023
+    4300322: Sphere030
+    4300324: "Lumi\xE8res_bombe024"
+    4300326: "Lumi\xE8res_bombe019"
+    4300328: Sphere025
+    4300330: Detonateur017
+    4300332: Sphere024
+    4300334: "Lumi\xE8res_bombe017"
+    4300336: Detonateur018
+    4300338: Box095
+    4300340: Box104
+    4300342: cable
+    4300344: Cylinder001
+    4300346: Cylinder008
+    4300348: Cylinder018
+    4300350: "Lumi\xE8res003"
+    4300352: Object002
+    4300354: Line007
+    4300356: ChamferBox001_ChamferBox001
+    4300358: Cylinder001_Cylinder001
+    4300360: Box004_Box004
+    4300362: Tube002_Tube002
+    4300364: CONTAINER
+    4300366: Object003_Object003
+    4300368: Object002_Object001
+    4300370: Object001_Object002
+    4300372: sol3
+    4300374: Box249
+    4300376: Box251
+    4300378: Oreiller
+    4300380: 105
+    4300382: Cylinder035
+    4300384: Cylinder037
+    4300386: 102
+    4300388: 101
+    4300390: Box250
+    4300392: Box252
+    4300394: Box123
+    4300396: Box124
+    4300398: Box122
+    4300400: Cylinder001_Cylinder011
+    4300402: Cylinder001_Cylinder010
+    4300404: Box118
+    4300406: Box121
+    4300408: Box120
+    4300410: Box119
+    4300412: Box117
+    4300414: Box128
+    4300416: Box127
+    4300418: Box126
+    4300420: Box125
+    4300422: Box068
+    4300424: Box067
+    4300426: Cylinder001_Cylinder005
+    4300428: Box066
+    4300430: Box062
+    4300432: Box065
+    4300434: Box064
+    4300436: Box063
+    4300438: Cylinder001_Cylinder004
+    4300440: Box059
+    4300442: Box060
+    4300444: Box070
+    7400000: Take 001
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
