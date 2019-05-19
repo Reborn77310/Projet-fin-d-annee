@@ -16,6 +16,8 @@ public class Adversaire1 : MonoBehaviour
     public Image[] symbolesSalles;
     public int[] formuleTotale;
     public int[] nbSymbolesParSalle;
+    public int[] nbActionsParSalle;
+    public int[] actions;
     EnnemiManager ennemiManager;
 
     private void Awake()
@@ -30,14 +32,9 @@ public class Adversaire1 : MonoBehaviour
         ennemiManager.pvTotauxText.gameObject.SetActive(true);
         ennemiManager.badGuy = gameObject;
         ennemiManager.RecupFormule(nbSymbolesParSalle, formuleTotale, symbolesSalles);
+        ennemiManager.RecupActions(nbActionsParSalle, actions);
 
     }
 
-
-
-
-    // Fonctions pour ses moves -> Comment on va faire pour choisir parmis les fonctions ?
-
-    // Prefab de l'adversaire contient les éléments d'ui et ce script
-    // Lorsque le prefab est instancier, ce script passe à ennemi manager la valeur de ses variables
+    
 }

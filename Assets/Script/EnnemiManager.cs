@@ -5,14 +5,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using TMPro;
+using System.Linq;
 
 public class DBM
 {
     public int origine; // index de la salle d'origine dans ennemiRooms
     public int cible; // index de la cible
     public float timer = 50000; // Temps restant avant lancement de l'action
-    public int id = -1; //Correspond à l'id de l'action qui servira à appeler la fonction correspondante.
-                        // Si l'ID est pair la cible se trouve sur l'ADV sinon c'est sur NEST
+    public int id = 0; //Correspond à l'id de l'action qui servira à appeler la fonction correspondante.
+                       // Si l'ID est pair la cible se trouve sur l'ADV sinon c'est sur NEST
     public DBM()
     {
 
@@ -26,6 +27,7 @@ public class EnnemiRooms
     public Sprite hightlight;
     public int[] myType;
     public Image[] symbole;
+    public int[] actions;
     public float pv = 100;
     public float pvMax = 100;
     public TextMeshProUGUI pvText;
@@ -33,6 +35,7 @@ public class EnnemiRooms
     public float timer;
     public int etat = 1;
     public bool isAttacking = false;
+    public int iteration = 0;
     public EnnemiRooms(float _timer)
     {
         timer = _timer;
@@ -98,6 +101,21 @@ public class EnnemiManager : MonoBehaviour
         ennemiRooms.Add(a);
     }
 
+    public void RecupActions(int[] _nb, int[] actions)
+    {
+        int index = 0;
+        for (int i = 0; i < ennemiRooms.Count; i++)
+        {
+            ennemiRooms[i].actions = new int[_nb[i]];
+
+            for (int h = 0; h < _nb[i]; h++)
+            {
+                ennemiRooms[i].actions[h] = actions[index];
+                index++;
+            }
+        }
+    }
+
     public void RecupFormule(int[] _nb, int[] _types, Image[] _symboles)
     {
         int index = 0;
@@ -110,7 +128,6 @@ public class EnnemiManager : MonoBehaviour
 
             for (int h = 0; h < _nb[i]; h++)
             {
-
                 ennemiRooms[i].myType[h] = _types[index];
                 ennemiRooms[i].symbole[h] = _symboles[index];
                 index++;
@@ -194,8 +211,6 @@ public class EnnemiManager : MonoBehaviour
                 {
                     // ChooseNextAttaque
                     ChooseAction(i);
-                    ennemiRooms[i].etat = 2;
-                    ennemiRooms[i].isAttacking = true;
                 }
 
             }
@@ -267,17 +282,251 @@ public class EnnemiManager : MonoBehaviour
 
     public void ChooseAction(int _origine)
     {
-        var a = IndexActionToDBM();
-        actionPrevues[a].timer = Random.Range(10, 20);
-        actionPrevues[a].origine = _origine;
-        actionPrevues[a].cible = Random.Range(0, 4);
-        actionPrevues[a].id = Random.Range(1, 3);
-        ennemiRooms[_origine].timer = actionPrevues[a].timer;
-
-        if (actionPrevues[a].id % 2 != 0)
+        print(_origine);
+        int type = int.Parse(ennemiRooms[_origine].symbole[0].sprite.name.Substring(5, 1));
+        if (type == 0)
         {
-            salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
-            salleManager.ChangeMaterial();
+            if (NombreAttaques() < 2)
+            {
+                var temp = AttaquesPool(_origine);
+                if (temp.Length == 0)
+                {
+                    ennemiRooms[_origine].timer = 5;
+                    ennemiRooms[_origine].iteration += 1;
+                }
+                else if (temp.Length == 1)
+                {
+                    var a = IndexActionToDBM();
+                    actionPrevues[a].timer = Random.Range(10, 20);
+                    actionPrevues[a].origine = _origine;
+                    actionPrevues[a].cible = Random.Range(0, 4);
+                    actionPrevues[a].id = temp[0];
+                    ennemiRooms[_origine].timer = actionPrevues[a].timer;
+
+                    salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
+                    salleManager.ChangeMaterial();
+
+                    ennemiRooms[_origine].etat = 2;
+                    ennemiRooms[_origine].isAttacking = true;
+                    ennemiRooms[_origine].iteration = 0;
+                }
+                else
+                {
+                    int rnd = Random.Range(0, temp.Length);
+                    var a = IndexActionToDBM();
+                    actionPrevues[a].timer = Random.Range(10, 20);
+                    actionPrevues[a].origine = _origine;
+                    actionPrevues[a].cible = Random.Range(0, 4);
+                    actionPrevues[a].id = temp[rnd];
+                    ennemiRooms[_origine].timer = actionPrevues[a].timer;
+
+                    salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
+                    salleManager.ChangeMaterial();
+
+                    ennemiRooms[_origine].etat = 2;
+                    ennemiRooms[_origine].isAttacking = true;
+                    ennemiRooms[_origine].iteration = 0;
+                }
+            }
+            else if (ennemiRooms[_origine].iteration >= 5)
+            {
+                int rnd = Random.Range(0, ennemiRooms[_origine].actions.Length);
+                var a = IndexActionToDBM();
+                actionPrevues[a].timer = Random.Range(10, 20);
+                actionPrevues[a].origine = _origine;
+                actionPrevues[a].cible = Random.Range(0, 4);
+                actionPrevues[a].id = ennemiRooms[_origine].actions[rnd];
+                ennemiRooms[_origine].timer = actionPrevues[a].timer;
+
+                if (actionPrevues[a].id > 0)
+                {
+                    salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
+                    salleManager.ChangeMaterial();
+                }
+
+                ennemiRooms[_origine].etat = 2;
+                ennemiRooms[_origine].isAttacking = true;
+                ennemiRooms[_origine].iteration = 0;
+
+            }
+            else
+            {
+                ennemiRooms[_origine].timer = 5;
+                ennemiRooms[_origine].iteration += 1;
+            }
+        }
+        else if (type == 1)
+        {
+            int b = NombreDefenses();
+            if (b < 2)
+            {
+                var temp = DefensesPool(_origine);
+                if (temp.Length == 0)
+                {
+                    ennemiRooms[_origine].timer = 5;
+                    ennemiRooms[_origine].iteration += 1;
+                }
+                else if (temp.Length == 1)
+                {
+                    var a = IndexActionToDBM();
+                    actionPrevues[a].timer = Random.Range(10, 20);
+                    actionPrevues[a].origine = _origine;
+                    actionPrevues[a].cible = Random.Range(0, 4);
+                    actionPrevues[a].id = temp[0];
+                    ennemiRooms[_origine].timer = actionPrevues[a].timer;
+
+                    ennemiRooms[_origine].etat = 2;
+                    ennemiRooms[_origine].isAttacking = true;
+                    ennemiRooms[_origine].iteration = 0;
+                }
+                else
+                {
+                    int rnd = Random.Range(0, temp.Length);
+                    var a = IndexActionToDBM();
+                    actionPrevues[a].timer = Random.Range(10, 20);
+                    actionPrevues[a].origine = _origine;
+                    actionPrevues[a].cible = Random.Range(0, 4);
+                    actionPrevues[a].id = temp[rnd];
+                    ennemiRooms[_origine].timer = actionPrevues[a].timer;
+
+                    ennemiRooms[_origine].etat = 2;
+                    ennemiRooms[_origine].isAttacking = true;
+                    ennemiRooms[_origine].iteration = 0;
+                }
+            }
+            else if (ennemiRooms[_origine].iteration >= 5)
+            {
+                int rnd = Random.Range(0, ennemiRooms[_origine].actions.Length);
+                var a = IndexActionToDBM();
+                actionPrevues[a].timer = Random.Range(10, 20);
+                actionPrevues[a].origine = _origine;
+                actionPrevues[a].cible = Random.Range(0, 4);
+                actionPrevues[a].id = ennemiRooms[_origine].actions[rnd];
+                ennemiRooms[_origine].timer = actionPrevues[a].timer;
+
+                if (actionPrevues[a].id > 0)
+                {
+                    salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
+                    salleManager.ChangeMaterial();
+                }
+
+                ennemiRooms[_origine].etat = 2;
+                ennemiRooms[_origine].isAttacking = true;
+                ennemiRooms[_origine].iteration = 0;
+
+            }
+            else
+            {
+                ennemiRooms[_origine].timer = 5;
+                ennemiRooms[_origine].iteration += 1;
+            }
+        }
+        else if (type == 2)
+        {
+            if (NombreAttaques() == 0 && AttaquesPool(_origine).Length > 0)
+            {
+                var temp = AttaquesPool(_origine);
+                int rnd = Random.Range(0, temp.Length);
+                var a = IndexActionToDBM();
+                actionPrevues[a].timer = Random.Range(10, 20);
+                actionPrevues[a].origine = _origine;
+                actionPrevues[a].cible = Random.Range(0, 4);
+                actionPrevues[a].id = temp[rnd];
+                ennemiRooms[_origine].timer = actionPrevues[a].timer;
+
+                salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
+                salleManager.ChangeMaterial();
+
+                ennemiRooms[_origine].etat = 2;
+                ennemiRooms[_origine].isAttacking = true;
+                ennemiRooms[_origine].iteration = 0;
+            }
+            else if (NombreDefenses() == 0 && DefensesPool(_origine).Length > 0)
+            {
+                var temp = DefensesPool(_origine);
+                int rnd = Random.Range(0, temp.Length);
+                var a = IndexActionToDBM();
+                actionPrevues[a].timer = Random.Range(10, 20);
+                actionPrevues[a].origine = _origine;
+                actionPrevues[a].cible = Random.Range(0, 4);
+                actionPrevues[a].id = temp[rnd];
+                ennemiRooms[_origine].timer = actionPrevues[a].timer;
+
+                ennemiRooms[_origine].etat = 2;
+                ennemiRooms[_origine].isAttacking = true;
+                ennemiRooms[_origine].iteration = 0;
+            }
+            else if (ennemiRooms[_origine].iteration >= 3)
+            {
+                int rnd = Random.Range(0, ennemiRooms[_origine].actions.Length);
+                var a = IndexActionToDBM();
+                actionPrevues[a].timer = Random.Range(10, 20);
+                actionPrevues[a].origine = _origine;
+                actionPrevues[a].cible = Random.Range(0, 4);
+                actionPrevues[a].id = ennemiRooms[_origine].actions[rnd];
+                ennemiRooms[_origine].timer = actionPrevues[a].timer;
+
+                if (actionPrevues[a].id > 0)
+                {
+                    salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
+                    salleManager.ChangeMaterial();
+                }
+
+                ennemiRooms[_origine].etat = 2;
+                ennemiRooms[_origine].isAttacking = true;
+                ennemiRooms[_origine].iteration = 0;
+            }
+            else
+            {
+                ennemiRooms[_origine].timer = 5;
+                ennemiRooms[_origine].iteration += 1;
+            }
+        }
+        else if (type == 4)
+        {
+            if (AttaquesPool(_origine).Length > 0 && !salleManager.allSalles[3].isReparing)
+            {
+                var temp = AttaquesPool(_origine);
+                int rnd = Random.Range(0, temp.Length);
+                var a = IndexActionToDBM();
+                actionPrevues[a].timer = Random.Range(10, 20);
+                actionPrevues[a].origine = _origine;
+                actionPrevues[a].cible = Random.Range(0, 4);
+                actionPrevues[a].id = temp[rnd];
+                ennemiRooms[_origine].timer = actionPrevues[a].timer;
+
+                salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
+                salleManager.ChangeMaterial();
+
+                ennemiRooms[_origine].etat = 2;
+                ennemiRooms[_origine].isAttacking = true;
+                ennemiRooms[_origine].iteration = 0;
+            }
+            else if (ennemiRooms[_origine].iteration >= 3)
+            {
+                int rnd = Random.Range(0, ennemiRooms[_origine].actions.Length);
+                var a = IndexActionToDBM();
+                actionPrevues[a].timer = Random.Range(10, 20);
+                actionPrevues[a].origine = _origine;
+                actionPrevues[a].cible = Random.Range(0, 4);
+                actionPrevues[a].id = ennemiRooms[_origine].actions[rnd];
+                ennemiRooms[_origine].timer = actionPrevues[a].timer;
+
+                if (actionPrevues[a].id > 0)
+                {
+                    salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
+                    salleManager.ChangeMaterial();
+                }
+
+                ennemiRooms[_origine].etat = 2;
+                ennemiRooms[_origine].isAttacking = true;
+                ennemiRooms[_origine].iteration = 0;
+            }
+            else
+            {
+                ennemiRooms[_origine].timer = 5;
+                ennemiRooms[_origine].iteration += 1;
+            }
         }
         SortDBMActionByTimer();
     }
@@ -288,9 +537,9 @@ public class EnnemiManager : MonoBehaviour
         {
             if (i < actionPrevues.Count)
             {
-                if (actionPrevues[i].id > 0)
+                if (actionPrevues[i].id != 0)
                 {
-                    if (actionPrevues[i].id % 2 != 0)
+                    if (actionPrevues[i].id > 0)
                     {
                         DBM_Cible[i].text = "<color=#126A0A>Room " + (actionPrevues[i].cible + 1).ToString() + "</color>";
                     }
@@ -301,7 +550,7 @@ public class EnnemiManager : MonoBehaviour
 
                     DBM_timer[i].text = actionPrevues[i].timer.ToString("F3") + "s ";
                     DBM_Symbole[i].text = (actionPrevues[i].origine + 1).ToString();
-                    
+
                 }
                 else
                 {
@@ -320,31 +569,21 @@ public class EnnemiManager : MonoBehaviour
     {
         for (int i = 0; i < actionPrevues.Count; i++)
         {
-            if (actionPrevues[i].id > 0)
+            if (actionPrevues[i].id != 0)
             {
                 actionPrevues[i].timer -= Time.deltaTime;
-                if (actionPrevues[i].id % 2 != 0)
+                if (actionPrevues[i].timer <= 0)
                 {
-                    if (actionPrevues[i].timer <= 0)
+                    if (actionPrevues[i].id > 0)
                     {
                         salleManager.allSalles[actionPrevues[i].cible].isAttacked = false;
                         salleManager.ChangeMaterial();
-                        salleManager.DamageSurSalle(actionPrevues[i].cible, 100); // DEGATS SET A 0 ATTENTION
-                        ennemiRooms[actionPrevues[i].origine].isAttacking = false;
-                        actionPrevues[i].id = -1;
-                        actionPrevues[i].timer = 50000;
                     }
 
-                }
-                else
-                {
-                    if (actionPrevues[i].timer <= 0)
-                    {
-                        print("Plus tard je me défendrais");
-                        ennemiRooms[actionPrevues[i].origine].isAttacking = false;
-                        actionPrevues[i].id = -1;
-                        actionPrevues[i].timer = 50000;
-                    }
+                    ActionsEnnemies(actionPrevues[i].id, i);
+                    ennemiRooms[actionPrevues[i].origine].isAttacking = false;
+                    actionPrevues[i].id = 0;
+                    actionPrevues[i].timer = 50000;
                 }
             }
         }
@@ -357,12 +596,12 @@ public class EnnemiManager : MonoBehaviour
         {
             if (actionPrevues[i].origine == _indexSalle)
             {
-                if (actionPrevues[i].id % 2 != 0)
+                if (actionPrevues[i].id > 0)
                 {
                     salleManager.allSalles[actionPrevues[i].cible].isAttacked = false;
                     salleManager.ChangeMaterial();
                 }
-                actionPrevues[i].id = -1;
+                actionPrevues[i].id = 0;
                 actionPrevues[i].timer = 50000;
                 i = actionPrevues.Count;
             }
@@ -371,7 +610,7 @@ public class EnnemiManager : MonoBehaviour
     }
 
 
-    
+
     // object pooling pour DBM semble une meilleure solution pour éviter les crash
     // Créer le nombre de DBM correspondant au nombre de la salles adverses
     // On se sert de ID pour définir si l'object DBM est libre ou non de stocker une action :
@@ -394,7 +633,7 @@ public class EnnemiManager : MonoBehaviour
         int index = 0;
         for (int i = 0; i < actionPrevues.Count; i++)
         {
-            if (actionPrevues[i].id < 0)
+            if (actionPrevues[i].id == 0)
             {
                 index = i;
                 i = actionPrevues.Count;
@@ -408,4 +647,105 @@ public class EnnemiManager : MonoBehaviour
         actionPrevues.Sort((p1, p2) => p1.timer.CompareTo(p2.timer));
     }
 
+    public void ActionsEnnemies(int id, int i)
+    {
+        if (id == 1)
+        {
+            salleManager.DamageSurSalle(actionPrevues[i].cible, 100); // DEGATS SET A 0 ATTENTION
+        }
+        else if (id == 2)
+        {
+            salleManager.DamageSurSalle(actionPrevues[i].cible, 100); // DEGATS SET A 0 ATTENTION
+        }
+        else if (id == -1)
+        {
+            // Defense
+            print("defense");
+        }
+        else if (id == -2)
+        {
+            // Defense+
+            print("defense");
+        }
+    }
+
+    public int NombreAttaques()
+    {
+        int toReturn = 0;
+        for (int i = 0; i < actionPrevues.Count; i++)
+        {
+            if (actionPrevues[i].id > 0)
+            {
+                toReturn += 1;
+            }
+        }
+        return toReturn;
+    }
+
+    public int NombreDefenses()
+    {
+        int toReturn = 0;
+        for (int i = 0; i < actionPrevues.Count; i++)
+        {
+            if (actionPrevues[i].id < 0)
+            {
+                toReturn += 1;
+            }
+        }
+        return toReturn;
+    }
+
+    public int[] AttaquesPool(int idSalle)
+    {
+        int[] toReturn;
+        int index = 0;
+        for (int i = 0; i < ennemiRooms[idSalle].actions.Length; i++)
+        {
+            if (ennemiRooms[idSalle].actions[i] > 0)
+            {
+                index++;
+            }
+        }
+        toReturn = new int[index];
+        index = 0;
+        for (int i = 0; i < ennemiRooms[idSalle].actions.Length; i++)
+        {
+            if (ennemiRooms[idSalle].actions[i] > 0)
+            {
+                toReturn[index] = ennemiRooms[idSalle].actions[i];
+                index++;
+            }
+        }
+        return toReturn;
+    }
+
+    public int[] DefensesPool(int idSalle)
+    {
+        int[] toReturn;
+        int index = 0;
+        for (int i = 0; i < ennemiRooms[idSalle].actions.Length; i++)
+        {
+            if (ennemiRooms[idSalle].actions[i] < 0)
+            {
+                index++;
+            }
+        }
+        toReturn = new int[index];
+        index = 0;
+        for (int i = 0; i < ennemiRooms[idSalle].actions.Length; i++)
+        {
+            if (ennemiRooms[idSalle].actions[i] < 0)
+            {
+                toReturn[index] = ennemiRooms[idSalle].actions[i];
+                index++;
+            }
+        }
+        return toReturn;
+    }
+
+    public void CheckEquipementElectronique()
+    {
+        // if salle symbole spé
+        // if sall
+    }
 }
