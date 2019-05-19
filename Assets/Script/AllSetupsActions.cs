@@ -20,124 +20,38 @@ public class AllSetupsActions : MonoBehaviour
          SalleQuiEffectueAction = mm.MySalleNumber;
         
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Attack
-        if (wantedName == "Attaque 01")
+        if (wantedName == "Tourelle BK-1") // ATK
         {
-            string effet = "Inflige des dégâts sur la salle ciblée";
-            DealDamage(wantedRoom, 20,5);
-            // 10 % * 2
-            // 15 % * 2
+            string effet = "Tire une rafale";
+            DealDamage(wantedRoom, 35,11);
             print(effet);
         }
-        else if (wantedName == "Attaque 02")
+        else if (wantedName == "Tourelle BK-2") // ATK
         {
-            string effet = "Inflige des dégâts sur la salle ciblée";
-            // 10% 
-            // 15% proc attaque
-            DealDamage(wantedRoom, 10,5);
+            string effet = "Tire deux rafales";
             print(effet);
         }
-        else if (wantedName == "Attaque 03")
+        else if (wantedName == "Bombe IEM") // ATK
         {
-            string effet = "Tir des projectiles sur des cibles aléatoire (peut toucher plusieurs fois la même salle)";
-            //3 proj à 10% aléa
-            //4proj
-            // DealDamage(Random.Range(0, 4),10);
-            // DealDamage(Random.Range(0, 4),10);
-            // DealDamage(Random.Range(0, 4),10);
-            if (superEffect)
-            {
-                DealDamage(wantedRoom, 75,5);
-                print(effet + " super ++");
-            }
-            else
-            {
-                DealDamage(wantedRoom, 35,5);
-                print(effet);
-            }
-            
-        }
-        else if (wantedName == "Attaque 04")
-        {
-            string effet = "Si 2 symboles différents ont été posé et burn précedemment, le troisième symbole déclenche un tir puissant.";
-            //Jouer les trois cartes dans le slot 3
+            string effet = "Retarde l’exécution de la prochaine action";
             print(effet);
         }
-        else if (wantedName == "Attaque 05")
+        else if (wantedName == "Brouilleur") // DEF
         {
-            string effet = "Tir un projectile, inflige des dégâts sur la salle ciblé.";
-            //20 %
-            //Augmente 10% 
-            DealDamage(wantedRoom, 20,5);
+            string effet = "Empêche le ciblage ennemi";
             print(effet);
         }
-        
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Defense
-        else if (wantedName == "Blindage maximal")
+        else if (wantedName == "Turbine") // DEF
         {
-            string effet = "Rend la salle visée insensible aux dégâts et aux altérations";
-            salleManager.allSalles[wantedRoom].isDefendu = true;
-            salleManager.DefendreSalle(wantedRoom);
-            StartCoroutine(instance.BlindeMaximalAndCloak(4.0f,wantedRoom));
+            string effet = "Evacue la pression des moteurs et accélère le temps de recharge";
             print(effet);
         }
-        else if (wantedName == "Cape d'invisibilité")
+        else if (wantedName == "hgOS") // DEF
         {
-            string effet = "Empêche l'ennemi de cibler la salle visée et d'avoir n'importe quelle info dessus";
-            salleManager.allSalles[wantedRoom].isDefendu = true;
-            if (superEffect)
-            {
-                salleManager.allSalles[wantedRoom].DefendingAmount = 100;
-            }
-            else
-            {
-                salleManager.allSalles[wantedRoom].DefendingAmount = 50;
-            }
-            
-            print(salleManager.allSalles[wantedRoom].DefendingAmount);
-            salleManager.DefendreSalle(wantedRoom);
-            StartCoroutine(instance.BlindeMaximalAndCloak(5.0f,wantedRoom));
-            print(effet);
-        }
-        else if (wantedName == "Defense 03")
-        {
-            string effet = "Place un bouclier sur la salle visée qui bloque 50% des dégâts reçu lors de la prochaine attaque";
-            print(effet);
-        }
-        else if (wantedName == "Defense 04")
-        {
-            string effet = "Place un bouclier de 5 secondes sur toutes les salles qui réduit de 15% les dégâts subit";
-            print(effet);
-        }
-        
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Alteration
-        else if (wantedName == "Impulsion IEM")
-        {
-            string effet = "Immobilise la salle ciblée pendant une action";
-            print(effet);
-        }
-        else if (wantedName == "Drone reco")
-        {
-            string effet = "Permet d'avoir des informations précise sur les actions de la salle adverse visée";
-            print(effet);
-        }
-        else if (wantedName == "Image mirroir")
-        {
-            string effet = "Fait croire au système ennemi que deux 2 ennemis supplémentaire sont apparus. L'ennemi choisit alors aléatoirement la cible";
-            print(effet);
-        }
-        else if (wantedName == "Confusion")
-        {
-            string effet = "Prend ses alliées pour des ennemis, les attaques pendant 2 actions";
-            print(effet);
-        }
-        else if (wantedName == "Corruption")
-        {
-            string effet = "Prend le controle de la salle ciblée. Cette salle s'adapte aux mêmes setup et jouera les mêmes cartes pendant 2 actions";
-            print(effet);
-        }
-        else if (wantedName == "Debuf")
-        {
-            string effet = "La salle visée subira 50% de dégâts en plus lors de la prochaine attaque";
+            string effet = "Programme qui purge des virus";
+            // salleManager.allSalles[wantedRoom].isDefendu = true;
+            // salleManager.DefendreSalle(wantedRoom);
+            // StartCoroutine(instance.BlindeMaximalAndCloak(4.0f,wantedRoom));
             print(effet);
         }
     }

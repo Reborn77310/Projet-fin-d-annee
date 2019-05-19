@@ -287,9 +287,15 @@ public class GameMaster : MonoBehaviour
         // Lancer action
         // Burn 3e carte
         // Check durabilité => Burn 2e carte
+        
+        int equipementSelected = 0;
+        if(mm.cartesModule[0].cartesTypes > 10)
+        {
+            equipementSelected = 1;
+        }
 
-        string wantedName = salleManager.allSalles[mm.MySalleNumber].equipement[0];
-        if (salleManager.allSalles[mm.MySalleNumber].equipementATK[0])
+        string wantedName = salleManager.allSalles[mm.MySalleNumber].equipement[equipementSelected];
+        if (salleManager.allSalles[mm.MySalleNumber].equipementATK[equipementSelected])
         {
             zoneSelectionADV = GameObject.Instantiate(mm.cartesModule[1].prefabZoneSelection, myCanvas.transform, false);
             zoneSelectionADV.transform.position = new Vector3(1447, 744, 0);

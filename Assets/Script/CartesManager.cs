@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 
 
@@ -27,13 +28,11 @@ public class CartesManager : MonoBehaviour
         {
             id = _id;
             cartesTypes = _cartesTypes;
-            illu = Resources.Load<Sprite>("Sprites/Cartes/Final/Common/Carte" + _cartesTypes);
-            picto = Resources.Load<Sprite>("Sprites/Cartes/Final//Carte" + _cartesTypes);
-            prefabZoneSelection = Resources.Load("Prefabs/Radar/ZoneSelection/Ciblage_ADV") as GameObject;
         }
     }
     [Header("Lists")]
     public List<Cartes> allCards = new List<Cartes>();
+    public List<Cartes> bufferDraw = new List<Cartes>();
     CartesButtons[] cartesButtonsScripts = new CartesButtons[3];
 
     [Header("Other")]
@@ -48,11 +47,13 @@ public class CartesManager : MonoBehaviour
     public static bool PhaseLente = true;
     public Image versus;
     public GameObject cartesHolder;
+    Almanach almanach;
 
     #region Initialisation
     void Awake()
     {
         scannerUI.GetComponent<Animator>().SetFloat("speedDraw", 1 / (drawTimer - 1));
+        almanach = GetComponent<Almanach>();
     }
 
     void Start()
@@ -110,7 +111,7 @@ public class CartesManager : MonoBehaviour
             {
                 if (!CheckHandisFull())
                 {
-                    AjouterUneCarteDansLaMain(1, toDraw[i]);
+                    AjouterUneCarteDansLaMain(toDraw[i]);
                 }
             }
             StartCoroutine("Draw");
@@ -121,7 +122,7 @@ public class CartesManager : MonoBehaviour
             {
                 if (!CheckHandisFull())
                 {
-                    AjouterUneCarteDansLaMain(1, i % 3);
+                    AjouterUneCarteDansLaMain(i % 3);
                 }
             }
         }
@@ -141,20 +142,70 @@ public class CartesManager : MonoBehaviour
         yield break;
     }
 
-    public void AjouterUneCarteDansLaMain(int cardsToDraw, int carteType)
+    public void AjouterUneCarteDansLaMain(int carteType)
     {
-        for (int i = 0; i < cardsToDraw; i++)
-        {
-            GameObject a = Instantiate(prefabCarte, Vector3.zero, Quaternion.identity, cartesHolder.transform);
-            a.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Final/Common/Carte" + carteType);
-            CartesButtons cb = a.GetComponent<CartesButtons>();
-            cb.id = allCards.Count + i;
-            Cartes c = new Cartes(allCards.Count + i, carteType);
-            c.go = a;
-            allCards.Add(c);
-        }
+        GameObject a = Instantiate(prefabCarte, Vector3.zero, Quaternion.identity, cartesHolder.transform);
+        Cartes b = CardFabrication(carteType);
+        Cartes c = new Cartes(allCards.Count, carteType);
+        CopyCardsValue(b, c);
+        c.go = a;
+        CartesButtons cb = a.GetComponent<CartesButtons>();
+        cb.id = c.id;
+        a.GetComponent<Image>().sprite = c.illu;
+        allCards.Add(c);
+        //Debug.Log(c.id + " " + allCards.IndexOf(c));
+
         SortCartes();
     }
+
+    public Cartes CardFabrication(int cartesTypes)
+    {
+        bufferDraw.Clear();
+        bufferDraw = almanach.cartesDebloquees.FindAll(item => item.cartesTypes.Equals(cartesTypes));
+        if (bufferDraw.Count == 1)
+        {
+            return bufferDraw[0];
+        }
+        else if (bufferDraw.Count == 2)
+        {
+            float rnd = Random.value * 100;
+            if (rnd <= 60)
+            {
+                return bufferDraw[0];
+            }
+            else
+            {
+                return bufferDraw[1];
+            }
+        }
+        else
+        {
+            float rnd = Random.value * 100;
+            if (rnd <= 50)
+            {
+                return bufferDraw[0];
+            }
+            else if (rnd > 50 && rnd <= 85)
+            {
+                return bufferDraw[1];
+            }
+            else
+            {
+                return bufferDraw[2];
+            }
+        }
+    }
+
+    void CopyCardsValue(Cartes oldC, Cartes newC)
+    {
+        newC.rarity = oldC.rarity;
+        newC.durability = oldC.durability;
+        newC.overdriveEffect = oldC.overdriveEffect;
+        newC.illu = oldC.illu;
+        newC.picto = oldC.picto;
+        newC.prefabZoneSelection = oldC.prefabZoneSelection;
+    }
+
 
     public bool CheckHandisFull()
     {
@@ -321,9 +372,10 @@ public class CartesManager : MonoBehaviour
         if (mm.cartesModule.Count > 0)
         {
             var c = mm.cartesModule[mm.cartesModule.Count - 1];
-            AjouterUneCarteDansLaMain(1, c.cartesTypes);
+            AjouterUneCarteDansLaMain(c.cartesTypes);
             mm.cartesModule.RemoveAt(mm.cartesModule.Count - 1);
         }
     }
+
 }
 
