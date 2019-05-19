@@ -14,6 +14,7 @@ public class Salles
     public bool isDefendu;
     public int DefendingAmount = 0;
 
+    public bool isReparing = false;
     public bool isAttacked = false;
     public string[] equipement = new string[2];
     public bool[] equipementATK = new bool[2];
@@ -75,7 +76,6 @@ public class SalleManager : MonoBehaviour
         {
             Salles newSalle = new Salles(GameObject.Find("Salle" + i.ToString()));
             allSalles.Add(newSalle);
-            //pvSalles[i].GetComponent<TextMesh>().text = allSalles[i].pv.ToString();
         }
     }
 
@@ -115,14 +115,19 @@ public class SalleManager : MonoBehaviour
             pvDuVehiculeText.text = Mathf.RoundToInt(pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
             if (pvDuVehicule <= 0)
             {
-               // pvDuVehiculeText.text = "MISSANDEI ?!?";
-             //   Time.timeScale = 0;
+                // pvDuVehiculeText.text = "MISSANDEI ?!?";
+                //   Time.timeScale = 0;
             }
             if (allSalles[salleVisee].pv <= 0)
             {
                 allSalles[salleVisee].pv = 0;
-                allSalles[salleVisee].CanPlayHere = false;
-                StartCoroutine("ReparationSalle",salleVisee);
+                if (!allSalles[salleVisee].isReparing)
+                {
+                    allSalles[salleVisee].CanPlayHere = false;
+                    StartCoroutine("ReparationSalle", salleVisee);
+                    allSalles[salleVisee].isReparing = true;
+                }
+
             }
         }
     }
@@ -151,9 +156,7 @@ public class SalleManager : MonoBehaviour
         allSalles[salleVisee].CanPlayHere = false;
         allSalles[salleVisee].MyGo.GetComponent<ModuleManager>().MyModules[0].transform.parent.transform.GetChild(2).GetComponent<Image>().color = Color.red;
         salleSound.DetruireLaSalle();
-        
-       // ennemiManager.CancelAction2(salleVisee); // C CASSE
-        
+
         while (allSalles[salleVisee].pv < 100)
         {
             allSalles[salleVisee].pv += 5 * Time.deltaTime;
@@ -164,6 +167,7 @@ public class SalleManager : MonoBehaviour
         allSalles[salleVisee].pv = 100;
         pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
         salleSound.ReparerLaSalle();
+        allSalles[salleVisee].isReparing = false;
         allSalles[salleVisee].MyGo.GetComponent<ModuleManager>().MyModules[0].transform.parent.transform.GetChild(2).GetComponent<Image>().color = Color.white;
         yield break;
     }

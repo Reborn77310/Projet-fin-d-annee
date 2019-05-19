@@ -76,6 +76,7 @@ public class CartesButtons : MonoBehaviour, IEventSystemHandler, IBeginDragHandl
         {
             if (!GameMaster.isPlayingACard)
             {
+                cartesManager.SortCartesOnPointerEnter(id);
                 anim.SetBool("CursorOn", true);
                 GameMaster.cursorIsOnCard = true;
                 cardSound.HoverCard();
@@ -91,6 +92,7 @@ public class CartesButtons : MonoBehaviour, IEventSystemHandler, IBeginDragHandl
         }
         else
         {
+            cartesManager.TuLuiDonneSonIndex(id);
             anim.SetBool("CursorOn", false);
             GameMaster.cursorIsOnCard = false;
         }
