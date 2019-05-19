@@ -25,6 +25,7 @@ public class GameMaster : MonoBehaviour
     AllSetupsActions allSetupsActions;
     private CardSound cardSound;
     EnnemiManager ennemiManager;
+    Equipement equipement;
     public GameObject uiPlaceHolder;
     public GameObject zoneSelectionADV;
     public Canvas myCanvas;
@@ -38,6 +39,7 @@ public class GameMaster : MonoBehaviour
         salleManager = GetComponent<SalleManager>();
         ennemiManager = GetComponent<EnnemiManager>();
         allSetupsActions = GetComponent<AllSetupsActions>();
+        equipement = GetComponent<Equipement>();
     }
 
     void Update()
@@ -106,7 +108,7 @@ public class GameMaster : MonoBehaviour
                             if (zoneSelectionADV == null)
                             {
                                 zoneSelectionADV = GameObject.Instantiate(mm.cartesModule[1].prefabZoneSelection, myCanvas.transform, false);
-                                if (salleManager.allSalles[mm.MySalleNumber].equipementATK[0])
+                                if (equipement.allEquipements[CheckEquipementSelected(mm)].attaque)
                                 {
                                     zoneSelectionADV.transform.position = new Vector3(1447, 743, 0);
                                 }
@@ -118,7 +120,7 @@ public class GameMaster : MonoBehaviour
                             }
 
                             zoneSelectionADV.GetComponent<parent>().RotationZones(mm.MyModules[1].transform);
-                            if (salleManager.allSalles[mm.MySalleNumber].equipementATK[0])
+                            if (equipement.allEquipements[CheckEquipementSelected(mm)].attaque)
                             {
                                 zoneSelectionADV.GetComponent<parent>().CheckOverlap(ennemiManager.sallesRT);
                             }
@@ -179,16 +181,16 @@ public class GameMaster : MonoBehaviour
 
                     if (!cartesManager.CheckHandisFull() && mm.cartesModule.Count > 0)
                     {
-                        mm.MyModules[mm.cartesModule.Count - 1].transform.GetComponent<Image>().sprite =
-                            Resources.Load<Sprite>("MiniUi/CadresCartes_0");
+                        mm.slotImage[mm.cartesModule.Count - 1].sprite = mm.defaultSprite[mm.cartesModule.Count - 1];
 
                         if (!CartesManager.PhaseLente)
                         {
                             cartesManager.ModuleToHand(mm);
                             cardSound.CardPickUp();
                         }
-                        else{
-                            mm.cartesModule.RemoveAt(mm.cartesModule.Count -1);
+                        else
+                        {
+                            mm.cartesModule.RemoveAt(mm.cartesModule.Count - 1);
                             cardSound.CardPickUp();
                         }
 
@@ -287,15 +289,11 @@ public class GameMaster : MonoBehaviour
         // Lancer action
         // Burn 3e carte
         // Check durabilité => Burn 2e carte
-        
-        int equipementSelected = 0;
-        if(mm.cartesModule[0].cartesTypes > 10)
-        {
-            equipementSelected = 1;
-        }
 
-        string wantedName = salleManager.allSalles[mm.MySalleNumber].equipement[equipementSelected];
-        if (salleManager.allSalles[mm.MySalleNumber].equipementATK[equipementSelected])
+        int equipementSelected = CheckEquipementSelected(mm);
+
+        string wantedName = equipement.allEquipements[equipementSelected].action;
+        if (equipement.allEquipements[equipementSelected].attaque)
         {
             zoneSelectionADV = GameObject.Instantiate(mm.cartesModule[1].prefabZoneSelection, myCanvas.transform, false);
             zoneSelectionADV.transform.position = new Vector3(1447, 744, 0);
@@ -315,7 +313,7 @@ public class GameMaster : MonoBehaviour
                     }
                     else
                     {
-                        
+
                         allSetupsActions.FindEffect(wantedName, i, mm, false);
                     }
 
@@ -348,18 +346,50 @@ public class GameMaster : MonoBehaviour
                 }
             }
         }
+    }
 
-        mm.cartesModule.RemoveAt(2);
-        mm.MyCompteurInt -= 1;
-        mm.MyCompteur.text = mm.MyCompteurInt.ToString();
-
-        if (mm.MyCompteurInt <= 0)
+    public int CheckEquipementSelected(ModuleManager mm)
+    {
+        int index = 0;
+        if (mm.MySalleNumber == 0 && mm.cartesModule[0].cartesTypes >= 3)
         {
-            mm.MyCompteurInt = 2;
-            cardSound.CardBurn();
-            mm.cartesModule.RemoveAt(1);
-            mm.MyModules[1].transform.GetComponent<Image>().sprite = 
-                        Resources.Load<Sprite>("MiniUi/CadresCartes_0");
+            index = 1;
         }
+        else if (mm.MySalleNumber == 1)
+        {
+            if (mm.cartesModule[0].cartesTypes >= 3)
+            {
+                index = 4;
+            }
+            else
+            {
+                index = 3;
+            }
+
+        }
+        else if (mm.MySalleNumber == 2)
+        {
+            if (mm.cartesModule[0].cartesTypes >= 3)
+            {
+                index = 4;
+            }
+            else
+            {
+                index = 5;
+            }
+        }
+        else if (mm.MySalleNumber == 3)
+        {
+            if (mm.cartesModule[0].cartesTypes >= 3)
+            {
+                index = 1;
+            }
+            else
+            {
+                index = 2;
+            }
+        }
+        return index;
+
     }
 }

@@ -40,7 +40,6 @@ public class CartesManager : MonoBehaviour
     public GameMaster gameMaster;
     public Canvas canvas;
     public float drawTimer;
-    public Image scannerUI;
     public Text ChangeBool;
     public EnnemiManager ennemiManager;
     public Image grilleRadar;
@@ -52,14 +51,12 @@ public class CartesManager : MonoBehaviour
     #region Initialisation
     void Awake()
     {
-        scannerUI.GetComponent<Animator>().SetFloat("speedDraw", 1 / (drawTimer - 1));
         almanach = GetComponent<Almanach>();
     }
 
     void Start()
     {
         DrawCards();
-        scannerUI.gameObject.SetActive(false);
     }
 
 
@@ -84,7 +81,7 @@ public class CartesManager : MonoBehaviour
             {
                 var c = allCards[id];
                 mm.cartesModule.Add(c);
-                mm.MyModules[mm.cartesModule.Count - 1].GetComponent<Image>().sprite = mm.cartesModule[mm.cartesModule.Count - 1].illu;
+                mm.slotImage[mm.cartesModule.Count - 1].sprite = mm.cartesModule[mm.cartesModule.Count - 1].picto;
                 SortCartes();
             }
 
@@ -95,7 +92,6 @@ public class CartesManager : MonoBehaviour
 
     void ThirdCardAction(ModuleManager mm)
     {
-        mm.MyModules[2].transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("MiniUi/CadresCartes_0");
         gameMaster.LancerActionJoueur(mm);
     }
 
@@ -342,9 +338,6 @@ public class CartesManager : MonoBehaviour
         {
             PhaseLente = false;
             ChangeBool.text = "Activer la phase lente.";
-            scannerUI.gameObject.SetActive(false);
-            scannerUI.gameObject.SetActive(true);
-            scannerUI.GetComponent<Animator>().SetFloat("speedDraw", 1 / (drawTimer - 1));
             ennemiManager.PassageEnPhaseCombat();
         }
         else
@@ -352,7 +345,6 @@ public class CartesManager : MonoBehaviour
             ennemiManager.EndCombat();
             PhaseLente = true;
             ChangeBool.text = "Activer la phase combat.";
-            scannerUI.gameObject.SetActive(false);
             ennemiManager.PassageEnPhaseLente();
         }
     }
@@ -362,7 +354,7 @@ public class CartesManager : MonoBehaviour
     {
         var c = allCards[index];
         mm.cartesModule.Add(c);
-        mm.MyModules[mm.cartesModule.Count - 1].GetComponent<Image>().sprite = mm.cartesModule[mm.cartesModule.Count - 1].illu;
+        mm.slotImage[mm.cartesModule.Count - 1].sprite = mm.cartesModule[mm.cartesModule.Count - 1].picto;
         Destroy(allCards[index].go);
         allCards.RemoveAt(index);
     }

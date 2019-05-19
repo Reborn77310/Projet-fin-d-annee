@@ -16,8 +16,6 @@ public class Salles
 
     public bool isReparing = false;
     public bool isAttacked = false;
-    public string[] equipement = new string[2];
-    public bool[] equipementATK = new bool[2];
 
     public Salles(GameObject go)
     {
@@ -45,14 +43,6 @@ public class SalleManager : MonoBehaviour
         instance = this;
         InitializeSalles();
         pvDuVehiculeText.text = Mathf.RoundToInt(pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
-        allSalles[0].equipement[0] = "Cape d'invisibilité";
-        allSalles[1].equipement[0] = "Cape d'invisibilité";
-        allSalles[2].equipement[0] = "Attaque 03";
-        allSalles[3].equipement[0] = "Attaque 03";
-        allSalles[0].equipementATK[0] = false;
-        allSalles[1].equipementATK[0] = false;
-        allSalles[2].equipementATK[0] = true;
-        allSalles[3].equipementATK[0] = true;
     }
 
     public void ChangeMaterial()
@@ -134,7 +124,7 @@ public class SalleManager : MonoBehaviour
 
     public void MakeCooldownSalle(int SalleVisee, float Cooldown)
     {
-        allSalles[SalleVisee].MyGo.GetComponent<ModuleManager>().MyModules[0].transform.parent.transform.GetChild(2).GetComponent<Image>().color = Color.red;
+
         StartCoroutine(instance.CooldownSalle(SalleVisee, Cooldown));
     }
 
@@ -142,10 +132,22 @@ public class SalleManager : MonoBehaviour
     {
         allSalles[salleVisee].CanPlayHere = false;
         yield return new WaitForSeconds(cooldown);
-        if (allSalles[salleVisee].pv > 0)
+        if (!allSalles[salleVisee].isReparing)
         {
             allSalles[salleVisee].CanPlayHere = true;
-            allSalles[salleVisee].MyGo.GetComponent<ModuleManager>().MyModules[0].transform.parent.transform.GetChild(2).GetComponent<Image>().color = Color.white;
+        }
+
+        ModuleManager mm = allSalles[salleVisee].MyGo.GetComponent<ModuleManager>();
+        mm.slotImage[2].sprite = mm.defaultSprite[2];
+        mm.cartesModule.RemoveAt(2);
+        mm.MyCompteurInt -= 1;
+
+        if (mm.MyCompteurInt <= 0)
+        {
+            mm.MyCompteurInt = 2;
+            Camera.main.GetComponent<CardSound>().CardBurn();
+            mm.cartesModule.RemoveAt(1);
+            mm.slotImage[1].sprite = mm.defaultSprite[1];
         }
 
         yield break;
@@ -154,7 +156,6 @@ public class SalleManager : MonoBehaviour
     IEnumerator ReparationSalle(int salleVisee)
     {
         allSalles[salleVisee].CanPlayHere = false;
-        allSalles[salleVisee].MyGo.GetComponent<ModuleManager>().MyModules[0].transform.parent.transform.GetChild(2).GetComponent<Image>().color = Color.red;
         salleSound.DetruireLaSalle();
 
         while (allSalles[salleVisee].pv < 100)
@@ -168,7 +169,6 @@ public class SalleManager : MonoBehaviour
         pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
         salleSound.ReparerLaSalle();
         allSalles[salleVisee].isReparing = false;
-        allSalles[salleVisee].MyGo.GetComponent<ModuleManager>().MyModules[0].transform.parent.transform.GetChild(2).GetComponent<Image>().color = Color.white;
         yield break;
     }
 

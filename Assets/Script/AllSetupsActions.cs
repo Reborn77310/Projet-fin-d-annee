@@ -31,7 +31,7 @@ public class AllSetupsActions : MonoBehaviour
             string effet = "Tire deux rafales";
             print(effet);
         }
-        else if (wantedName == "Bombe IEM") // ATK
+        else if (wantedName == "CanonIEM") // ATK
         {
             string effet = "Retarde l’exécution de la prochaine action";
             print(effet);

@@ -48,7 +48,6 @@ public class EnnemiManager : MonoBehaviour
     public GameObject badGuy = null;
     public Canvas myCanvas;
     CartesManager cartesManager;
-    private AllSetupsActions allSetup;
 
     public GameObject horsCombat; // Les éléments d'ui hors combat
     public GameObject combat; // Les éléments d'ui en combat
@@ -69,7 +68,6 @@ public class EnnemiManager : MonoBehaviour
 
     private void Awake()
     {
-        allSetup = GetComponent<AllSetupsActions>();
         cartesManager = GetComponent<CartesManager>();
         salleManager = GetComponent<SalleManager>();
         myCanvas = GameObject.Find("Canvas").GetComponent<Canvas>();

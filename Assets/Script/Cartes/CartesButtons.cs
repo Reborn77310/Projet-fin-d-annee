@@ -35,8 +35,7 @@ public class CartesButtons : MonoBehaviour, IEventSystemHandler, IBeginDragHandl
             anim.SetTrigger("Pressed");
             GameMaster.isPlayingACard = true;
             cardSound.HoldCard();
-            int a = cartesManager.allCards[id].cartesTypes;
-            pictoCAJ.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Cartes/Final/Common/Carte" + a.ToString());
+            pictoCAJ.GetComponent<SpriteRenderer>().sprite = cartesManager.allCards[id].picto;
             GameMaster.cardIDBeingPlayed = id;
         }
     }
