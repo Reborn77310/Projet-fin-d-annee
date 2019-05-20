@@ -43,8 +43,8 @@ public class Equipement : MonoBehaviour
 
         effets[4] = "ELECTRONIC. Cleanse virus. Reducts virus duration of 8s";
         effets[5] = "DURATION. Eliminates engine pressure and accelerates cooldown. Cooldown -30%. Last 8s.";
-        effets[0] = "CANALISATION. Fire a blast. Deals 35 damage";
-        effets[3] = "CANALISATION. Fire two blast. Each deals 27 damage";
+        effets[0] = "PROJECTILE. CANALISATION. Fire a blast. Deals 35 damage";
+        effets[3] = "PROJECTILE. CANALISATION. Fire two blast. Each deals 27 damage";
         effets[1] = "CHARGE. ELECTRONIC. Delays the execution of the next action. Delay of 8s.";
         effets[2] = "DURATION. ELECTRONIC. Prevent enemy targeting. Last 10s";
         

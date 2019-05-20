@@ -13,7 +13,7 @@ public class DBM
     public int cible; // index de la cible
     public float timer = 50000; // Temps restant avant lancement de l'action
     public int id = 0; //Correspond à l'id de l'action qui servira à appeler la fonction correspondante.
-                       // Si l'ID est pair la cible se trouve sur l'ADV sinon c'est sur NEST
+
     public DBM()
     {
 
@@ -282,7 +282,6 @@ public class EnnemiManager : MonoBehaviour
 
     public void ChooseAction(int _origine)
     {
-        print(_origine);
         int type = int.Parse(ennemiRooms[_origine].symbole[0].sprite.name.Substring(5, 1));
         if (type == 0)
         {
@@ -484,14 +483,14 @@ public class EnnemiManager : MonoBehaviour
         }
         else if (type == 4)
         {
-            if (AttaquesPool(_origine).Length > 0 && !salleManager.allSalles[3].isReparing)
+            if (AttaquesPool(_origine).Length > 0 && salleManager.allSalles[3].etat != 2)
             {
                 var temp = AttaquesPool(_origine);
                 int rnd = Random.Range(0, temp.Length);
                 var a = IndexActionToDBM();
                 actionPrevues[a].timer = Random.Range(10, 20);
                 actionPrevues[a].origine = _origine;
-                actionPrevues[a].cible = Random.Range(0, 4);
+                actionPrevues[a].cible = 3;
                 actionPrevues[a].id = temp[rnd];
                 ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
@@ -660,12 +659,11 @@ public class EnnemiManager : MonoBehaviour
         else if (id == -1)
         {
             // Defense
-            print("defense");
         }
         else if (id == -2)
         {
             // Defense+
-            print("defense");
+
         }
     }
 
@@ -743,9 +741,4 @@ public class EnnemiManager : MonoBehaviour
         return toReturn;
     }
 
-    public void CheckEquipementElectronique()
-    {
-        // if salle symbole spé
-        // if sall
-    }
 }

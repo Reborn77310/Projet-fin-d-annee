@@ -10,26 +10,37 @@ public class Salles
     public GameObject MyGo;
     public bool CanPlayHere = true;
     public float pv;
+    public int etat = 0; // 0 = fonctionnelle, 1 = cooldown, 2 = reparation
+    public float timer = 0;
+    public float facteurReparation = 1;
+    public float facteurCooldown = 1;
 
-    public bool isDefendu;
-    public int DefendingAmount = 0;
-
-    public bool isReparing = false;
     public bool isAttacked = false;
 
     public Salles(GameObject go)
     {
         MyGo = go;
         pv = 100;
-        isDefendu = false;
     }
 }
 
 public class SalleManager : MonoBehaviour
 {
+    public class Effets
+    {
+        public float duration;
+        public string name;
+        public string[] tags;
+        public int[] salles;
+        public Effets()
+        {
+
+        }
+    }
     private SalleSound salleSound;
     public List<Salles> allSalles = new List<Salles>();
-    public TextMeshProUGUI[] pvSalles; // A ASSIGNER
+    public List<Effets> allEffets = new List<Effets>();
+    public TextMeshProUGUI[] pvSalles;
     public TextMeshProUGUI pvDuVehiculeText;
     public float pvDuVehicule = 300;
     public float pvDuVehiculeMax = 300;
@@ -43,6 +54,10 @@ public class SalleManager : MonoBehaviour
         instance = this;
         InitializeSalles();
         pvDuVehiculeText.text = Mathf.RoundToInt(pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
+    }
+
+    void Update() {
+        GestionEtatDesSalles();
     }
 
     public void ChangeMaterial()
@@ -71,72 +86,31 @@ public class SalleManager : MonoBehaviour
 
     public void DamageSurSalle(int salleVisee, int damage)
     {
-        if (allSalles[salleVisee].isDefendu)
-        {
-            allSalles[salleVisee].isDefendu = false;
-            if (allSalles[salleVisee].DefendingAmount < damage)
-            {
-                var wantedDamage = damage - allSalles[salleVisee].DefendingAmount;
-                allSalles[salleVisee].pv -= wantedDamage;
-                pvDuVehicule -= wantedDamage;
-            }
+        allSalles[salleVisee].pv -= damage;
+        pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
+        pvDuVehicule -= damage;
+        pvDuVehiculeText.text = Mathf.RoundToInt(pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
 
-            pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
-            pvDuVehiculeText.text = Mathf.RoundToInt(pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
-            if (pvDuVehicule <= 0)
+        if (allSalles[salleVisee].pv <= 0)
+        {
+            allSalles[salleVisee].pv = 0;
+            if (allSalles[salleVisee].etat != 2)
             {
-                pvDuVehiculeText.text = "MISSANDEI ?!?";
-                Time.timeScale = 0;
-            }
-            if (allSalles[salleVisee].pv <= 0)
-            {
-                allSalles[salleVisee].pv = 0;
                 allSalles[salleVisee].CanPlayHere = false;
-                ReparationSalle(salleVisee);
-            }
-
-            allSalles[salleVisee].DefendingAmount = 0;
-        }
-        else
-        {
-            allSalles[salleVisee].pv -= damage;
-            pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
-            pvDuVehicule -= damage;
-            pvDuVehiculeText.text = Mathf.RoundToInt(pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
-            if (pvDuVehicule <= 0)
-            {
-                // pvDuVehiculeText.text = "MISSANDEI ?!?";
-                //   Time.timeScale = 0;
-            }
-            if (allSalles[salleVisee].pv <= 0)
-            {
-                allSalles[salleVisee].pv = 0;
-                if (!allSalles[salleVisee].isReparing)
-                {
-                    allSalles[salleVisee].CanPlayHere = false;
-                    StartCoroutine("ReparationSalle", salleVisee);
-                    allSalles[salleVisee].isReparing = true;
-                }
-
+                allSalles[salleVisee].etat = 2;
             }
         }
     }
 
-    public void MakeCooldownSalle(int SalleVisee, float Cooldown)
-    {
-
-        StartCoroutine(instance.CooldownSalle(SalleVisee, Cooldown));
-    }
-
-    IEnumerator CooldownSalle(int salleVisee, float cooldown)
+    public void EnterCooldown(int salleVisee, float cooldown)
     {
         allSalles[salleVisee].CanPlayHere = false;
-        yield return new WaitForSeconds(cooldown);
-        if (!allSalles[salleVisee].isReparing)
-        {
-            allSalles[salleVisee].CanPlayHere = true;
-        }
+        allSalles[salleVisee].etat = 1;
+        allSalles[salleVisee].timer = cooldown;
+    }
 
+    public void GestionDurabiliteFinCD(int salleVisee)
+    {
         ModuleManager mm = allSalles[salleVisee].MyGo.GetComponent<ModuleManager>();
         mm.slotImage[2].sprite = mm.defaultSprite[2];
         mm.cartesModule.RemoveAt(2);
@@ -149,36 +123,48 @@ public class SalleManager : MonoBehaviour
             mm.cartesModule.RemoveAt(1);
             mm.slotImage[1].sprite = mm.defaultSprite[1];
         }
-
-        yield break;
     }
-
-    IEnumerator ReparationSalle(int salleVisee)
+    public void GestionEtatDesSalles()
     {
-        allSalles[salleVisee].CanPlayHere = false;
-        salleSound.DetruireLaSalle();
-
-        while (allSalles[salleVisee].pv < 100)
+        for (int i = 0; i < allSalles.Count; i++)
         {
-            allSalles[salleVisee].pv += 5 * Time.deltaTime;
-            pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
-            yield return new WaitForSeconds(Time.deltaTime);
+
+            if (allSalles[i].etat == 0) // FONCTIONNELLE
+            {
+
+            }
+            else if (allSalles[i].etat == 1) // COOLDOWN
+            {
+                allSalles[i].timer -= Time.deltaTime * allSalles[i].facteurCooldown;
+                if (allSalles[i].timer <= 0)
+                {
+                    GestionDurabiliteFinCD(i);
+                    allSalles[i].etat = 0;
+                    allSalles[i].timer = 0;
+                    allSalles[i].CanPlayHere = true;
+                }
+            }
+            else if (allSalles[i].etat == 2) // REPARATION
+            {
+                if (allSalles[i].timer > 0)
+                {
+                    GestionDurabiliteFinCD(i);
+                    allSalles[i].timer = 0;
+                }
+
+                allSalles[i].pv += 5 * Time.deltaTime * allSalles[i].facteurReparation;
+                pvSalles[i].text = Mathf.RoundToInt(allSalles[i].pv).ToString() + " %";
+                if (allSalles[i].pv >= 100)
+                {
+                    allSalles[i].timer = 0;
+                    allSalles[i].CanPlayHere = true;
+                    allSalles[i].pv = 100;
+                    pvSalles[i].text = Mathf.RoundToInt(allSalles[i].pv).ToString() + " %";
+                    salleSound.ReparerLaSalle();
+                    allSalles[i].etat = 0;
+                }
+            }
+
         }
-        allSalles[salleVisee].CanPlayHere = true;
-        allSalles[salleVisee].pv = 100;
-        pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
-        salleSound.ReparerLaSalle();
-        allSalles[salleVisee].isReparing = false;
-        yield break;
-    }
-
-    public void DefendreSalle(int salleVisee)
-    {
-        pvSalles[salleVisee].text = "DEF";
-    }
-
-    public void CancelDefense(int salleVisee)
-    {
-        pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
     }
 }
