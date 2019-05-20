@@ -13,6 +13,7 @@ public class DBM
     public int cible; // index de la cible
     public float timer = 50000; // Temps restant avant lancement de l'action
     public int id = 0; //Correspond à l'id de l'action qui servira à appeler la fonction correspondante.
+    public string textInfos;
 
     public DBM()
     {
@@ -288,8 +289,8 @@ public class EnnemiManager : MonoBehaviour
 
     public int RandomCible()
     {
-        int toReturn = -1;
-        while(toReturn < 0 && !salleManager.allSalles[toReturn].canBeTarget)
+        int toReturn = Random.Range(0,4);
+        while(!salleManager.allSalles[toReturn].canBeTarget)
         {
             toReturn = Random.Range(0,4);
         }
@@ -897,6 +898,64 @@ public class EnnemiManager : MonoBehaviour
             {
                 ennemiRooms[h].canBeTarget = true;
             }
+        }
+    }
+
+    public void SetTextInDBM(int idDBM)
+    {
+        int id = actionPrevues[idDBM].id;
+        if (id == 1) // Missile 1
+        {
+            actionPrevues[idDBM].textInfos = "";
+        }
+        else if (id == 2) // Missile 2
+        {
+            actionPrevues[idDBM].textInfos = "";
+        }
+        else if (id == 3) // Singularité empêche overdrive
+        {
+            actionPrevues[idDBM].textInfos = "";
+        }
+        else if (id == 4) // Armagedon
+        {
+            actionPrevues[idDBM].textInfos = "";
+        }
+        else if (id == 5) // Poinçonneuse
+        {
+            actionPrevues[idDBM].textInfos = "";
+        }
+        else if (id == 6) // Grappin
+        {
+            actionPrevues[idDBM].textInfos = "";
+        }
+        else if (id == 7) // Drone incendiaire
+        {
+            actionPrevues[idDBM].textInfos = "";
+        }
+        else if (id == 8) // Tourelle DASSAULT
+        {
+            actionPrevues[idDBM].textInfos = "";
+
+        }
+        else if (id == 9) // Fumée
+        {
+            actionPrevues[idDBM].textInfos = "";
+        }
+        else if (id == -1) // Drone anti-projectile
+        {
+            actionPrevues[idDBM].textInfos = "";
+        }
+        else if (id == -2)  // Reflect
+        {
+            actionPrevues[idDBM].textInfos = "";
+        }
+        else if (id == -3)  // Bouclier anti-canalisation
+        {
+           actionPrevues[idDBM].textInfos = "";
+        }
+        else if (id == -4)  // Cloaking
+        {
+            actionPrevues[idDBM].textInfos = "";
         }
     }
 
