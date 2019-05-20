@@ -42,7 +42,7 @@ public class DecalageCartes : MonoBehaviour
 
     public void Highlight(float xGiven)
     {
-        curve2 = AnimationCurve.Linear(0.0F, rt.anchoredPosition.y, 0.2F, -400);
+        curve2 = AnimationCurve.Linear(0.0F, rt.anchoredPosition.y, 0.2F, -350);
         AnimationClip clip = new AnimationClip();
         clip.legacy = true;
         clip.SetCurve("", typeof(Transform), "localPosition.y", curve2);
