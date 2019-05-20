@@ -282,6 +282,7 @@ public class EnnemiManager : MonoBehaviour
 
     public void ChooseAction(int _origine)
     {
+
         int type = int.Parse(ennemiRooms[_origine].symbole[0].sprite.name.Substring(5, 1));
         if (type == 0)
         {

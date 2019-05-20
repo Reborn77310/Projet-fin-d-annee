@@ -14,7 +14,7 @@ public class Salles
     public float timer = 0;
     public float facteurReparation = 1;
     public float facteurCooldown = 1;
-
+    public bool canBeTarget = true;
     public bool isAttacked = false;
 
     public Salles(GameObject go)
@@ -31,12 +31,14 @@ public class SalleManager : MonoBehaviour
         public float duration;
         public string name;
         public string[] tags;
-        public int[] salles;
+        public int salle;
+        public float value;
         public Effets()
         {
 
         }
     }
+
     private SalleSound salleSound;
     public List<Salles> allSalles = new List<Salles>();
     public List<Effets> allEffets = new List<Effets>();
@@ -56,8 +58,10 @@ public class SalleManager : MonoBehaviour
         pvDuVehiculeText.text = Mathf.RoundToInt(pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
     }
 
-    void Update() {
+    void Update()
+    {
         GestionEtatDesSalles();
+        GestionDesEffets();
     }
 
     public void ChangeMaterial()
@@ -166,5 +170,45 @@ public class SalleManager : MonoBehaviour
             }
 
         }
+    }
+
+    public void GestionDesEffets()
+    {
+        for (int i = 0; i < allEffets.Count; i++)
+        {
+            allEffets[i].duration -= Time.deltaTime;
+            if (allEffets[i].duration <= 0)
+            {
+                RemoveEffets(i);
+                allEffets.RemoveAt(i);
+            }
+        }
+    }
+
+    public void RemoveEffets(int i)
+    {
+        if (allEffets[i].name == "Tempo")
+        {
+
+            allSalles[allEffets[i].salle].facteurCooldown -= allEffets[i].value;
+
+        }
+        else if (allEffets[i].name == "Brouilleur")
+        {
+            allSalles[allEffets[i].salle].canBeTarget = true;
+        }
+    }
+
+    public void AddEffets(float _duration, string _name, string[] _tags, int _salle, float _value)
+    {
+        Effets a = new Effets();
+
+        a.duration = _duration;
+        a.name = _name;
+        a.tags = _tags;
+        a.salle = _salle;
+        a.value = _value;
+
+        allEffets.Add(a);
     }
 }

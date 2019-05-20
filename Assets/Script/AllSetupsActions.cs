@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class AllSetupsActions : MonoBehaviour
 {
@@ -54,23 +55,39 @@ public class AllSetupsActions : MonoBehaviour
         }
         else if (wantedName == "Brouilleur") // DEF
         {
+            salleManager.allSalles[wantedRoom].canBeTarget = false;
+            string[] a = new string[]{"DURATION", "ELECTRONIC"};
+            salleManager.AddEffets(10, "Brouilleur", a, wantedRoom, 0);
             cooldown = 22;
             string effet = "Empêche le ciblage ennemi";
             print(effet);
         }
         else if (wantedName == "Turbine") // DEF
         {
+            ModuleManager moduleManager = salleManager.allSalles[wantedRoom].MyGo.GetComponent<ModuleManager>();
+            if(moduleManager.cartesModule.Count > 1)
+            {
+                moduleManager.cartesModule[1].durability += 1;
+            }
+            string[] a = new string[]{"DURATION"};
+            salleManager.AddEffets(6, "Tempo", a, wantedRoom, 0.3f);
             cooldown = 11;
             string effet = "Evacue la pression des moteurs et accélère le temps de recharge";
             print(effet);
         }
         else if (wantedName == "hgOS") // DEF
         {
-            cooldown = 14;
+            // check si wanted room a des effets electronic
+            if(salleManager.allEffets.Exists(item => item.salle == wantedRoom && item.tags.Contains("ELECTRONIC")))
+            {
+                var temp = salleManager.allEffets.FindAll(item => item.salle == wantedRoom && item.tags.Contains("ELECTRONIC"));
+                for (int i = 0; i < temp.Count; i++)
+                {
+                    temp[i].duration -= 8;
+                }
+            }
+            cooldown = 24;
             string effet = "Programme qui purge des virus";
-            // salleManager.allSalles[wantedRoom].isDefendu = true;
-            // salleManager.DefendreSalle(wantedRoom);
-            // StartCoroutine(instance.BlindeMaximalAndCloak(4.0f,wantedRoom));
             print(effet);
         }
         salleManager.EnterCooldown(SalleQuiEffectueAction,cooldown);
