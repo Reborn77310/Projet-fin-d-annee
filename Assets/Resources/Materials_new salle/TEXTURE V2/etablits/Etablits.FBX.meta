@@ -1,0 +1,362 @@
+fileFormatVersion: 2
+guid: 76063587685ec5b429d57856325e577a
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Base_Pince002
+    100002: Base_Pince003
+    100004: Base_Pince004
+    100006: Base_Pince005
+    100008: Base_Pince006
+    100010: Base_Pince007
+    100012: Base_Pince008
+    100014: Boulon_Pince017
+    100016: Boulon_Pince018
+    100018: Boulon_Pince019
+    100020: Boulon_Pince020
+    100022: Boulon_Pince021
+    100024: Boulon_Pince022
+    100026: Boulon_Pince023
+    100028: Boulon_Pince024
+    100030: Boulon_Pince026
+    100032: Boulon_Pince027
+    100034: Boulon_Pince028
+    100036: Boulon_Pince029
+    100038: Boulon_Pince030
+    100040: Boulon_Pince031
+    100042: Boulon_Pince032
+    100044: Boulon_Pince033
+    100046: Boulon_Pince034
+    100048: Boulon_Pince035
+    100050: Boulon_Pince036
+    100052: Box115
+    100054: Box263
+    100056: Box264
+    100058: Cylinder027
+    100060: //RootNode
+    100062: Kit de pinces002
+    100064: Kit de pinces003
+    100066: Milieu_Pince008
+    100068: Milieu_Pince009
+    100070: Milieu_Pince010
+    100072: Milieu_Pince011
+    100074: Milieu_Pince012
+    100076: Milieu_Pince013
+    100078: Milieu_Pince014
+    100080: Pince1_P004
+    100082: Pince1_P005
+    100084: Pince1_P006
+    100086: Pince1_P007
+    100088: Pince1_P008
+    100090: Pince1_P009
+    100092: Pointe_Pince007
+    100094: Pointe_Pince008
+    100096: Pointe_Pince009
+    100098: Pointe_Pince010
+    100100: Pointe_Pince011
+    100102: Pointe_Pince012
+    100104: Pointe_Pince013
+    400000: Base_Pince002
+    400002: Base_Pince003
+    400004: Base_Pince004
+    400006: Base_Pince005
+    400008: Base_Pince006
+    400010: Base_Pince007
+    400012: Base_Pince008
+    400014: Boulon_Pince017
+    400016: Boulon_Pince018
+    400018: Boulon_Pince019
+    400020: Boulon_Pince020
+    400022: Boulon_Pince021
+    400024: Boulon_Pince022
+    400026: Boulon_Pince023
+    400028: Boulon_Pince024
+    400030: Boulon_Pince026
+    400032: Boulon_Pince027
+    400034: Boulon_Pince028
+    400036: Boulon_Pince029
+    400038: Boulon_Pince030
+    400040: Boulon_Pince031
+    400042: Boulon_Pince032
+    400044: Boulon_Pince033
+    400046: Boulon_Pince034
+    400048: Boulon_Pince035
+    400050: Boulon_Pince036
+    400052: Box115
+    400054: Box263
+    400056: Box264
+    400058: Cylinder027
+    400060: //RootNode
+    400062: Kit de pinces002
+    400064: Kit de pinces003
+    400066: Milieu_Pince008
+    400068: Milieu_Pince009
+    400070: Milieu_Pince010
+    400072: Milieu_Pince011
+    400074: Milieu_Pince012
+    400076: Milieu_Pince013
+    400078: Milieu_Pince014
+    400080: Pince1_P004
+    400082: Pince1_P005
+    400084: Pince1_P006
+    400086: Pince1_P007
+    400088: Pince1_P008
+    400090: Pince1_P009
+    400092: Pointe_Pince007
+    400094: Pointe_Pince008
+    400096: Pointe_Pince009
+    400098: Pointe_Pince010
+    400100: Pointe_Pince011
+    400102: Pointe_Pince012
+    400104: Pointe_Pince013
+    2100000: 'Material #28'
+    2100002: 'Material #29'
+    2100004: 'Material #30'
+    2100006: 'Material #25'
+    2100008: Pinces
+    2100010: 'Material #26'
+    2100012: 'Material #27'
+    2300000: Base_Pince002
+    2300002: Base_Pince003
+    2300004: Base_Pince004
+    2300006: Base_Pince005
+    2300008: Base_Pince006
+    2300010: Base_Pince007
+    2300012: Base_Pince008
+    2300014: Boulon_Pince017
+    2300016: Boulon_Pince018
+    2300018: Boulon_Pince019
+    2300020: Boulon_Pince020
+    2300022: Boulon_Pince021
+    2300024: Boulon_Pince022
+    2300026: Boulon_Pince023
+    2300028: Boulon_Pince024
+    2300030: Boulon_Pince026
+    2300032: Boulon_Pince027
+    2300034: Boulon_Pince028
+    2300036: Boulon_Pince029
+    2300038: Boulon_Pince030
+    2300040: Boulon_Pince031
+    2300042: Boulon_Pince032
+    2300044: Boulon_Pince033
+    2300046: Boulon_Pince034
+    2300048: Boulon_Pince035
+    2300050: Boulon_Pince036
+    2300052: Box115
+    2300054: Box263
+    2300056: Box264
+    2300058: Cylinder027
+    2300060: Kit de pinces002
+    2300062: Kit de pinces003
+    2300064: Milieu_Pince008
+    2300066: Milieu_Pince009
+    2300068: Milieu_Pince010
+    2300070: Milieu_Pince011
+    2300072: Milieu_Pince012
+    2300074: Milieu_Pince013
+    2300076: Milieu_Pince014
+    2300078: Pince1_P004
+    2300080: Pince1_P005
+    2300082: Pince1_P006
+    2300084: Pince1_P007
+    2300086: Pince1_P008
+    2300088: Pince1_P009
+    2300090: Pointe_Pince007
+    2300092: Pointe_Pince008
+    2300094: Pointe_Pince009
+    2300096: Pointe_Pince010
+    2300098: Pointe_Pince011
+    2300100: Pointe_Pince012
+    2300102: Pointe_Pince013
+    3300000: Base_Pince002
+    3300002: Base_Pince003
+    3300004: Base_Pince004
+    3300006: Base_Pince005
+    3300008: Base_Pince006
+    3300010: Base_Pince007
+    3300012: Base_Pince008
+    3300014: Boulon_Pince017
+    3300016: Boulon_Pince018
+    3300018: Boulon_Pince019
+    3300020: Boulon_Pince020
+    3300022: Boulon_Pince021
+    3300024: Boulon_Pince022
+    3300026: Boulon_Pince023
+    3300028: Boulon_Pince024
+    3300030: Boulon_Pince026
+    3300032: Boulon_Pince027
+    3300034: Boulon_Pince028
+    3300036: Boulon_Pince029
+    3300038: Boulon_Pince030
+    3300040: Boulon_Pince031
+    3300042: Boulon_Pince032
+    3300044: Boulon_Pince033
+    3300046: Boulon_Pince034
+    3300048: Boulon_Pince035
+    3300050: Boulon_Pince036
+    3300052: Box115
+    3300054: Box263
+    3300056: Box264
+    3300058: Cylinder027
+    3300060: Kit de pinces002
+    3300062: Kit de pinces003
+    3300064: Milieu_Pince008
+    3300066: Milieu_Pince009
+    3300068: Milieu_Pince010
+    3300070: Milieu_Pince011
+    3300072: Milieu_Pince012
+    3300074: Milieu_Pince013
+    3300076: Milieu_Pince014
+    3300078: Pince1_P004
+    3300080: Pince1_P005
+    3300082: Pince1_P006
+    3300084: Pince1_P007
+    3300086: Pince1_P008
+    3300088: Pince1_P009
+    3300090: Pointe_Pince007
+    3300092: Pointe_Pince008
+    3300094: Pointe_Pince009
+    3300096: Pointe_Pince010
+    3300098: Pointe_Pince011
+    3300100: Pointe_Pince012
+    3300102: Pointe_Pince013
+    4300000: Box115
+    4300002: Cylinder027
+    4300004: Kit de pinces002
+    4300006: Pince1_P004
+    4300008: Base_Pince002
+    4300010: Boulon_Pince019
+    4300012: Milieu_Pince008
+    4300014: Pointe_Pince007
+    4300016: Boulon_Pince021
+    4300018: Boulon_Pince018
+    4300020: Pince1_P006
+    4300022: Boulon_Pince017
+    4300024: Pince1_P005
+    4300026: Boulon_Pince020
+    4300028: Base_Pince007
+    4300030: Boulon_Pince031
+    4300032: Milieu_Pince013
+    4300034: Boulon_Pince030
+    4300036: Pointe_Pince012
+    4300038: Base_Pince003
+    4300040: Boulon_Pince022
+    4300042: Milieu_Pince009
+    4300044: Boulon_Pince023
+    4300046: Pointe_Pince008
+    4300048: Base_Pince006
+    4300050: Boulon_Pince029
+    4300052: Milieu_Pince012
+    4300054: Boulon_Pince028
+    4300056: Pointe_Pince011
+    4300058: Pointe_Pince009
+    4300060: Base_Pince004
+    4300062: Boulon_Pince024
+    4300064: Milieu_Pince010
+    4300066: Pointe_Pince010
+    4300068: Boulon_Pince027
+    4300070: Milieu_Pince011
+    4300072: Boulon_Pince026
+    4300074: Base_Pince005
+    4300076: Boulon_Pince035
+    4300078: Pince1_P008
+    4300080: Pince1_P009
+    4300082: Boulon_Pince036
+    4300084: Kit de pinces003
+    4300086: Boulon_Pince034
+    4300088: Pince1_P007
+    4300090: Base_Pince008
+    4300092: Boulon_Pince032
+    4300094: Milieu_Pince014
+    4300096: Boulon_Pince033
+    4300098: Pointe_Pince013
+    4300100: Box263
+    4300102: Box264
+    7400000: Take 001
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
