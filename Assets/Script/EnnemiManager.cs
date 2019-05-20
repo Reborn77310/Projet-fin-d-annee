@@ -36,6 +36,10 @@ public class EnnemiRooms
     public int etat = 1;
     public bool isAttacking = false;
     public int iteration = 0;
+    public bool canBeTarget = true;
+    public float projectileReduction = 1; 
+    public float cannalisationReduction = 1;
+    public bool reflect = false;
     public EnnemiRooms(float _timer)
     {
         timer = _timer;
@@ -68,6 +72,7 @@ public class EnnemiManager : MonoBehaviour
 
     public List<DBM> actionPrevues = new List<DBM>();
     public RectTransform[] sallesRT;
+    public List<SalleManager.Effets> effetsEnnemi = new List<SalleManager.Effets>();
 
     private void Awake()
     {
@@ -137,8 +142,9 @@ public class EnnemiManager : MonoBehaviour
         cartesManager.DrawCards();
     }
 
-    public void PerdrePvLocal(int wantedRoom, int wantedDamage)
+    public void PerdrePvLocal(int wantedRoom, float wantedDamage)
     {
+
         ennemiRooms[wantedRoom].pv -= wantedDamage;
         float fill = (ennemiRooms[wantedRoom].pv / ennemiRooms[wantedRoom].pvMax) * 100;
         ennemiRooms[wantedRoom].pvText.text = Mathf.RoundToInt(fill).ToString() + " %";
@@ -152,7 +158,7 @@ public class EnnemiManager : MonoBehaviour
         }
     }
 
-    public void PerdrePvGlobal(int numberOfPv)
+    public void PerdrePvGlobal(float numberOfPv)
     {
         pvTotaux -= numberOfPv;
         float fill = pvTotaux / pvTotauxMax * 100;
@@ -280,6 +286,16 @@ public class EnnemiManager : MonoBehaviour
         boutonSpawn.SetActive(false);
     }
 
+    public int RandomCible()
+    {
+        int toReturn = -1;
+        while(toReturn < 0 && !salleManager.allSalles[toReturn].canBeTarget)
+        {
+            toReturn = Random.Range(0,4);
+        }
+        return toReturn;
+    }
+
     public void ChooseAction(int _origine)
     {
 
@@ -299,7 +315,7 @@ public class EnnemiManager : MonoBehaviour
                     var a = IndexActionToDBM();
                     actionPrevues[a].timer = Random.Range(10, 20);
                     actionPrevues[a].origine = _origine;
-                    actionPrevues[a].cible = Random.Range(0, 4);
+                    actionPrevues[a].cible = RandomCible();
                     actionPrevues[a].id = temp[0];
                     ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
@@ -316,7 +332,7 @@ public class EnnemiManager : MonoBehaviour
                     var a = IndexActionToDBM();
                     actionPrevues[a].timer = Random.Range(10, 20);
                     actionPrevues[a].origine = _origine;
-                    actionPrevues[a].cible = Random.Range(0, 4);
+                    actionPrevues[a].cible = RandomCible();
                     actionPrevues[a].id = temp[rnd];
                     ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
@@ -334,7 +350,7 @@ public class EnnemiManager : MonoBehaviour
                 var a = IndexActionToDBM();
                 actionPrevues[a].timer = Random.Range(10, 20);
                 actionPrevues[a].origine = _origine;
-                actionPrevues[a].cible = Random.Range(0, 4);
+                actionPrevues[a].cible = RandomCible();
                 actionPrevues[a].id = ennemiRooms[_origine].actions[rnd];
                 ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
@@ -371,7 +387,7 @@ public class EnnemiManager : MonoBehaviour
                     var a = IndexActionToDBM();
                     actionPrevues[a].timer = Random.Range(10, 20);
                     actionPrevues[a].origine = _origine;
-                    actionPrevues[a].cible = Random.Range(0, 4);
+                    actionPrevues[a].cible = RandomCible();
                     actionPrevues[a].id = temp[0];
                     ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
@@ -385,7 +401,7 @@ public class EnnemiManager : MonoBehaviour
                     var a = IndexActionToDBM();
                     actionPrevues[a].timer = Random.Range(10, 20);
                     actionPrevues[a].origine = _origine;
-                    actionPrevues[a].cible = Random.Range(0, 4);
+                    actionPrevues[a].cible = RandomCible();
                     actionPrevues[a].id = temp[rnd];
                     ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
@@ -400,7 +416,7 @@ public class EnnemiManager : MonoBehaviour
                 var a = IndexActionToDBM();
                 actionPrevues[a].timer = Random.Range(10, 20);
                 actionPrevues[a].origine = _origine;
-                actionPrevues[a].cible = Random.Range(0, 4);
+                actionPrevues[a].cible = RandomCible();
                 actionPrevues[a].id = ennemiRooms[_origine].actions[rnd];
                 ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
@@ -430,7 +446,7 @@ public class EnnemiManager : MonoBehaviour
                 var a = IndexActionToDBM();
                 actionPrevues[a].timer = Random.Range(10, 20);
                 actionPrevues[a].origine = _origine;
-                actionPrevues[a].cible = Random.Range(0, 4);
+                actionPrevues[a].cible = RandomCible();
                 actionPrevues[a].id = temp[rnd];
                 ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
@@ -448,7 +464,7 @@ public class EnnemiManager : MonoBehaviour
                 var a = IndexActionToDBM();
                 actionPrevues[a].timer = Random.Range(10, 20);
                 actionPrevues[a].origine = _origine;
-                actionPrevues[a].cible = Random.Range(0, 4);
+                actionPrevues[a].cible = RandomCible();
                 actionPrevues[a].id = temp[rnd];
                 ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
@@ -462,7 +478,7 @@ public class EnnemiManager : MonoBehaviour
                 var a = IndexActionToDBM();
                 actionPrevues[a].timer = Random.Range(10, 20);
                 actionPrevues[a].origine = _origine;
-                actionPrevues[a].cible = Random.Range(0, 4);
+                actionPrevues[a].cible = RandomCible();
                 actionPrevues[a].id = ennemiRooms[_origine].actions[rnd];
                 ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
@@ -508,7 +524,7 @@ public class EnnemiManager : MonoBehaviour
                 var a = IndexActionToDBM();
                 actionPrevues[a].timer = Random.Range(10, 20);
                 actionPrevues[a].origine = _origine;
-                actionPrevues[a].cible = Random.Range(0, 4);
+                actionPrevues[a].cible = RandomCible();
                 actionPrevues[a].id = ennemiRooms[_origine].actions[rnd];
                 ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
@@ -649,22 +665,115 @@ public class EnnemiManager : MonoBehaviour
 
     public void ActionsEnnemies(int id, int i)
     {
-        if (id == 1)
+        //print(id + " " + actionPrevues[i].origine);
+        if (id == 1) // Missile 1
         {
-            salleManager.DamageSurSalle(actionPrevues[i].cible, 100); // DEGATS SET A 0 ATTENTION
+            print("Missile 1 " + actionPrevues[i].origine);
+            // PROJECTILE
+            salleManager.DamageSurSalle(actionPrevues[i].cible, 25);
         }
-        else if (id == 2)
+        else if (id == 2) // Missile 2
         {
-            salleManager.DamageSurSalle(actionPrevues[i].cible, 100); // DEGATS SET A 0 ATTENTION
+            print("Missile 2 " + actionPrevues[i].origine);
+            // PROJECTILE
+            salleManager.DamageSurSalle(actionPrevues[i].cible, 45);
         }
-        else if (id == -1)
+        else if (id == 3) // Singularité empêche overdrive
         {
-            // Defense
+            print("Singularity " + actionPrevues[i].origine);
+            salleManager.allSalles[actionPrevues[i].cible].canOverdrive = false;
+            string[] a = new string[] { "DURATION", "ELECTRONIC" };
+            salleManager.AddEffets(18, "Singularity", a, actionPrevues[i].cible, 0);
         }
-        else if (id == -2)
+        else if (id == 4) // Armagedon
         {
-            // Defense+
+            // PROJECTILE
+            print("Armagedon " + actionPrevues[i].origine);
+            salleManager.DamageSurSalle(actionPrevues[i].cible, 70);
+            // durability -2
+        }
+        else if (id == 5) // Poinçonneuse
+        {
+            // PROJECTILE
+            print("Poinçonneuse " + actionPrevues[i].origine);
+            salleManager.DamageSurSalle(actionPrevues[i].cible, 15);
+            if (salleManager.allSalles[actionPrevues[i].cible].pv <= 15)
+            {
+                // Enlever la carte de gauche dans la main
+            }
+        }
+        else if (id == 6) // Grappin
+        {
+            // Brouille le radar
+            print("Grappin " + actionPrevues[i].origine);
+            string[] a = new string[] { "DURATION", "PROJECTILE" };
+            salleManager.AddEffets(10, "Grappin", a, actionPrevues[i].cible, 0);
+        }
+        else if (id == 7) // Drone incendiaire
+        {
+            print("Drone incendiaire " + actionPrevues[i].origine);
+            // Le drone
+            // DRONE CHARGE
+        }
+        else if (id == 8) // Tourelle DASSAULT
+        {
+            print("dassault " + actionPrevues[i].origine);
+            // PROJECTILE && CANALISATION
+            if (salleManager.allSalles[actionPrevues[i].cible].etat == 1)
+            {
+                salleManager.DamageSurSalle(actionPrevues[i].cible, 10);
+                salleManager.DamageSurSalle(actionPrevues[i].cible, 10);
+                salleManager.DamageSurSalle(actionPrevues[i].cible, 10);
+                salleManager.DamageSurSalle(actionPrevues[i].cible, 10);
+                salleManager.DamageSurSalle(actionPrevues[i].cible, 10);
+            }
+            else
+            {
+                salleManager.DamageSurSalle(actionPrevues[i].cible, 5);
+                salleManager.DamageSurSalle(actionPrevues[i].cible, 5);
+                salleManager.DamageSurSalle(actionPrevues[i].cible, 5);
+                salleManager.DamageSurSalle(actionPrevues[i].cible, 5);
+                salleManager.DamageSurSalle(actionPrevues[i].cible, 5);
+            }
 
+        }
+        else if (id == 9) // Fumée
+        {
+            print("Fumée " + actionPrevues[i].origine);
+            // declencher smoke ajouter perte de durabilité
+            string[] a = new string[] { "DURATION", "CHIMIC" };
+            salleManager.AddEffets(20, "Smoke", a, actionPrevues[i].cible, 0);
+        }
+        else if (id == -1) // Drone anti-projectile
+        {
+            print("anti-proj " + actionPrevues[i].origine);
+            string[] a = new string[] { "DURATION", "DRONE" };
+            ennemiRooms[actionPrevues[i].cible].projectileReduction -= 0.5f;
+            AddEffets(15, "Terra", a, actionPrevues[i].cible, -0.5f);
+        }
+        else if (id == -2)  // Reflect
+        {
+            print("reflect " + actionPrevues[i].origine);
+            string[] a = new string[] { "DURATION", "GAMMA" };
+            ennemiRooms[actionPrevues[i].cible].reflect = true;
+            AddEffets(10, "Reflect", a, actionPrevues[i].cible, 0);
+        }
+        else if (id == -3)  // Bouclier anti-canalisation
+        {
+            print("anti-cana " + actionPrevues[i].origine);
+            string[] a = new string[] { "DURATION", "ELECTRONIC" };
+            ennemiRooms[actionPrevues[i].cible].cannalisationReduction -= 1f;
+            AddEffets(10, "Anti-cannalisation", a, actionPrevues[i].cible, -1f);
+        }
+        else if (id == -4)  // Cloaking
+        {
+            print("cloaking " + actionPrevues[i].origine);
+            string[] a = new string[] { "DURATION", "GAMMA" };
+            for (int h = 0; h < ennemiRooms.Count; h++)
+            {
+                ennemiRooms[h].canBeTarget = false;
+            }
+            AddEffets(5, "Cloaking", a, actionPrevues[i].cible, 0);
         }
     }
 
@@ -740,6 +849,55 @@ public class EnnemiManager : MonoBehaviour
             }
         }
         return toReturn;
+    }
+
+    public void AddEffets(float _duration, string _name, string[] _tags, int _salle, float _value)
+    {
+        SalleManager.Effets a = new SalleManager.Effets();
+
+        a.duration = _duration;
+        a.name = _name;
+        a.tags = _tags;
+        a.salle = _salle;
+        a.value = _value;
+
+        effetsEnnemi.Add(a);
+    }
+
+        public void GestionDesEffets()
+    {
+        for (int i = 0; i < effetsEnnemi.Count; i++)
+        {
+            effetsEnnemi[i].duration -= Time.deltaTime;
+            if (effetsEnnemi[i].duration <= 0)
+            {
+                RemoveEffets(i);
+                effetsEnnemi.RemoveAt(i);
+            }
+        }
+    }
+
+    public void RemoveEffets(int i)
+    {
+        if (effetsEnnemi[i].name == "Terra")
+        {
+            ennemiRooms[effetsEnnemi[i].salle].projectileReduction += effetsEnnemi[i].value;
+        }
+        else if (effetsEnnemi[i].name == "Reflect")
+        {
+            ennemiRooms[effetsEnnemi[i].salle].reflect = false;
+        }
+        else if (effetsEnnemi[i].name == "Anti-cannalisation")
+        {
+            ennemiRooms[effetsEnnemi[i].salle].cannalisationReduction += effetsEnnemi[i].value;
+        }
+        else if (effetsEnnemi[i].name == "Cloaking")
+        {
+            for (int h = 0; h < ennemiRooms.Count; h++)
+            {
+                ennemiRooms[h].canBeTarget = true;
+            }
+        }
     }
 
 }

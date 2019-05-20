@@ -305,7 +305,7 @@ public class GameMaster : MonoBehaviour
 
             for (int i = 0; i < sallesTouchees.Length; i++)
             {
-                if (sallesTouchees[i] >= 0)
+                if (sallesTouchees[i] >= 0 && ennemiManager.ennemiRooms[sallesTouchees[i]].canBeTarget)
                 {
                     if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
                     {

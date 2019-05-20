@@ -15,6 +15,7 @@ public class Salles
     public float facteurReparation = 1;
     public float facteurCooldown = 1;
     public bool canBeTarget = true;
+    public bool canOverdrive = true;
     public bool isAttacked = false;
 
     public Salles(GameObject go)
@@ -189,13 +190,23 @@ public class SalleManager : MonoBehaviour
     {
         if (allEffets[i].name == "Tempo")
         {
-
             allSalles[allEffets[i].salle].facteurCooldown -= allEffets[i].value;
-
         }
         else if (allEffets[i].name == "Brouilleur")
         {
             allSalles[allEffets[i].salle].canBeTarget = true;
+        }
+        else if (allEffets[i].name == "Singularity")
+        {
+            allSalles[allEffets[i].salle].canOverdrive = true;
+        }
+        else if (allEffets[i].name == "Grappin")
+        {
+            // desactiver brouillage radar
+        }
+        else if (allEffets[i].name == "Smoke")
+        {
+            // desactiver smoke
         }
     }
 
