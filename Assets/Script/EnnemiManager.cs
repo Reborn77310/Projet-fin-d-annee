@@ -13,7 +13,7 @@ public class DBM
     public int cible; // index de la cible
     public float timer = 50000; // Temps restant avant lancement de l'action
     public int id = 0; //Correspond à l'id de l'action qui servira à appeler la fonction correspondante.
-    public string textInfos;
+    public string textInfos ="";
 
     public DBM()
     {
@@ -38,7 +38,7 @@ public class EnnemiRooms
     public bool isAttacking = false;
     public int iteration = 0;
     public bool canBeTarget = true;
-    public float projectileReduction = 1; 
+    public float projectileReduction = 1;
     public float cannalisationReduction = 1;
     public bool reflect = false;
     public EnnemiRooms(float _timer)
@@ -289,10 +289,10 @@ public class EnnemiManager : MonoBehaviour
 
     public int RandomCible()
     {
-        int toReturn = Random.Range(0,4);
-        while(!salleManager.allSalles[toReturn].canBeTarget)
+        int toReturn = Random.Range(0, 4);
+        while (!salleManager.allSalles[toReturn].canBeTarget)
         {
-            toReturn = Random.Range(0,4);
+            toReturn = Random.Range(0, 4);
         }
         return toReturn;
     }
@@ -567,7 +567,11 @@ public class EnnemiManager : MonoBehaviour
 
                     DBM_timer[i].text = actionPrevues[i].timer.ToString("F3") + "s ";
                     DBM_Symbole[i].text = (actionPrevues[i].origine + 1).ToString();
-
+                    if (actionPrevues[i].textInfos == "")
+                    {
+                        SetTextInDBM(i);
+                        print("a");
+                    }
                 }
                 else
                 {
@@ -580,6 +584,8 @@ public class EnnemiManager : MonoBehaviour
                 }
             }
         }
+
+        BattleLog.ChangeText(actionPrevues[0].textInfos);
     }
 
     public void GestionDesActions()
@@ -601,6 +607,7 @@ public class EnnemiManager : MonoBehaviour
                     ennemiRooms[actionPrevues[i].origine].isAttacking = false;
                     actionPrevues[i].id = 0;
                     actionPrevues[i].timer = 50000;
+                    actionPrevues[i].textInfos = "";
                 }
             }
         }
@@ -620,6 +627,7 @@ public class EnnemiManager : MonoBehaviour
                 }
                 actionPrevues[i].id = 0;
                 actionPrevues[i].timer = 50000;
+                actionPrevues[i].textInfos = "";
                 i = actionPrevues.Count;
             }
         }
@@ -865,7 +873,7 @@ public class EnnemiManager : MonoBehaviour
         effetsEnnemi.Add(a);
     }
 
-        public void GestionDesEffets()
+    public void GestionDesEffets()
     {
         for (int i = 0; i < effetsEnnemi.Count; i++)
         {
@@ -906,56 +914,55 @@ public class EnnemiManager : MonoBehaviour
         int id = actionPrevues[idDBM].id;
         if (id == 1) // Missile 1
         {
-            actionPrevues[idDBM].textInfos = "";
+            actionPrevues[idDBM].textInfos = "<b><color=#E6742E>PROJECTILE</color></b>" + "\n" + "Deals <color=#7841BB>25 damage</color>.";
         }
         else if (id == 2) // Missile 2
         {
-            actionPrevues[idDBM].textInfos = "";
+            actionPrevues[idDBM].textInfos = "<b><color=#E6742E>PROJECTILE</color></b>" + "\n" + "Deals <color=#7841BB>45 damage</color>.";
         }
         else if (id == 3) // Singularité empêche overdrive
         {
-            actionPrevues[idDBM].textInfos = "";
+            actionPrevues[idDBM].textInfos = "<b><color=#B97D31>ELECTRONIC</color></b>" + "\n" + "Prevents the use of overdrive effects. Last 18s.";
         }
         else if (id == 4) // Armagedon
         {
-            actionPrevues[idDBM].textInfos = "";
+            actionPrevues[idDBM].textInfos = "<b><color=#E6742E>GAMMA</color></b>" + "\n" + "Deals <color=#7841BB>45 damage</color>. Reduces card durability of 2.";
         }
         else if (id == 5) // Poinçonneuse
         {
-            actionPrevues[idDBM].textInfos = "";
+            actionPrevues[idDBM].textInfos = "<b><color=#E6742E>MINES</color></b>" + "\n" + "Deals <color=#7841BB>15 damage</color>. If a room is down as a result of this action, discard your leftmost card.";
         }
         else if (id == 6) // Grappin
         {
-            actionPrevues[idDBM].textInfos = "";
+            actionPrevues[idDBM].textInfos = "<b><color=#B97D31>DURATION, PROJECTILE</color></b>" + "\n" + "Blurs your radar. Last 10s.";
         }
         else if (id == 7) // Drone incendiaire
         {
-            actionPrevues[idDBM].textInfos = "";
+            actionPrevues[idDBM].textInfos = "<b><color=#E6742E>DRONE</color></b>" + "\n" + "Deals <color=#7841BB>35 damage</color>. Set the room on fire for 10s.";
         }
         else if (id == 8) // Tourelle DASSAULT
         {
-            actionPrevues[idDBM].textInfos = "";
-
+            actionPrevues[idDBM].textInfos = "<b><color=#E6742E>PROJECTILE, CANALIZATION</color></b>" + "\n" + "Deals <color=#7841BB>5 damage</color> 5 times. Deals <color=#7841BB>5 more damage</color> each time if target room is in cooldown.";
         }
         else if (id == 9) // Fumée
         {
-            actionPrevues[idDBM].textInfos = "";
+            actionPrevues[idDBM].textInfos = "<b><color=#B97D31>DURATION, CHIMIC</color></b>" + "\n" + "Smokes. Last 20s. Reduces card durability of 1.";
         }
         else if (id == -1) // Drone anti-projectile
         {
-            actionPrevues[idDBM].textInfos = "";
+            actionPrevues[idDBM].textInfos = "<b><color=#6289F3>DURATION, DRONE</color></b>" + "\n" + "Reduces projectiles effectiveness against target for 50%. Last 15s.";
         }
         else if (id == -2)  // Reflect
         {
-            actionPrevues[idDBM].textInfos = "";
+            actionPrevues[idDBM].textInfos = "<b><color=#6289F3>DURATION, GAMMA</color></b>" + "\n" + "Duplicates offensive actions against target. Last 10s.";
         }
         else if (id == -3)  // Bouclier anti-canalisation
         {
-           actionPrevues[idDBM].textInfos = "";
+            actionPrevues[idDBM].textInfos = "<b><color=#6289F3>DURATION</color></b>" + "\n" + "Reduces canalization effectiveness against target for 100%. Last 10s.";
         }
         else if (id == -4)  // Cloaking
         {
-            actionPrevues[idDBM].textInfos = "";
+            actionPrevues[idDBM].textInfos = "<b><color=#6289F3>DURATION, GAMMA</color></b>" + "\n" + "<size=120%><b>The Voydroc's</b></size> rooms can't be targeted. Last 5.";
         }
     }
 
