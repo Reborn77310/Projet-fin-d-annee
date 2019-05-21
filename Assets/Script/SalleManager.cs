@@ -13,6 +13,7 @@ public class Salles
     public float pv;
     public int etat = 0; // 0 = fonctionnelle, 1 = cooldown, 2 = reparation
     public float timer = 0;
+    public float timerMax = 0;
     public float facteurReparation = 1;
     public float facteurCooldown = 1;
     public bool canBeTarget = true;
@@ -54,6 +55,7 @@ public class SalleManager : MonoBehaviour
     public EnnemiManager ennemiManager;
     public RectTransform[] sallesRT;
     public Animator[] animators;
+    public Image[] fillCD;
 
     void Start()
     {
@@ -116,7 +118,9 @@ public class SalleManager : MonoBehaviour
         allSalles[salleVisee].CanPlayHere = false;
         allSalles[salleVisee].etat = 1;
         allSalles[salleVisee].timer = cooldown;
-        animators[salleVisee].SetBool("cooldown", true);
+        allSalles[salleVisee].timerMax = cooldown;
+        //animators[salleVisee].SetBool("cooldown", true);
+        fillCD[salleVisee].fillAmount = 1;
     }
 
     public void GestionDurabiliteFinCD(int salleVisee)
@@ -146,9 +150,11 @@ public class SalleManager : MonoBehaviour
             else if (allSalles[i].etat == 1) // COOLDOWN
             {
                 allSalles[i].timer -= Time.deltaTime * allSalles[i].facteurCooldown;
+                fillCD[i].fillAmount = allSalles[i].timer / allSalles[i].timerMax;
                 if (allSalles[i].timer <= 0)
                 {
-                    animators[i].SetBool("cooldown", false);
+                    fillCD[i].fillAmount = 0;
+                    //animators[i].SetBool("cooldown", false);
                     GestionDurabiliteFinCD(i);
                     allSalles[i].etat = 0;
                     allSalles[i].timer = 0;
@@ -159,10 +165,11 @@ public class SalleManager : MonoBehaviour
             {
                 if (allSalles[i].timer > 0)
                 {
-                    if(animators[i].GetBool("cooldown"))
-                    {
-                        animators[i].SetBool("cooldown", false);
-                    }
+                    // if(animators[i].GetBool("cooldown"))
+                    // {
+                    //     animators[i].SetBool("cooldown", false);
+                    // }
+                    fillCD[i].fillAmount = 0;
                     GestionDurabiliteFinCD(i);
                     allSalles[i].timer = 0;
                 }

@@ -142,6 +142,7 @@ public class GameMaster : MonoBehaviour
                             zoneSelectionADV.GetComponent<parent>().RotationZones(mm.MyModules[1].transform);
                             if (equipement.allEquipements[CheckEquipementSelected(mm)].attaque)
                             {
+                                print("ici");
                                 overlapEnnemi = zoneSelectionADV.GetComponent<parent>().CheckOverlap(ennemiManager.sallesRT);
                                 for (int x = 0; x < ennemiManager.animators.Length; x++)
                                 {
@@ -165,6 +166,10 @@ public class GameMaster : MonoBehaviour
                             else
                             {
                                 overlapNest = zoneSelectionADV.GetComponent<parent>().CheckOverlap(salleManager.sallesRT);
+                                for (int g = 0; g < ennemiManager.animators.Length; g++)
+                                {
+                                    ennemiManager.animators[g].SetBool("hightlight", false);
+                                }
                                 for (int x = 0; x < salleManager.animators.Length; x++)
                                 {
                                     if (overlapNest.Contains(x))
