@@ -6,7 +6,7 @@ using TMPro;
 
 public class Salles
 {
-
+    public GameObject SpawnParticleFeedback;
     public GameObject MyGo;
     public bool CanPlayHere = true;
     public float pv;
@@ -22,6 +22,7 @@ public class Salles
     {
         MyGo = go;
         pv = 100;
+        SpawnParticleFeedback = MyGo.transform.GetChild(0).gameObject;
     }
 }
 
