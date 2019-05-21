@@ -31,7 +31,8 @@ public class GameMaster : MonoBehaviour
     public GameObject uiPlaceHolder;
     public GameObject zoneSelectionADV;
     public Canvas myCanvas;
-
+    public bool isPaused = false;
+    public GameObject pause;
 
     void Awake()
     {
@@ -85,6 +86,21 @@ public class GameMaster : MonoBehaviour
             {
                 salleManager.animators[i].SetBool("hightlight", false);
                 salleManager.fillCD[i].fillAmount = 0;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (isPaused)
+            {
+                isPaused = false;
+                pause.SetActive(false);
+                Time.timeScale = 1;
+            }
+            else
+            {
+                isPaused = true;
+                pause.SetActive(true);
+                Time.timeScale = 0;
             }
         }
     }
