@@ -276,7 +276,6 @@ public class EnnemiManager : MonoBehaviour
     {
         horsCombat.SetActive(false);
         combat.SetActive(true);
-        boutonSpawn.SetActive(true);
     }
 
     public void PassageEnPhaseLente()

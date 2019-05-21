@@ -11,24 +11,24 @@ public class movieTexture : MonoBehaviour
     public string select_sound;
     public FMOD.Studio.EventInstance soundevent;
 
-    void Start()
+    void Awake()
     {
         soundevent = FMODUnity.RuntimeManager.CreateInstance(select_sound);
         soundevent.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(this.transform));
-
-        movie = GetComponent<RawImage>().mainTexture as MovieTexture;
     }
 
     public void Activevideo()
     {
         GetComponent<RawImage>().enabled = true;
+        movie = GetComponent<RawImage>().mainTexture as MovieTexture;
+
         movie.Play();
         FMOD.Studio.PLAYBACK_STATE fmodPbState;
         soundevent.getPlaybackState(out fmodPbState);
-        if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-        {
-            soundevent.start();
-        }
+
+        soundevent.start();
+        print(soundevent.getPlaybackState(out fmodPbState));
+
 
         StartCoroutine("Continue");
     }

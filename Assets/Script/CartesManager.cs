@@ -338,7 +338,7 @@ public class CartesManager : MonoBehaviour
         {
             PhaseLente = false;
             ChangeBool.text = "Activer la phase lente.";
-            ennemiManager.PassageEnPhaseCombat();
+            ennemiManager.boutonSpawn.SetActive(true);
         }
         else
         {
