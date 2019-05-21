@@ -18,6 +18,7 @@ public class Voydroc : MonoBehaviour
     public int[] nbActionsParSalle;
     public int[] actions;
     EnnemiManager ennemiManager;
+    public Animator[] animators;
     public Sprite[] formule;
 
     private void Awake()
@@ -27,6 +28,7 @@ public class Voydroc : MonoBehaviour
         {
             ennemiManager.RecupInfosADV(ui[i], normales[i], highlighted[i], pvSalles[i], textPV[i]);
         }
+        ennemiManager.animators = animators;
         ennemiManager.pvTotaux = pvTotaux;
         ennemiManager.pvTotauxMax = pvTotaux;
         ennemiManager.pvTotauxText.gameObject.SetActive(true);

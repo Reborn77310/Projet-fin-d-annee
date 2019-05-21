@@ -767,6 +767,7 @@ GameObject:
   - component: {fileID: 3255594941464730656}
   - component: {fileID: 3255594941464730658}
   - component: {fileID: 3255594941464730657}
+  - component: {fileID: 8653377962336299000}
   m_Layer: 5
   m_Name: Salle_ADV_2
   m_TagString: Untagged
@@ -834,6 +835,25 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!95 &8653377962336299000
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3255594941464730687}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 28d5b44d8f0532b4f88778e6ea330810, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3255594941823900320
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,6 +903,7 @@ GameObject:
   - component: {fileID: 3255594941863591466}
   - component: {fileID: 3255594941863591468}
   - component: {fileID: 3255594941863591467}
+  - component: {fileID: 3078296809476931778}
   m_Layer: 5
   m_Name: Salle_ADV_0
   m_TagString: Untagged
@@ -949,6 +970,25 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!95 &3078296809476931778
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3255594941863591465}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 00974ef176724b746991a277bbf5d213, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3255594942207819331
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,6 +1000,7 @@ GameObject:
   - component: {fileID: 3255594942207819332}
   - component: {fileID: 3255594942207819334}
   - component: {fileID: 3255594942207819333}
+  - component: {fileID: 1684423875262374043}
   m_Layer: 5
   m_Name: Salle_ADV_1
   m_TagString: Untagged
@@ -1025,6 +1066,25 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!95 &1684423875262374043
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3255594942207819331}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 19ac9b76b56d4724e82ead502eb54fde, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3255594942423363769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,6 +1243,10 @@ MonoBehaviour:
   nbSymbolesParSalle: 020000000100000003000000
   nbActionsParSalle: 020000000200000001000000
   actions: 0100000003000000060000000500000004000000
+  animators:
+  - {fileID: 3078296809476931778}
+  - {fileID: 1684423875262374043}
+  - {fileID: 8653377962336299000}
   formule:
   - {fileID: 21300000, guid: 272b8b4052b712743b5311ab0cafa87b, type: 3}
   - {fileID: 21300000, guid: 272b8b4052b712743b5311ab0cafa87b, type: 3}
