@@ -81,6 +81,10 @@ public class GameMaster : MonoBehaviour
             {
                 ennemiManager.animators[i].SetBool("hightlight", false);
             }
+            for (int i = 0; i < salleManager.animators.Length; i++)
+            {
+                salleManager.animators[i].SetBool("hightlight", false);
+            }
         }
     }
 
@@ -105,7 +109,7 @@ public class GameMaster : MonoBehaviour
                 if (hit.transform.tag == "Salles")
                 {
                     ModuleManager mm = hit.transform.gameObject.GetComponent<ModuleManager>();
-                    if(mm.cartesModule.Count > 0)
+                    if (mm.cartesModule.Count > 0)
                     {
                         battleLog.ChangeTextInfosNEST(equipement.effets[CheckEquipementSelected(mm)]);
                     }
@@ -114,7 +118,7 @@ public class GameMaster : MonoBehaviour
                     if (canPlay)
                     {
                         var moletteSouris = Input.GetAxis("Mouse ScrollWheel");
-                        
+
 
 
                         if (mm.cartesModule.Count >= 2)
@@ -141,7 +145,7 @@ public class GameMaster : MonoBehaviour
                                 overlapEnnemi = zoneSelectionADV.GetComponent<parent>().CheckOverlap(ennemiManager.sallesRT);
                                 for (int x = 0; x < ennemiManager.animators.Length; x++)
                                 {
-                                    if(overlapEnnemi.Contains(x))
+                                    if (overlapEnnemi.Contains(x))
                                     {
                                         if (!ennemiManager.animators[x].GetBool("hightlight"))
                                         {
@@ -155,13 +159,30 @@ public class GameMaster : MonoBehaviour
                                             ennemiManager.animators[x].SetBool("hightlight", false);
                                         }
                                     }
-                                    
+
                                 }
                             }
                             else
                             {
                                 overlapNest = zoneSelectionADV.GetComponent<parent>().CheckOverlap(salleManager.sallesRT);
-                                // HL les salles du nest
+                                for (int x = 0; x < salleManager.animators.Length; x++)
+                                {
+                                    if (overlapNest.Contains(x))
+                                    {
+                                        if (!salleManager.animators[x].GetBool("hightlight"))
+                                        {
+                                            salleManager.animators[x].SetBool("hightlight", true);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (salleManager.animators[x].GetBool("hightlight"))
+                                        {
+                                            salleManager.animators[x].SetBool("hightlight", false);
+                                        }
+                                    }
+
+                                }
                             }
 
                         }
@@ -344,12 +365,12 @@ public class GameMaster : MonoBehaviour
                 {
                     if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
                     {
-                        allSetupsActions.FindEffect(wantedName, i, mm, true,equipementSelected);
+                        allSetupsActions.FindEffect(wantedName, i, mm, true, equipementSelected);
                     }
                     else
                     {
 
-                        allSetupsActions.FindEffect(wantedName, i, mm, false,equipementSelected);
+                        allSetupsActions.FindEffect(wantedName, i, mm, false, equipementSelected);
                     }
 
                 }
@@ -372,11 +393,11 @@ public class GameMaster : MonoBehaviour
                 {
                     if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
                     {
-                        allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, true,equipementSelected);
+                        allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, true, equipementSelected);
                     }
                     else
                     {
-                        allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, false,equipementSelected);
+                        allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, false, equipementSelected);
                     }
                 }
             }

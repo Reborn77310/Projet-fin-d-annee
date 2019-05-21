@@ -53,6 +53,7 @@ public class SalleManager : MonoBehaviour
     private SalleManager instance;
     public EnnemiManager ennemiManager;
     public RectTransform[] sallesRT;
+    public Animator[] animators;
 
     void Start()
     {
@@ -98,7 +99,7 @@ public class SalleManager : MonoBehaviour
         pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
         pvDuVehicule -= damage;
         pvDuVehiculeText.text = Mathf.RoundToInt(pvDuVehicule / pvDuVehiculeMax * 100).ToString() + " %";
-
+        animators[salleVisee].SetTrigger("hit");
         if (allSalles[salleVisee].pv <= 0)
         {
             allSalles[salleVisee].pv = 0;
@@ -115,6 +116,7 @@ public class SalleManager : MonoBehaviour
         allSalles[salleVisee].CanPlayHere = false;
         allSalles[salleVisee].etat = 1;
         allSalles[salleVisee].timer = cooldown;
+        animators[salleVisee].SetBool("cooldown", true);
     }
 
     public void GestionDurabiliteFinCD(int salleVisee)
@@ -146,6 +148,7 @@ public class SalleManager : MonoBehaviour
                 allSalles[i].timer -= Time.deltaTime * allSalles[i].facteurCooldown;
                 if (allSalles[i].timer <= 0)
                 {
+                    animators[i].SetBool("cooldown", false);
                     GestionDurabiliteFinCD(i);
                     allSalles[i].etat = 0;
                     allSalles[i].timer = 0;
@@ -156,6 +159,10 @@ public class SalleManager : MonoBehaviour
             {
                 if (allSalles[i].timer > 0)
                 {
+                    if(animators[i].GetBool("cooldown"))
+                    {
+                        animators[i].SetBool("cooldown", false);
+                    }
                     GestionDurabiliteFinCD(i);
                     allSalles[i].timer = 0;
                 }

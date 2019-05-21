@@ -338,7 +338,7 @@ public class EnnemiManager : MonoBehaviour
                     ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
                     salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
-                    salleManager.ChangeMaterial();
+                    salleManager.animators[actionPrevues[a].cible].SetBool("attacked", true);
 
                     ennemiRooms[_origine].etat = 2;
                     ennemiRooms[_origine].isAttacking = true;
@@ -355,7 +355,7 @@ public class EnnemiManager : MonoBehaviour
                     ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
                     salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
-                    salleManager.ChangeMaterial();
+                    salleManager.animators[actionPrevues[a].cible].SetBool("attacked", true);
 
                     ennemiRooms[_origine].etat = 2;
                     ennemiRooms[_origine].isAttacking = true;
@@ -375,7 +375,7 @@ public class EnnemiManager : MonoBehaviour
                 if (actionPrevues[a].id > 0)
                 {
                     salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
-                    salleManager.ChangeMaterial();
+                    salleManager.animators[actionPrevues[a].cible].SetBool("attacked", true);
                 }
 
                 ennemiRooms[_origine].etat = 2;
@@ -441,7 +441,7 @@ public class EnnemiManager : MonoBehaviour
                 if (actionPrevues[a].id > 0)
                 {
                     salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
-                    salleManager.ChangeMaterial();
+                    salleManager.animators[actionPrevues[a].cible].SetBool("attacked", true);
                 }
 
                 ennemiRooms[_origine].etat = 2;
@@ -469,7 +469,7 @@ public class EnnemiManager : MonoBehaviour
                 ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
                 salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
-                salleManager.ChangeMaterial();
+                salleManager.animators[actionPrevues[a].cible].SetBool("attacked", true);
 
                 ennemiRooms[_origine].etat = 2;
                 ennemiRooms[_origine].isAttacking = true;
@@ -503,7 +503,7 @@ public class EnnemiManager : MonoBehaviour
                 if (actionPrevues[a].id > 0)
                 {
                     salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
-                    salleManager.ChangeMaterial();
+                    salleManager.animators[actionPrevues[a].cible].SetBool("attacked", true);
                 }
 
                 ennemiRooms[_origine].etat = 2;
@@ -530,7 +530,7 @@ public class EnnemiManager : MonoBehaviour
                 ennemiRooms[_origine].timer = actionPrevues[a].timer;
 
                 salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
-                salleManager.ChangeMaterial();
+                salleManager.animators[actionPrevues[a].cible].SetBool("attacked", true);
 
                 ennemiRooms[_origine].etat = 2;
                 ennemiRooms[_origine].isAttacking = true;
@@ -549,7 +549,7 @@ public class EnnemiManager : MonoBehaviour
                 if (actionPrevues[a].id > 0)
                 {
                     salleManager.allSalles[actionPrevues[a].cible].isAttacked = true;
-                    salleManager.ChangeMaterial();
+                    salleManager.animators[actionPrevues[a].cible].SetBool("attacked", true);
                 }
 
                 ennemiRooms[_origine].etat = 2;
@@ -617,7 +617,7 @@ public class EnnemiManager : MonoBehaviour
                     if (actionPrevues[i].id > 0)
                     {
                         salleManager.allSalles[actionPrevues[i].cible].isAttacked = false;
-                        salleManager.ChangeMaterial();
+                        salleManager.animators[actionPrevues[i].cible].SetBool("attacked", false);
                     }
 
                     ActionsEnnemies(actionPrevues[i].id, i);
@@ -640,7 +640,7 @@ public class EnnemiManager : MonoBehaviour
                 if (actionPrevues[i].id > 0)
                 {
                     salleManager.allSalles[actionPrevues[i].cible].isAttacked = false;
-                    salleManager.ChangeMaterial();
+                    salleManager.animators[actionPrevues[i].cible].SetBool("attacked", false);
                 }
                 actionPrevues[i].id = 0;
                 actionPrevues[i].timer = 50000;

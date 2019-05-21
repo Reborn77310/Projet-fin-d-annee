@@ -4552,6 +4552,7 @@ MonoBehaviour:
   - {fileID: 674930054764118647}
   - {fileID: 7950325494075370707}
   - {fileID: 3291707515201954393}
+  animators: []
 --- !u!4 &533148568
 Transform:
   m_ObjectHideFlags: 0
@@ -17054,6 +17055,11 @@ MonoBehaviour:
   - {fileID: 674930054764118647}
   - {fileID: 7950325494075370707}
   - {fileID: 3291707515201954393}
+  animators:
+  - {fileID: 2228454520586864444}
+  - {fileID: 4317381642462302609}
+  - {fileID: 5346285524899200080}
+  - {fileID: 602224204687996322}
 --- !u!114 &1335090936
 MonoBehaviour:
   m_ObjectHideFlags: 0
