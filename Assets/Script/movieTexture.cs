@@ -27,8 +27,6 @@ public class movieTexture : MonoBehaviour
         soundevent.getPlaybackState(out fmodPbState);
 
         soundevent.start();
-        print(soundevent.getPlaybackState(out fmodPbState));
-
 
         StartCoroutine("Continue");
     }
