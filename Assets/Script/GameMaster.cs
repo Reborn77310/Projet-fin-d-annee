@@ -23,6 +23,7 @@ public class GameMaster : MonoBehaviour
     CartesManager cartesManager;
     SalleManager salleManager;
     AllSetupsActions allSetupsActions;
+    BattleLog battleLog;
     private CardSound cardSound;
     EnnemiManager ennemiManager;
     Equipement equipement;
@@ -40,6 +41,7 @@ public class GameMaster : MonoBehaviour
         ennemiManager = GetComponent<EnnemiManager>();
         allSetupsActions = GetComponent<AllSetupsActions>();
         equipement = GetComponent<Equipement>();
+        battleLog = GetComponent<BattleLog>();
     }
 
     void Update()
@@ -94,12 +96,17 @@ public class GameMaster : MonoBehaviour
             {
                 if (hit.transform.tag == "Salles")
                 {
+                    ModuleManager mm = hit.transform.gameObject.GetComponent<ModuleManager>();
+                    if(mm.cartesModule.Count > 0)
+                    {
+                        battleLog.ChangeTextInfosNEST(equipement.effets[CheckEquipementSelected(mm)]);
+                    }
                     bool canPlay = TestIfCanPlay(hit);
 
                     if (canPlay)
                     {
                         var moletteSouris = Input.GetAxis("Mouse ScrollWheel");
-                        ModuleManager mm = hit.transform.gameObject.GetComponent<ModuleManager>();
+                        
 
 
                         if (mm.cartesModule.Count >= 2)

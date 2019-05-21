@@ -41,13 +41,12 @@ public class Equipement : MonoBehaviour
             allEquipements.Add(a);
         }
 
-        // "<b><color=#B97D31>DURATION, PROJECTILE</color></b>" + "\n" + "Blurs your radar. Last 10s.";
-        effets[4] = "ELECTRONIC. Cleanse virus. Reducts virus duration of 8s";
-        effets[5] = "DURATION. Eliminates engine pressure and accelerates cooldown. Cooldown -30%. Last 8s.";
+        effets[4] = "<b><color=#4061BA>ELECTRONIC</color><b>" + "\n" + "Cleanse virus. Reducts virus duration of 8s";
+        effets[5] = "<b><color=#6289F3>DURATION</color><b>" + "\n" + "Eliminates engine pressure and accelerates cooldown. Cooldown -30%. Last 8s.";
         effets[0] = "<b><color=#E6742E>PROJECTILE, CANALISATION</color></b>" + "\n" + "Fire a blast. Deals <color=#7841BB>35 damage</color>.";
-        effets[3] = "PROJECTILE. CANALISATION. Fire two blast. Each deals 27 damage";
-        effets[1] = "CHARGE. ELECTRONIC. Delays the execution of the next action. Delay of 8s.";
-        effets[2] = "DURATION. ELECTRONIC. Prevent enemy targeting. Last 10s";
+        effets[3] = "<b><color=#E6742E>PROJECTILE, CANALISATION</color></b>" + "\n" + "Fire two blast. Each deals <color=#7841BB>27 damage</color>.";
+        effets[1] = "<b><color=#B97D31>ELECTRONIC</color><b>" + "\n" + "Delays the execution of the planned action. Delay of 18s.";
+        effets[2] = "<b><color=#6289F3>DURATION, ELECTRONIC</color><b>" + "\n" + "Prevent enemy targeting. Last 10s";
         
     }
 
