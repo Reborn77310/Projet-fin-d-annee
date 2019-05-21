@@ -7897,7 +7897,22 @@ PrefabInstance:
     - target: {fileID: 8512885480597155097, guid: 0ca0c7c7031caea4eab0364f2a17594a,
         type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 100
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8512885480597155099, guid: 0ca0c7c7031caea4eab0364f2a17594a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8512885480597155099, guid: 0ca0c7c7031caea4eab0364f2a17594a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8512885480597155099, guid: 0ca0c7c7031caea4eab0364f2a17594a,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca0c7c7031caea4eab0364f2a17594a, type: 3}
@@ -20129,6 +20144,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289339939968794417, guid: 3f30c428b486e0944b70bd293bea32bf,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289339939968794417, guid: 3f30c428b486e0944b70bd293bea32bf,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289339939968794417, guid: 3f30c428b486e0944b70bd293bea32bf,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289339939968794431, guid: 3f30c428b486e0944b70bd293bea32bf,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289339939968794431, guid: 3f30c428b486e0944b70bd293bea32bf,
+        type: 3}
+      propertyPath: InitialModule.size3D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289339939968794431, guid: 3f30c428b486e0944b70bd293bea32bf,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289339939968794431, guid: 3f30c428b486e0944b70bd293bea32bf,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 2.5484748
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f30c428b486e0944b70bd293bea32bf, type: 3}
