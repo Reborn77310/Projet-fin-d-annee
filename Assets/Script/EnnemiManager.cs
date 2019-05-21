@@ -663,7 +663,14 @@ public class EnnemiManager : MonoBehaviour
             var a = new DBM();
             actionPrevues.Add(a);
         }
+        if (ennemiRooms.Count == 3)
+        {
+            DBM_Symbole[3].text ="";
+            DBM_Cible[3].text ="";
+            DBM_timer[3].text ="";
+        }
     }
+
 
     int IndexActionToDBM()
     {
@@ -948,7 +955,7 @@ public class EnnemiManager : MonoBehaviour
         }
         else if (id == 4) // Armagedon
         {
-            actionPrevues[idDBM].textInfos = "<b><color=#E6742E>GAMMA</color></b>" + "\n" + "Deals <color=#7841BB>45 damage</color>. Reduces card durability of 2.";
+            actionPrevues[idDBM].textInfos = "<b><color=#E6742E>GAMMA</color></b>" + "\n" + "Deals <color=#7841BB>70 damage</color>. Reduces card durability of 2.";
         }
         else if (id == 5) // Poinçonneuse
         {
