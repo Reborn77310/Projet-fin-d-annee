@@ -20,6 +20,7 @@ public class Adversaire1 : MonoBehaviour
     public int[] actions;
     EnnemiManager ennemiManager;
     public Sprite[] formule;
+    public Animator[] animators;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class Adversaire1 : MonoBehaviour
         {
             ennemiManager.RecupInfosADV(ui[i], normales[i], highlighted[i], pvSalles[i], textPV[i]);
         }
+        ennemiManager.animators = animators;
         ennemiManager.pvTotaux = pvTotaux;
         ennemiManager.pvTotauxMax = pvTotaux;
         ennemiManager.pvTotauxText.gameObject.SetActive(true);
@@ -35,6 +37,7 @@ public class Adversaire1 : MonoBehaviour
         ennemiManager.RecupFormule(nbSymbolesParSalle, formuleTotale, symbolesSalles);
         ennemiManager.RecupActions(nbActionsParSalle, actions);
         ennemiManager.ApplyFormule(formule);
+        
     }
 
     

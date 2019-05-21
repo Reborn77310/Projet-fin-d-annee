@@ -76,6 +76,7 @@ public class EnnemiManager : MonoBehaviour
     public RectTransform[] sallesRT;
     public List<SalleManager.Effets> effetsEnnemi = new List<SalleManager.Effets>();
     public Image[] formule = new Image[6];
+    public Animator[] animators;
 
     private void Awake()
     {
@@ -122,6 +123,7 @@ public class EnnemiManager : MonoBehaviour
                 ennemiRooms[i].actions[h] = actions[index];
                 index++;
             }
+            animators[i].SetBool("cooldown", true);
         }
     }
 
@@ -222,12 +224,14 @@ public class EnnemiManager : MonoBehaviour
                     ennemiRooms[i].isDead = false;
                     ennemiRooms[i].etat = 1;
                     ennemiRooms[i].timer = Random.Range(8, 16);
+                    animators[i].SetBool("cooldown", true);
                 }
             }
             else if (ennemiRooms[i].etat == 1)
             {
                 if (ennemiRooms[i].timer <= 0)
                 {
+                    animators[i].SetBool("cooldown", false);
                     // ChooseNextAttaque
                     ChooseAction(i);
                 }
@@ -240,6 +244,7 @@ public class EnnemiManager : MonoBehaviour
                     // attaque a été lancée, on passe en cooldown
                     ennemiRooms[i].timer = Random.Range(8, 16);
                     ennemiRooms[i].etat = 1;
+                    animators[i].SetBool("cooldown", true);
                 }
             }
         }
