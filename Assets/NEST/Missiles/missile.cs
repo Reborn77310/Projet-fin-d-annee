@@ -10,19 +10,21 @@ public class missile : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(-transform.right * Time.deltaTime * Speed);
+        if (transform.parent.transform.parent.name == "Salle0" || transform.parent.transform.parent.name == "Salle3")
+        {
+            transform.Translate(-transform.parent.right * Time.deltaTime * Speed);
+        }
+        else
+        {
+            transform.Translate(transform.parent.right * Time.deltaTime * Speed);
+        }
+
     }
 
-    void OnCollisionEnter()
+    void OnCollisionEnter(Collision col)
     {
-        RaycastHit hit;
-        var direction = transform.position - transform.right;
-        if(Physics.Raycast(transform.position,direction,out hit))
-        {
-            print(hit.collider.name);
-            var pos = hit.point;
-            Instantiate(Explosion,pos,Quaternion.identity);
-        }
+        var pos = col.contacts[0].point;
+        Instantiate(Explosion, pos, Quaternion.identity);
         Destroy(this.gameObject);
     }
 }
