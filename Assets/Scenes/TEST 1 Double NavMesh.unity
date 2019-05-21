@@ -1414,6 +1414,7 @@ GameObject:
   - component: {fileID: 223249565}
   - component: {fileID: 223249566}
   - component: {fileID: 223249567}
+  - component: {fileID: 223249568}
   m_Layer: 0
   m_Name: Salle1
   m_TagString: Salles
@@ -1485,6 +1486,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Select_Sound: event:/Sons ennemis/Feu
+--- !u!114 &223249568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223249563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed9a6bd8090153c4f9b8c34effc2fc2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Select_Sound: event:/Sons ennemis/Fumee
 --- !u!1 &228479883
 GameObject:
   m_ObjectHideFlags: 0
@@ -7137,6 +7151,7 @@ GameObject:
   - component: {fileID: 790842099}
   - component: {fileID: 790842100}
   - component: {fileID: 790842101}
+  - component: {fileID: 790842102}
   m_Layer: 0
   m_Name: Salle3
   m_TagString: Salles
@@ -7207,6 +7222,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Select_Sound: event:/Sons ennemis/Feu
+--- !u!114 &790842102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790842097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed9a6bd8090153c4f9b8c34effc2fc2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Select_Sound: event:/Sons ennemis/Fumee
 --- !u!4 &800865447 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400012, guid: e8a595185d727af4bb5ab2439d889145,
@@ -9682,6 +9710,7 @@ GameObject:
   - component: {fileID: 1112984393}
   - component: {fileID: 1112984394}
   - component: {fileID: 1112984395}
+  - component: {fileID: 1112984396}
   m_Layer: 0
   m_Name: Salle2
   m_TagString: Salles
@@ -9753,6 +9782,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Select_Sound: event:/Sons ennemis/Feu
+--- !u!114 &1112984396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112984391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed9a6bd8090153c4f9b8c34effc2fc2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Select_Sound: event:/Sons ennemis/Fumee
 --- !u!1 &1131686330 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 884735856740836270, guid: fa5bbc6d2db88bb469c187a4f1bcfee8,
@@ -18385,6 +18427,7 @@ GameObject:
   - component: {fileID: 1477107962}
   - component: {fileID: 1477107963}
   - component: {fileID: 1477107964}
+  - component: {fileID: 1477107965}
   m_Layer: 0
   m_Name: Salle0
   m_TagString: Salles
@@ -18456,6 +18499,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Select_Sound: event:/Sons ennemis/Feu
+--- !u!114 &1477107965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477107960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed9a6bd8090153c4f9b8c34effc2fc2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Select_Sound: event:/Sons ennemis/Fumee
 --- !u!1 &1480889909 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4471210434888975946, guid: 144de1e25ce162843b889234ecfa8a10,

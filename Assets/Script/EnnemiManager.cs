@@ -789,6 +789,7 @@ public class EnnemiManager : MonoBehaviour
             string[] a = new string[] { "DURATION", "CHIMIC" };
             salleManager.AddEffets(20, "Smoke", a, actionPrevues[i].cible, 0);
             salleManager.allEffets[salleManager.allEffets.Count - 1].Feedback = salleManager.allSalles[actionPrevues[i].cible].ActualFeedbackOnMe;
+            salleManager.allSalles[actionPrevues[i].cible].MyGo.GetComponent<FumeeSound>().LaunchFumee();
         }
         else if (id == -1) // Drone anti-projectile
         {
