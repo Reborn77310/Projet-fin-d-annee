@@ -30,7 +30,7 @@ public class Almanach : MonoBehaviour
             c.overdriveEffect = c.id;
             c.illu = Resources.Load<Sprite>("Sprites/Cartes/Final/Cartes/Carte" + c.id);
             c.picto = Resources.Load<Sprite>("Sprites/Cartes/Final/picto" + c.cartesTypes);
-            c.prefabZoneSelection = Resources.Load("Prefabs/Radar/ZoneSelection/Ciblage_ADV") as GameObject;
+            c.prefabZoneSelection = Resources.Load("Prefabs/Radar/ZoneSelection/Ciblage_" + c.id) as GameObject;
 
             cartesDebloquees.Add(c);
         }
