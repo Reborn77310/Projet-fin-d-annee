@@ -203,10 +203,11 @@ public class EnnemiManager : MonoBehaviour
                 ennemiRooms[i].isAttacking = false;
                 ennemiRooms[i].pv += 5 * Time.deltaTime;
                 float fill = (ennemiRooms[i].pv / ennemiRooms[i].pvMax) * 100;
-                ennemiRooms[i].pvText.text = Mathf.RoundToInt(fill).ToString() + " %";
+                ennemiRooms[i].pvText.text = "<color=#4061BA>" + Mathf.RoundToInt(fill).ToString() + " % </color>";
 
                 if (ennemiRooms[i].pv >= ennemiRooms[i].pvMax)
                 {
+                    ennemiRooms[i].pvText.text = "<color=#BC1910>" + Mathf.RoundToInt(fill).ToString() + " % </color>";
                     // salle réparée
                     ennemiRooms[i].pv = ennemiRooms[i].pvMax;
                     ennemiRooms[i].isDead = false;

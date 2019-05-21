@@ -161,9 +161,10 @@ public class SalleManager : MonoBehaviour
                 }
 
                 allSalles[i].pv += 5 * Time.deltaTime * allSalles[i].facteurReparation;
-                pvSalles[i].text = Mathf.RoundToInt(allSalles[i].pv).ToString() + " %";
+                pvSalles[i].text ="<color=#4061BA>" + Mathf.RoundToInt(allSalles[i].pv).ToString() + " % </color>";
                 if (allSalles[i].pv >= 100)
                 {
+                    pvSalles[i].text = "<color=#78FF1B>" + Mathf.RoundToInt(allSalles[i].pv).ToString() + " % </color>"; 
                     allSalles[i].timer = 0;
                     allSalles[i].CanPlayHere = true;
                     allSalles[i].pv = 100;
