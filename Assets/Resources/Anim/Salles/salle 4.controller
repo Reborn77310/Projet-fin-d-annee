@@ -6,7 +6,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: salle 1
+  m_Name: salle 4
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: hightlight
@@ -188,10 +188,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.00967741
-  m_TransitionOffset: 0.22369124
-  m_ExitTime: 0.97369105
-  m_HasExitTime: 1
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -294,7 +294,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b533e669534cd254ebb6d1baeaa67afd, type: 2}
+  m_Motion: {fileID: 7400000, guid: 8f5099acb05551247a63c325e354c7bf, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -321,7 +321,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: cd62d3ba164d1db4d8318711f2e429b2, type: 2}
+  m_Motion: {fileID: 7400000, guid: 97e3dfd1a3312ce49bbf3f1e99f44283, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -349,7 +349,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1ea869bf0291a594ea1c6bb6ba0a3e03, type: 2}
+  m_Motion: {fileID: 7400000, guid: 0c29ffa4ab427b74291adfa23c7ac61b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -376,7 +376,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: bb5841993b858eb43b9cbccfe747b9a4, type: 2}
+  m_Motion: {fileID: 7400000, guid: cd3b046b353f9b24f9a6bab151b6996c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

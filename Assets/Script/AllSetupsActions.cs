@@ -38,6 +38,7 @@ public class AllSetupsActions : MonoBehaviour
             damage *= ennemiManager.ennemiRooms[wantedRoom].projectileReduction;
             damage *= ennemiManager.ennemiRooms[wantedRoom].cannalisationReduction;
             DealDamage(wantedRoom, damage);
+            ennemiManager.animators[wantedRoom].SetTrigger("hit");
             cooldown = 11;
             print(effet);
         }
@@ -54,6 +55,7 @@ public class AllSetupsActions : MonoBehaviour
             DealDamage(wantedRoom, damage);
             DealDamage(wantedRoom, damage);
             cooldown = 14;
+            ennemiManager.animators[wantedRoom].SetTrigger("hit");
             print(effet);
         }
         else if (wantedName == "CanonIEM") // ATK
@@ -68,6 +70,7 @@ public class AllSetupsActions : MonoBehaviour
                 int test = ennemiManager.actionPrevues.Find(item => item.origine == wantedRoom).origine;
                 ennemiManager.actionPrevues[test].timer += 18;
                 ennemiManager.ennemiRooms[wantedRoom].timer += 18;
+                ennemiManager.animators[wantedRoom].SetTrigger("hit");
             }
             else
             {

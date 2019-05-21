@@ -7,11 +7,13 @@ public class parent : MonoBehaviour
 {
     RectTransform[] zones;
     public Canvas myCanvas;
+    EnnemiManager ennemiManager;
 
     void Awake()
     {
         myCanvas = GameObject.Find("GameMaster").GetComponent<GameMaster>().myCanvas;
         zones = GetComponentsInChildren<RectTransform>();
+        ennemiManager = GameObject.Find("GameMaster").GetComponent<EnnemiManager>();
     }
 
     public bool rectOverlaps(RectTransform rectTrans1, RectTransform rectTrans2)
@@ -42,7 +44,8 @@ public class parent : MonoBehaviour
                 {
                     zones[h].GetComponent<Image>().color = Color.red;
                     toReturn[i] = i;
-                    //h = zones.Length;
+                    print(i + " " + ennemiManager.animators.Length);
+                    ennemiManager.animators[i].SetBool("hightlight", true);
                 }
             }
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using System.Linq;
 
 public class GameMaster : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class GameMaster : MonoBehaviour
     public GameObject uiPlaceHolder;
     public GameObject zoneSelectionADV;
     public Canvas myCanvas;
+
 
     void Awake()
     {
@@ -72,6 +74,13 @@ public class GameMaster : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             TakeCardFromModule();
+        }
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            for (int i = 0; i < ennemiManager.animators.Length; i++)
+            {
+                ennemiManager.animators[i].SetBool("hightlight", false);
+            }
         }
     }
 
@@ -124,15 +133,35 @@ public class GameMaster : MonoBehaviour
                                 }
 
                             }
-
+                            int[] overlapEnnemi;
+                            int[] overlapNest;
                             zoneSelectionADV.GetComponent<parent>().RotationZones(mm.MyModules[1].transform);
                             if (equipement.allEquipements[CheckEquipementSelected(mm)].attaque)
                             {
-                                zoneSelectionADV.GetComponent<parent>().CheckOverlap(ennemiManager.sallesRT);
+                                overlapEnnemi = zoneSelectionADV.GetComponent<parent>().CheckOverlap(ennemiManager.sallesRT);
+                                for (int x = 0; x < ennemiManager.animators.Length; x++)
+                                {
+                                    if(overlapEnnemi.Contains(x))
+                                    {
+                                        if (!ennemiManager.animators[x].GetBool("hightlight"))
+                                        {
+                                            ennemiManager.animators[x].SetBool("hightlight", true);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (ennemiManager.animators[x].GetBool("hightlight"))
+                                        {
+                                            ennemiManager.animators[x].SetBool("hightlight", false);
+                                        }
+                                    }
+                                    
+                                }
                             }
                             else
                             {
-                                zoneSelectionADV.GetComponent<parent>().CheckOverlap(salleManager.sallesRT);
+                                overlapNest = zoneSelectionADV.GetComponent<parent>().CheckOverlap(salleManager.sallesRT);
+                                // HL les salles du nest
                             }
 
                         }
