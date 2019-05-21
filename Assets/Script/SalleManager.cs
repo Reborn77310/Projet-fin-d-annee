@@ -95,7 +95,7 @@ public class SalleManager : MonoBehaviour
         }
     }
 
-    public void DamageSurSalle(int salleVisee, int damage)
+    public void DamageSurSalle(int salleVisee, float damage)
     {
         allSalles[salleVisee].pv -= damage;
         pvSalles[salleVisee].text = Mathf.RoundToInt(allSalles[salleVisee].pv).ToString() + " %";
