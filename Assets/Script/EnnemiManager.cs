@@ -701,7 +701,9 @@ public class EnnemiManager : MonoBehaviour
         if (id == 1 || id == 4 || id == 7 || id == 8 || id == 9)
         {
             string chemin = "Prefabs/FeedbackActionsEnnemisSurNest/";
+            
             var transformParent = salleManager.allSalles[actionPrevues[i].cible].SpawnParticleFeedback.transform;
+            print(transformParent.transform.parent.name + " OOOOOOOOOOOOOO");
             GameObject wantedThing = Resources.Load<GameObject>(chemin + id);
             var go = Instantiate(wantedThing, transformParent.position, transformParent.rotation, transformParent);
             salleManager.allSalles[actionPrevues[i].cible].ActualFeedbackOnMe = go;
@@ -710,6 +712,7 @@ public class EnnemiManager : MonoBehaviour
         //print(id + " " + actionPrevues[i].origine);
         if (id == 1) // Missile 1
         {
+            salleManager.allSalles[actionPrevues[i].cible].MyGo.GetComponent<MissileSound>().LaunchMissile();
             print("Missile 1 " + actionPrevues[i].origine);
             // PROJECTILE
             salleManager.DamageSurSalle(actionPrevues[i].cible, 25);
@@ -763,6 +766,7 @@ public class EnnemiManager : MonoBehaviour
         else if (id == 8) // Tourelle DASSAULT
         {
             print("dassault " + actionPrevues[i].origine);
+            salleManager.allSalles[actionPrevues[i].cible].MyGo.GetComponent<RafalesSon>().LaunchRafale();
             // PROJECTILE && CANALISATION
             if (salleManager.allSalles[actionPrevues[i].cible].etat == 1)
             {
