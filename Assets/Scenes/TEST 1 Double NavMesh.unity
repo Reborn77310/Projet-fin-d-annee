@@ -6520,7 +6520,6 @@ GameObject:
   - component: {fileID: 745230653}
   - component: {fileID: 745230655}
   - component: {fileID: 745230654}
-  - component: {fileID: 745230656}
   m_Layer: 5
   m_Name: Video
   m_TagString: Untagged
@@ -6589,35 +6588,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 745230652}
   m_CullTransparentMesh: 0
---- !u!114 &745230656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745230652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: dfff40a5d3ba5b44d97e70fcf197148d, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
 --- !u!1001 &755290875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20550,6 +20520,7 @@ GameObject:
   - component: {fileID: 1668953928}
   - component: {fileID: 1668953927}
   - component: {fileID: 1668953926}
+  - component: {fileID: 1668953930}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -20630,6 +20601,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1668953930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668953925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4865a734f58f23479e837540d116a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  select_sound: 
 --- !u!1 &1673685024 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5836686224815386583, guid: 110a21fffa899f444874adf80e25406c,
