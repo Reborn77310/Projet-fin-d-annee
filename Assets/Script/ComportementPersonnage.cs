@@ -13,6 +13,7 @@ public class ComportementPersonnage : MonoBehaviour
     public int NumberOfCategories = 2;
 
     Vector3[] agentsDestination = new Vector3[2];
+    Transform[] agentsDestinationGo = new Transform[2];
 
     SalleManager salleManager;
     EnnemiManager ennemiManager;
@@ -26,13 +27,13 @@ public class ComportementPersonnage : MonoBehaviour
 
     void FindFirstDestination()
     {
-        agentsDestination[0] = SelectDirection();
+        agentsDestination[0] = SelectDirection(0);
         agents[0].SetDestination(agentsDestination[0]);
 
-        agentsDestination[1] = SelectDirection();
+        agentsDestination[1] = SelectDirection(1);
         while (agentsDestination[1] == agentsDestination[0])
         {
-            agentsDestination[1] = SelectDirection();
+            agentsDestination[1] = SelectDirection(1);
         }
         agents[1].SetDestination(agentsDestination[1]);
     }
@@ -68,23 +69,31 @@ public class ComportementPersonnage : MonoBehaviour
         if (i == 0)
         {
             a = 1;
-        }        
+        }
 
-        agentsDestination[i] = SelectDirection();
+        agentsDestination[i] = SelectDirection(i);
         while (agentsDestination[i] == agentsDestination[a])
         {
-            agentsDestination[i] = SelectDirection();
+            agentsDestination[i] = SelectDirection(i);
+        }
+        if (!CheckIfRoomIsPlayable(i))
+        {
+            StartCoroutine("StartNewDirection", i);
+            yield break;
         }
         agents[i].SetDestination(agentsDestination[i]);
         yield break;
     }
 
-    bool CheckIfRoomIsPlayable()
+    bool CheckIfRoomIsPlayable(int playerSelectedIndex)
     {
         bool canPlayHere = true;
         for (int b = 0; b < ennemiManager.effetsEnnemi.Count; b++)
         {
-            if (ennemiManager.effetsEnnemi[b].salle == 0)
+            string[] stringArray = agentsDestinationGo[playerSelectedIndex].name.Split(char.Parse("_"));
+
+
+            if (ennemiManager.effetsEnnemi[b].salle == int.Parse(stringArray[1]))
             {
                 var tags = ennemiManager.effetsEnnemi[b].tags;
                 for (int c = 0; c < tags.Length; c++)
@@ -98,18 +107,18 @@ public class ComportementPersonnage : MonoBehaviour
         }
         return canPlayHere;
     }
-    Vector3 SelectDirection()
+    Vector3 SelectDirection(int i)
     {
         int random = ReturnRandom(NumberOfCategories);
         var wantedPos = Vector3.zero;
 
         if (random == 0)
         {
-            wantedPos = PickRandomPositionWithArrays(ConsolesPositions);
+            wantedPos = PickRandomPositionWithArrays(ConsolesPositions, i);
         }
         else if (random == 1)
         {
-            wantedPos = PickRandomPositionWithArrays(CommonPositions);
+            wantedPos = PickRandomPositionWithArrays(CommonPositions, i);
         }
         return wantedPos;
     }
@@ -121,12 +130,14 @@ public class ComportementPersonnage : MonoBehaviour
         return toReturn;
     }
 
-    Vector3 PickRandomPositionWithArrays(Transform[] wantedTransform)
+    Vector3 PickRandomPositionWithArrays(Transform[] wantedTransform, int i)
     {
         Vector3 toReturn = Vector3.zero;
         int randomPos = ReturnRandom(wantedTransform.Length);
 
         toReturn = wantedTransform[randomPos].position;
+        agentsDestinationGo[i] = wantedTransform[randomPos];
+
         return toReturn;
     }
 }
