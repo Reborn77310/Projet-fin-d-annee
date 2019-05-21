@@ -40,10 +40,10 @@ TextureImporter:
     21300070: NewEnemyFillAmount_35
     21300072: NewEnemyFillAmount_36
     21300074: NewEnemyFillAmount_37
-    21300076: NewEnemyFillAmount_38
-    21300078: NewEnemyFillAmount_39
-    21300080: NewEnemyFillAmount_40
-    21300082: NewEnemyFillAmount_41
+    21300076: NEST_EnemyCiblage_HautGauche
+    21300078: NEST_EnemyCiblage_HautDroite
+    21300080: NEST_Highlight_HautGauche
+    21300082: NEST_Highlight_HautDroite
     21300084: NewEnemyFillAmount_42
     21300086: NewEnemyFillAmount_43
     21300088: NewEnemyFillAmount_44
@@ -66,10 +66,10 @@ TextureImporter:
     21300122: NewEnemyFillAmount_61
     21300124: NewEnemyFillAmount_62
     21300126: NewEnemyFillAmount_63
-    21300128: NewEnemyFillAmount_64
-    21300130: NewEnemyFillAmount_65
-    21300132: NewEnemyFillAmount_66
-    21300134: NewEnemyFillAmount_67
+    21300128: NEST_EnemyCiblage_BasGauche
+    21300130: NEST_EnemyCiblage_BasDroite
+    21300132: NEST_Highlight_BasGauche
+    21300134: NEST_Highlight_BasDroite
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -492,7 +492,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewEnemyFillAmount_38
+      name: NEST_EnemyCiblage_HautGauche
       rect:
         serializedVersion: 2
         x: 17
@@ -512,7 +512,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewEnemyFillAmount_39
+      name: NEST_EnemyCiblage_HautDroite
       rect:
         serializedVersion: 2
         x: 249
@@ -532,7 +532,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewEnemyFillAmount_40
+      name: NEST_Highlight_HautGauche
       rect:
         serializedVersion: 2
         x: 835
@@ -552,7 +552,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewEnemyFillAmount_41
+      name: NEST_Highlight_HautDroite
       rect:
         serializedVersion: 2
         x: 1067
@@ -572,7 +572,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewEnemyFillAmount_64
+      name: NEST_EnemyCiblage_BasGauche
       rect:
         serializedVersion: 2
         x: 16
@@ -592,7 +592,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewEnemyFillAmount_65
+      name: NEST_EnemyCiblage_BasDroite
       rect:
         serializedVersion: 2
         x: 248
@@ -612,7 +612,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewEnemyFillAmount_66
+      name: NEST_Highlight_BasGauche
       rect:
         serializedVersion: 2
         x: 834
@@ -632,7 +632,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewEnemyFillAmount_67
+      name: NEST_Highlight_BasDroite
       rect:
         serializedVersion: 2
         x: 1066
