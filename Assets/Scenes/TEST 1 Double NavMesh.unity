@@ -1499,7 +1499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &246928122
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2524,7 +2524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &314035855
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2592,8 +2592,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 1.63, z: 1.8401334}
-  m_Center: {x: -1.21, y: 1.59, z: 0.39}
+  m_Size: {x: 0.19999997, y: 1.6300001, z: 2.849596}
+  m_Center: {x: -1.21, y: 1.59, z: -0.11473068}
 --- !u!1 &319787638
 GameObject:
   m_ObjectHideFlags: 0
@@ -6433,7 +6433,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.2, y: 1.63, z: 1.8401334}
-  m_Center: {x: 1.37, y: 1.41, z: 0.057419613}
+  m_Center: {x: 1.37, y: 1.41, z: 0.92}
 --- !u!1 &734821890
 GameObject:
   m_ObjectHideFlags: 0
@@ -15155,6 +15155,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1620733766}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1232539028 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5289339939430517164, guid: 3f30c428b486e0944b70bd293bea32bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1620733766}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1232539031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16645,6 +16651,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ennemiManager: {fileID: 1335090933}
+  MyAnimatorsTurrets:
+  - {fileID: 1673685025}
+  - {fileID: 1410876836}
+  - {fileID: 1232539028}
+  - {fileID: 1456268384}
+  - {fileID: 1480889911}
+  - {fileID: 1468191563}
 --- !u!114 &1335090935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17765,6 +17778,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 912421654}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1410876836 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8512885480775760860, guid: 0ca0c7c7031caea4eab0364f2a17594a,
+    type: 3}
+  m_PrefabInstance: {fileID: 912421654}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1410876839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17924,6 +17943,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 756198670}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1456268384 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3799891204468007722, guid: 569acbc005ce8fd459ec473559c6e6db,
+    type: 3}
+  m_PrefabInstance: {fileID: 756198670}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1456268386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18039,6 +18064,12 @@ Transform:
 --- !u!1 &1468191561 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7932889436650117148, guid: 025a307c6cc5f6942b387583ed946c81,
+    type: 3}
+  m_PrefabInstance: {fileID: 755290875}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1468191563 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7932889436650117149, guid: 025a307c6cc5f6942b387583ed946c81,
     type: 3}
   m_PrefabInstance: {fileID: 755290875}
   m_PrefabAsset: {fileID: 0}
@@ -18170,6 +18201,12 @@ MonoBehaviour:
 --- !u!1 &1480889909 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4471210434888975946, guid: 144de1e25ce162843b889234ecfa8a10,
+    type: 3}
+  m_PrefabInstance: {fileID: 1465552429}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1480889911 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4471210434888975944, guid: 144de1e25ce162843b889234ecfa8a10,
     type: 3}
   m_PrefabInstance: {fileID: 1465552429}
   m_PrefabAsset: {fileID: 0}
@@ -20337,6 +20374,12 @@ Transform:
 --- !u!1 &1673685024 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5836686224815386583, guid: 110a21fffa899f444874adf80e25406c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1985830884}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1673685025 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5836686224815386580, guid: 110a21fffa899f444874adf80e25406c,
     type: 3}
   m_PrefabInstance: {fileID: 1985830884}
   m_PrefabAsset: {fileID: 0}

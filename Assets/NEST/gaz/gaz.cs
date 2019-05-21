@@ -9,6 +9,7 @@ public class gaz : MonoBehaviour
     {
         transform.SetParent(transform.parent.transform.parent);
         var pos = Vector3.zero;
+        transform.Rotate(-90,0,0);
         pos.y = 0.7f;
         transform.localPosition = pos;        
     }

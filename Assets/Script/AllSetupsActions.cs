@@ -9,15 +9,21 @@ public class AllSetupsActions : MonoBehaviour
     private SalleManager salleManager;
     public EnnemiManager ennemiManager;
     private int SalleQuiEffectueAction = 0;
-
+    public Animator[] MyAnimatorsTurrets = new Animator[6];
     void Awake()
     {
         instance = this;
         salleManager = GameObject.Find("GameMaster").GetComponent<SalleManager>();
     }
 
-    public void FindEffect(string wantedName, int wantedRoom, ModuleManager mm, bool superEffect)
+    public void FindEffect(string wantedName, int wantedRoom, ModuleManager mm, bool superEffect, int equipementSelected)
     {
+        print(equipementSelected + "equp");
+        if (equipementSelected >= 0)
+        {
+            MyAnimatorsTurrets[equipementSelected].SetTrigger("Declenche");
+        }
+
         SalleQuiEffectueAction = mm.MySalleNumber;
         float cooldown = 0;
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Attack
@@ -54,7 +60,7 @@ public class AllSetupsActions : MonoBehaviour
         {
             if (ennemiManager.ennemiRooms[wantedRoom].reflect)
             {
-                string[] a = new string[] { "DURATION"};
+                string[] a = new string[] { "DURATION" };
                 salleManager.AddEffets(4, "Tempo", a, mm.MySalleNumber, -0.5f);
             }
             if (ennemiManager.actionPrevues.Exists(item => item.origine == wantedRoom))
@@ -74,16 +80,16 @@ public class AllSetupsActions : MonoBehaviour
         else if (wantedName == "Brouilleur") // DEF
         {
             int x = 0;
-            for(int i = 0; i < salleManager.allSalles.Count; i++)
+            for (int i = 0; i < salleManager.allSalles.Count; i++)
             {
-                if(salleManager.allSalles[i].canBeTarget)
-                x++;
+                if (salleManager.allSalles[i].canBeTarget)
+                    x++;
             }
             if (x > 1)
             {
                 salleManager.allSalles[wantedRoom].canBeTarget = false;
             }
-            
+
             string[] a = new string[] { "DURATION", "ELECTRONIC" };
             salleManager.AddEffets(10, "Brouilleur", a, wantedRoom, 0);
             cooldown = 22;

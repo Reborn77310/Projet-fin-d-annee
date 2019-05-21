@@ -7,6 +7,7 @@ using TMPro;
 public class Salles
 {
     public GameObject SpawnParticleFeedback;
+    public GameObject ActualFeedbackOnMe;
     public GameObject MyGo;
     public bool CanPlayHere = true;
     public float pv;
@@ -35,6 +36,7 @@ public class SalleManager : MonoBehaviour
         public string[] tags;
         public int salle;
         public float value;
+        public GameObject Feedback;
         public Effets()
         {
 
@@ -207,7 +209,7 @@ public class SalleManager : MonoBehaviour
         }
         else if (allEffets[i].name == "Smoke")
         {
-            // desactiver smoke
+            Destroy(allEffets[i].Feedback);
         }
     }
 
@@ -220,7 +222,7 @@ public class SalleManager : MonoBehaviour
         a.tags = _tags;
         a.salle = _salle;
         a.value = _value;
-
+        
         allEffets.Add(a);
     }
 }

@@ -13,7 +13,7 @@ public class DBM
     public int cible; // index de la cible
     public float timer = 50000; // Temps restant avant lancement de l'action
     public int id = 0; //Correspond à l'id de l'action qui servira à appeler la fonction correspondante.
-    public string textInfos ="";
+    public string textInfos = "";
 
     public DBM()
     {
@@ -676,6 +676,15 @@ public class EnnemiManager : MonoBehaviour
 
     public void ActionsEnnemies(int id, int i)
     {
+        if (id == 1 || id == 4 || id == 7 || id == 8 || id == 9)
+        {
+            string chemin = "Prefabs/FeedbackActionsEnnemisSurNest/";
+            var transformParent = salleManager.allSalles[actionPrevues[i].cible].SpawnParticleFeedback.transform;
+            GameObject wantedThing = Resources.Load<GameObject>(chemin + id);
+            var go = Instantiate(wantedThing, transformParent.position, transformParent.rotation, transformParent);
+            salleManager.allSalles[actionPrevues[i].cible].ActualFeedbackOnMe = go;
+        }
+
         //print(id + " " + actionPrevues[i].origine);
         if (id == 1) // Missile 1
         {
@@ -754,6 +763,7 @@ public class EnnemiManager : MonoBehaviour
             // declencher smoke ajouter perte de durabilité
             string[] a = new string[] { "DURATION", "CHIMIC" };
             salleManager.AddEffets(20, "Smoke", a, actionPrevues[i].cible, 0);
+            salleManager.allEffets[salleManager.allEffets.Count - 1].Feedback = salleManager.allSalles[actionPrevues[i].cible].ActualFeedbackOnMe;
         }
         else if (id == -1) // Drone anti-projectile
         {

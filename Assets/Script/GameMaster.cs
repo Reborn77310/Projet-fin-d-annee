@@ -31,7 +31,6 @@ public class GameMaster : MonoBehaviour
     public GameObject zoneSelectionADV;
     public Canvas myCanvas;
 
-
     void Awake()
     {
         cardSound = Camera.main.GetComponent<CardSound>();
@@ -316,12 +315,12 @@ public class GameMaster : MonoBehaviour
                 {
                     if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
                     {
-                        allSetupsActions.FindEffect(wantedName, i, mm, true);
+                        allSetupsActions.FindEffect(wantedName, i, mm, true,equipementSelected);
                     }
                     else
                     {
 
-                        allSetupsActions.FindEffect(wantedName, i, mm, false);
+                        allSetupsActions.FindEffect(wantedName, i, mm, false,equipementSelected);
                     }
 
                 }
@@ -344,11 +343,11 @@ public class GameMaster : MonoBehaviour
                 {
                     if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
                     {
-                        allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, true);
+                        allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, true,equipementSelected);
                     }
                     else
                     {
-                        allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, false);
+                        allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, false,equipementSelected);
                     }
                 }
             }
