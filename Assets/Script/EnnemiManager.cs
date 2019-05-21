@@ -95,6 +95,7 @@ public class EnnemiManager : MonoBehaviour
             GestionDesActions();
             GestionDesSalles();
             MajDBM();
+            GestionDesEffets();
         }
 
     }
@@ -669,9 +670,9 @@ public class EnnemiManager : MonoBehaviour
         }
         if (ennemiRooms.Count == 3)
         {
-            DBM_Symbole[3].text ="";
-            DBM_Cible[3].text ="";
-            DBM_timer[3].text ="";
+            DBM_Symbole[3].text = "";
+            DBM_Cible[3].text = "";
+            DBM_timer[3].text = "";
         }
     }
 
@@ -753,6 +754,9 @@ public class EnnemiManager : MonoBehaviour
         else if (id == 7) // Drone incendiaire
         {
             print("Drone incendiaire " + actionPrevues[i].origine);
+            string[] a = new string[] { "DURATION", "DOT" };
+            AddEffets(10, "Drone", a, actionPrevues[i].cible, 0);
+            StartCoroutine("Brulez", i);
             // Le drone
             // DRONE CHARGE
         }
@@ -917,6 +921,36 @@ public class EnnemiManager : MonoBehaviour
                 effetsEnnemi.RemoveAt(i);
             }
         }
+    }
+
+    IEnumerator Brulez(int i) //Jfais durer 10 sec vue que on peut pas l'annuler tfaçon
+    {
+        salleManager.allSalles[effetsEnnemi[i].salle].MyGo.GetComponent<IncendieSound>().LaunchIncendie(); //SON
+
+        GameObject go = Resources.Load("Prefabs/FeedbackActionsEnnemisSurNest/Incendie") as GameObject;
+        GameObject salleGo = salleManager.allSalles[effetsEnnemi[i].salle].MyGo;
+
+        salleManager.DamageSurSalle(effetsEnnemi[i].salle, 35);
+        yield return new WaitForSeconds(2);
+
+        var newGo = Instantiate(go, salleGo.transform.position, go.transform.rotation, salleGo.transform);
+        newGo.transform.localPosition = Vector3.zero;
+
+        salleManager.DamageSurSalle(effetsEnnemi[i].salle, 5);
+        yield return new WaitForSeconds(2);
+        salleManager.DamageSurSalle(effetsEnnemi[i].salle, 5);
+        yield return new WaitForSeconds(2);
+        salleManager.DamageSurSalle(effetsEnnemi[i].salle, 5);
+        yield return new WaitForSeconds(2);
+        salleManager.DamageSurSalle(effetsEnnemi[i].salle, 5);
+
+        foreach (Transform child in newGo.transform)
+        {
+            var emission = child.GetComponent<ParticleSystem>().emission;
+            emission.enabled = false;
+        }
+        yield return new WaitForSeconds(2);
+        Destroy(newGo);
     }
 
     public void RemoveEffets(int i)
