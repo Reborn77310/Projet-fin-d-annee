@@ -41,14 +41,24 @@ public class Equipement : MonoBehaviour
             allEquipements.Add(a);
         }
 
+        // "<b><color=#B97D31>DURATION, PROJECTILE</color></b>" + "\n" + "Blurs your radar. Last 10s.";
         effets[4] = "ELECTRONIC. Cleanse virus. Reducts virus duration of 8s";
         effets[5] = "DURATION. Eliminates engine pressure and accelerates cooldown. Cooldown -30%. Last 8s.";
-        effets[0] = "PROJECTILE. CANALISATION. Fire a blast. Deals 35 damage";
+        effets[0] = "<b><color=#E6742E>PROJECTILE, CANALISATION</color></b>" + "\n" + "Fire a blast. Deals <color=#7841BB>35 damage</color>.";
         effets[3] = "PROJECTILE. CANALISATION. Fire two blast. Each deals 27 damage";
         effets[1] = "CHARGE. ELECTRONIC. Delays the execution of the next action. Delay of 8s.";
         effets[2] = "DURATION. ELECTRONIC. Prevent enemy targeting. Last 10s";
         
     }
+
+        // "\n"
+        // <color=#BC1910> normale
+        // <color=#7841BB> intégrité
+        // <color=#E6742E> attaque
+        // <color=#4061BA> defense
+        // <color=#6289F3> buff
+        // <color=#B97D31> debuff
+        // </color>
 
 
 }

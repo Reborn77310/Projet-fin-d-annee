@@ -16,15 +16,15 @@ public class BattleLog : MonoBehaviour
         // </color>
 
 
-    public static TextMeshProUGUI textInfosAction;
-    public int id;
+    public TextMeshProUGUI textInfosActionADV;
+    public TextMeshProUGUI textInfosActionNEST;
 
-    private void Awake() {
-        textInfosAction = GameObject.Find("Infos text").GetComponent<TextMeshProUGUI>();
-    }
-
-    public static void ChangeText(string a)
+    public void ChangeTextInfosADV(string a)
     {
-        textInfosAction.text = a;
+        textInfosActionADV.text = a;
+    }
+    public void ChangeTextInfosNEST(string a)
+    {
+        textInfosActionNEST.text = a;
     }
 }
