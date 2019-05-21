@@ -75,6 +75,7 @@ public class EnnemiManager : MonoBehaviour
     public List<DBM> actionPrevues = new List<DBM>();
     public RectTransform[] sallesRT;
     public List<SalleManager.Effets> effetsEnnemi = new List<SalleManager.Effets>();
+    public Image[] formule = new Image[6];
 
     private void Awake()
     {
@@ -121,6 +122,14 @@ public class EnnemiManager : MonoBehaviour
                 ennemiRooms[i].actions[h] = actions[index];
                 index++;
             }
+        }
+    }
+
+    public void ApplyFormule(Sprite[] s)
+    {
+        for (int i = 0; i < formule.Length; i++)
+        {
+            formule[i].sprite = s[i];
         }
     }
 

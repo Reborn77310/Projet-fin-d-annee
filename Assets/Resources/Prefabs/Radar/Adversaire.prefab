@@ -1496,6 +1496,13 @@ MonoBehaviour:
   nbSymbolesParSalle: 01000000010000000100000001000000
   nbActionsParSalle: 01000000010000000200000001000000
   actions: 07000000010000000800000009000000ffffffff
+  formule:
+  - {fileID: 21300000, guid: 0556001ff843af04f922609725235ef5, type: 3}
+  - {fileID: 21300000, guid: 0556001ff843af04f922609725235ef5, type: 3}
+  - {fileID: 21300000, guid: 272b8b4052b712743b5311ab0cafa87b, type: 3}
+  - {fileID: 21300000, guid: bc61345bd60852d4bafa11137a6ceba2, type: 3}
+  - {fileID: 21300000, guid: 4d6301dd7d610e448ac6df10e3b5a0cd, type: 3}
+  - {fileID: 21300000, guid: 4d6301dd7d610e448ac6df10e3b5a0cd, type: 3}
 --- !u!1 &3255594942592849549
 GameObject:
   m_ObjectHideFlags: 0
