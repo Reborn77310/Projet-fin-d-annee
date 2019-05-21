@@ -34,6 +34,7 @@ public class EnnemiRooms
     public TextMeshProUGUI pvText;
     public bool isDead = false;
     public float timer;
+    public float timerMax;
     public int etat = 1;
     public bool isAttacking = false;
     public int iteration = 0;
@@ -41,9 +42,11 @@ public class EnnemiRooms
     public float projectileReduction = 1;
     public float cannalisationReduction = 1;
     public bool reflect = false;
+    public Image fillCD;
     public EnnemiRooms(float _timer)
     {
         timer = _timer;
+        timerMax = _timer;
     }
 }
 
@@ -124,7 +127,7 @@ public class EnnemiManager : MonoBehaviour
                 ennemiRooms[i].actions[h] = actions[index];
                 index++;
             }
-            animators[i].SetBool("cooldown", true);
+            //animators[i].SetBool("cooldown", true);
         }
     }
 
@@ -225,14 +228,14 @@ public class EnnemiManager : MonoBehaviour
                     ennemiRooms[i].isDead = false;
                     ennemiRooms[i].etat = 1;
                     ennemiRooms[i].timer = Random.Range(8, 16);
-                    animators[i].SetBool("cooldown", true);
+                    //animators[i].SetBool("cooldown", true);
                 }
             }
             else if (ennemiRooms[i].etat == 1)
             {
                 if (ennemiRooms[i].timer <= 0)
                 {
-                    animators[i].SetBool("cooldown", false);
+                    //animators[i].SetBool("cooldown", false);
                     // ChooseNextAttaque
                     ChooseAction(i);
                 }
@@ -245,7 +248,7 @@ public class EnnemiManager : MonoBehaviour
                     // attaque a été lancée, on passe en cooldown
                     ennemiRooms[i].timer = Random.Range(8, 16);
                     ennemiRooms[i].etat = 1;
-                    animators[i].SetBool("cooldown", true);
+                    //animators[i].SetBool("cooldown", true);
                 }
             }
         }

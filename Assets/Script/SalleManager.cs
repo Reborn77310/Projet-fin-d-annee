@@ -119,7 +119,6 @@ public class SalleManager : MonoBehaviour
         allSalles[salleVisee].etat = 1;
         allSalles[salleVisee].timer = cooldown;
         allSalles[salleVisee].timerMax = cooldown;
-        //animators[salleVisee].SetBool("cooldown", true);
         fillCD[salleVisee].fillAmount = 1;
     }
 
@@ -154,7 +153,6 @@ public class SalleManager : MonoBehaviour
                 if (allSalles[i].timer <= 0)
                 {
                     fillCD[i].fillAmount = 0;
-                    //animators[i].SetBool("cooldown", false);
                     GestionDurabiliteFinCD(i);
                     allSalles[i].etat = 0;
                     allSalles[i].timer = 0;

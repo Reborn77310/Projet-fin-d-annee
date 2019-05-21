@@ -84,6 +84,7 @@ public class GameMaster : MonoBehaviour
             for (int i = 0; i < salleManager.animators.Length; i++)
             {
                 salleManager.animators[i].SetBool("hightlight", false);
+                salleManager.fillCD[i].fillAmount = 0;
             }
         }
     }
@@ -142,7 +143,6 @@ public class GameMaster : MonoBehaviour
                             zoneSelectionADV.GetComponent<parent>().RotationZones(mm.MyModules[1].transform);
                             if (equipement.allEquipements[CheckEquipementSelected(mm)].attaque)
                             {
-                                print("ici");
                                 overlapEnnemi = zoneSelectionADV.GetComponent<parent>().CheckOverlap(ennemiManager.sallesRT);
                                 for (int x = 0; x < ennemiManager.animators.Length; x++)
                                 {
@@ -169,6 +169,10 @@ public class GameMaster : MonoBehaviour
                                 for (int g = 0; g < ennemiManager.animators.Length; g++)
                                 {
                                     ennemiManager.animators[g].SetBool("hightlight", false);
+                                }
+                                for (int g = 0; g < salleManager.fillCD.Length; g++)
+                                {
+                                    salleManager.fillCD[g].fillAmount = 1;
                                 }
                                 for (int x = 0; x < salleManager.animators.Length; x++)
                                 {
