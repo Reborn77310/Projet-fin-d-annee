@@ -8,6 +8,7 @@ public class CameraShake : MonoBehaviour
     public float shakeDuration = 0f;
     public float shakeAmount = 0.7f;
     public float decreaseFactor = 1.0f;
+    float tempDuration = 0f;
 
     Vector3 originalPos;
 
@@ -43,6 +44,24 @@ public class CameraShake : MonoBehaviour
         shakeAmount = newShakeAmount;
         shakeDuration = newShakeDuration;
         decreaseFactor = newDecreaseFactor;
+    }
+
+    public void PauseShake()
+    {
+        if(shakeDuration > 0)
+        {
+            tempDuration = shakeDuration;
+            shakeDuration = 0;
+        }
+    }
+
+    public void UnpauseShake()
+    {
+        if(tempDuration > 0)
+        {
+            shakeDuration = tempDuration;
+            tempDuration = 0;
+        }
     }
 
     struct ToSave
