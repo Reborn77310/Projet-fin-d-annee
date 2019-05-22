@@ -188,12 +188,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2601709}
   m_CullTransparentMesh: 0
---- !u!195 &4791114 stripped
-NavMeshAgent:
-  m_CorrespondingSourceObject: {fileID: 195543772436200848, guid: 911e024ca4401ec46beb272801ddf4a2,
-    type: 3}
-  m_PrefabInstance: {fileID: 720033154}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &40141616
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6377,12 +6371,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 93a8d076a6e3e7447a85df1cdcdb7c2b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8a595185d727af4bb5ab2439d889145, type: 3}
---- !u!95 &716424587 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95521278411604134, guid: ea6dd04f8846d3f4ea4aefc57341ee76,
-    type: 3}
-  m_PrefabInstance: {fileID: 225168059}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &716963377
 GameObject:
   m_ObjectHideFlags: 0
@@ -7466,12 +7454,12 @@ GameObject:
   - component: {fileID: 770115256}
   - component: {fileID: 770115255}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: brouillage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &770115254
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17720,12 +17708,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b923e1dc4720c4aa29d57726611a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agents:
-  - {fileID: 1547662214}
-  - {fileID: 4791114}
-  agentsAnimator:
-  - {fileID: 716424587}
-  - {fileID: 1621623378}
   ConsolesPositions:
   - {fileID: 4883225645276105756}
   - {fileID: 8356486085528798994}
@@ -20566,12 +20548,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1547256110}
   m_CullTransparentMesh: 0
---- !u!195 &1547662214 stripped
-NavMeshAgent:
-  m_CorrespondingSourceObject: {fileID: 195668209710245362, guid: ea6dd04f8846d3f4ea4aefc57341ee76,
-    type: 3}
-  m_PrefabInstance: {fileID: 225168059}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1552629820
 GameObject:
   m_ObjectHideFlags: 0
@@ -21500,12 +21476,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5289339939430517166, guid: 3f30c428b486e0944b70bd293bea32bf,
     type: 3}
   m_PrefabInstance: {fileID: 1620733766}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1621623378 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95685107303688226, guid: 911e024ca4401ec46beb272801ddf4a2,
-    type: 3}
-  m_PrefabInstance: {fileID: 720033154}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1624342716
 PrefabInstance:
