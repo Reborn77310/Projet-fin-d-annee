@@ -126,14 +126,22 @@ public class SalleManager : MonoBehaviour
     {
         ModuleManager mm = allSalles[salleVisee].MyGo.GetComponent<ModuleManager>();
         mm.slotImage[2].sprite = mm.defaultSprite[2];
-        mm.cartesModule.RemoveAt(2);
+        if (mm.cartesModule.Count > 2)
+        {
+            mm.cartesModule.RemoveAt(2);
+        }
+
         mm.MyCompteurInt -= 1;
 
         if (mm.MyCompteurInt <= 0)
         {
             mm.MyCompteurInt = 2;
             Camera.main.GetComponent<CardSound>().CardBurn();
-            mm.cartesModule.RemoveAt(1);
+            if (mm.cartesModule.Count > 1)
+            {
+                mm.cartesModule.RemoveAt(1);
+            }
+
             mm.slotImage[1].sprite = mm.defaultSprite[1];
         }
     }
@@ -152,6 +160,7 @@ public class SalleManager : MonoBehaviour
                 fillCD[i].fillAmount = allSalles[i].timer / allSalles[i].timerMax;
                 if (allSalles[i].timer <= 0)
                 {
+                    GetComponent<GameMaster>().consolesAnim[i].SetBool("cooldown", false);
                     fillCD[i].fillAmount = 0;
                     GestionDurabiliteFinCD(i);
                     allSalles[i].etat = 0;
@@ -168,15 +177,16 @@ public class SalleManager : MonoBehaviour
                     //     animators[i].SetBool("cooldown", false);
                     // }
                     fillCD[i].fillAmount = 0;
+                    GetComponent<GameMaster>().consolesAnim[i].SetBool("cooldown", false);
                     GestionDurabiliteFinCD(i);
                     allSalles[i].timer = 0;
                 }
 
                 allSalles[i].pv += 5 * Time.deltaTime * allSalles[i].facteurReparation;
-                pvSalles[i].text ="<color=#4061BA>" + Mathf.RoundToInt(allSalles[i].pv).ToString() + " % </color>";
+                pvSalles[i].text = "<color=#4061BA>" + Mathf.RoundToInt(allSalles[i].pv).ToString() + " % </color>";
                 if (allSalles[i].pv >= 100)
                 {
-                    pvSalles[i].text = "<color=#78FF1B>" + Mathf.RoundToInt(allSalles[i].pv).ToString() + " % </color>"; 
+                    pvSalles[i].text = "<color=#78FF1B>" + Mathf.RoundToInt(allSalles[i].pv).ToString() + " % </color>";
                     allSalles[i].timer = 0;
                     allSalles[i].CanPlayHere = true;
                     allSalles[i].pv = 100;
@@ -215,11 +225,11 @@ public class SalleManager : MonoBehaviour
         else if (allEffets[i].name == "Singularity")
         {
             allSalles[allEffets[i].salle].canOverdrive = true;
-            GameObject.Find("Salle_NEST_"+ allEffets[i].salle).transform.GetChild(0).GetComponent<Animator>().SetBool("rouge", false);
+            GameObject.Find("Salle_NEST_" + allEffets[i].salle).transform.GetChild(0).GetComponent<Animator>().SetBool("rouge", false);
         }
         else if (allEffets[i].name == "Grappin")
         {
-        ennemiManager.brouillage.SetActive(false);
+            ennemiManager.brouillage.SetActive(false);
         }
         else if (allEffets[i].name == "Smoke")
         {
@@ -236,7 +246,7 @@ public class SalleManager : MonoBehaviour
         a.tags = _tags;
         a.salle = _salle;
         a.value = _value;
-        
+
         allEffets.Add(a);
     }
 }

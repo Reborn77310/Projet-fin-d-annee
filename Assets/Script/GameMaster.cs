@@ -25,7 +25,7 @@ public class GameMaster : MonoBehaviour
     SalleManager salleManager;
     AllSetupsActions allSetupsActions;
     BattleLog battleLog;
-    private CardSound cardSound;
+    public CardSound cardSound;
     EnnemiManager ennemiManager;
     Equipement equipement;
     public GameObject uiPlaceHolder;
@@ -34,7 +34,7 @@ public class GameMaster : MonoBehaviour
     public bool isPaused = false;
     public GameObject pause;
     CameraShake cameraShake;
-    //public Animator[] consolesAnim;
+    public Animator[] consolesAnim;
 
     void Awake()
     {
@@ -317,14 +317,14 @@ public class GameMaster : MonoBehaviour
                     caj.GetComponent<Animator>().SetBool("Dance", true);
                     hittingAModule = true;
                     moduleHit = hit.transform.GetComponent<ModuleManager>();
-                    //consolesAnim[moduleHit.MySalleNumber].SetBool("hover", true);
+                    consolesAnim[moduleHit.MySalleNumber].SetBool("hover", true);
                 }
             }
             else
             {
                 if (moduleHit != null)
                 {
-                    //consolesAnim[moduleHit.MySalleNumber].SetBool("hover", false);
+                    consolesAnim[moduleHit.MySalleNumber].SetBool("hover", false);
                     moduleHit = null;
                     hittingAModule = false;
                     caj.GetComponent<Animator>().SetBool("Dance", false);
@@ -333,9 +333,9 @@ public class GameMaster : MonoBehaviour
         }
         else
         {
-
             if (moduleHit != null)
             {
+                consolesAnim[moduleHit.MySalleNumber].SetBool("hover", false);
                 moduleHit = null;
                 hittingAModule = false;
                 caj.GetComponent<Animator>().SetBool("Dance", false);
@@ -361,12 +361,8 @@ public class GameMaster : MonoBehaviour
         return toReturn;
     }
     public void PlayCard()
-    {
-        // consolesAnim[moduleHit.MySalleNumber].SetTrigger("validation");
-        // consolesAnim[moduleHit.MySalleNumber].SetBool("hover", false);
-        // consolesAnim[moduleHit.MySalleNumber].SetBool("cooldown", true);
+    {             
         cartesManager.PlayACardOnModule(cardIDBeingPlayed, moduleHit);
-        cardSound.GoingToPlayACard();
         cardIDBeingPlayed = -1;
     }
     #endregion
@@ -383,6 +379,7 @@ public class GameMaster : MonoBehaviour
         int equipementSelected = CheckEquipementSelected(mm);
 
         string wantedName = equipement.allEquipements[equipementSelected].action;
+        consolesAnim[moduleHit.MySalleNumber].SetBool("cooldown", true);
         if (equipement.allEquipements[equipementSelected].attaque)
         {
             zoneSelectionADV = GameObject.Instantiate(mm.cartesModule[1].prefabZoneSelection, myCanvas.transform, false);
@@ -424,7 +421,7 @@ public class GameMaster : MonoBehaviour
             for (int i = 0; i < sallesTouchees.Length; i++)
             {
                 if (sallesTouchees[i] >= 0)
-                {
+                {                    
                     if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
                     {
                         allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, true, equipementSelected);

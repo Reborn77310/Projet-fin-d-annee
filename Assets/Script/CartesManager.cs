@@ -67,10 +67,16 @@ public class CartesManager : MonoBehaviour
     {
         if (!PhaseLente)
         {
+            gameMaster.cardSound.GoingToPlayACard();
+            gameMaster.consolesAnim[mm.MySalleNumber].SetTrigger("validation");
             HandToModule(id, mm);
             if (mm.cartesModule.Count == 3)
             {
                 ThirdCardAction(mm);
+            }
+            else
+            {
+                StartCoroutine("StopAnim", mm);
             }
             SortCartes();
         }
@@ -79,16 +85,23 @@ public class CartesManager : MonoBehaviour
 
             if (mm.cartesModule.Count < 2)
             {
+                gameMaster.cardSound.GoingToPlayACard();
                 var c = allCards[id];
                 mm.cartesModule.Add(c);
                 mm.slotImage[mm.cartesModule.Count - 1].sprite = mm.cartesModule[mm.cartesModule.Count - 1].picto;
                 SortCartes();
+                StartCoroutine("StopAnim", mm);
             }
 
         }
     }
 
-
+    IEnumerator StopAnim(ModuleManager mm)
+    {
+        gameMaster.consolesAnim[mm.MySalleNumber].SetTrigger("validation");
+        yield return new WaitForSeconds(1f);
+        gameMaster.consolesAnim[mm.MySalleNumber].SetBool("hover", false);
+    }
 
     void ThirdCardAction(ModuleManager mm)
     {

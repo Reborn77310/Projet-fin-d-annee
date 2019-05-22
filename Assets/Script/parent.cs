@@ -19,16 +19,16 @@ public class parent : MonoBehaviour
     public bool rectOverlaps(RectTransform rectTrans1, RectTransform rectTrans2)
     {
         var r = rectTrans1.rect;
-        r.center =rectTrans1.TransformPoint(r.center);
+        r.center = rectTrans1.TransformPoint(r.center);
         r.size = rectTrans1.TransformVector(r.size);
 
         var r2 = rectTrans2.rect;
-        r2.center =rectTrans2.TransformPoint(r2.center);
+        r2.center = rectTrans2.TransformPoint(r2.center);
         r2.size = rectTrans2.TransformVector(r2.size);
 
         return r.Overlaps(r2);
 
-        
+
 
     }
 
@@ -45,7 +45,11 @@ public class parent : MonoBehaviour
                     zones[h].GetComponent<Image>().color = Color.red;
                     toReturn[i] = i;
                     print(i + " " + ennemiManager.animators.Length);
-                    ennemiManager.animators[i].SetBool("hightlight", true);
+                    if (ennemiManager.animators.Length > 0)
+                    {
+                        ennemiManager.animators[i].SetBool("hightlight", true);
+                    }
+
                 }
             }
         }
@@ -65,7 +69,7 @@ public class parent : MonoBehaviour
         {
             zones[i].SetParent(myCanvas.transform, true);
             zones[i].rotation = Quaternion.identity;
-            zones[i].localScale = new Vector3(1,1,1);
+            zones[i].localScale = new Vector3(1, 1, 1);
         }
     }
 
