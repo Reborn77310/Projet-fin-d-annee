@@ -27,11 +27,9 @@ public class ComportementPersonnage : MonoBehaviour
     public int NumberOfCategories = 2;
 
     SalleManager salleManager;
-    EnnemiManager ennemiManager;
     void Awake()
     {
         salleManager = GameObject.Find("GameMaster").GetComponent<SalleManager>();
-        ennemiManager = GameObject.Find("GameMaster").GetComponent<EnnemiManager>();
 
         var wantedAgent = GameObject.Find("PersoRouge").GetComponent<NavMeshAgent>();
         var newAgent = new Agents(wantedAgent);
@@ -44,10 +42,6 @@ public class ComportementPersonnage : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            print(MyAgents[1]._agent.remainingDistance);
-        }
         CheckState();
     }
 
@@ -99,7 +93,6 @@ public class ComportementPersonnage : MonoBehaviour
                 if (!CheckIfRoomIsPlayable(i))
                 {
                     MyAgents[i].etat = 0;
-                    print("wat");
                 }
 
             }
@@ -119,7 +112,6 @@ public class ComportementPersonnage : MonoBehaviour
                 else if (!CheckIfRoomIsPlayable(i))
                 {
                     MyAgents[i].etat = 0;
-                    print("wat1");
                 }
             }
         }
@@ -128,13 +120,13 @@ public class ComportementPersonnage : MonoBehaviour
     bool CheckIfRoomIsPlayable(int playerSelectedIndex)
     {
         bool canPlayHere = true;
-        for (int b = 0; b < ennemiManager.effetsEnnemi.Count; b++)
+        for (int b = 0; b < salleManager.allEffets.Count; b++)
         {
             string[] stringArray = MyAgents[playerSelectedIndex].destinationGo.name.Split(char.Parse("_"));
 
-            if (ennemiManager.effetsEnnemi[b].salle == int.Parse(stringArray[1]))
+            if (salleManager.allEffets[b].salle == int.Parse(stringArray[1]))
             {
-                string[] tags = ennemiManager.effetsEnnemi[b].tags;
+                string[] tags = salleManager.allEffets[b].tags;
                 for (int c = 0; c < tags.Length; c++)
                 {
                     if (tags[c] == "CHIMIC" || tags[c] == "DOT")

@@ -80,6 +80,7 @@ public class EnnemiManager : MonoBehaviour
     public List<SalleManager.Effets> effetsEnnemi = new List<SalleManager.Effets>();
     public Image[] formule = new Image[6];
     public Animator[] animators;
+    public GameObject brouillage;
 
     private void Awake()
     {
@@ -751,7 +752,7 @@ public class EnnemiManager : MonoBehaviour
         }
         else if (id == 6) // Grappin
         {
-            // Brouille le radar
+            brouillage.SetActive(true);
             print("Grappin " + actionPrevues[i].origine);
             string[] a = new string[] { "DURATION", "PROJECTILE" };
             salleManager.AddEffets(10, "Grappin", a, actionPrevues[i].cible, 0);
@@ -760,8 +761,8 @@ public class EnnemiManager : MonoBehaviour
         {
             print("Drone incendiaire " + actionPrevues[i].origine);
             string[] a = new string[] { "DURATION", "DOT" };
-            AddEffets(10, "Drone", a, actionPrevues[i].cible, 0);
-            StartCoroutine("Brulez", i);
+            salleManager.AddEffets(10, "Drone", a, actionPrevues[i].cible, 0);
+            StartCoroutine("Brulez", actionPrevues[i].cible);
             // Le drone
             // DRONE CHARGE
         }
@@ -932,7 +933,6 @@ public class EnnemiManager : MonoBehaviour
 
     IEnumerator Brulez(int i) //Jfais durer 10 sec vue que on peut pas l'annuler tfaçon
     {
-        print(i);
         salleManager.allSalles[i].MyGo.GetComponent<IncendieSound>().LaunchIncendie(); //SON
 
         GameObject go = Resources.Load("Prefabs/FeedbackActionsEnnemisSurNest/Incendie") as GameObject;

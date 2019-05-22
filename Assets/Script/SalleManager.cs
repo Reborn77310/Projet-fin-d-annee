@@ -218,7 +218,7 @@ public class SalleManager : MonoBehaviour
         }
         else if (allEffets[i].name == "Grappin")
         {
-            // desactiver brouillage radar
+        ennemiManager.brouillage.SetActive(false);
         }
         else if (allEffets[i].name == "Smoke")
         {
