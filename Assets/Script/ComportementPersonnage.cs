@@ -115,7 +115,6 @@ public class ComportementPersonnage : MonoBehaviour
                 if (MyAgents[i].randomTime <= 0)
                 {
                     MyAgents[i].etat = 0;
-                    print("arrivé à dest");
                 }
                 else if (!CheckIfRoomIsPlayable(i))
                 {
@@ -135,7 +134,7 @@ public class ComportementPersonnage : MonoBehaviour
 
             if (ennemiManager.effetsEnnemi[b].salle == int.Parse(stringArray[1]))
             {
-                var tags = ennemiManager.effetsEnnemi[b].tags;
+                string[] tags = ennemiManager.effetsEnnemi[b].tags;
                 for (int c = 0; c < tags.Length; c++)
                 {
                     if (tags[c] == "CHIMIC" || tags[c] == "DOT")
