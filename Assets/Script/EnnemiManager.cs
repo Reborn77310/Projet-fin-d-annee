@@ -706,7 +706,6 @@ public class EnnemiManager : MonoBehaviour
             string chemin = "Prefabs/FeedbackActionsEnnemisSurNest/";
             
             var transformParent = salleManager.allSalles[actionPrevues[i].cible].SpawnParticleFeedback.transform;
-            print(transformParent.transform.parent.name + " OOOOOOOOOOOOOO");
             GameObject wantedThing = Resources.Load<GameObject>(chemin + id);
             var go = Instantiate(wantedThing, transformParent.position, transformParent.rotation, transformParent);
             salleManager.allSalles[actionPrevues[i].cible].ActualFeedbackOnMe = go;
@@ -933,24 +932,25 @@ public class EnnemiManager : MonoBehaviour
 
     IEnumerator Brulez(int i) //Jfais durer 10 sec vue que on peut pas l'annuler tfaçon
     {
-        salleManager.allSalles[effetsEnnemi[i].salle].MyGo.GetComponent<IncendieSound>().LaunchIncendie(); //SON
+        print(i);
+        salleManager.allSalles[i].MyGo.GetComponent<IncendieSound>().LaunchIncendie(); //SON
 
         GameObject go = Resources.Load("Prefabs/FeedbackActionsEnnemisSurNest/Incendie") as GameObject;
-        GameObject salleGo = salleManager.allSalles[effetsEnnemi[i].salle].MyGo;
+        GameObject salleGo = salleManager.allSalles[i].MyGo;
 
-        salleManager.DamageSurSalle(effetsEnnemi[i].salle, 35);
+        salleManager.DamageSurSalle(i, 35);
         yield return new WaitForSeconds(2);
 
         var newGo = Instantiate(go, salleGo.transform.position, go.transform.rotation, salleGo.transform);
         newGo.transform.localPosition = Vector3.zero;
 
-        salleManager.DamageSurSalle(effetsEnnemi[i].salle, 5);
+        salleManager.DamageSurSalle(i, 5);
         yield return new WaitForSeconds(2);
-        salleManager.DamageSurSalle(effetsEnnemi[i].salle, 5);
+        salleManager.DamageSurSalle(i, 5);
         yield return new WaitForSeconds(2);
-        salleManager.DamageSurSalle(effetsEnnemi[i].salle, 5);
+        salleManager.DamageSurSalle(i, 5);
         yield return new WaitForSeconds(2);
-        salleManager.DamageSurSalle(effetsEnnemi[i].salle, 5);
+        salleManager.DamageSurSalle(i, 5);
 
         foreach (Transform child in newGo.transform)
         {
