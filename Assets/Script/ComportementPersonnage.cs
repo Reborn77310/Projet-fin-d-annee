@@ -22,8 +22,7 @@ public class ComportementPersonnage : MonoBehaviour
         }
     }
     List<Agents> MyAgents = new List<Agents>();
-    public Transform[] ConsolesPositions = new Transform[4];
-    public Transform[] CommonPositions = new Transform[4];
+    public Transform[] ConsolesPositions = new Transform[5];
     public int NumberOfCategories = 2;
 
     SalleManager salleManager;
@@ -49,9 +48,14 @@ public class ComportementPersonnage : MonoBehaviour
     {
         for (int i = 0; i < 2; i++)
         {
-            if (MyAgents[i]._agent.velocity.sqrMagnitude > Mathf.Epsilon)
+            if (MyAgents[i]._agent.velocity.sqrMagnitude > Mathf.Epsilon && MyAgents[i].etat != 3)
             {
                 MyAgents[i]._agent.transform.rotation = Quaternion.LookRotation(MyAgents[i]._agent.velocity.normalized);
+            }
+            else if (MyAgents[i].etat == 3)
+            {
+                var positionToLook = (MyAgents[i].destinationGo.transform.position - MyAgents[i]._agent.transform.position).normalized;
+                MyAgents[i]._agent.transform.rotation = Quaternion.LookRotation(positionToLook);
             }
         }
     }
@@ -70,6 +74,7 @@ public class ComportementPersonnage : MonoBehaviour
             {
                 MyAgents[i].destinationGo = null;
                 MyAgents[i].animator.SetBool("GoRun", false);
+                MyAgents[i].animator.SetBool("OnConsole", false);
                 var newDirection = SelectDirection(i);
 
                 if (CheckIfRoomIsPlayable(i) && MyAgents[otherI].destinationGo != MyAgents[i].destinationGo)
@@ -80,11 +85,11 @@ public class ComportementPersonnage : MonoBehaviour
             }
             else if (MyAgents[i].etat == 1) //Va vers la destination
             {
-                if (MyAgents[i]._agent.remainingDistance > 0.2f && !MyAgents[i].animator.GetBool("GoRun"))
+                if (MyAgents[i]._agent.remainingDistance > 1.2f && !MyAgents[i].animator.GetBool("GoRun"))
                 {
                     MyAgents[i].animator.SetBool("GoRun", true);
                 }
-                else if (MyAgents[i]._agent.remainingDistance <= 0.2f)
+                else if (MyAgents[i]._agent.remainingDistance <= 1.2f)
                 {
                     MyAgents[i].animator.SetBool("GoRun", false);
                     MyAgents[i].etat = 2;
@@ -98,12 +103,13 @@ public class ComportementPersonnage : MonoBehaviour
             }
             else if (MyAgents[i].etat == 2) //Calcul du rand
             {
-                MyAgents[i].randomTime = ReturnRandom(10);
+                MyAgents[i].randomTime = Random.Range(5, 10);
                 MyAgents[i].etat = 3;
             }
             else if (MyAgents[i].etat == 3) //Arrivé à destination
             {
                 MyAgents[i].randomTime -= Time.deltaTime;
+                MyAgents[i].animator.SetBool("OnConsole", true);
 
                 if (MyAgents[i].randomTime <= 0)
                 {
@@ -139,18 +145,11 @@ public class ComportementPersonnage : MonoBehaviour
         return canPlayHere;
     }
     Vector3 SelectDirection(int i)
-    {
-        int random = ReturnRandom(NumberOfCategories);
+    {    
         var wantedPos = Vector3.zero;
 
-        if (random == 0)
-        {
-            wantedPos = PickRandomPositionWithArrays(ConsolesPositions, i);
-        }
-        else if (random == 1)
-        {
-            wantedPos = PickRandomPositionWithArrays(CommonPositions, i);
-        }
+        wantedPos = PickRandomPositionWithArrays(ConsolesPositions, i);
+
         return wantedPos;
     }
 
