@@ -706,7 +706,6 @@ public class EnnemiManager : MonoBehaviour
             string chemin = "Prefabs/FeedbackActionsEnnemisSurNest/";
             
             var transformParent = salleManager.allSalles[actionPrevues[i].cible].SpawnParticleFeedback.transform;
-            print(transformParent.transform.parent.name + " OOOOOOOOOOOOOO");
             GameObject wantedThing = Resources.Load<GameObject>(chemin + id);
             var go = Instantiate(wantedThing, transformParent.position, transformParent.rotation, transformParent);
             salleManager.allSalles[actionPrevues[i].cible].ActualFeedbackOnMe = go;
