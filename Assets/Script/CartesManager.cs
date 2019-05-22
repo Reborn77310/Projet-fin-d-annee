@@ -39,7 +39,7 @@ public class CartesManager : MonoBehaviour
     public GameObject prefabCarte;
     public GameMaster gameMaster;
     public Canvas canvas;
-    public float drawTimer;
+    float drawTimer = 30;
     public Text ChangeBool;
     public EnnemiManager ennemiManager;
     public Image grilleRadar;

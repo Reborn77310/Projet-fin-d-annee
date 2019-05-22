@@ -33,6 +33,7 @@ public class GameMaster : MonoBehaviour
     public Canvas myCanvas;
     public bool isPaused = false;
     public GameObject pause;
+    CameraShake cameraShake;
 
     void Awake()
     {
@@ -44,6 +45,7 @@ public class GameMaster : MonoBehaviour
         allSetupsActions = GetComponent<AllSetupsActions>();
         equipement = GetComponent<Equipement>();
         battleLog = GetComponent<BattleLog>();
+        cameraShake = Camera.main.GetComponent<CameraShake>();
     }
 
     void Update()
@@ -92,12 +94,14 @@ public class GameMaster : MonoBehaviour
         {
             if (isPaused)
             {
+                cameraShake.UnpauseShake();
                 isPaused = false;
                 pause.SetActive(false);
                 Time.timeScale = 1;
             }
             else
             {
+                cameraShake.PauseShake();
                 isPaused = true;
                 pause.SetActive(true);
                 Time.timeScale = 0;
