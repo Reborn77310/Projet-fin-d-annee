@@ -215,6 +215,7 @@ public class SalleManager : MonoBehaviour
         else if (allEffets[i].name == "Singularity")
         {
             allSalles[allEffets[i].salle].canOverdrive = true;
+            GameObject.Find("Salle_NEST_"+ allEffets[i].salle).transform.GetChild(0).GetComponent<Animator>().SetBool("rouge", false);
         }
         else if (allEffets[i].name == "Grappin")
         {

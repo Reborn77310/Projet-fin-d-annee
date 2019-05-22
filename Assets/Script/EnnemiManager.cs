@@ -591,7 +591,6 @@ public class EnnemiManager : MonoBehaviour
                     if (actionPrevues[i].textInfos == "")
                     {
                         SetTextInDBM(i);
-                        print("a");
                     }
                 }
                 else
@@ -705,7 +704,7 @@ public class EnnemiManager : MonoBehaviour
         if (id == 1 || id == 4 || id == 7 || id == 8 || id == 9)
         {
             string chemin = "Prefabs/FeedbackActionsEnnemisSurNest/";
-            
+
             var transformParent = salleManager.allSalles[actionPrevues[i].cible].SpawnParticleFeedback.transform;
             GameObject wantedThing = Resources.Load<GameObject>(chemin + id);
             var go = Instantiate(wantedThing, transformParent.position, transformParent.rotation, transformParent);
@@ -728,6 +727,7 @@ public class EnnemiManager : MonoBehaviour
         }
         else if (id == 3) // Singularité empêche overdrive
         {
+            GameObject.Find("Salle_NEST_"+actionPrevues[i].cible).transform.GetChild(0).GetComponent<Animator>().SetBool("rouge", true);
             print("Singularity " + actionPrevues[i].origine);
             salleManager.allSalles[actionPrevues[i].cible].canOverdrive = false;
             string[] a = new string[] { "DURATION", "ELECTRONIC" };
@@ -795,250 +795,261 @@ public class EnnemiManager : MonoBehaviour
             // declencher smoke ajouter perte de durabilité
             string[] a = new string[] { "DURATION", "CHIMIC" };
             salleManager.AddEffets(20, "Smoke", a, actionPrevues[i].cible, 0);
-            salleManager.allEffets[salleManager.allEffets.Count - 1].Feedback = salleManager.allSalles[actionPrevues[i].cible].ActualFeedbackOnMe;
-            salleManager.allSalles[actionPrevues[i].cible].MyGo.GetComponent<FumeeSound>().LaunchFumee();
-        }
-        else if (id == -1) // Drone anti-projectile
-        {
-            print("anti-proj " + actionPrevues[i].origine);
-            string[] a = new string[] { "DURATION", "DRONE" };
-            ennemiRooms[actionPrevues[i].cible].projectileReduction -= 0.5f;
-            AddEffets(15, "Terra", a, actionPrevues[i].cible, -0.5f);
-        }
-        else if (id == -2)  // Reflect
-        {
-            print("reflect " + actionPrevues[i].origine);
-            string[] a = new string[] { "DURATION", "GAMMA" };
-            ennemiRooms[actionPrevues[i].cible].reflect = true;
-            AddEffets(10, "Reflect", a, actionPrevues[i].cible, 0);
-        }
-        else if (id == -3)  // Bouclier anti-canalisation
-        {
-            print("anti-cana " + actionPrevues[i].origine);
-            string[] a = new string[] { "DURATION", "ELECTRONIC" };
-            ennemiRooms[actionPrevues[i].cible].cannalisationReduction -= 1f;
-            AddEffets(10, "Anti-cannalisation", a, actionPrevues[i].cible, -1f);
-        }
-        else if (id == -4)  // Cloaking
-        {
-            print("cloaking " + actionPrevues[i].origine);
-            string[] a = new string[] { "DURATION", "GAMMA" };
-            for (int h = 0; h < ennemiRooms.Count; h++)
+            ModuleManager mm = salleManager.allSalles[actionPrevues[i].cible].MyGo.GetComponent<ModuleManager>();
+            if (mm.cartesModule.Count > 1)
             {
-                ennemiRooms[h].canBeTarget = false;
-            }
-            AddEffets(5, "Cloaking", a, actionPrevues[i].cible, 0);
-        }
-    }
-
-    public int NombreAttaques()
-    {
-        int toReturn = 0;
-        for (int i = 0; i < actionPrevues.Count; i++)
-        {
-            if (actionPrevues[i].id > 0)
-            {
-                toReturn += 1;
+                mm.MyCompteurInt -= 1;
+                if (mm.MyCompteurInt <= 0)
+                {
+                    mm.MyCompteurInt = 2;
+                    mm.cartesModule.RemoveAt(1);
+                    mm.slotImage[1].sprite = mm.defaultSprite[1];
+                }
+                salleManager.allEffets[salleManager.allEffets.Count - 1].Feedback = salleManager.allSalles[actionPrevues[i].cible].ActualFeedbackOnMe;
+                salleManager.allSalles[actionPrevues[i].cible].MyGo.GetComponent<FumeeSound>().LaunchFumee();
             }
         }
-        return toReturn;
-    }
-
-    public int NombreDefenses()
-    {
-        int toReturn = 0;
-        for (int i = 0; i < actionPrevues.Count; i++)
-        {
-            if (actionPrevues[i].id < 0)
+            else if (id == -1) // Drone anti-projectile
             {
-                toReturn += 1;
+                print("anti-proj " + actionPrevues[i].origine);
+                string[] a = new string[] { "DURATION", "DRONE" };
+                ennemiRooms[actionPrevues[i].cible].projectileReduction -= 0.5f;
+                AddEffets(15, "Terra", a, actionPrevues[i].cible, -0.5f);
+            }
+            else if (id == -2)  // Reflect
+            {
+                print("reflect " + actionPrevues[i].origine);
+                string[] a = new string[] { "DURATION", "GAMMA" };
+                ennemiRooms[actionPrevues[i].cible].reflect = true;
+                AddEffets(10, "Reflect", a, actionPrevues[i].cible, 0);
+            }
+            else if (id == -3)  // Bouclier anti-canalisation
+            {
+                print("anti-cana " + actionPrevues[i].origine);
+                string[] a = new string[] { "DURATION", "ELECTRONIC" };
+                ennemiRooms[actionPrevues[i].cible].cannalisationReduction -= 1f;
+                AddEffets(10, "Anti-cannalisation", a, actionPrevues[i].cible, -1f);
+            }
+            else if (id == -4)  // Cloaking
+            {
+                print("cloaking " + actionPrevues[i].origine);
+                string[] a = new string[] { "DURATION", "GAMMA" };
+                for (int h = 0; h < ennemiRooms.Count; h++)
+                {
+                    ennemiRooms[h].canBeTarget = false;
+                }
+                AddEffets(5, "Cloaking", a, actionPrevues[i].cible, 0);
             }
         }
-        return toReturn;
-    }
 
-    public int[] AttaquesPool(int idSalle)
-    {
-        int[] toReturn;
-        int index = 0;
-        for (int i = 0; i < ennemiRooms[idSalle].actions.Length; i++)
+        public int NombreAttaques()
         {
-            if (ennemiRooms[idSalle].actions[i] > 0)
+            int toReturn = 0;
+            for (int i = 0; i < actionPrevues.Count; i++)
             {
-                index++;
+                if (actionPrevues[i].id > 0)
+                {
+                    toReturn += 1;
+                }
+            }
+            return toReturn;
+        }
+
+        public int NombreDefenses()
+        {
+            int toReturn = 0;
+            for (int i = 0; i < actionPrevues.Count; i++)
+            {
+                if (actionPrevues[i].id < 0)
+                {
+                    toReturn += 1;
+                }
+            }
+            return toReturn;
+        }
+
+        public int[] AttaquesPool(int idSalle)
+        {
+            int[] toReturn;
+            int index = 0;
+            for (int i = 0; i < ennemiRooms[idSalle].actions.Length; i++)
+            {
+                if (ennemiRooms[idSalle].actions[i] > 0)
+                {
+                    index++;
+                }
+            }
+            toReturn = new int[index];
+            index = 0;
+            for (int i = 0; i < ennemiRooms[idSalle].actions.Length; i++)
+            {
+                if (ennemiRooms[idSalle].actions[i] > 0)
+                {
+                    toReturn[index] = ennemiRooms[idSalle].actions[i];
+                    index++;
+                }
+            }
+            return toReturn;
+        }
+
+        public int[] DefensesPool(int idSalle)
+        {
+            int[] toReturn;
+            int index = 0;
+            for (int i = 0; i < ennemiRooms[idSalle].actions.Length; i++)
+            {
+                if (ennemiRooms[idSalle].actions[i] < 0)
+                {
+                    index++;
+                }
+            }
+            toReturn = new int[index];
+            index = 0;
+            for (int i = 0; i < ennemiRooms[idSalle].actions.Length; i++)
+            {
+                if (ennemiRooms[idSalle].actions[i] < 0)
+                {
+                    toReturn[index] = ennemiRooms[idSalle].actions[i];
+                    index++;
+                }
+            }
+            return toReturn;
+        }
+
+        public void AddEffets(float _duration, string _name, string[] _tags, int _salle, float _value)
+        {
+            SalleManager.Effets a = new SalleManager.Effets();
+
+            a.duration = _duration;
+            a.name = _name;
+            a.tags = _tags;
+            a.salle = _salle;
+            a.value = _value;
+
+            effetsEnnemi.Add(a);
+        }
+
+        public void GestionDesEffets()
+        {
+            for (int i = 0; i < effetsEnnemi.Count; i++)
+            {
+                effetsEnnemi[i].duration -= Time.deltaTime;
+                if (effetsEnnemi[i].duration <= 0)
+                {
+                    RemoveEffets(i);
+                    effetsEnnemi.RemoveAt(i);
+                }
             }
         }
-        toReturn = new int[index];
-        index = 0;
-        for (int i = 0; i < ennemiRooms[idSalle].actions.Length; i++)
+
+        IEnumerator Brulez(int i) //Jfais durer 10 sec vue que on peut pas l'annuler tfaçon
         {
-            if (ennemiRooms[idSalle].actions[i] > 0)
+            salleManager.allSalles[i].MyGo.GetComponent<IncendieSound>().LaunchIncendie(); //SON
+
+            GameObject go = Resources.Load("Prefabs/FeedbackActionsEnnemisSurNest/Incendie") as GameObject;
+            GameObject salleGo = salleManager.allSalles[i].MyGo;
+
+            salleManager.DamageSurSalle(i, 35);
+            yield return new WaitForSeconds(2);
+
+            var newGo = Instantiate(go, salleGo.transform.position, go.transform.rotation, salleGo.transform);
+            newGo.transform.localPosition = Vector3.zero;
+
+            salleManager.DamageSurSalle(i, 5);
+            yield return new WaitForSeconds(2);
+            salleManager.DamageSurSalle(i, 5);
+            yield return new WaitForSeconds(2);
+            salleManager.DamageSurSalle(i, 5);
+            yield return new WaitForSeconds(2);
+            salleManager.DamageSurSalle(i, 5);
+
+            foreach (Transform child in newGo.transform)
             {
-                toReturn[index] = ennemiRooms[idSalle].actions[i];
-                index++;
+                var emission = child.GetComponent<ParticleSystem>().emission;
+                emission.enabled = false;
+            }
+            yield return new WaitForSeconds(2);
+            Destroy(newGo);
+        }
+
+        public void RemoveEffets(int i)
+        {
+            if (effetsEnnemi[i].name == "Terra")
+            {
+                ennemiRooms[effetsEnnemi[i].salle].projectileReduction -= effetsEnnemi[i].value;
+            }
+            else if (effetsEnnemi[i].name == "Reflect")
+            {
+                ennemiRooms[effetsEnnemi[i].salle].reflect = false;
+            }
+            else if (effetsEnnemi[i].name == "Anti-cannalisation")
+            {
+                ennemiRooms[effetsEnnemi[i].salle].cannalisationReduction -= effetsEnnemi[i].value;
+            }
+            else if (effetsEnnemi[i].name == "Cloaking")
+            {
+                for (int h = 0; h < ennemiRooms.Count; h++)
+                {
+                    ennemiRooms[h].canBeTarget = true;
+                }
             }
         }
-        return toReturn;
-    }
 
-    public int[] DefensesPool(int idSalle)
-    {
-        int[] toReturn;
-        int index = 0;
-        for (int i = 0; i < ennemiRooms[idSalle].actions.Length; i++)
+        public void SetTextInDBM(int idDBM)
         {
-            if (ennemiRooms[idSalle].actions[i] < 0)
+            int id = actionPrevues[idDBM].id;
+            if (id == 1) // Missile 1
             {
-                index++;
+                actionPrevues[idDBM].textInfos = "<b><color=#E6742E>PROJECTILE</color></b>" + "\n" + "Deals <color=#7841BB>25 damage</color>.";
+            }
+            else if (id == 2) // Missile 2
+            {
+                actionPrevues[idDBM].textInfos = "<b><color=#E6742E>PROJECTILE</color></b>" + "\n" + "Deals <color=#7841BB>45 damage</color>.";
+            }
+            else if (id == 3) // Singularité empêche overdrive
+            {
+                actionPrevues[idDBM].textInfos = "<b><color=#B97D31>ELECTRONIC</color></b>" + "\n" + "Prevents the use of overdrive effects. Last 18s.";
+            }
+            else if (id == 4) // Armagedon
+            {
+                actionPrevues[idDBM].textInfos = "<b><color=#E6742E>GAMMA</color></b>" + "\n" + "Deals <color=#7841BB>70 damage</color>. Reduces card durability of 2.";
+            }
+            else if (id == 5) // Poinçonneuse
+            {
+                actionPrevues[idDBM].textInfos = "<b><color=#E6742E>MINES</color></b>" + "\n" + "Deals <color=#7841BB>15 damage</color>. If a room is down as a result of this action, discard your leftmost card.";
+            }
+            else if (id == 6) // Grappin
+            {
+                actionPrevues[idDBM].textInfos = "<b><color=#B97D31>DURATION, PROJECTILE</color></b>" + "\n" + "Blurs your radar. Last 10s.";
+            }
+            else if (id == 7) // Drone incendiaire
+            {
+                actionPrevues[idDBM].textInfos = "<b><color=#E6742E>DRONE</color></b>" + "\n" + "Deals <color=#7841BB>35 damage</color>. Set the room on fire for 10s.";
+            }
+            else if (id == 8) // Tourelle DASSAULT
+            {
+                actionPrevues[idDBM].textInfos = "<b><color=#E6742E>PROJECTILE, CANALIZATION</color></b>" + "\n" + "Deals <color=#7841BB>5 damage</color> 5 times. Deals <color=#7841BB>5 more damage</color> each time if target room is in cooldown.";
+            }
+            else if (id == 9) // Fumée
+            {
+                actionPrevues[idDBM].textInfos = "<b><color=#B97D31>DURATION, CHIMIC</color></b>" + "\n" + "Smokes. Last 20s. Reduces card durability of 1.";
+            }
+            else if (id == -1) // Drone anti-projectile
+            {
+                actionPrevues[idDBM].textInfos = "<b><color=#6289F3>DURATION, DRONE</color></b>" + "\n" + "Reduces projectiles effectiveness against target for 50%. Last 15s.";
+            }
+            else if (id == -2)  // Reflect
+            {
+                actionPrevues[idDBM].textInfos = "<b><color=#6289F3>DURATION, GAMMA</color></b>" + "\n" + "Duplicates offensive actions against target. Last 10s.";
+            }
+            else if (id == -3)  // Bouclier anti-canalisation
+            {
+                actionPrevues[idDBM].textInfos = "<b><color=#6289F3>DURATION</color></b>" + "\n" + "Reduces canalization effectiveness against target for 100%. Last 10s.";
+            }
+            else if (id == -4)  // Cloaking
+            {
+                actionPrevues[idDBM].textInfos = "<b><color=#6289F3>DURATION, GAMMA</color></b>" + "\n" + "<size=120%><b>The Voydroc's</b></size> rooms can't be targeted. Last 5.";
             }
         }
-        toReturn = new int[index];
-        index = 0;
-        for (int i = 0; i < ennemiRooms[idSalle].actions.Length; i++)
-        {
-            if (ennemiRooms[idSalle].actions[i] < 0)
-            {
-                toReturn[index] = ennemiRooms[idSalle].actions[i];
-                index++;
-            }
-        }
-        return toReturn;
+
     }
-
-    public void AddEffets(float _duration, string _name, string[] _tags, int _salle, float _value)
-    {
-        SalleManager.Effets a = new SalleManager.Effets();
-
-        a.duration = _duration;
-        a.name = _name;
-        a.tags = _tags;
-        a.salle = _salle;
-        a.value = _value;
-
-        effetsEnnemi.Add(a);
-    }
-
-    public void GestionDesEffets()
-    {
-        for (int i = 0; i < effetsEnnemi.Count; i++)
-        {
-            effetsEnnemi[i].duration -= Time.deltaTime;
-            if (effetsEnnemi[i].duration <= 0)
-            {
-                RemoveEffets(i);
-                effetsEnnemi.RemoveAt(i);
-            }
-        }
-    }
-
-    IEnumerator Brulez(int i) //Jfais durer 10 sec vue que on peut pas l'annuler tfaçon
-    {
-        salleManager.allSalles[i].MyGo.GetComponent<IncendieSound>().LaunchIncendie(); //SON
-
-        GameObject go = Resources.Load("Prefabs/FeedbackActionsEnnemisSurNest/Incendie") as GameObject;
-        GameObject salleGo = salleManager.allSalles[i].MyGo;
-
-        salleManager.DamageSurSalle(i, 35);
-        yield return new WaitForSeconds(2);
-
-        var newGo = Instantiate(go, salleGo.transform.position, go.transform.rotation, salleGo.transform);
-        newGo.transform.localPosition = Vector3.zero;
-
-        salleManager.DamageSurSalle(i, 5);
-        yield return new WaitForSeconds(2);
-        salleManager.DamageSurSalle(i, 5);
-        yield return new WaitForSeconds(2);
-        salleManager.DamageSurSalle(i, 5);
-        yield return new WaitForSeconds(2);
-        salleManager.DamageSurSalle(i, 5);
-
-        foreach (Transform child in newGo.transform)
-        {
-            var emission = child.GetComponent<ParticleSystem>().emission;
-            emission.enabled = false;
-        }
-        yield return new WaitForSeconds(2);
-        Destroy(newGo);
-    }
-
-    public void RemoveEffets(int i)
-    {
-        if (effetsEnnemi[i].name == "Terra")
-        {
-            ennemiRooms[effetsEnnemi[i].salle].projectileReduction += effetsEnnemi[i].value;
-        }
-        else if (effetsEnnemi[i].name == "Reflect")
-        {
-            ennemiRooms[effetsEnnemi[i].salle].reflect = false;
-        }
-        else if (effetsEnnemi[i].name == "Anti-cannalisation")
-        {
-            ennemiRooms[effetsEnnemi[i].salle].cannalisationReduction += effetsEnnemi[i].value;
-        }
-        else if (effetsEnnemi[i].name == "Cloaking")
-        {
-            for (int h = 0; h < ennemiRooms.Count; h++)
-            {
-                ennemiRooms[h].canBeTarget = true;
-            }
-        }
-    }
-
-    public void SetTextInDBM(int idDBM)
-    {
-        int id = actionPrevues[idDBM].id;
-        if (id == 1) // Missile 1
-        {
-            actionPrevues[idDBM].textInfos = "<b><color=#E6742E>PROJECTILE</color></b>" + "\n" + "Deals <color=#7841BB>25 damage</color>.";
-        }
-        else if (id == 2) // Missile 2
-        {
-            actionPrevues[idDBM].textInfos = "<b><color=#E6742E>PROJECTILE</color></b>" + "\n" + "Deals <color=#7841BB>45 damage</color>.";
-        }
-        else if (id == 3) // Singularité empêche overdrive
-        {
-            actionPrevues[idDBM].textInfos = "<b><color=#B97D31>ELECTRONIC</color></b>" + "\n" + "Prevents the use of overdrive effects. Last 18s.";
-        }
-        else if (id == 4) // Armagedon
-        {
-            actionPrevues[idDBM].textInfos = "<b><color=#E6742E>GAMMA</color></b>" + "\n" + "Deals <color=#7841BB>70 damage</color>. Reduces card durability of 2.";
-        }
-        else if (id == 5) // Poinçonneuse
-        {
-            actionPrevues[idDBM].textInfos = "<b><color=#E6742E>MINES</color></b>" + "\n" + "Deals <color=#7841BB>15 damage</color>. If a room is down as a result of this action, discard your leftmost card.";
-        }
-        else if (id == 6) // Grappin
-        {
-            actionPrevues[idDBM].textInfos = "<b><color=#B97D31>DURATION, PROJECTILE</color></b>" + "\n" + "Blurs your radar. Last 10s.";
-        }
-        else if (id == 7) // Drone incendiaire
-        {
-            actionPrevues[idDBM].textInfos = "<b><color=#E6742E>DRONE</color></b>" + "\n" + "Deals <color=#7841BB>35 damage</color>. Set the room on fire for 10s.";
-        }
-        else if (id == 8) // Tourelle DASSAULT
-        {
-            actionPrevues[idDBM].textInfos = "<b><color=#E6742E>PROJECTILE, CANALIZATION</color></b>" + "\n" + "Deals <color=#7841BB>5 damage</color> 5 times. Deals <color=#7841BB>5 more damage</color> each time if target room is in cooldown.";
-        }
-        else if (id == 9) // Fumée
-        {
-            actionPrevues[idDBM].textInfos = "<b><color=#B97D31>DURATION, CHIMIC</color></b>" + "\n" + "Smokes. Last 20s. Reduces card durability of 1.";
-        }
-        else if (id == -1) // Drone anti-projectile
-        {
-            actionPrevues[idDBM].textInfos = "<b><color=#6289F3>DURATION, DRONE</color></b>" + "\n" + "Reduces projectiles effectiveness against target for 50%. Last 15s.";
-        }
-        else if (id == -2)  // Reflect
-        {
-            actionPrevues[idDBM].textInfos = "<b><color=#6289F3>DURATION, GAMMA</color></b>" + "\n" + "Duplicates offensive actions against target. Last 10s.";
-        }
-        else if (id == -3)  // Bouclier anti-canalisation
-        {
-            actionPrevues[idDBM].textInfos = "<b><color=#6289F3>DURATION</color></b>" + "\n" + "Reduces canalization effectiveness against target for 100%. Last 10s.";
-        }
-        else if (id == -4)  // Cloaking
-        {
-            actionPrevues[idDBM].textInfos = "<b><color=#6289F3>DURATION, GAMMA</color></b>" + "\n" + "<size=120%><b>The Voydroc's</b></size> rooms can't be targeted. Last 5.";
-        }
-    }
-
-}

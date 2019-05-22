@@ -34,6 +34,7 @@ public class GameMaster : MonoBehaviour
     public bool isPaused = false;
     public GameObject pause;
     CameraShake cameraShake;
+    //public Animator[] consolesAnim;
 
     void Awake()
     {
@@ -316,13 +317,14 @@ public class GameMaster : MonoBehaviour
                     caj.GetComponent<Animator>().SetBool("Dance", true);
                     hittingAModule = true;
                     moduleHit = hit.transform.GetComponent<ModuleManager>();
-
+                    //consolesAnim[moduleHit.MySalleNumber].SetBool("hover", true);
                 }
             }
             else
             {
                 if (moduleHit != null)
                 {
+                    //consolesAnim[moduleHit.MySalleNumber].SetBool("hover", false);
                     moduleHit = null;
                     hittingAModule = false;
                     caj.GetComponent<Animator>().SetBool("Dance", false);
@@ -360,6 +362,9 @@ public class GameMaster : MonoBehaviour
     }
     public void PlayCard()
     {
+        // consolesAnim[moduleHit.MySalleNumber].SetTrigger("validation");
+        // consolesAnim[moduleHit.MySalleNumber].SetBool("hover", false);
+        // consolesAnim[moduleHit.MySalleNumber].SetBool("cooldown", true);
         cartesManager.PlayACardOnModule(cardIDBeingPlayed, moduleHit);
         cardSound.GoingToPlayACard();
         cardIDBeingPlayed = -1;

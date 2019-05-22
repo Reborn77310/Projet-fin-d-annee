@@ -18,7 +18,6 @@ public class AllSetupsActions : MonoBehaviour
 
     public void FindEffect(string wantedName, int wantedRoom, ModuleManager mm, bool superEffect, int equipementSelected)
     {
-        print(equipementSelected + "equp");
         if (equipementSelected >= 0)
         {
             MyAnimatorsTurrets[equipementSelected].SetTrigger("Declenche");
@@ -57,7 +56,7 @@ public class AllSetupsActions : MonoBehaviour
 
             DealDamage(wantedRoom, damage);
             ennemiManager.animators[wantedRoom].SetTrigger("hit");
-            print(effet);
+            print(effet + " " + damage);
         }
         else if (wantedName == "Tourelle BK-2") // ATK
         {
@@ -91,7 +90,7 @@ public class AllSetupsActions : MonoBehaviour
             DealDamage(wantedRoom, damage);
             
             ennemiManager.animators[wantedRoom].SetTrigger("hit");
-            print(effet);
+            print(effet + " " + damage);
         }
         else if (wantedName == "CanonIEM") // ATK
         {

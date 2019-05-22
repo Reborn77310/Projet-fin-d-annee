@@ -18,11 +18,11 @@ public class Almanach : MonoBehaviour
     //     public GameObject prefabZoneSelection;
     //     public int rarity;
     //     public int overdriveEffect;
-    
+
     public void CreateCommunCards()
     {
         for (int i = 0; i < 5; i++)
-        {         
+        {
             CartesManager.Cartes c = new CartesManager.Cartes(i, i);
             c.rarity = 1;
             c.durability = c.rarity * 2;
@@ -36,7 +36,27 @@ public class Almanach : MonoBehaviour
         }
     }
 
-    private void Awake() {
+    private void Awake()
+    {
         CreateCommunCards();
+    }
+
+    public void DebloquerCarteRare()
+    {
+        CartesManager.Cartes c = new CartesManager.Cartes(cartesDebloquees.Count, 4);
+        c.rarity = 2;
+        c.durability = c.rarity * 2;
+        c.id = c.cartesTypes * 3 + c.rarity;
+        c.overdriveEffect = c.id;
+        c.illu = Resources.Load<Sprite>("Sprites/Cartes/Final/Cartes/Carte" + c.id);
+        c.picto = Resources.Load<Sprite>("Sprites/Cartes/Final/picto" + c.cartesTypes);
+        c.prefabZoneSelection = Resources.Load("Prefabs/Radar/ZoneSelection/Ciblage_" + c.id) as GameObject;
+
+        cartesDebloquees.Add(c);
+    }
+
+    public void DisplaySelectedCard(int i)
+    {
+        //
     }
 }
