@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using System.Linq;
+using TMPro;
 
 public class GameMaster : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class GameMaster : MonoBehaviour
     public GameObject DeuxiemeDestination;
     public GameObject NeigeTemporaire;
     public GameObject EcranDeSucces;
+    public GameObject EcranDeSuccesIntegrity;
+    public GameObject EcranDeSuccesIntegrityPhrase;
 
     Camera cam;
 
@@ -102,6 +105,8 @@ public class GameMaster : MonoBehaviour
     }
     public void SuccesGainCarte()
     {
+        ennemiManager.combat.SetActive(false);
+        ennemiManager.horsCombat.SetActive(true);
         EcranDeSucces.SetActive(false);
         GameObject.Find("PersoTransmission").GetComponent<VideoTransmission>().Activevideo();
     }
@@ -118,7 +123,7 @@ public class GameMaster : MonoBehaviour
     }
 
     void Update()
-    {        
+    {
         if (Input.GetKeyDown(KeyCode.C))
         {
             if (Codex.gameObject.activeInHierarchy)
@@ -631,8 +636,6 @@ public class GameMaster : MonoBehaviour
     {
         ennemiManager.enabled = false;
         ennemiManager.enabled = true;
-        ennemiManager.combat.SetActive(false);
-        ennemiManager.horsCombat.SetActive(true);
         ennemiManager.NEST.SetActive(false);
 
         CartesManager.PhaseLente = true;
@@ -664,6 +667,30 @@ public class GameMaster : MonoBehaviour
         etat = -1;
         EcranDeSucces.SetActive(true);
 
+        var integrity = salleManager.pvDuVehicule / salleManager.pvDuVehiculeMax * 100;
+
+        Sprite[] tableauImage = Resources.LoadAll<Sprite>("Sprites/VictoryScreen/EndIntegrityNest");
+        Sprite wantedImage = null;
+        if (integrity == 100)
+        {
+            wantedImage = tableauImage[0];
+        }
+        else if (integrity >= 66 && integrity < 100)
+        {
+            wantedImage = tableauImage[1];
+        }
+        else if (integrity >= 33 && integrity < 66)
+        {
+            wantedImage = tableauImage[2];
+        }
+        else if (integrity < 33)
+        {
+            wantedImage = tableauImage[3];
+        }
+
+        EcranDeSuccesIntegrity.GetComponent<Image>().sprite = wantedImage;
+        EcranDeSuccesIntegrityPhrase.GetComponent<TextMeshProUGUI>().text = Mathf.RoundToInt(integrity).ToString() + " %";
+        
         Camera.main.GetComponent<MusiqueScript>().StopCombat();
         Camera.main.GetComponent<MusiqueScript>().LancerPhaseLente();
     }
