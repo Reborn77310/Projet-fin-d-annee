@@ -7,7 +7,9 @@ using System.Linq;
 
 public class GameMaster : MonoBehaviour
 {
-    int etat = -1;
+    public Texture2D cursorBase;
+    public Texture2D cursorClic;
+    public int etat = -1;
     Vector3 PhaseLenteDestination = Vector3.zero;
     public Transform SecondCam;
     public GameObject perso1;
@@ -15,6 +17,7 @@ public class GameMaster : MonoBehaviour
     public GameObject BoutonsDestination;
     public GameObject DeuxiemeDestination;
     public GameObject NeigeTemporaire;
+    public GameObject EcranDeSucces;
 
     Camera cam;
 
@@ -66,7 +69,7 @@ public class GameMaster : MonoBehaviour
         Color a = GameObject.Find("PictosCartes_3").GetComponent<SpriteRenderer>().color;
         a.a = 100;
         GameObject.Find("PictosCartes_3").GetComponent<SpriteRenderer>().color = a;
-
+        Camera.main.GetComponent<MusiqueScript>().LancerPhaseLente();
         var emission = NeigeTemporaire.GetComponent<ParticleSystem>().emission;
         emission.enabled = true;
 
@@ -76,6 +79,13 @@ public class GameMaster : MonoBehaviour
 
     public void FindDestination2()
     {
+        for (int i = 0; i < 4; i++)
+        {
+            GameObject.Find("PattesController").GetComponent<PlayWithDécalage>().AllLegs[i].speed = 0;
+        }
+        var emission = NeigeTemporaire.GetComponent<ParticleSystem>().emission;
+        emission.enabled = true;
+
         BoutonsDestination.SetActive(false);
         Color a = GameObject.Find("PictosCartes_4").GetComponent<SpriteRenderer>().color;
         a.a = 100;
@@ -83,8 +93,39 @@ public class GameMaster : MonoBehaviour
         etat = 3;
     }
 
+    public void RetourAlmanac()
+    {
+        etat = 4;
+        SecondCam.GetComponent<Animator>().SetTrigger("2");
+        GameObject.Find("PictosCartes_4").transform.Rotate(0,0,-70.704f);
+    }
+    public void SuccesGainCarte()
+    {
+        EcranDeSucces.SetActive(false);
+        GameObject.Find("PersoTransmission").GetComponent<VideoTransmission>().Activevideo();        
+    }
+    public Texture2D cursorTexture;
+
+    void OnMouseEnter()
+    {
+        Cursor.SetCursor(cursorClic, Vector2.zero, CursorMode.Auto);
+    }
+
+    void OnMouseExit()
+    {
+        Cursor.SetCursor(cursorBase, new Vector2(5, 0), CursorMode.Auto);
+    }
+
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            OnMouseEnter();
+        }
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            OnMouseExit();
+        }
         if (CartesManager.PhaseLente)
         {
             if (etat == -1)
@@ -109,10 +150,12 @@ public class GameMaster : MonoBehaviour
                     }
 
                     perso1.GetComponent<MovieTexturePersoUn>().Activevideo();
+                    Camera.main.GetComponent<MusiqueScript>().StopPhaseLente();
                 }
             }
             else if (etat == 2)
             {
+                GameObject.Find("TransmissionCadre").SetActive(false);
                 BoutonsDestination.SetActive(true);
                 Destroy(GameObject.Find("PictosCartes_3"));
                 Destroy(BoutonsDestination.transform.GetChild(3).gameObject);
@@ -123,7 +166,7 @@ public class GameMaster : MonoBehaviour
             else if (etat == 3)
             {
                 //On attend que le joueur fasse ses bails dans l'almanac
-                etat = 4;
+
             }
             else if (etat == 4)
             {
@@ -606,6 +649,7 @@ public class GameMaster : MonoBehaviour
         }
         cajSR.enabled = false;
 
-        etat = 2;
+        etat = -1;
+        EcranDeSucces.SetActive(true);
     }
 }
