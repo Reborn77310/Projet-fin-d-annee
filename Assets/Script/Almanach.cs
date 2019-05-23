@@ -43,7 +43,8 @@ public class Almanach : MonoBehaviour
         CreateCommunCards();
     }
 
-    private void Start() {
+    private void Start()
+    {
         AfficherInventaire();
 
     }
@@ -107,12 +108,13 @@ public class Almanach : MonoBehaviour
 
     public void TrierParTypes()
     {
+        Camera.main.GetComponent<SonsCanva>().InteractionLaunch();
         if (typeClic == 0)
         {
             print(cartesDebloquees[0].illu.name);
             cartesDebloquees.Sort((x1, x2) => (x1.cartesTypes.CompareTo(x2.cartesTypes)));
             print(cartesDebloquees[0].illu.name);
-            
+
             typeClic = 1;
         }
         else if (typeClic == 1)
@@ -133,6 +135,7 @@ public class Almanach : MonoBehaviour
 
     public void TrierParRarete()
     {
+        Camera.main.GetComponent<SonsCanva>().InteractionLaunch();
         if (rarityClic == 0)
         {
             cartesDebloquees = cartesDebloquees.OrderBy(x => x.rarity).ToList();
@@ -153,6 +156,7 @@ public class Almanach : MonoBehaviour
 
     public void TrierParLastOptain()
     {
+        Camera.main.GetComponent<SonsCanva>().InteractionLaunch();
         if (optainedClic == 0)
         {
             cartesDebloquees = cartesDebloquees.OrderBy(x => x.optained).ToList();

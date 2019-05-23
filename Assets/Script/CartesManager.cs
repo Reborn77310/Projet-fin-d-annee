@@ -334,5 +334,16 @@ public class CartesManager : MonoBehaviour
         }
     }
 
+    public void Prepot()
+    {
+        var mm = GetComponent<SalleManager>().allSalles[0].MyGo.GetComponent<ModuleManager>();
+        AjouterUneCarteDansLaMain(0);
+        HandToModule(0, mm);
+        AjouterUneCarteDansLaMain(2);
+        HandToModule(0, mm);
+
+        DrawCards();
+    }
+
 }
 

@@ -100,6 +100,12 @@ public class GameMaster : MonoBehaviour
     public void RetourAlmanac()
     {
         etat = 4;
+        GameObject.Find("Canvas2").transform.GetChild(1).gameObject.SetActive(false);
+        Camera.main.GetComponent<SonsCanva>().LancerFermeture();
+        ennemiManager.horsCombat.SetActive(true);
+
+        Camera.main.GetComponent<Animator>().speed = 0.6f;
+        Camera.main.GetComponent<Animator>().SetTrigger("GoUp");
         SecondCam.GetComponent<Animator>().SetTrigger("2");
         GameObject.Find("PictosCartes_4").transform.Rotate(0, 0, -70.704f);
     }
@@ -691,7 +697,7 @@ public class GameMaster : MonoBehaviour
 
         EcranDeSuccesIntegrity.GetComponent<Image>().sprite = wantedImage;
         EcranDeSuccesIntegrityPhrase.GetComponent<TextMeshProUGUI>().text = Mathf.RoundToInt(integrity).ToString() + " %";
-        
+
         Camera.main.GetComponent<MusiqueScript>().StopCombat();
         Camera.main.GetComponent<MusiqueScript>().LancerPhaseLente();
     }

@@ -34,7 +34,7 @@ public class movieTexture : MonoBehaviour
     IEnumerator Continue()
     {
         var gameMaster = GameObject.Find("GameMaster");
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(9);
         movie.Stop();
         soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         CartesManager.PhaseLente = false;

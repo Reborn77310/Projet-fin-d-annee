@@ -33,15 +33,14 @@ public class MovieTexture2 : MonoBehaviour
 
     IEnumerator Continue()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(9);
         movie.Stop();
         soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         CartesManager.PhaseLente = false;
         GameObject.Find("GameMaster").GetComponent<EnnemiManager>().SpawnAdversaire();
         Camera.main.GetComponent<MusiqueScript>().LancerMusiqueCombat();
-        var newPos = new Vector3(0, 58.4f, 0);
+        Camera.main.GetComponent<Animator>().SetTrigger("GoDown");
 
-        Camera.main.transform.position = newPos;
         this.gameObject.SetActive(false);
     }
 }

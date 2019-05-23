@@ -63,7 +63,6 @@ public class VideoMenu : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime  * 2);
         }
         SceneManager.LoadScene("TEST 1 Double NavMesh", LoadSceneMode.Single);
-        print("?");
     }
 
     public void Activevideo()
