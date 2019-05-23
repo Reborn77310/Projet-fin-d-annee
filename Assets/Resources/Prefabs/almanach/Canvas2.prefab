@@ -638,7 +638,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706913695360715413}
   m_LocalRotation: {x: -0, y: 0.000000029802312, z: -0.000000014901156, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1412066599778825666}
@@ -646,7 +646,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.599, y: -0.584}
+  m_AnchoredPosition: {x: -0.599, y: -0.529}
   m_SizeDelta: {x: 0.1161, y: 0.0647}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6956374952531411758
@@ -2157,7 +2157,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4d6301dd7d610e448ac6df10e3b5a0cd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 402ea778e09afe348b8f47ba11c13aa9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2231,7 +2231,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Engine Room
+  m_text: 'Efficiency +30%
+
+    <i>Boosts efficiency of equipment effect values by 30%.</i>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 94899dd071083a54381f40e736c161b9, type: 2}
   m_sharedMaterial: {fileID: 21416857203635738, guid: 94899dd071083a54381f40e736c161b9,
@@ -2260,8 +2262,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 4
-  m_fontSizeBase: 4
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2301,12 +2303,12 @@ MonoBehaviour:
   m_margin: {x: -3.6688144, y: -15.8748665, z: 0, w: -15.412699}
   m_textInfo:
     textComponent: {fileID: 1173291702767695621}
-    characterCount: 11
+    characterCount: 68
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 9
+    wordCount: 10
     linkCount: 0
-    lineCount: 1
+    lineCount: 4
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -3065,7 +3067,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4d6301dd7d610e448ac6df10e3b5a0cd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6b32d1891546a114da31b9d132db804c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3192,7 +3194,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2694550973515242819}
   m_LocalRotation: {x: -0, y: 0.000000029802312, z: -0.000000014901156, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.000000029802}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1412066599778825666}
@@ -3200,8 +3202,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.4713, y: -0.473}
-  m_SizeDelta: {x: 0.1161, y: 0.0647}
+  m_AnchoredPosition: {x: -0.24653, y: -0.473}
+  m_SizeDelta: {x: 0.49305, y: 0.0647}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5302628750210641685
 CanvasRenderer:
@@ -3231,7 +3233,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: InfoText
+  m_text: <b><color=#E6742E>PROJECTILE, CANALISATION</color></b>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9dcba9870d0b37a49810d6d6ef21e565, type: 2}
   m_sharedMaterial: {fileID: 21538514042447240, guid: 9dcba9870d0b37a49810d6d6ef21e565,
@@ -3267,7 +3269,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 514
+  m_textAlignment: 513
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -3301,10 +3303,10 @@ MonoBehaviour:
   m_margin: {x: -0.032535255, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 8963789758023083446}
-    characterCount: 8
+    characterCount: 24
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -4116,7 +4118,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4d6301dd7d610e448ac6df10e3b5a0cd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 402ea778e09afe348b8f47ba11c13aa9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5548,7 +5550,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4363744634719430346}
   m_LocalRotation: {x: 0.47669277, y: -0.32234955, z: 0.1950167, w: 0.7942439}
-  m_LocalPosition: {x: 0, y: 0, z: -0.049}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0476}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5950411119171541489}
@@ -5556,8 +5558,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.681, y: 1.398}
-  m_SizeDelta: {x: 0.4486, y: 0.38}
+  m_AnchoredPosition: {x: 0.6913, y: 1.3947}
+  m_SizeDelta: {x: 0.4319, y: 0.3659}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1804281974159082009
 CanvasRenderer:
@@ -5587,7 +5589,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 50fe85d8fca48884589bbc62c79cf051, type: 3}
+  m_Sprite: {fileID: 21300012, guid: 502c62f2a7bdf4c44ab3114cbff7cfde, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7717,7 +7719,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6339071812451170294}
   m_LocalRotation: {x: -0, y: 0.000000029802312, z: -0.000000014901156, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00000035018}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1412066599778825666}
@@ -7725,8 +7727,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.5989895, y: -0.52499294}
-  m_SizeDelta: {x: 0.1161, y: 0.0647}
+  m_AnchoredPosition: {x: -0.26238, y: -0.525}
+  m_SizeDelta: {x: 0.52475, y: 0.0647}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4464658503431774703
 CanvasRenderer:
@@ -7756,7 +7758,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: p
+  m_text: 14 s
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9dcba9870d0b37a49810d6d6ef21e565, type: 2}
   m_sharedMaterial: {fileID: 21538514042447240, guid: 9dcba9870d0b37a49810d6d6ef21e565,
@@ -7792,7 +7794,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 514
+  m_textAlignment: 513
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -7826,10 +7828,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 7854019869937796622}
-    characterCount: 1
+    characterCount: 4
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -8282,8 +8284,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.5989933, y: -0.583993}
-  m_SizeDelta: {x: 0.1161, y: 0.0647}
+  m_AnchoredPosition: {x: -0.2629, y: -0.645}
+  m_SizeDelta: {x: 0.52575, y: 0.1517}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &519497085841669499
 CanvasRenderer:
@@ -8313,7 +8315,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: cd
+  m_text: Fire two blast. Each deals <color=#7841BB>27 damage</color>.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9dcba9870d0b37a49810d6d6ef21e565, type: 2}
   m_sharedMaterial: {fileID: 21538514042447240, guid: 9dcba9870d0b37a49810d6d6ef21e565,
@@ -8349,7 +8351,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 514
+  m_textAlignment: 264
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -8383,12 +8385,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 8744101402963320663}
-    characterCount: 2
+    characterCount: 37
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 6
+    wordCount: 7
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -8583,7 +8585,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7015636643776340554}
   m_LocalRotation: {x: -0, y: 0.000000029802312, z: -0.000000014901156, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1412066599778825666}
@@ -8591,7 +8593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.108, y: -0.402}
+  m_AnchoredPosition: {x: -0.136, y: -0.402}
   m_SizeDelta: {x: 0.786, y: 0.1036}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1938613279777872836
@@ -8622,7 +8624,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Nom de la tourelle
+  m_text: Tourelle BK-II
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 94899dd071083a54381f40e736c161b9, type: 2}
   m_sharedMaterial: {fileID: 21416857203635738, guid: 94899dd071083a54381f40e736c161b9,
@@ -8632,8 +8634,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279007514
-  m_fontColor: {r: 0.10196079, g: 0.47450984, b: 0.04705883, a: 1}
+    rgba: 4281234662
+  m_fontColor: {r: 0.9019608, g: 0.45490196, b: 0.18039216, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8657,7 +8659,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 257
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
@@ -8692,10 +8694,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0.044996668}
   m_textInfo:
     textComponent: {fileID: 3247886833236526194}
-    characterCount: 18
+    characterCount: 14
     spriteCount: 0
-    spaceCount: 3
-    wordCount: 4
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -9096,7 +9098,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7825956941980359224}
   m_LocalRotation: {x: -0, y: 0.000000029802312, z: -0.000000014901156, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1412066599778825666}
@@ -9104,7 +9106,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.599, y: -0.525}
+  m_AnchoredPosition: {x: -0.599, y: -0.586}
   m_SizeDelta: {x: 0.1161, y: 0.0647}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &368794980321603892

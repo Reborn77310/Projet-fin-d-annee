@@ -75,5 +75,8 @@ public class Equipement : MonoBehaviour
         // <color=#B97D31> debuff
         // </color>
 
-
+    public void AfficherTourelle()
+    {
+        
+    }
 }
