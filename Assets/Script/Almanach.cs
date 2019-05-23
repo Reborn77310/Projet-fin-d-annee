@@ -34,6 +34,7 @@ public class Almanach : MonoBehaviour
             c.prefabZoneSelection = Resources.Load("Prefabs/Radar/ZoneSelection/Ciblage_" + c.id) as GameObject;
             c.optained = i;
             cartesDebloquees.Add(c);
+            textOverdrive(i);
         }
     }
 
@@ -54,6 +55,7 @@ public class Almanach : MonoBehaviour
         c.prefabZoneSelection = Resources.Load("Prefabs/Radar/ZoneSelection/Ciblage_" + c.id) as GameObject;
 
         cartesDebloquees.Add(c);
+        textOverdrive(cartesDebloquees.Count - 1);
     }
 
     public void DisplaySelectedCard()
@@ -161,70 +163,66 @@ public class Almanach : MonoBehaviour
 
     public void textOverdrive(int index)
     {
-        int i = cartesDebloquees[index].id;
+        int i = cartesDebloquees[index].id - 1;
         if (i == 0)
         {
-            
+            cartesDebloquees[index].textOverdrive = "Efficiency +30%" + "\n" + "<i>Boosts efficiency of equipment effect values ​​by 30%.</i>";
         }
         else if (i == 1)
         {
-
+            cartesDebloquees[index].textOverdrive = "Efficiency +60%" + "\n" + "<i>Boosts efficiency of equipment effect values ​​by 60%.</i>";
         }
         else if (i == 2)
         {
-
+            cartesDebloquees[index].textOverdrive = "Efficiency +90%" + "\n" + "<i>Boosts efficiency of equipment effect values ​​by 90%.</i>";
         }
         else if (i == 3)
         {
-
+            cartesDebloquees[index].textOverdrive = "Cooldown +/-30%" + "\n" + "<i>If the action targets a room of the N.E.S.T. it applies a buff that accelerates the cooldown of the room of 30%. In the other hand if the action targets an opponent's room it applies a debuff that slow the cooldown of the room of 30%. These effects last 6s.</i>";
         }
         else if (i == 4)
         {
-
+            cartesDebloquees[index].textOverdrive = "Cooldown +/-60%" + "\n" + "<i>If the action targets a room of the N.E.S.T. it applies a buff that accelerates the cooldown of the room of 60%. In the other hand if the action targets an opponent's room it applies a debuff that slow the cooldown of the room of 60%. These effects last 8s.</i>";
         }
         else if (i == 5)
         {
-
+            cartesDebloquees[index].textOverdrive = "Cooldown +/-90%" + "\n" + "<i>If the action targets a room of the N.E.S.T. it applies a buff that accelerates the cooldown of the room of 90%. In the other hand if the action targets an opponent's room it applies a debuff that slow the cooldown of the room of 90%. These effects last 10s.</i>";
         }
         else if (i == 6)
         {
-
+            cartesDebloquees[index].textOverdrive = "Add <b>repetition</b> effect with an reduced efficiency of 50%" + "\n" + "<i>At the end of the action, it will be repeat a second time. The effect values of the second action will be reduced of 50%.</i>";
         }
         else if (i == 7)
         {
-
+            cartesDebloquees[index].textOverdrive = "Add <b>repetition</b> effect with an reduced efficiency of 25%" + "\n" + "<i>At the end of the action, it will be repeat a second time. The effect values of the second action will be reduced of 25%.</i>";
         }
         else if (i == 8)
         {
-
+            cartesDebloquees[index].textOverdrive = "Add <b>repetition</b> effect" + "\n" + "<i>At the end of the action, it will be repeat a second time.</i>";
         }
         else if (i == 9)
         {
-
+            cartesDebloquees[index].textOverdrive = "Prolongs the <b>duration</b> of the action of 30%" + "\n" + "<i>If the action involves the tag </i>duration<i>, the duration of the effcts of the action will be prolonged of 30%.</i>";
         }
         else if (i == 10)
         {
-
+            cartesDebloquees[index].textOverdrive = "Prolongs the <b>duration</b> of the action of 60%" + "\n" + "<i>If the action involves the tag </i>duration<i>, the duration of the effcts of the action will be prolonged of 60%.</i>";
         }
         else if (i == 11)
         {
-
+            cartesDebloquees[index].textOverdrive = "Prolongs the <b>duration</b> of the action of 90%" + "\n" + "<i>If the action involves the tag </i>duration<i>, the duration of the effcts of the action will be prolonged of 90%.</i>";
         }
         else if (i == 12)
         {
-
+            cartesDebloquees[index].textOverdrive = "Diffuse electronic effects around the targeted area" + "\n" + "<i>If the action involves the tag </i>electronic<i>, targeting area will be extended to adjacent squares. If rooms are hit will the extended area only the effects of the action will be apply with a reduced efficiency of 60%.</i>";
         }
         else if (i == 13)
         {
-
+            cartesDebloquees[index].textOverdrive = "Diffuse electronic effects around the targeted area" + "\n" + "<i>If the action involves the tag </i>electronic<i>, targeting area will be extended to adjacent squares. If rooms are hit will the extended area only the effects of the action will be apply with a reduced efficiency of 40%.</i>";
         }
         else if (i == 14)
         {
-
-        }
-        else if (i == 15)
-        {
-
+            cartesDebloquees[index].textOverdrive = "Diffuse electronic effects around the targeted area" + "\n" + "<i>If the action involves the tag </i>electronic<i>, targeting area will be extended to adjacent squares. If rooms are hit will the extended area only the effects of the action will be apply with a reduced efficiency of 20%.</i>";
         }
     }
 
