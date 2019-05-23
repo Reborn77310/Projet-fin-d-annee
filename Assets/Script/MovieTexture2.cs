@@ -38,7 +38,7 @@ public class MovieTexture2 : MonoBehaviour
         soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         CartesManager.PhaseLente = false;
         GameObject.Find("GameMaster").GetComponent<EnnemiManager>().SpawnAdversaire();
-
+        Camera.main.GetComponent<MusiqueScript>().LancerMusiqueCombat();
         var newPos = new Vector3(0, 58.4f, 0);
 
         Camera.main.transform.position = newPos;

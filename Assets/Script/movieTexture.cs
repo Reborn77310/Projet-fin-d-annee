@@ -38,6 +38,7 @@ public class movieTexture : MonoBehaviour
         movie.Stop();
         soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         CartesManager.PhaseLente = false;
+        Camera.main.GetComponent<MusiqueScript>().LancerMusiqueCombat();
         gameMaster.GetComponent<EnnemiManager>().SpawnAdversaire();
 
         Camera.main.GetComponent<Animator>().SetTrigger("GoDown");

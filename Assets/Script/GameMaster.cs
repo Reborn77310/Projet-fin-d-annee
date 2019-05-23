@@ -7,6 +7,7 @@ using System.Linq;
 
 public class GameMaster : MonoBehaviour
 {
+    public Image Codex;
     public Texture2D cursorBase;
     public Texture2D cursorClic;
     public int etat = -1;
@@ -97,12 +98,12 @@ public class GameMaster : MonoBehaviour
     {
         etat = 4;
         SecondCam.GetComponent<Animator>().SetTrigger("2");
-        GameObject.Find("PictosCartes_4").transform.Rotate(0,0,-70.704f);
+        GameObject.Find("PictosCartes_4").transform.Rotate(0, 0, -70.704f);
     }
     public void SuccesGainCarte()
     {
         EcranDeSucces.SetActive(false);
-        GameObject.Find("PersoTransmission").GetComponent<VideoTransmission>().Activevideo();        
+        GameObject.Find("PersoTransmission").GetComponent<VideoTransmission>().Activevideo();
     }
     public Texture2D cursorTexture;
 
@@ -118,6 +119,22 @@ public class GameMaster : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            Camera.main.GetComponent<Animator>().SetTrigger("Test");
+            GameObject.Find("HorsCombat").SetActive(false);
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (Codex.gameObject.activeInHierarchy)
+            {
+                Codex.gameObject.SetActive(false);
+            }
+            else
+            {
+                Codex.gameObject.SetActive(true);
+            }
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             OnMouseEnter();
@@ -651,5 +668,8 @@ public class GameMaster : MonoBehaviour
 
         etat = -1;
         EcranDeSucces.SetActive(true);
+
+        Camera.main.GetComponent<MusiqueScript>().StopCombat();
+        Camera.main.GetComponent<MusiqueScript>().LancerPhaseLente();
     }
 }
