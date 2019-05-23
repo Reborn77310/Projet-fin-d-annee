@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Equipement : MonoBehaviour
 {
@@ -20,6 +22,20 @@ public class Equipement : MonoBehaviour
     public GameObject equipParent;
     public List<Equipements> allEquipements = new List<Equipements>();
     public string[] effets = new string[6];
+
+    // Pour l'interface
+    public Image imgAct;
+    public Image imgCib;
+    public Image imgOvr;
+    public TextMeshProUGUI overdriveText;
+    public Image ciblageSprite;
+    
+    public TextMeshProUGUI nomEquipement;
+    public TextMeshProUGUI tags;
+    public TextMeshProUGUI cdText;
+    public TextMeshProUGUI equipementDescription;
+
+    public TextMeshProUGUI nomDeLaSalle;
     
 
     private void Awake() {
