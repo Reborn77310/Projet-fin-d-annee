@@ -105,6 +105,7 @@ public class GameMaster : MonoBehaviour
     }
     public void SuccesGainCarte()
     {
+        GetComponent<Almanach>().DebloquerCarteRare();
         ennemiManager.combat.SetActive(false);
         ennemiManager.horsCombat.SetActive(true);
         EcranDeSucces.SetActive(false);
