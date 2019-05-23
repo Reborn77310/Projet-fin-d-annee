@@ -45,6 +45,7 @@ public class Almanach : MonoBehaviour
 
     private void Start() {
         AfficherInventaire();
+
     }
 
     public void DebloquerCarteRare()
@@ -65,22 +66,22 @@ public class Almanach : MonoBehaviour
     public void DisplaySelectedCard()
     {
         string a = EventSystem.current.currentSelectedGameObject.name;
-        a = a.Substring(2, 1); // appeler les emplacement bouton genre e_0, e_1, etc
+        a = a.Substring(2, 1);
         selectedCarteID = int.Parse(a);
 
         selectedCarteImage.sprite = cartesDebloquees[selectedCarteID].illu;
         scType.sprite = cartesDebloquees[selectedCarteID].picto;
         scDurability.text = cartesDebloquees[selectedCarteID].durability.ToString();
-        //scTooltip.text = cartesDebloquees[selectedCarteID].overdriveEffect
-        if (cartesDebloquees[selectedCarteID].rarity == 0)
+        scTooltip.text = cartesDebloquees[selectedCarteID].textOverdrive;
+        if (cartesDebloquees[selectedCarteID].rarity == 1)
         {
             scRarity.text = "<color=#B7B8BD><b>Common</b></color>";
         }
-        else if (cartesDebloquees[selectedCarteID].rarity == 1)
+        else if (cartesDebloquees[selectedCarteID].rarity == 2)
         {
             scRarity.text = "<color=#475ED5><b>Rare</b></color>";
         }
-        else if (cartesDebloquees[selectedCarteID].rarity == 2)
+        else if (cartesDebloquees[selectedCarteID].rarity == 3)
         {
             scRarity.text = "<color=#D5C447><b>Legendary</b></color>";
         }
@@ -108,17 +109,22 @@ public class Almanach : MonoBehaviour
     {
         if (typeClic == 0)
         {
-            cartesDebloquees.OrderBy(x => x.cartesTypes);
+            print(cartesDebloquees[0].illu.name);
+            cartesDebloquees.Sort((x1, x2) => (x1.cartesTypes.CompareTo(x2.cartesTypes)));
+            print(cartesDebloquees[0].illu.name);
+            
             typeClic = 1;
         }
         else if (typeClic == 1)
         {
-            cartesDebloquees.OrderByDescending(x => x.cartesTypes);
+            print(cartesDebloquees[0].illu.name);
+            cartesDebloquees = cartesDebloquees.OrderByDescending(x => x.cartesTypes).ToList();
             typeClic = 2;
+            print(cartesDebloquees[0].illu.name);
         }
         else if (typeClic == 2)
         {
-            cartesDebloquees.OrderBy(x => x.id);
+            cartesDebloquees = cartesDebloquees.OrderBy(x => x.id).ToList();
             typeClic = 0;
         }
 
@@ -129,17 +135,17 @@ public class Almanach : MonoBehaviour
     {
         if (rarityClic == 0)
         {
-            cartesDebloquees.OrderBy(x => x.rarity);
+            cartesDebloquees = cartesDebloquees.OrderBy(x => x.rarity).ToList();
             rarityClic = 1;
         }
         else if (rarityClic == 1)
         {
-            cartesDebloquees.OrderByDescending(x => x.rarity);
+            cartesDebloquees = cartesDebloquees.OrderByDescending(x => x.rarity).ToList();
             rarityClic = 2;
         }
         else if (rarityClic == 2)
         {
-            cartesDebloquees.OrderBy(x => x.id);
+            cartesDebloquees = cartesDebloquees.OrderBy(x => x.id).ToList();
             rarityClic = 0;
         }
         AfficherInventaire();
@@ -149,17 +155,17 @@ public class Almanach : MonoBehaviour
     {
         if (optainedClic == 0)
         {
-            cartesDebloquees.OrderBy(x => x.optained);
+            cartesDebloquees = cartesDebloquees.OrderBy(x => x.optained).ToList();
             optainedClic = 1;
         }
         else if (optainedClic == 1)
         {
-            cartesDebloquees.OrderByDescending(x => x.optained);
+            cartesDebloquees = cartesDebloquees.OrderByDescending(x => x.optained).ToList();
             optainedClic = 2;
         }
         else if (optainedClic == 2)
         {
-            cartesDebloquees.OrderBy(x => x.id);
+            cartesDebloquees = cartesDebloquees.OrderBy(x => x.id).ToList();
             optainedClic = 0;
         }
         AfficherInventaire();
@@ -170,15 +176,15 @@ public class Almanach : MonoBehaviour
         int i = cartesDebloquees[index].id - 1;
         if (i == 0)
         {
-            cartesDebloquees[index].textOverdrive = "Efficiency +30%" + "\n" + "<i>Boosts efficiency of equipment effect values ??by 30%.</i>";
+            cartesDebloquees[index].textOverdrive = "Efficiency +30%" + "\n" + "<i>Boosts efficiency of equipment effect values by 30%.</i>";
         }
         else if (i == 1)
         {
-            cartesDebloquees[index].textOverdrive = "Efficiency +60%" + "\n" + "<i>Boosts efficiency of equipment effect values ??by 60%.</i>";
+            cartesDebloquees[index].textOverdrive = "Efficiency +60%" + "\n" + "<i>Boosts efficiency of equipment effect values by 60%.</i>";
         }
         else if (i == 2)
         {
-            cartesDebloquees[index].textOverdrive = "Efficiency +90%" + "\n" + "<i>Boosts efficiency of equipment effect values ??by 90%.</i>";
+            cartesDebloquees[index].textOverdrive = "Efficiency +90%" + "\n" + "<i>Boosts efficiency of equipment effect values by 90%.</i>";
         }
         else if (i == 3)
         {
