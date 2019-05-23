@@ -12,16 +12,18 @@ public class CartesManager : MonoBehaviour
     public class Cartes
     {
         public int id; // L'index dans la liste à laquelle elle appartient (allCards ou onModule)
+        public int optained;
         public int cartesTypes; // 0,1,2 = types basiques // 10+ = types spéciaux
         public Sprite illu;
         public Sprite picto;
         public GameObject go;
-
+        public Sprite moche;
         // A SETUP :
         public int durability;
         public GameObject prefabZoneSelection;
         public int rarity;
         public int overdriveEffect;
+        public string textOverdrive;
 
 
         public Cartes(int _id, int _cartesTypes)
