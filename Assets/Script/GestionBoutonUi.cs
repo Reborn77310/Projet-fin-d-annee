@@ -10,7 +10,8 @@ public class GestionBoutonUi : MonoBehaviour
     public Button Suivant;
     public Button Precedent;
     public Button Retour;
-
+    public GameObject Canvas2;
+    public GameObject HorsCombat;
     public void ClickAlmanac()
     {
         if (Suivant.gameObject.activeInHierarchy)
@@ -25,5 +26,8 @@ public class GestionBoutonUi : MonoBehaviour
             Precedent.gameObject.SetActive(true);
             Retour.gameObject.SetActive(true);
         }
+        Camera.main.GetComponent<Animator>().SetTrigger("Zoom");
+        Canvas2.SetActive(true);
+        HorsCombat.SetActive(false);
     }
 }

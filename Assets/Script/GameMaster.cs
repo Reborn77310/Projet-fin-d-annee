@@ -118,12 +118,7 @@ public class GameMaster : MonoBehaviour
     }
 
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            Camera.main.GetComponent<Animator>().SetTrigger("Test");
-            GameObject.Find("HorsCombat").SetActive(false);
-        }
+    {        
         if (Input.GetKeyDown(KeyCode.C))
         {
             if (Codex.gameObject.activeInHierarchy)
