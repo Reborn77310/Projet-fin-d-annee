@@ -39,7 +39,7 @@ public class CartesManager : MonoBehaviour
     public GameObject prefabCarte;
     public GameMaster gameMaster;
     public Canvas canvas;
-    float drawTimer = 30;
+    float drawTimer = 5;
     public Text ChangeBool;
     public EnnemiManager ennemiManager;
     public Image grilleRadar;
@@ -56,7 +56,7 @@ public class CartesManager : MonoBehaviour
 
     void Start()
     {
-        DrawCards();
+
     }
 
 
@@ -65,36 +65,21 @@ public class CartesManager : MonoBehaviour
     #region Actions
     public void PlayACardOnModule(int id, ModuleManager mm)
     {
-        if (!PhaseLente)
+
+        gameMaster.cardSound.GoingToPlayACard();
+        gameMaster.consolesAnim[mm.MySalleNumber].SetTrigger("validation");
+        HandToModule(id, mm);
+        if (mm.cartesModule.Count == 3)
         {
-            gameMaster.cardSound.GoingToPlayACard();
-            gameMaster.consolesAnim[mm.MySalleNumber].SetTrigger("validation");
-            HandToModule(id, mm);
-            if (mm.cartesModule.Count == 3)
-            {
-                ThirdCardAction(mm);
-            }
-            else
-            {
-                StartCoroutine("StopAnim", mm);
-            }
-            SortCartes();
+            ThirdCardAction(mm);
         }
         else
         {
-
-            if (mm.cartesModule.Count < 2)
-            {
-                gameMaster.cardSound.GoingToPlayACard();
-                var c = allCards[id];
-                mm.cartesModule.Add(c);
-                mm.slotImage[mm.cartesModule.Count - 1].sprite = mm.cartesModule[mm.cartesModule.Count - 1].picto;
-                SortCartes();
-                StartCoroutine("StopAnim", mm);
-            }
-
+            StartCoroutine("StopAnim", mm);
         }
+        SortCartes();
     }
+
 
     IEnumerator StopAnim(ModuleManager mm)
     {
@@ -113,28 +98,17 @@ public class CartesManager : MonoBehaviour
     #region Gestion Des Cartes
     public void DrawCards()
     {
-        if (!PhaseLente)
+
+        int[] toDraw = ennemiManager.GiveInfosForDraw();
+        for (int i = 0; i < toDraw.Length; i++)
         {
-            int[] toDraw = ennemiManager.GiveInfosForDraw();
-            for (int i = 0; i < toDraw.Length; i++)
+            if (!CheckHandisFull())
             {
-                if (!CheckHandisFull())
-                {
-                    AjouterUneCarteDansLaMain(toDraw[i]);
-                }
-            }
-            StartCoroutine("Draw");
-        }
-        else
-        {
-            for (int i = 0; i < 6; i++)
-            {
-                if (!CheckHandisFull())
-                {
-                    AjouterUneCarteDansLaMain(i % 3);
-                }
+                AjouterUneCarteDansLaMain(toDraw[i]);
             }
         }
+        StartCoroutine("Draw");
+
     }
 
     IEnumerator Draw()
@@ -337,31 +311,7 @@ public class CartesManager : MonoBehaviour
             cartesButtonsScripts[i].anim.SetBool("Baisser", false);
         }
     }
-    #endregion
-
-    public void ChangeBoolPhases()
-    {
-        foreach (var go in allCards)
-        {
-            Destroy(go.go);
-        }
-        allCards.Clear();
-
-        if (PhaseLente)
-        {
-            PhaseLente = false;
-            ChangeBool.text = "Activer la phase lente.";
-            ennemiManager.boutonSpawn.SetActive(true);
-        }
-        else
-        {
-            ennemiManager.EndCombat();
-            PhaseLente = true;
-            ChangeBool.text = "Activer la phase combat.";
-            ennemiManager.PassageEnPhaseLente();
-        }
-    }
-
+    #endregion    
 
     public void HandToModule(int index, ModuleManager mm)
     {

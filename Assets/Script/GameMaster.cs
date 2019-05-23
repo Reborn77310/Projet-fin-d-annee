@@ -7,6 +7,15 @@ using System.Linq;
 
 public class GameMaster : MonoBehaviour
 {
+    int etat = -1;
+    Vector3 PhaseLenteDestination = Vector3.zero;
+    public Transform SecondCam;
+    public GameObject perso1;
+    public GameObject perso2;
+    public GameObject BoutonsDestination;
+    public GameObject DeuxiemeDestination;
+    public GameObject NeigeTemporaire;
+
     Camera cam;
 
     public Vector3 offset;
@@ -49,10 +58,95 @@ public class GameMaster : MonoBehaviour
         cameraShake = Camera.main.GetComponent<CameraShake>();
     }
 
+    public void FirstDestinationButtonClicked()
+    {
+        SecondCam.GetComponent<Animator>().SetTrigger("1");
+        BoutonsDestination.SetActive(false);
+
+        Color a = GameObject.Find("PictosCartes_3").GetComponent<SpriteRenderer>().color;
+        a.a = 100;
+        GameObject.Find("PictosCartes_3").GetComponent<SpriteRenderer>().color = a;
+
+        var emission = NeigeTemporaire.GetComponent<ParticleSystem>().emission;
+        emission.enabled = true;
+
+        PlayWithDécalage.CanMove = true;
+        etat = 1;
+    }
+
+    public void FindDestination2()
+    {
+        BoutonsDestination.SetActive(false);
+        Color a = GameObject.Find("PictosCartes_4").GetComponent<SpriteRenderer>().color;
+        a.a = 100;
+        GameObject.Find("PictosCartes_4").GetComponent<SpriteRenderer>().color = a;
+        etat = 3;
+    }
+
     void Update()
     {
+        if (CartesManager.PhaseLente)
+        {
+            if (etat == -1)
+            {
+                //Pas de bras qui bouge
+                //Pas de "neige"
+                //Camera start en dezoom
+                //Phase lente = true
+                //Persos en IDDLE quelque part
+            }
+            else if (etat == 1)
+            {
+                GameObject.Find("PictosCartes_3").transform.rotation = SecondCam.rotation;
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    var emission = NeigeTemporaire.GetComponent<ParticleSystem>().emission;
+                    emission.enabled = false;
 
+                    for (int i = 0; i < 4; i++)
+                    {
+                        GameObject.Find("PattesController").GetComponent<PlayWithDécalage>().AllLegs[i].speed = 0;
+                    }
 
+                    perso1.GetComponent<MovieTexturePersoUn>().Activevideo();
+                }
+            }
+            else if (etat == 2)
+            {
+                BoutonsDestination.SetActive(true);
+                Destroy(GameObject.Find("PictosCartes_3"));
+                Destroy(BoutonsDestination.transform.GetChild(3).gameObject);
+                BoutonsDestination.GetComponent<BoutonsScript>().Buttons[3] = null;
+                DeuxiemeDestination.SetActive(true);
+                etat = -1;
+            }
+            else if (etat == 3)
+            {
+                //On attend que le joueur fasse ses bails dans l'almanac
+                etat = 4;
+            }
+            else if (etat == 4)
+            {
+                SecondCam.GetComponent<Animator>().SetTrigger("2");
+                etat = 5;
+            }
+            else if (etat == 5)
+            {
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    PlayWithDécalage.CanMove = false;
+                    perso2.GetComponent<MovieTexturePersoDeux>().Activevideo();
+                }
+            }
+        }
+        else
+        {
+            UpdatePasPhaseLente();
+        }
+    }
+
+    void UpdatePasPhaseLente()
+    {
         RotateSecondModule();
         if (isPlayingACard)
         {
@@ -83,7 +177,10 @@ public class GameMaster : MonoBehaviour
         {
             for (int i = 0; i < ennemiManager.animators.Length; i++)
             {
-                ennemiManager.animators[i].SetBool("hightlight", false);
+                if (ennemiManager.badGuy != null)
+                {
+                    ennemiManager.animators[i].SetBool("hightlight", false);
+                }
             }
             for (int i = 0; i < salleManager.animators.Length; i++)
             {
@@ -109,7 +206,6 @@ public class GameMaster : MonoBehaviour
             }
         }
     }
-
     #region Actions
 
     void RotateSecondModule()
@@ -269,16 +365,9 @@ public class GameMaster : MonoBehaviour
                     {
                         mm.slotImage[mm.cartesModule.Count - 1].sprite = mm.defaultSprite[mm.cartesModule.Count - 1];
 
-                        if (!CartesManager.PhaseLente)
-                        {
-                            cartesManager.ModuleToHand(mm);
-                            cardSound.CardPickUp();
-                        }
-                        else
-                        {
-                            mm.cartesModule.RemoveAt(mm.cartesModule.Count - 1);
-                            cardSound.CardPickUp();
-                        }
+
+                        cartesManager.ModuleToHand(mm);
+                        cardSound.CardPickUp();
 
                     }
                 }
@@ -361,7 +450,7 @@ public class GameMaster : MonoBehaviour
         return toReturn;
     }
     public void PlayCard()
-    {             
+    {
         cartesManager.PlayACardOnModule(cardIDBeingPlayed, moduleHit);
         cardIDBeingPlayed = -1;
     }
@@ -392,18 +481,21 @@ public class GameMaster : MonoBehaviour
 
             for (int i = 0; i < sallesTouchees.Length; i++)
             {
-                if (sallesTouchees[i] >= 0 && ennemiManager.ennemiRooms[sallesTouchees[i]].canBeTarget)
+                if (ennemiManager.badGuy != null)
                 {
-                    if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
+                    if (sallesTouchees[i] >= 0 && ennemiManager.ennemiRooms[sallesTouchees[i]].canBeTarget)
                     {
-                        allSetupsActions.FindEffect(wantedName, i, mm, true, equipementSelected);
-                    }
-                    else
-                    {
+                        if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
+                        {
+                            allSetupsActions.FindEffect(wantedName, i, mm, true, equipementSelected);
+                        }
+                        else
+                        {
 
-                        allSetupsActions.FindEffect(wantedName, i, mm, false, equipementSelected);
-                    }
+                            allSetupsActions.FindEffect(wantedName, i, mm, false, equipementSelected);
+                        }
 
+                    }
                 }
             }
 
@@ -421,7 +513,7 @@ public class GameMaster : MonoBehaviour
             for (int i = 0; i < sallesTouchees.Length; i++)
             {
                 if (sallesTouchees[i] >= 0)
-                {                    
+                {
                     if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
                     {
                         allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, true, equipementSelected);
@@ -478,5 +570,42 @@ public class GameMaster : MonoBehaviour
         }
         return index;
 
+    }
+
+    public void CombatEnded()
+    {
+        ennemiManager.enabled = false;
+        ennemiManager.enabled = true;
+        ennemiManager.combat.SetActive(false);
+        ennemiManager.horsCombat.SetActive(true);
+        ennemiManager.NEST.SetActive(false);
+
+        CartesManager.PhaseLente = true;
+        for (int i = 0; i < cartesManager.allCards.Count; i++)
+        {
+            Destroy(cartesManager.allCards[i].go);
+        }
+        cartesManager.allCards.Clear();
+
+        Camera.main.GetComponent<Animator>().SetTrigger("GoUp");
+        for (int i = 0; i < 4; i++)
+        {
+            for (int h = 0; h < salleManager.allSalles[i].SpawnParticleFeedback.transform.childCount; h++)
+            {
+                Destroy(salleManager.allSalles[i].SpawnParticleFeedback.transform.GetChild(h).gameObject);
+            }
+            for (int j = 0; j < salleManager.allSalles[i].MyGo.transform.childCount; j++)
+            {
+                if (salleManager.allSalles[i].MyGo.transform.GetChild(j).name == "9(Clone)")
+                {
+                    Destroy(salleManager.allSalles[i].MyGo.transform.GetChild(j).gameObject);
+                }
+            }
+            consolesAnim[i].SetBool("hover", false);
+            consolesAnim[i].SetBool("cooldown", false);
+        }
+        cajSR.enabled = false;
+
+        etat = 2;
     }
 }

@@ -36,8 +36,7 @@ public class Adversaire1 : MonoBehaviour
         ennemiManager.badGuy = gameObject;
         ennemiManager.RecupFormule(nbSymbolesParSalle, formuleTotale, symbolesSalles);
         ennemiManager.RecupActions(nbActionsParSalle, actions);
-        ennemiManager.ApplyFormule(formule);
-        
+        ennemiManager.ApplyFormule(formule);        
     }
 
     

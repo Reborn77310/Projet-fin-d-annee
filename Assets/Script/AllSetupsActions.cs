@@ -50,7 +50,7 @@ public class AllSetupsActions : MonoBehaviour
             {
                 salleManager.DamageSurSalle(mm.MySalleNumber, 35);
             }
-            
+
             damage *= ennemiManager.ennemiRooms[wantedRoom].projectileReduction;
             damage *= ennemiManager.ennemiRooms[wantedRoom].cannalisationReduction;
 
@@ -81,14 +81,14 @@ public class AllSetupsActions : MonoBehaviour
             string effet = "Tire deux rafales";
             if (ennemiManager.ennemiRooms[wantedRoom].reflect)
             {
-                salleManager.DamageSurSalle(mm.MySalleNumber, damage*2);
+                salleManager.DamageSurSalle(mm.MySalleNumber, damage * 2);
             }
-            
+
             damage *= ennemiManager.ennemiRooms[wantedRoom].projectileReduction;
             damage *= ennemiManager.ennemiRooms[wantedRoom].cannalisationReduction;
             DealDamage(wantedRoom, damage);
             DealDamage(wantedRoom, damage);
-            
+
             ennemiManager.animators[wantedRoom].SetTrigger("hit");
             print(effet + " " + damage);
         }
@@ -234,9 +234,12 @@ public class AllSetupsActions : MonoBehaviour
 
     public void DealDamage(int wantedRoom, float damage)
     {
-        ennemiManager.PerdrePvGlobal(damage);
-        ennemiManager.PerdrePvLocal(wantedRoom, damage);
-        ennemiManager.CheckPdv();
+        if (ennemiManager.badGuy != null)
+        {
+            ennemiManager.PerdrePvGlobal(damage);
+            ennemiManager.PerdrePvLocal(wantedRoom, damage);
+            ennemiManager.CheckPdv();
+        }
     }
 
     float OverdriveEfficacity(int x, float value)
@@ -248,7 +251,7 @@ public class AllSetupsActions : MonoBehaviour
     void OverdriveTempo(int x, int index)
     {
         string[] a = new string[] { "DURATION" };
-        salleManager.AddEffets(6, "Tempo", a, index, x*0.3f);
+        salleManager.AddEffets(6, "Tempo", a, index, x * 0.3f);
     }
 
     void OverdriveRepetition()

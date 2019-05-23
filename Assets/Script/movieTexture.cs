@@ -33,10 +33,20 @@ public class movieTexture : MonoBehaviour
 
     IEnumerator Continue()
     {
-        yield return new WaitForSeconds(8);
+        var gameMaster = GameObject.Find("GameMaster");
+        //yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(0.2f);
         movie.Stop();
         soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        GameObject.Find("GameMaster").GetComponent<EnnemiManager>().SpawnAdversaire();
+        CartesManager.PhaseLente = false;
+        gameMaster.GetComponent<EnnemiManager>().SpawnAdversaire();
+
+        Camera.main.GetComponent<Animator>().SetTrigger("GoDown");
+        int count = gameMaster.GetComponent<Equipement>().allEquipements.Count;
+        for (int i = 0; i < count; i++)
+        {
+            gameMaster.GetComponent<Equipement>().allEquipements[i].go.GetComponent<Animator>().SetTrigger("Sortirlestourelles");
+        }
         this.gameObject.SetActive(false);
     }
 }

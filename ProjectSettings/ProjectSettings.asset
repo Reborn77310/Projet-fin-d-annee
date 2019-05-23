@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: OnLacheRien
   productName: "\u0438\u0435s\u0442"
-  defaultCursor: {fileID: 2800000, guid: 27776ad0aa47468428c34823a9c19401, type: 3}
+  defaultCursor: {fileID: 2800000, guid: 089bcc169d355d949b61715462cc6d4b, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1

@@ -35,12 +35,14 @@ public class MovieTexturePersoUn : MonoBehaviour
 
     IEnumerator Continue()
     {
-        yield return new WaitForSeconds(5);
+     //  yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(0.2f);
         movie.Stop();
         soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         GameObject.Find("GameMaster").GetComponent<EnnemiManager>().PassageEnPhaseCombat();
         GameObject.Find("Video").GetComponent<movieTexture>().Activevideo();
-
+        GameObject.Find("GameMaster").GetComponent<GameMaster>().SecondCam.GetComponent<Animator>().SetTrigger("stop");
+        
         this.gameObject.SetActive(false);
     }
 }

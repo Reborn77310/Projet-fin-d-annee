@@ -249,4 +249,39 @@ public class SalleManager : MonoBehaviour
 
         allEffets.Add(a);
     }
+
+    public void ImBurning(int i)
+    {
+        StartCoroutine("Brulez",i);
+    }
+
+     IEnumerator Brulez(int i) //Jfais durer 10 sec vue que on peut pas l'annuler tfaçon
+    {
+        allSalles[i].MyGo.GetComponent<IncendieSound>().LaunchIncendie(); //SON
+
+        GameObject go = Resources.Load("Prefabs/FeedbackActionsEnnemisSurNest/Incendie") as GameObject;
+        GameObject salleGo = allSalles[i].MyGo;
+
+        DamageSurSalle(i, 35);
+        yield return new WaitForSeconds(2);
+
+        var newGo = Instantiate(go, salleGo.transform.position, go.transform.rotation, salleGo.transform);
+        newGo.transform.localPosition = Vector3.zero;
+
+        DamageSurSalle(i, 5);
+        yield return new WaitForSeconds(2);
+        DamageSurSalle(i, 5);
+        yield return new WaitForSeconds(2);
+        DamageSurSalle(i, 5);
+        yield return new WaitForSeconds(2);
+        DamageSurSalle(i, 5);
+
+        foreach (Transform child in newGo.transform)
+        {
+            var emission = child.GetComponent<ParticleSystem>().emission;
+            emission.enabled = false;
+        }
+        yield return new WaitForSeconds(2);
+        Destroy(newGo);
+    }
 }

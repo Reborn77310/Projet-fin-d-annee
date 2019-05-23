@@ -34,7 +34,7 @@ public class parent : MonoBehaviour
 
     public int[] CheckOverlap(RectTransform[] rt)
     {
-        int[] toReturn = new int[4];
+        int[] toReturn = new int[rt.Length]; // avant ct 4
         for (int i = 0; i < rt.Length; i++)
         {
             toReturn[i] = -1;

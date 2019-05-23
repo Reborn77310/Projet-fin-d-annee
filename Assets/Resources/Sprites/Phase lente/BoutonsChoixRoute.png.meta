@@ -1,0 +1,303 @@
+fileFormatVersion: 2
+guid: 78ef1c7acf25bb94091a9ea63dbb4d45
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: BoutonsChoixRoute_0
+    21300002: BoutonsChoixRoute_1
+    21300004: BoutonsChoixRoute_2
+    21300006: BoutonsChoixRoute_3
+    21300008: BoutonsChoixRoute_4
+    21300010: BoutonsChoixRoute_5
+    21300012: BoutonsChoixRoute_6
+    21300014: BoutonsChoixRoute_7
+    21300016: BoutonsChoixRoute_8
+    21300018: BoutonsChoixRoute_9
+    21300020: BoutonsChoixRoute_10
+    21300022: BoutonsChoixRoute_11
+    21300024: BoutonsChoixRoute_12
+    21300026: BoutonsChoixRoute_13
+    21300028: BoutonsChoixRoute_14
+    21300030: BoutonsChoixRoute_15
+    21300032: BoutonsChoixRoute_16
+    21300034: BoutonsChoixRoute_17
+    21300036: BoutonsChoixRoute_18
+    21300038: BoutonsChoixRoute_19
+    21300040: BoutonsChoixRoute_20
+    21300042: BoutonsChoixRoute_21
+    21300044: BoutonsChoixRoute_22
+    21300046: BoutonsChoixRoute_23
+    21300048: BoutonsChoixRoute_24
+    21300050: BoutonsChoixRoute_25
+    21300052: BoutonsChoixRoute_26
+    21300054: BoutonsChoixRoute_27
+    21300056: BoutonsChoixRoute_28
+    21300058: BoutonsChoixRoute_29
+    21300060: BoutonsChoixRoute_30
+    21300062: BoutonsChoixRoute_31
+    21300064: BoutonsChoixRoute_32
+    21300066: BoutonsChoixRoute_33
+    21300068: BoutonsChoixRoute_34
+    21300070: BoutonsChoixRoute_35
+    21300072: BoutonsChoixRoute_36
+    21300074: BoutonsChoixRoute_37
+    21300076: BoutonsChoixRoute_38
+    21300078: BoutonsChoixRoute_39
+    21300080: BoutonsChoixRoute_40
+    21300082: BoutonsChoixRoute_41
+    21300084: BoutonsChoixRoute_42
+    21300086: BoutonsChoixRoute_43
+    21300088: BoutonsChoixRoute_44
+    21300090: BoutonsChoixRoute_45
+    21300092: BoutonsChoixRoute_46
+    21300094: BoutonsChoixRoute_47
+    21300096: BoutonsChoixRoute_48
+    21300098: BoutonsChoixRoute_49
+    21300100: BoutonsChoixRoute_50
+    21300102: BoutonsChoixRoute_51
+    21300104: BoutonsChoixRoute_52
+    21300106: BoutonsChoixRoute_53
+    21300108: BoutonsChoixRoute_54
+    21300110: BoutonsChoixRoute_55
+    21300112: BoutonsChoixRoute_56
+    21300114: BoutonsChoixRoute_57
+    21300116: BoutonsChoixRoute_58
+    21300118: BoutonsChoixRoute_59
+    21300120: BoutonsChoixRoute_60
+    21300122: BoutonsChoixRoute_61
+    21300124: BoutonsChoixRoute_62
+    21300126: BoutonsChoixRoute_63
+    21300128: BoutonsChoixRoute_64
+    21300130: BoutonsChoixRoute_65
+    21300132: BoutonsChoixRoute_66
+    21300134: BoutonsChoixRoute_67
+    21300136: BoutonsChoixRoute_68
+    21300138: BoutonsChoixRoute_69
+    21300140: BoutonsChoixRoute_70
+    21300142: BoutonsChoixRoute_71
+    21300144: BoutonsChoixRoute_72
+    21300146: BoutonsChoixRoute_73
+    21300148: BoutonsChoixRoute_74
+    21300150: BoutonsChoixRoute_75
+    21300152: BoutonsChoixRoute_76
+    21300154: BoutonsChoixRoute_77
+    21300156: BoutonsChoixRoute_78
+    21300158: BoutonsChoixRoute_79
+    21300160: BoutonsChoixRoute_80
+    21300162: BoutonsChoixRoute_81
+    21300164: BoutonsChoixRoute_82
+    21300166: BoutonsChoixRoute_83
+  externalObjects: {}
+  serializedVersion: 9
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 2000
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BoutonsChoixRoute_0
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 118
+        width: 160
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c5bd072669377e40a61c12c67c9cf27
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BoutonsChoixRoute_14
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 98
+        width: 167
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c89f92ec34a81c442bb65234d68c3c63
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BoutonsChoixRoute_28
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 77
+        width: 160
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bc79968a9bd1524b87054164588396d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BoutonsChoixRoute_42
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 57
+        width: 167
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 720a2527cfba16948bf0b0e55301b5ed
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BoutonsChoixRoute_56
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 36
+        width: 160
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19b90ec8b5de9b14c8cd614823f28809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BoutonsChoixRoute_70
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 15
+        width: 166
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3851377f44a4a384aa90c0a935480c92
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: d30677ce3e5c85d45bf5f72f3dea5f49
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

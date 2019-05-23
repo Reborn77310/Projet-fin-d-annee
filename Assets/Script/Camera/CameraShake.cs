@@ -27,19 +27,24 @@ public class CameraShake : MonoBehaviour
 
     void Update()
     {
+        var posY = camTransform.localPosition.y;
+        var pos = new Vector3(originalPos.x, posY, originalPos.z);
+
         if (shakeDuration > 0)
         {
-            camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
+            camTransform.localPosition = pos + Random.insideUnitSphere * shakeAmount;
 
             shakeDuration -= Time.deltaTime * decreaseFactor;
         }
         else
         {
             shakeDuration = 0f;
-            camTransform.localPosition = originalPos;
+
+
+            camTransform.localPosition = pos;
         }
     }
-    public void Shake(float newShakeAmount,float newShakeDuration,float newDecreaseFactor)
+    public void Shake(float newShakeAmount, float newShakeDuration, float newDecreaseFactor)
     {
         shakeAmount = newShakeAmount;
         shakeDuration = newShakeDuration;
@@ -48,7 +53,7 @@ public class CameraShake : MonoBehaviour
 
     public void PauseShake()
     {
-        if(shakeDuration > 0)
+        if (shakeDuration > 0)
         {
             tempDuration = shakeDuration;
             shakeDuration = 0;
@@ -57,7 +62,7 @@ public class CameraShake : MonoBehaviour
 
     public void UnpauseShake()
     {
-        if(tempDuration > 0)
+        if (tempDuration > 0)
         {
             shakeDuration = tempDuration;
             tempDuration = 0;
