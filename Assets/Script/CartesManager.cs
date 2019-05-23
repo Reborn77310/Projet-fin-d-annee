@@ -22,6 +22,8 @@ public class CartesManager : MonoBehaviour
         public GameObject prefabZoneSelection;
         public int rarity;
         public int overdriveEffect;
+        public int optained;
+        public string textOverdrive;
 
 
         public Cartes(int _id, int _cartesTypes)
