@@ -33,8 +33,7 @@ public class MovieTexture2 : MonoBehaviour
 
     IEnumerator Continue()
     {
-        //yield return new WaitForSeconds(8);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(5);
         movie.Stop();
         soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         CartesManager.PhaseLente = false;

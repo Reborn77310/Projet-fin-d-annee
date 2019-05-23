@@ -35,7 +35,7 @@ public class VideoTransmission : MonoBehaviour
     IEnumerator Continue()
     {
         Transmission.SetActive(true);
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(5);
 
         movie.Stop();
         soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);

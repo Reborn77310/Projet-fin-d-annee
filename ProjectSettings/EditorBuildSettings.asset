@@ -8,15 +8,18 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/scenario1.unity
-    guid: b0be83d884bf46544bb134ed29baff74
-  - enabled: 1
-    path: Assets/Scenes/scenario2.unity
-    guid: 189ecf61ff4f48544b79e58a95c5d52a
-  - enabled: 1
-    path: Assets/Scenes/scenario3.unity
-    guid: 85ca5fed33dbbd947b9b353b0df64a0d
+    path: Assets/Scenes/MainMenu.unity
+    guid: 72864df69dd55ec4ab15870ed0a76f95
   - enabled: 1
     path: Assets/Scenes/TEST 1 Double NavMesh.unity
     guid: 64b4d42595568e84d8bc022fbf09585b

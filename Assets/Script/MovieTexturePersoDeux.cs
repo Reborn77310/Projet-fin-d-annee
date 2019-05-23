@@ -36,8 +36,7 @@ public class MovieTexturePersoDeux : MonoBehaviour
 
     IEnumerator Continue()
     {
-        //yield return new WaitForSeconds(5);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(5);
         movie.Stop();
         soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
