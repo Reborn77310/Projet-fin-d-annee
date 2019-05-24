@@ -37,10 +37,16 @@ public class MovieTexture2 : MonoBehaviour
         movie.Stop();
         soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         CartesManager.PhaseLente = false;
-        GameObject.Find("GameMaster").GetComponent<EnnemiManager>().SpawnAdversaire();
+        for (int i = 0; i < 4; i++)
+        {
+            GameObject.Find("PattesController").GetComponent<PlayWithDécalage>().AllLegs[i].speed = 0;
+        }
+        var emission = GameObject.Find("NeigeTemporaire").GetComponent<ParticleSystem>().emission;
+        emission.enabled = false;
+        Camera.main.GetComponent<MusiqueScript>().StopPhaseLente();
         Camera.main.GetComponent<MusiqueScript>().LancerMusiqueCombat();
         Camera.main.GetComponent<Animator>().SetTrigger("GoDown");
-
+        GameObject.Find("GameMaster").GetComponent<EnnemiManager>().SpawnAdversaire();
         this.gameObject.SetActive(false);
     }
 }

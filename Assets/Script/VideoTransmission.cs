@@ -28,15 +28,10 @@ public class VideoTransmission : MonoBehaviour
         soundevent.getPlaybackState(out fmodPbState);
 
         soundevent.start();
-
-        StartCoroutine("Continue");
     }
 
-    IEnumerator Continue()
+    public void Continue()
     {
-        Transmission.SetActive(true);
-        yield return new WaitForSeconds(5);
-
         movie.Stop();
         soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         

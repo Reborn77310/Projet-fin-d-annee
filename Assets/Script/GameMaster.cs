@@ -16,12 +16,14 @@ public class GameMaster : MonoBehaviour
     public Transform SecondCam;
     public GameObject perso1;
     public GameObject perso2;
+    public GameObject TransmissionCadre;
     public GameObject BoutonsDestination;
     public GameObject DeuxiemeDestination;
     public GameObject NeigeTemporaire;
     public GameObject EcranDeSucces;
     public GameObject EcranDeSuccesIntegrity;
     public GameObject EcranDeSuccesIntegrityPhrase;
+    public GameObject PersoTransmission;
 
     Camera cam;
 
@@ -85,7 +87,7 @@ public class GameMaster : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            GameObject.Find("PattesController").GetComponent<PlayWithDécalage>().AllLegs[i].speed = 0;
+            GameObject.Find("PattesController").GetComponent<PlayWithDécalage>().AllLegs[i].speed = 1;
         }
         var emission = NeigeTemporaire.GetComponent<ParticleSystem>().emission;
         emission.enabled = true;
@@ -100,6 +102,7 @@ public class GameMaster : MonoBehaviour
     public void RetourAlmanac()
     {
         etat = 4;
+
         GameObject.Find("Canvas2").transform.GetChild(1).gameObject.SetActive(false);
         Camera.main.GetComponent<SonsCanva>().LancerFermeture();
         ennemiManager.horsCombat.SetActive(true);
@@ -115,7 +118,20 @@ public class GameMaster : MonoBehaviour
         ennemiManager.combat.SetActive(false);
         ennemiManager.horsCombat.SetActive(true);
         EcranDeSucces.SetActive(false);
-        GameObject.Find("PersoTransmission").GetComponent<VideoTransmission>().Activevideo();
+        BoutonsDestination.SetActive(true);
+        Color col = BoutonsDestination.transform.GetChild(3).GetComponent<Image>().color;
+        Destroy(BoutonsDestination.transform.GetChild(3).transform.GetChild(0).gameObject);
+        Destroy(GameObject.Find("PictosCartes_3"));
+        col.a = 0;
+        BoutonsDestination.transform.GetChild(3).GetComponent<Image>().color = col;
+        StartCoroutine("Wait");
+    }
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(2);
+        TransmissionCadre.SetActive(true);
+        TransmissionCadre.transform.GetChild(1).GetComponent<Dialogue>().isActive = true;
+        PersoTransmission.GetComponent<VideoTransmission>().Activevideo();
     }
     public Texture2D cursorTexture;
 
@@ -172,16 +188,14 @@ public class GameMaster : MonoBehaviour
                     {
                         GameObject.Find("PattesController").GetComponent<PlayWithDécalage>().AllLegs[i].speed = 0;
                     }
-
+                    TransmissionCadre.SetActive(true);
                     perso1.GetComponent<MovieTexturePersoUn>().Activevideo();
                     Camera.main.GetComponent<MusiqueScript>().StopPhaseLente();
                 }
             }
             else if (etat == 2)
             {
-                GameObject.Find("TransmissionCadre").SetActive(false);
-                BoutonsDestination.SetActive(true);
-                Destroy(GameObject.Find("PictosCartes_3"));
+                TransmissionCadre.SetActive(false);
                 Destroy(BoutonsDestination.transform.GetChild(3).gameObject);
                 BoutonsDestination.GetComponent<BoutonsScript>().Buttons[3] = null;
                 DeuxiemeDestination.SetActive(true);
@@ -202,6 +216,8 @@ public class GameMaster : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.A))
                 {
                     PlayWithDécalage.CanMove = false;
+                    TransmissionCadre.SetActive(true);
+                    TransmissionCadre.transform.GetChild(2).GetComponent<Dialogue>().isActive = true;
                     perso2.GetComponent<MovieTexturePersoDeux>().Activevideo();
                 }
             }

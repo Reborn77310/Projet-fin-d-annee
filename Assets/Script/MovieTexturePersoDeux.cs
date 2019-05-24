@@ -30,16 +30,14 @@ public class MovieTexturePersoDeux : MonoBehaviour
         {
             soundevent.start();
         }
-
-        StartCoroutine("Continue");
     }
 
-    IEnumerator Continue()
+    public void Continue()
     {
-        yield return new WaitForSeconds(5);
         movie.Stop();
         soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
+        
+        GameObject.Find("GameMaster").GetComponent<GameMaster>().TransmissionCadre.SetActive(false);
         GameObject.Find("GameMaster").GetComponent<EnnemiManager>().prefabADV = prefabBoss;
         GameObject.Find("GameMaster").GetComponent<EnnemiManager>().PassageEnPhaseCombat();
 

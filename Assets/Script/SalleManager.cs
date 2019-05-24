@@ -225,7 +225,10 @@ public class SalleManager : MonoBehaviour
         else if (allEffets[i].name == "Singularity")
         {
             allSalles[allEffets[i].salle].canOverdrive = true;
-            GameObject.Find("Salle_NEST_" + allEffets[i].salle).transform.GetChild(0).GetComponent<Animator>().SetBool("rouge", false);
+            if (sallesRT[allEffets[i].salle].gameObject.activeInHierarchy)
+            {
+                sallesRT[allEffets[i].salle].transform.GetChild(0).GetComponent<Animator>().SetBool("rouge", false);
+            }
         }
         else if (allEffets[i].name == "Grappin")
         {
@@ -252,10 +255,10 @@ public class SalleManager : MonoBehaviour
 
     public void ImBurning(int i)
     {
-        StartCoroutine("Brulez",i);
+        StartCoroutine("Brulez", i);
     }
 
-     IEnumerator Brulez(int i) //Jfais durer 10 sec vue que on peut pas l'annuler tfaçon
+    IEnumerator Brulez(int i) //Jfais durer 10 sec vue que on peut pas l'annuler tfaçon
     {
         allSalles[i].MyGo.GetComponent<IncendieSound>().LaunchIncendie(); //SON
 
