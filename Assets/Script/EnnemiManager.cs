@@ -163,7 +163,7 @@ public class EnnemiManager : MonoBehaviour
         }
         PoolingDBM();
 
-        cartesManager.Prepot();        
+        cartesManager.Prepot();
     }
 
     public void PerdrePvLocal(int wantedRoom, float wantedDamage)
@@ -711,6 +711,15 @@ public class EnnemiManager : MonoBehaviour
             salleManager.allSalles[actionPrevues[i].cible].ActualFeedbackOnMe = go;
         }
 
+        // "\n"
+        // <color=#BC1910> normale
+        // <color=#7841BB> intégrité
+        // <color=#E6742E> attaque
+        // <color=#4061BA> defense
+        // <color=#6289F3> buff
+        // <color=#B97D31> debuff
+        // </color>
+
         //print(id + " " + actionPrevues[i].origine);
         if (id == 1) // Missile 1
         {
@@ -718,12 +727,16 @@ public class EnnemiManager : MonoBehaviour
             print("Missile 1 " + actionPrevues[i].origine);
             // PROJECTILE
             salleManager.DamageSurSalle(actionPrevues[i].cible, 25);
+            string s = "<color=#78FF1B>The N.E.S.T.</color> has been hit for <color=#7841BB>25 damage</color>.";
+            battleLog.AddNewBattleLog(s);
         }
         else if (id == 2) // Missile 2
         {
             print("Missile 2 " + actionPrevues[i].origine);
             // PROJECTILE
             salleManager.DamageSurSalle(actionPrevues[i].cible, 45);
+            string s = "<color=#78FF1B>The N.E.S.T.</color> has been hit for <color=#7841BB>45 damage</color>.";
+            battleLog.AddNewBattleLog(s);
         }
         else if (id == 3) // Singularité empêche overdrive
         {
@@ -732,19 +745,24 @@ public class EnnemiManager : MonoBehaviour
             salleManager.allSalles[actionPrevues[i].cible].canOverdrive = false;
             string[] a = new string[] { "DURATION", "ELECTRONIC" };
             salleManager.AddEffets(18, "Singularity", a, actionPrevues[i].cible, 0);
+            string s = "<color=#78FF1B>The N.E.S.T.</color> <color=#B97D31>can't use overdrive on room" + actionPrevues[i].cible.ToString() + "</color>.";
+            battleLog.AddNewBattleLog(s);
         }
         else if (id == 4) // Armagedon
         {
             // PROJECTILE
             print("Armagedon " + actionPrevues[i].origine);
             salleManager.DamageSurSalle(actionPrevues[i].cible, 70);
-            // durability -2
+            string s = "<color=#78FF1B>The N.E.S.T.</color> has been hit for <color=#7841BB>70 damage</color>.";
+            battleLog.AddNewBattleLog(s);
         }
         else if (id == 5) // Poinçonneuse
         {
             // PROJECTILE
             print("Poinçonneuse " + actionPrevues[i].origine);
             salleManager.DamageSurSalle(actionPrevues[i].cible, 15);
+            string s = "<color=#78FF1B>The N.E.S.T.</color> has been hit for <color=#7841BB>15 damage</color>.";
+            battleLog.AddNewBattleLog(s);
             if (salleManager.allSalles[actionPrevues[i].cible].pv <= 15)
             {
                 // Enlever la carte de gauche dans la main
@@ -756,6 +774,8 @@ public class EnnemiManager : MonoBehaviour
             print("Grappin " + actionPrevues[i].origine);
             string[] a = new string[] { "DURATION", "PROJECTILE" };
             salleManager.AddEffets(10, "Grappin", a, actionPrevues[i].cible, 0);
+            string s = "<color=#B97D31>Something.. #~!§ blocked.</color>.";
+            battleLog.AddNewBattleLog(s);
         }
         else if (id == 7) // Drone incendiaire
         {
@@ -763,6 +783,8 @@ public class EnnemiManager : MonoBehaviour
             string[] a = new string[] { "DURATION", "DOT" };
             salleManager.AddEffets(10, "Drone", a, actionPrevues[i].cible, 0);
             salleManager.ImBurning(actionPrevues[i].cible);
+            string s = "<color=#B97D31>Fire detected on room" + actionPrevues[i].cible.ToString() + "</color>.";
+            battleLog.AddNewBattleLog(s);
             // Le drone
             // DRONE CHARGE
         }
@@ -778,6 +800,8 @@ public class EnnemiManager : MonoBehaviour
                 salleManager.DamageSurSalle(actionPrevues[i].cible, 10);
                 salleManager.DamageSurSalle(actionPrevues[i].cible, 10);
                 salleManager.DamageSurSalle(actionPrevues[i].cible, 10);
+                string s = "<color=#78FF1B>The N.E.S.T.</color> has been hit for <color=#7841BB>50 damage</color>.";
+                battleLog.AddNewBattleLog(s);
             }
             else
             {
@@ -786,6 +810,8 @@ public class EnnemiManager : MonoBehaviour
                 salleManager.DamageSurSalle(actionPrevues[i].cible, 5);
                 salleManager.DamageSurSalle(actionPrevues[i].cible, 5);
                 salleManager.DamageSurSalle(actionPrevues[i].cible, 5);
+                string s = "<color=#78FF1B>The N.E.S.T.</color> has been hit for <color=#7841BB>25 damage</color>.";
+                battleLog.AddNewBattleLog(s);
             }
 
         }
@@ -806,8 +832,10 @@ public class EnnemiManager : MonoBehaviour
                     mm.slotImage[1].sprite = mm.defaultSprite[1];
                 }
                 salleManager.allEffets[salleManager.allEffets.Count - 1].Feedback = salleManager.allSalles[actionPrevues[i].cible].ActualFeedbackOnMe;
-                salleManager.allSalles[actionPrevues[i].cible].MyGo.GetComponent<FumeeSound>().LaunchFumee();
             }
+            salleManager.allSalles[actionPrevues[i].cible].MyGo.GetComponent<FumeeSound>().LaunchFumee();
+            string s = "<color=#B97D31>Smoke detected on room" + actionPrevues[i].cible.ToString() + "</color>.";
+            battleLog.AddNewBattleLog(s);
         }
         else if (id == -1) // Drone anti-projectile
         {
@@ -815,6 +843,8 @@ public class EnnemiManager : MonoBehaviour
             string[] a = new string[] { "DURATION", "DRONE" };
             ennemiRooms[actionPrevues[i].cible].projectileReduction -= 0.5f;
             AddEffets(15, "Terra", a, actionPrevues[i].cible, -0.5f);
+            string s = "<color=#BC1910>Room" + actionPrevues[i].cible.ToString() +"</color> <color=#6289F3>protected for 50% of PROJECTILES damage</color> for 15s.";
+            battleLog.AddNewBattleLog(s);
         }
         else if (id == -2)  // Reflect
         {
@@ -822,6 +852,8 @@ public class EnnemiManager : MonoBehaviour
             string[] a = new string[] { "DURATION", "GAMMA" };
             ennemiRooms[actionPrevues[i].cible].reflect = true;
             AddEffets(10, "Reflect", a, actionPrevues[i].cible, 0);
+            string s = "<color=#BC1910>Room" + actionPrevues[i].cible.ToString() +"</color> <color=#6289F3>reflect offensive effects</color> for 15s.";
+            battleLog.AddNewBattleLog(s);
         }
         else if (id == -3)  // Bouclier anti-canalisation
         {
@@ -829,6 +861,8 @@ public class EnnemiManager : MonoBehaviour
             string[] a = new string[] { "DURATION", "ELECTRONIC" };
             ennemiRooms[actionPrevues[i].cible].cannalisationReduction -= 1f;
             AddEffets(10, "Anti-cannalisation", a, actionPrevues[i].cible, -1f);
+            string s = "<color=#BC1910>Room" + actionPrevues[i].cible.ToString() +"</color> <color=#6289F3>protected for 100% of CHANNELING damage</color> for 10s.";
+            battleLog.AddNewBattleLog(s);
         }
         else if (id == -4)  // Cloaking
         {
@@ -839,6 +873,8 @@ public class EnnemiManager : MonoBehaviour
                 ennemiRooms[h].canBeTarget = false;
             }
             AddEffets(5, "Cloaking", a, actionPrevues[i].cible, 0);
+            string s = "<color=#BC1910>All rooms</color> <color=#6289F3>can't be targeted</color> for 5s.";
+            battleLog.AddNewBattleLog(s);
         }
     }
 
@@ -947,14 +983,20 @@ public class EnnemiManager : MonoBehaviour
         if (effetsEnnemi[i].name == "Terra")
         {
             ennemiRooms[effetsEnnemi[i].salle].projectileReduction -= effetsEnnemi[i].value;
+            string s = "<color=#BC1910>Ennemi's</color><color=#6289F3><i>Projectile protection</i> effect has ended.</color>";
+            battleLog.AddNewBattleLog(s);
         }
         else if (effetsEnnemi[i].name == "Reflect")
         {
             ennemiRooms[effetsEnnemi[i].salle].reflect = false;
+            string s = "<color=#BC1910>Ennemi's</color><color=#6289F3><i>Reflect</i> effect has ended.</color>";
+            battleLog.AddNewBattleLog(s);
         }
         else if (effetsEnnemi[i].name == "Anti-cannalisation")
         {
             ennemiRooms[effetsEnnemi[i].salle].cannalisationReduction -= effetsEnnemi[i].value;
+            string s = "<color=#BC1910>Ennemi's</color><color=#6289F3><i>Channeling protection</i> effect has ended.</color>";
+            battleLog.AddNewBattleLog(s);
         }
         else if (effetsEnnemi[i].name == "Cloaking")
         {
@@ -962,6 +1004,8 @@ public class EnnemiManager : MonoBehaviour
             {
                 ennemiRooms[h].canBeTarget = true;
             }
+            string s = "<color=#BC1910>Ennemi's</color><color=#6289F3><i>Cloaking</i> effect has ended.</color>";
+            battleLog.AddNewBattleLog(s);
         }
     }
 

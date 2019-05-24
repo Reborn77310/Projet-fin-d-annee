@@ -18,6 +18,7 @@ public class BattleLog : MonoBehaviour
 
     public TextMeshProUGUI textInfosActionADV;
     public TextMeshProUGUI textInfosActionNEST;
+    public TextMeshProUGUI[] textBattleLog;
 
     public void ChangeTextInfosADV(string a)
     {
@@ -26,5 +27,12 @@ public class BattleLog : MonoBehaviour
     public void ChangeTextInfosNEST(string a)
     {
         textInfosActionNEST.text = a;
+    }
+
+    public void AddNewBattleLog(string toDisplay)
+    {
+        textBattleLog[0].text = textBattleLog[1].text;
+        textBattleLog[1].text = textBattleLog[2].text;
+        textBattleLog[2].text = toDisplay;
     }
 }

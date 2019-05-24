@@ -61,7 +61,9 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
+           
             string[] name = transform.parent.name.Split(char.Parse("e"));
+            print(name[1]);
             if(name[1] == "1")
             {
                 GameObject.Find("GameMaster").GetComponent<GameMaster>().perso1.GetComponent<MovieTexturePersoUn>().Continue();
@@ -72,6 +74,7 @@ public class Dialogue : MonoBehaviour
             }
             else if(name[1] == "3")
             {
+                
                 GameObject.Find("GameMaster").GetComponent<GameMaster>().perso2.GetComponent<MovieTexturePersoDeux>().Continue();
             }
             // Appeler la fonction que tu veux, dialogue fini
