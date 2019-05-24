@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
 {
+    public GameObject fj;
     TextMeshProUGUI dialogue;
     string[] _textCharacter;
     public bool isActive = false;
@@ -63,7 +64,6 @@ public class Dialogue : MonoBehaviour
         {
            
             string[] name = transform.parent.name.Split(char.Parse("e"));
-            print(name[1]);
             if(name[1] == "1")
             {
                 GameObject.Find("GameMaster").GetComponent<GameMaster>().perso1.GetComponent<MovieTexturePersoUn>().Continue();
@@ -76,6 +76,11 @@ public class Dialogue : MonoBehaviour
             {
                 
                 GameObject.Find("GameMaster").GetComponent<GameMaster>().perso2.GetComponent<MovieTexturePersoDeux>().Continue();
+            }
+            else if(name[1] == "4")
+            {                
+                fj.GetComponent<findujeu>().StartFin();
+                Destroy(transform.parent.gameObject);
             }
             // Appeler la fonction que tu veux, dialogue fini
         }

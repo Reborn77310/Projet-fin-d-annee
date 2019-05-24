@@ -52,6 +52,8 @@ public class EnnemiRooms
 
 public class EnnemiManager : MonoBehaviour
 {
+    public GameObject gm;
+    public GameObject findj;
     public List<EnnemiRooms> ennemiRooms = new List<EnnemiRooms>();
     SalleManager salleManager;
     public float pvTotaux;
@@ -210,10 +212,11 @@ public class EnnemiManager : MonoBehaviour
         if (badGuy.name == "Voydroc(Clone)")
         {
             video3.SetActive(true);
-            Camera.main.GetComponent<MusiqueScript>().StopCombat();
-            
+            Camera.main.GetComponent<MusiqueScript>().stopboss();
+            findj.SetActive(true);
             GetComponent<GameMaster>().caj.SetActive(false);
-            GameObject.Find("GameMaster").SetActive(false);
+            Destroy(badGuy);
+            this.gameObject.SetActive(false);
         }
         else
         {

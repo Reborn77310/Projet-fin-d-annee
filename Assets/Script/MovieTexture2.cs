@@ -43,7 +43,7 @@ public class MovieTexture2 : MonoBehaviour
         }
         var emission = GameObject.Find("NeigeTemporaire").GetComponent<ParticleSystem>().emission;
         emission.enabled = false;
-        Camera.main.GetComponent<MusiqueScript>().LancerMusiqueCombat();
+        Camera.main.GetComponent<MusiqueScript>().LancerBoss();
         Camera.main.GetComponent<Animator>().SetTrigger("GoDown");
         GameObject.Find("GameMaster").GetComponent<EnnemiManager>().SpawnAdversaire();
         this.gameObject.SetActive(false);
