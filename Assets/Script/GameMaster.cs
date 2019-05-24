@@ -218,6 +218,7 @@ public class GameMaster : MonoBehaviour
                     PlayWithDécalage.CanMove = false;
                     TransmissionCadre.SetActive(true);
                     TransmissionCadre.transform.GetChild(2).GetComponent<Dialogue>().isActive = true;
+                    Camera.main.GetComponent<MusiqueScript>().StopPhaseLente();
                     perso2.GetComponent<MovieTexturePersoDeux>().Activevideo();
                 }
             }
@@ -711,6 +712,7 @@ public class GameMaster : MonoBehaviour
             wantedImage = tableauImage[3];
         }
 
+        GetComponent<Victory>().LancerVictoire();
         EcranDeSuccesIntegrity.GetComponent<Image>().sprite = wantedImage;
         EcranDeSuccesIntegrityPhrase.GetComponent<TextMeshProUGUI>().text = Mathf.RoundToInt(integrity).ToString() + " %";
 

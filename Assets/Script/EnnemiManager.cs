@@ -61,6 +61,7 @@ public class EnnemiManager : MonoBehaviour
     CartesManager cartesManager;
     BattleLog battleLog;
 
+    public GameObject video3;
     public GameObject horsCombat; // Les éléments d'ui hors combat
     public GameObject combat; // Les éléments d'ui en combat
 
@@ -206,14 +207,25 @@ public class EnnemiManager : MonoBehaviour
 
     public void EndCombat()
     {
-        NEST.SetActive(false);
-        pvTotauxText.gameObject.SetActive(false);
-        Destroy(badGuy);
-        badGuy = null;
+        if (badGuy.name == "Voydroc(Clone)")
+        {
+            video3.SetActive(true);
+            Camera.main.GetComponent<MusiqueScript>().StopCombat();
+            
+            GetComponent<GameMaster>().caj.SetActive(false);
+            GameObject.Find("GameMaster").SetActive(false);
+        }
+        else
+        {
+            NEST.SetActive(false);
+            pvTotauxText.gameObject.SetActive(false);
+            Destroy(badGuy);
+            badGuy = null;
 
-        ennemiRooms.Clear();
-        actionPrevues.Clear();
-        GetComponent<GameMaster>().CombatEnded();
+            ennemiRooms.Clear();
+            actionPrevues.Clear();
+            GetComponent<GameMaster>().CombatEnded();
+        }
     }
 
     void GestionDesSalles()
@@ -843,7 +855,7 @@ public class EnnemiManager : MonoBehaviour
             string[] a = new string[] { "DURATION", "DRONE" };
             ennemiRooms[actionPrevues[i].cible].projectileReduction -= 0.5f;
             AddEffets(15, "Terra", a, actionPrevues[i].cible, -0.5f);
-            string s = "<color=#BC1910>Room" + actionPrevues[i].cible.ToString() +"</color> <color=#6289F3>protected for 50% of PROJECTILES damage</color> for 15s.";
+            string s = "<color=#BC1910>Room" + actionPrevues[i].cible.ToString() + "</color> <color=#6289F3>protected for 50% of PROJECTILES damage</color> for 15s.";
             battleLog.AddNewBattleLog(s);
         }
         else if (id == -2)  // Reflect
@@ -852,7 +864,7 @@ public class EnnemiManager : MonoBehaviour
             string[] a = new string[] { "DURATION", "GAMMA" };
             ennemiRooms[actionPrevues[i].cible].reflect = true;
             AddEffets(10, "Reflect", a, actionPrevues[i].cible, 0);
-            string s = "<color=#BC1910>Room" + actionPrevues[i].cible.ToString() +"</color> <color=#6289F3>reflect offensive effects</color> for 15s.";
+            string s = "<color=#BC1910>Room" + actionPrevues[i].cible.ToString() + "</color> <color=#6289F3>reflect offensive effects</color> for 15s.";
             battleLog.AddNewBattleLog(s);
         }
         else if (id == -3)  // Bouclier anti-canalisation
@@ -861,7 +873,7 @@ public class EnnemiManager : MonoBehaviour
             string[] a = new string[] { "DURATION", "ELECTRONIC" };
             ennemiRooms[actionPrevues[i].cible].cannalisationReduction -= 1f;
             AddEffets(10, "Anti-cannalisation", a, actionPrevues[i].cible, -1f);
-            string s = "<color=#BC1910>Room" + actionPrevues[i].cible.ToString() +"</color> <color=#6289F3>protected for 100% of CHANNELING damage</color> for 10s.";
+            string s = "<color=#BC1910>Room" + actionPrevues[i].cible.ToString() + "</color> <color=#6289F3>protected for 100% of CHANNELING damage</color> for 10s.";
             battleLog.AddNewBattleLog(s);
         }
         else if (id == -4)  // Cloaking

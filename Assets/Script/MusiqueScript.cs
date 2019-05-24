@@ -17,6 +17,8 @@ public class MusiqueScript : MonoBehaviour
         SoundEvent.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(this.transform));
         SoundEvent2 = FMODUnity.RuntimeManager.CreateInstance(PhaseCombat);
         SoundEvent2.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(this.transform));
+        SoundEvent3 = FMODUnity.RuntimeManager.CreateInstance(Select_Sound3);
+        SoundEvent3.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(this.transform));
     }
 
     public void LancerPhaseLente()
@@ -40,5 +42,17 @@ public class MusiqueScript : MonoBehaviour
     public void StopCombat()
     {
         SoundEvent2.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    public void LancerBoss()
+    {
+        FMOD.Studio.PLAYBACK_STATE fmodPbState;
+        SoundEvent3.getPlaybackState(out fmodPbState);
+        SoundEvent3.start();
+    }
+
+    public void stopboss()
+    {
+        SoundEvent3.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 }
