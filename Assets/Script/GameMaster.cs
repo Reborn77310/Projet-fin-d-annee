@@ -75,7 +75,7 @@ public class GameMaster : MonoBehaviour
         Color a = GameObject.Find("PictosCartes_3").GetComponent<SpriteRenderer>().color;
         a.a = 100;
         GameObject.Find("PictosCartes_3").GetComponent<SpriteRenderer>().color = a;
-        Camera.main.GetComponent<MusiqueScript>().LancerPhaseLente();
+        Camera.main.GetComponent<MusicSound>().LancerPhaseLente();
         var emission = NeigeTemporaire.GetComponent<ParticleSystem>().emission;
         emission.enabled = true;
 
@@ -104,7 +104,7 @@ public class GameMaster : MonoBehaviour
         etat = 4;
 
         GameObject.Find("Canvas2").transform.GetChild(1).gameObject.SetActive(false);
-        Camera.main.GetComponent<SonsCanva>().LancerFermeture();
+        Camera.main.GetComponent<CanvaSound>().LancerFermeture();
         ennemiManager.horsCombat.SetActive(true);
 
         Camera.main.GetComponent<Animator>().speed = 0.6f;
@@ -190,7 +190,7 @@ public class GameMaster : MonoBehaviour
                     }
                     TransmissionCadre.SetActive(true);
                     perso1.GetComponent<MovieTexturePersoUn>().Activevideo();
-                    Camera.main.GetComponent<MusiqueScript>().StopPhaseLente();
+                    Camera.main.GetComponent<MusicSound>().StopPhaseLente();
                 }
             }
             else if (etat == 2)
@@ -218,7 +218,7 @@ public class GameMaster : MonoBehaviour
                     PlayWithDécalage.CanMove = false;
                     TransmissionCadre.SetActive(true);
                     TransmissionCadre.transform.GetChild(2).GetComponent<Dialogue>().isActive = true;
-                    Camera.main.GetComponent<MusiqueScript>().StopPhaseLente();
+                    Camera.main.GetComponent<MusicSound>().StopPhaseLente();
                     perso2.GetComponent<MovieTexturePersoDeux>().Activevideo();
                 }
             }
@@ -712,11 +712,11 @@ public class GameMaster : MonoBehaviour
             wantedImage = tableauImage[3];
         }
 
-        GetComponent<Victory>().LancerVictoire();
+        GetComponent<VictorySound>().LancerVictoire();
         EcranDeSuccesIntegrity.GetComponent<Image>().sprite = wantedImage;
         EcranDeSuccesIntegrityPhrase.GetComponent<TextMeshProUGUI>().text = Mathf.RoundToInt(integrity).ToString() + " %";
 
-        Camera.main.GetComponent<MusiqueScript>().StopCombat();
-        Camera.main.GetComponent<MusiqueScript>().LancerPhaseLente();
+        Camera.main.GetComponent<MusicSound>().StopCombat();
+        Camera.main.GetComponent<MusicSound>().LancerPhaseLente();
     }
 }

@@ -44,7 +44,6 @@ public class parent : MonoBehaviour
                 {
                     zones[h].GetComponent<Image>().color = Color.red;
                     toReturn[i] = i;
-                    print(i + " " + ennemiManager.animators.Length);
                     if (ennemiManager.animators.Length > 0)
                     {
                         ennemiManager.animators[i].SetBool("hightlight", true);
