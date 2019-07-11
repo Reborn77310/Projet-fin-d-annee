@@ -75,19 +75,6 @@
           </e>
         </e>
         <e p="Resources" t="Include">
-          <e p="NEST" t="Include">
-            <e p="destroyCoroutine.cs" t="Include" />
-            <e p="gaz" t="Include">
-              <e p="gaz.cs" t="Include" />
-            </e>
-            <e p="Lien particule" t="Include">
-              <e p="RotatebienElec.cs" t="Include" />
-            </e>
-            <e p="Missiles" t="Include">
-              <e p="missile.cs" t="Include" />
-            </e>
-            <e p="position.cs" t="Include" />
-          </e>
           <e p="Son" t="Include">
             <e p="Master" t="Include">
               <e p="Metadata" t="Include">
@@ -284,6 +271,13 @@
             <e p="DecalageCartes.cs" t="Include" />
           </e>
           <e p="Dialogue.cs" t="Include" />
+          <e p="Feedback actions" t="Include">
+            <e p="destroyCoroutine.cs" t="Include" />
+            <e p="gaz.cs" t="Include" />
+            <e p="missile.cs" t="Include" />
+            <e p="position.cs" t="Include" />
+            <e p="RotatebienElec.cs" t="Include" />
+          </e>
           <e p="GameMaster.cs" t="Include" />
           <e p="Menu principal" t="Include">
             <e p="VideoMenu.cs" t="Include" />
