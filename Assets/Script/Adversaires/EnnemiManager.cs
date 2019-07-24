@@ -203,7 +203,13 @@ public class EnnemiManager : MonoBehaviour
         if (pvTotaux <= 0 && badGuy != null)
         {
             EndCombat();
-            Debug.Log("Dracarys");
+            
+            int count = GameObject.Find("GameMaster").GetComponent<Equipement>().allEquipements.Count;
+            for (int i = 0; i < count; i++)
+            {
+                GameObject.Find("GameMaster").GetComponent<Equipement>().allEquipements[i].go.GetComponent<Animator>().SetTrigger("Rentrerlestourelles");
+            }
+            
         }
     }
 
@@ -211,6 +217,7 @@ public class EnnemiManager : MonoBehaviour
     {
         if (badGuy.name == "Voydroc(Clone)")
         {
+            Camera.main.GetComponent<findujeu>().StartCorou();
             video3.SetActive(true);
             Camera.main.GetComponent<MusicSound>().stopboss();
             findj.SetActive(true);

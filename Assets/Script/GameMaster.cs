@@ -213,7 +213,7 @@ public class GameMaster : MonoBehaviour
             {
                 if (!evenementProc.ActuallySeeking && CartesManager.PhaseLente)
                 {
-                    evenementProc.FindNewTimer(30); //Temps à donner = le temps de la destination
+                    evenementProc.FindNewTimer(20); //Temps à donner = le temps de la destination
                 }
             }
         }

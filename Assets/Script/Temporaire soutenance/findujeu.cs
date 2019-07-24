@@ -11,13 +11,13 @@ public class findujeu : MonoBehaviour
     {
         
     }
-    void Update()
+
+    public void StartCorou()
     {
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            StartCoroutine("oui");
-        }
+        StartCoroutine("oui");
     }
+    
+    
     
     public void StartFin()
     {
@@ -34,7 +34,7 @@ public class findujeu : MonoBehaviour
 
     IEnumerator oui()
     {
-        
+        yield return new WaitForSeconds(20);
         Color c = fade.GetComponent<Image>().color;
         while(c.a < 1)
         {

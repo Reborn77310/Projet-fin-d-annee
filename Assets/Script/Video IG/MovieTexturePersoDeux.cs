@@ -20,6 +20,7 @@ public class MovieTexturePersoDeux : MonoBehaviour
 
     public void Activevideo()
     {
+        CartesManager.PhaseLente = false;
         GetComponent<RawImage>().enabled = true;
         movie = GetComponent<RawImage>().mainTexture as MovieTexture;
 

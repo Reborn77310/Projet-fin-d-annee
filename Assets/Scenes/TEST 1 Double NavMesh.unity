@@ -6752,7 +6752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -15919,7 +15919,7 @@ MonoBehaviour:
   NeigeTemporaire: {fileID: 1787047521}
   TransmissionCadre: {fileID: 1677728194}
   perso1: {fileID: 1620449532}
-  perso2: {fileID: 0}
+  perso2: {fileID: 1609979019}
   ActuallySeeking: 0
 --- !u!1 &1348341500
 GameObject:

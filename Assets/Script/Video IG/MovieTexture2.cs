@@ -10,9 +10,11 @@ public class MovieTexture2 : MonoBehaviour
     [FMODUnity.EventRef]
     public string select_sound;
     public FMOD.Studio.EventInstance soundevent;
+    private GameObject gameMaster;
 
     void Awake()
     {
+        gameMaster = GameObject.Find("GameMaster");
         soundevent = FMODUnity.RuntimeManager.CreateInstance(select_sound);
         soundevent.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(this.transform));
     }
@@ -36,7 +38,6 @@ public class MovieTexture2 : MonoBehaviour
         yield return new WaitForSeconds(9);
         movie.Stop();
         soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        CartesManager.PhaseLente = false;
         for (int i = 0; i < 4; i++)
         {
             GameObject.Find("PattesController").GetComponent<PlayWithDécalage>().AllLegs[i].speed = 0;
@@ -45,7 +46,14 @@ public class MovieTexture2 : MonoBehaviour
         emission.enabled = false;
         Camera.main.GetComponent<MusicSound>().LancerBoss();
         Camera.main.GetComponent<Animator>().SetTrigger("GoDown");
-        GameObject.Find("GameMaster").GetComponent<EnnemiManager>().SpawnAdversaire();
+        gameMaster.GetComponent<EnnemiManager>().SpawnAdversaire();
+        
+        int count = gameMaster.GetComponent<Equipement>().allEquipements.Count;
+        for (int i = 0; i < count; i++)
+        {
+            gameMaster.GetComponent<Equipement>().allEquipements[i].go.GetComponent<Animator>().SetTrigger("Sortirlestourelles");
+        }
+        
         this.gameObject.SetActive(false);
     }
 }

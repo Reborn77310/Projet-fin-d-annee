@@ -8,7 +8,8 @@ public class EvenementProc : MonoBehaviour
    public GameObject TransmissionCadre;
    public GameObject perso1;
    public GameObject perso2;
-   
+
+   private bool firstFight = false;
    //Différents types d'événements possibles : Combat, Dialogue
   
    public bool ActuallySeeking = false;
@@ -32,7 +33,15 @@ public class EvenementProc : MonoBehaviour
          {
             randomTime = 0;
             ActuallySeeking = false;
-            CombatEncounter();
+            if (!firstFight)
+            {
+               CombatEncounter();
+               firstFight = true;
+            }
+            else
+            {
+               BossFight();
+            }
          }
       }
    }
@@ -51,7 +60,7 @@ public class EvenementProc : MonoBehaviour
       Camera.main.GetComponent<MusicSound>().StopPhaseLente();
    }
 
-   void CombatEncounter2()
+   void BossFight()
    {
       PlayWithDécalage.CanMove = false;
       TransmissionCadre.SetActive(true);
