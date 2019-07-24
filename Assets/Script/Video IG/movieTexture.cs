@@ -37,7 +37,7 @@ public class movieTexture : MonoBehaviour
         yield return new WaitForSeconds(9);
         movie.Stop();
         soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        CartesManager.PhaseLente = false;
+        
         Camera.main.GetComponent<MusicSound>().LancerMusiqueCombat();
         gameMaster.GetComponent<EnnemiManager>().SpawnAdversaire();
 

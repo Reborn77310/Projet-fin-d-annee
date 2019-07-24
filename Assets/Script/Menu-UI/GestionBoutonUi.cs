@@ -13,8 +13,12 @@ public class GestionBoutonUi : MonoBehaviour
 
     public GameObject fondu1;
     public GameObject fondu2;
-    public void ClickAlmanac()
-    {       
+    public void ClickAlmanac(GameObject go)
+    {
+        Color a = Color.white;
+        a.a = 0;
+        go.GetComponent<Image>().color = a;
+        
         Camera.main.GetComponent<Animator>().SetTrigger("Zoom");
         Canvas2.SetActive(true);
         GameObject.Find("GameMaster").GetComponent<Almanach>().AfficherInventaire();

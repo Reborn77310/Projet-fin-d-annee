@@ -24,7 +24,7 @@ public class GameMaster : MonoBehaviour
     public GameObject EcranDeSuccesIntegrity;
     public GameObject EcranDeSuccesIntegrityPhrase;
     public GameObject PersoTransmission;
-
+    
     Camera cam;
 
     public Vector3 offset;
@@ -36,6 +36,7 @@ public class GameMaster : MonoBehaviour
 
     public static int cardIDBeingPlayed = -1;
 
+    public EvenementProc evenementProc;
     public static ModuleManager moduleHit;
     public GameObject caj;
     SpriteRenderer cajSR;
@@ -58,22 +59,29 @@ public class GameMaster : MonoBehaviour
     {
         cardSound = Camera.main.GetComponent<CardSound>();
         cartesManager = GetComponent<CartesManager>();
+        cartesManager = GetComponent<CartesManager>();
         cajSR = caj.GetComponent<SpriteRenderer>();
         salleManager = GetComponent<SalleManager>();
         ennemiManager = GetComponent<EnnemiManager>();
         allSetupsActions = GetComponent<AllSetupsActions>();
         equipement = GetComponent<Equipement>();
         battleLog = GetComponent<BattleLog>();
-        cameraShake = Camera.main.GetComponent<CameraShake>();
+        evenementProc = GetComponent<EvenementProc>();
     }
 
     public void FirstDestinationButtonClicked()
     {
         SecondCam.GetComponent<Animator>().SetTrigger("1");
+        
+        var wantedScript = BoutonsDestination.GetComponent<BoutonsScript>();
+        for (int i = 0; i < 4; i++)
+        {
+            Destroy(wantedScript.Buttons[i]);
+        }
         BoutonsDestination.SetActive(false);
 
         Color a = GameObject.Find("PictosCartes_3").GetComponent<SpriteRenderer>().color;
-        a.a = 100;
+        a.a = 255;
         GameObject.Find("PictosCartes_3").GetComponent<SpriteRenderer>().color = a;
         Camera.main.GetComponent<MusicSound>().LancerPhaseLente();
         var emission = NeigeTemporaire.GetComponent<ParticleSystem>().emission;
@@ -94,8 +102,14 @@ public class GameMaster : MonoBehaviour
 
         BoutonsDestination.SetActive(false);
         Color a = GameObject.Find("PictosCartes_4").GetComponent<SpriteRenderer>().color;
-        a.a = 100;
+        a.a = 255;
         GameObject.Find("PictosCartes_4").GetComponent<SpriteRenderer>().color = a;
+        
+        Color b = Color.white;
+        a.a = 255;
+
+        GameObject.Find("IndicationOuvertureAlmanac").GetComponent<Image>().color = a;
+        
         etat = 3;
     }
 
@@ -119,11 +133,7 @@ public class GameMaster : MonoBehaviour
         ennemiManager.horsCombat.SetActive(true);
         EcranDeSucces.SetActive(false);
         BoutonsDestination.SetActive(true);
-        Color col = BoutonsDestination.transform.GetChild(3).GetComponent<Image>().color;
-        Destroy(BoutonsDestination.transform.GetChild(3).transform.GetChild(0).gameObject);
         Destroy(GameObject.Find("PictosCartes_3"));
-        col.a = 0;
-        BoutonsDestination.transform.GetChild(3).GetComponent<Image>().color = col;
         StartCoroutine("Wait");
     }
     IEnumerator Wait()
@@ -179,32 +189,20 @@ public class GameMaster : MonoBehaviour
             else if (etat == 1)
             {
                 GameObject.Find("PictosCartes_3").transform.rotation = SecondCam.rotation;
-                if (Input.GetKeyDown(KeyCode.A))
+                if (!evenementProc.ActuallySeeking && CartesManager.PhaseLente)
                 {
-                    var emission = NeigeTemporaire.GetComponent<ParticleSystem>().emission;
-                    emission.enabled = false;
-
-                    for (int i = 0; i < 4; i++)
-                    {
-                        GameObject.Find("PattesController").GetComponent<PlayWithDécalage>().AllLegs[i].speed = 0;
-                    }
-                    TransmissionCadre.SetActive(true);
-                    perso1.GetComponent<MovieTexturePersoUn>().Activevideo();
-                    Camera.main.GetComponent<MusicSound>().StopPhaseLente();
+                    evenementProc.FindNewTimer(30); //Temps à donner = le temps de la destination
                 }
             }
             else if (etat == 2)
             {
                 TransmissionCadre.SetActive(false);
-                Destroy(BoutonsDestination.transform.GetChild(3).gameObject);
-                BoutonsDestination.GetComponent<BoutonsScript>().Buttons[3] = null;
                 DeuxiemeDestination.SetActive(true);
                 etat = -1;
             }
             else if (etat == 3)
             {
                 //On attend que le joueur fasse ses bails dans l'almanac
-
             }
             else if (etat == 4)
             {
@@ -213,13 +211,9 @@ public class GameMaster : MonoBehaviour
             }
             else if (etat == 5)
             {
-                if (Input.GetKeyDown(KeyCode.A))
+                if (!evenementProc.ActuallySeeking && CartesManager.PhaseLente)
                 {
-                    PlayWithDécalage.CanMove = false;
-                    TransmissionCadre.SetActive(true);
-                    TransmissionCadre.transform.GetChild(2).GetComponent<Dialogue>().isActive = true;
-                    Camera.main.GetComponent<MusicSound>().StopPhaseLente();
-                    perso2.GetComponent<MovieTexturePersoDeux>().Activevideo();
+                    evenementProc.FindNewTimer(30); //Temps à donner = le temps de la destination
                 }
             }
         }
