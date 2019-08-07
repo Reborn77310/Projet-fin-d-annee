@@ -202,14 +202,13 @@ public class EnnemiManager : MonoBehaviour
     {
         if (pvTotaux <= 0 && badGuy != null)
         {
-            EndCombat();
-            
             int count = GameObject.Find("GameMaster").GetComponent<Equipement>().allEquipements.Count;
             for (int i = 0; i < count; i++)
             {
                 GameObject.Find("GameMaster").GetComponent<Equipement>().allEquipements[i].go.GetComponent<Animator>().SetTrigger("Rentrerlestourelles");
             }
-            
+
+            EndCombat();
         }
     }
 
@@ -217,16 +216,19 @@ public class EnnemiManager : MonoBehaviour
     {
         if (badGuy.name == "Voydroc(Clone)")
         {
+            XML_PlaytestAnalyse.IntegrityAfterSecondFight = Mathf.RoundToInt(salleManager.pvDuVehicule / salleManager.pvDuVehiculeMax * 100).ToString() + " %";
             Camera.main.GetComponent<findujeu>().StartCorou();
             video3.SetActive(true);
             Camera.main.GetComponent<MusicSound>().stopboss();
             findj.SetActive(true);
             GetComponent<GameMaster>().caj.SetActive(false);
             Destroy(badGuy);
-            this.gameObject.SetActive(false);
+            //this.gameObject.SetActive(false);
         }
         else
         {
+            XML_PlaytestAnalyse.firstFight = true;
+            XML_PlaytestAnalyse.IntegrityAfterFirstFight = Mathf.RoundToInt(salleManager.pvDuVehicule / salleManager.pvDuVehiculeMax * 100).ToString() + " %";
             NEST.SetActive(false);
             pvTotauxText.gameObject.SetActive(false);
             Destroy(badGuy);

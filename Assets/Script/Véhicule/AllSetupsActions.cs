@@ -10,6 +10,10 @@ public class AllSetupsActions : MonoBehaviour
     public EnnemiManager ennemiManager;
     private int SalleQuiEffectueAction = 0;
     public Animator[] MyAnimatorsTurrets = new Animator[6];
+
+    public float firstActionTimer = 0.0f;
+    public float secondActionTimer = 0.0f;
+
     void Awake()
     {
         instance = this;
@@ -230,6 +234,21 @@ public class AllSetupsActions : MonoBehaviour
             print(effet);
         }
         salleManager.EnterCooldown(SalleQuiEffectueAction, cooldown);
+
+        if (firstActionTimer == 0 || firstActionTimer <= secondActionTimer)
+        {
+            firstActionTimer = Time.time;
+        }
+        else if (secondActionTimer == 0 || secondActionTimer <= firstActionTimer)
+        {
+            secondActionTimer = Time.time;
+        }
+
+        if (firstActionTimer != 0 && secondActionTimer != 0)
+        {
+            float timerToGive = Mathf.Abs(secondActionTimer - firstActionTimer);
+            XML_PlaytestAnalyse.TimeBetweenTwoOperations.Add(timerToGive);
+        }
     }
 
     public void DealDamage(int wantedRoom, float damage)

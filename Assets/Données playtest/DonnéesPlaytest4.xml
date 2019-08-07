@@ -1,0 +1,16 @@
+<root>
+  <Infos_véhicule>
+    <Intégrité_après_premier_combat>82 %</Intégrité_après_premier_combat>
+    <Intégrité_après_deuxième_combat>
+    </Intégrité_après_deuxième_combat>
+  </Infos_véhicule>
+  <Infos_joueurs>
+    <Nombres_de_pauses>3</Nombres_de_pauses>
+  </Infos_joueurs>
+  <Temps_en_secondes>
+    <Durée_totale>267</Durée_totale>
+    <Durée_premier_combat>78</Durée_premier_combat>
+    <Durée_deuxieme_combat>92</Durée_deuxieme_combat>
+    <Temps_de_pause>0</Temps_de_pause>
+  </Temps_en_secondes>
+</root>

@@ -24,7 +24,7 @@ public class GameMaster : MonoBehaviour
     public GameObject EcranDeSuccesIntegrity;
     public GameObject EcranDeSuccesIntegrityPhrase;
     public GameObject PersoTransmission;
-    
+
     Camera cam;
 
     public Vector3 offset;
@@ -57,6 +57,7 @@ public class GameMaster : MonoBehaviour
 
     void Awake()
     {
+        cameraShake = Camera.main.GetComponent<CameraShake>();
         cardSound = Camera.main.GetComponent<CardSound>();
         cartesManager = GetComponent<CartesManager>();
         cartesManager = GetComponent<CartesManager>();
@@ -72,7 +73,7 @@ public class GameMaster : MonoBehaviour
     public void FirstDestinationButtonClicked()
     {
         SecondCam.GetComponent<Animator>().SetTrigger("1");
-        
+
         var wantedScript = BoutonsDestination.GetComponent<BoutonsScript>();
         for (int i = 0; i < 4; i++)
         {
@@ -104,12 +105,12 @@ public class GameMaster : MonoBehaviour
         Color a = GameObject.Find("PictosCartes_4").GetComponent<SpriteRenderer>().color;
         a.a = 255;
         GameObject.Find("PictosCartes_4").GetComponent<SpriteRenderer>().color = a;
-        
+
         Color b = Color.white;
         a.a = 255;
 
         GameObject.Find("IndicationOuvertureAlmanac").GetComponent<Image>().color = a;
-        
+
         etat = 3;
     }
 
@@ -221,6 +222,11 @@ public class GameMaster : MonoBehaviour
         {
             UpdatePasPhaseLente();
         }
+
+        if(isPaused)
+        {
+            XML_PlaytestAnalyse.TimePaused += Time.deltaTime;
+        }
     }
 
     void UpdatePasPhaseLente()
@@ -277,6 +283,7 @@ public class GameMaster : MonoBehaviour
             }
             else
             {
+                XML_PlaytestAnalyse.NumberOfPause += 1;
                 cameraShake.PauseShake();
                 isPaused = true;
                 pause.SetActive(true);
@@ -650,11 +657,15 @@ public class GameMaster : MonoBehaviour
 
     }
 
+
     public void CombatEnded()
     {
         ennemiManager.enabled = false;
         ennemiManager.enabled = true;
         ennemiManager.NEST.SetActive(false);
+
+        allSetupsActions.firstActionTimer = 0.0f;
+        allSetupsActions.secondActionTimer = 0.0f;        
 
         CartesManager.PhaseLente = true;
         for (int i = 0; i < cartesManager.allCards.Count; i++)

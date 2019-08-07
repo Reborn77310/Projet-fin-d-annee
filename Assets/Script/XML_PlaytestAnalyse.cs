@@ -7,7 +7,7 @@ using System.IO;
 
 public class XML_PlaytestAnalyse : MonoBehaviour
 { 
-    public static int _elementValue;
+    public static string _elementValue;
     
     public static string elmtName;
     
@@ -15,6 +15,16 @@ public class XML_PlaytestAnalyse : MonoBehaviour
     static XmlElement elmRoot;
 
     private string filePathAfterCreated;
+
+    public static float DureeDuCombat1 = 0.0f;
+    public static bool firstFight = false;
+    public static float DureeDuCombat2= 0.0f;
+    public static string IntegrityAfterFirstFight;
+    public static string IntegrityAfterSecondFight;
+    public static int NumberOfPause = 0;
+    public static float TimePaused = 0;
+    public static List<float> TimeBetweenTwoOperations = new List<float>();
+
 
     void Start()
     {
@@ -47,10 +57,25 @@ public class XML_PlaytestAnalyse : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        SaveThis("Temps_en_secondes","Durée_totale", Mathf.RoundToInt(Time.time));
+        SaveThis("Temps_en_secondes","Durée_totale", Mathf.RoundToInt(Time.time).ToString());
+        SaveThis("Temps_en_secondes","Durée_premier_combat", Mathf.RoundToInt(DureeDuCombat1).ToString());
+        SaveThis("Temps_en_secondes","Durée_deuxieme_combat", Mathf.RoundToInt(DureeDuCombat2).ToString());
+        SaveThis("Infos_véhicule","Intégrité_après_premier_combat", IntegrityAfterFirstFight);
+        SaveThis("Infos_véhicule","Intégrité_après_deuxième_combat", IntegrityAfterSecondFight);
+        SaveThis("Infos_joueurs","Nombres_de_pauses", NumberOfPause.ToString());
+        SaveThis("Temps_en_secondes","Temps_de_pause", Mathf.RoundToInt(TimePaused).ToString() + " ça peut pas marcher pour l'instant pck quand c'est pause le time est à 0");
+
+        float tempsMoyen = 0;
+        for(int i = 0; i < TimeBetweenTwoOperations.Count;i++)
+        {
+            tempsMoyen += TimeBetweenTwoOperations[i];
+        }
+        tempsMoyen /= TimeBetweenTwoOperations.Count;
+
+        SaveThis("Temps_en_secondes","Temps_entre_deux_opérations", tempsMoyen.ToString());
     }
 
-    public void SaveThis (string groupeName,string elementName,int valueInt) {
+    public void SaveThis (string groupeName,string elementName,string valueInt) {
         
         elmtName = elementName;
         _elementValue = valueInt;

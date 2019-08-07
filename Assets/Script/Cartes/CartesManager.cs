@@ -50,6 +50,7 @@ public class CartesManager : MonoBehaviour
     public GameObject cartesHolder;
     Almanach almanach;
 
+
     #region Initialisation
     void Awake()
     {
@@ -63,6 +64,18 @@ public class CartesManager : MonoBehaviour
 
 
     #endregion
+
+    void Update()
+    {
+        if (!PhaseLente && !XML_PlaytestAnalyse.firstFight)
+        {
+            XML_PlaytestAnalyse.DureeDuCombat1 += Time.deltaTime;
+        }
+        else if (!PhaseLente && XML_PlaytestAnalyse.firstFight)
+        {
+            XML_PlaytestAnalyse.DureeDuCombat2 += Time.deltaTime;
+        }
+    }
 
     #region Actions
     public void PlayACardOnModule(int id, ModuleManager mm)
@@ -337,6 +350,16 @@ public class CartesManager : MonoBehaviour
     public void Prepot()
     {
         var mm = GetComponent<SalleManager>().allSalles[0].MyGo.GetComponent<ModuleManager>();
+
+        if (mm.cartesModule.Count > 0)
+        {
+            while (mm.cartesModule.Count > 0)
+            {
+                var c = mm.cartesModule[mm.cartesModule.Count - 1];
+                mm.cartesModule.RemoveAt(mm.cartesModule.Count - 1);
+            }
+        }
+
         AjouterUneCarteDansLaMain(0);
         HandToModule(0, mm);
         AjouterUneCarteDansLaMain(2);

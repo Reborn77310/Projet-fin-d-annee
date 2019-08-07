@@ -1,0 +1,16 @@
+<root>
+  <Infos_véhicule>
+    <Intégrité_après_premier_combat>92 %</Intégrité_après_premier_combat>
+    <Intégrité_après_deuxième_combat>79 %</Intégrité_après_deuxième_combat>
+  </Infos_véhicule>
+  <Infos_joueurs>
+    <Nombres_de_pauses>0</Nombres_de_pauses>
+  </Infos_joueurs>
+  <Temps_en_secondes>
+    <Durée_totale>183</Durée_totale>
+    <Durée_premier_combat>116</Durée_premier_combat>
+    <Durée_deuxieme_combat>0</Durée_deuxieme_combat>
+    <Temps_de_pause>0 ça peut pas marcher pour l'instant pck quand c'est pause le time est à 0</Temps_de_pause>
+    <Temps_entre_deux_opérations>10.23053</Temps_entre_deux_opérations>
+  </Temps_en_secondes>
+</root>
