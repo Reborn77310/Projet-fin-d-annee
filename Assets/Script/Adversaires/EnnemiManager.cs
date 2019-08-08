@@ -866,7 +866,7 @@ public class EnnemiManager : MonoBehaviour
             print("anti-proj " + actionPrevues[i].origine);
             string[] a = new string[] { "DURATION", "DRONE" };
             ennemiRooms[actionPrevues[i].cible].projectileReduction -= 0.5f;
-            AddEffets(15, "Terra", a, actionPrevues[i].cible, -0.5f);
+            //AddEffets(15, "Terra", a, actionPrevues[i].cible, -0.5f);
             string s = "<color=#BC1910>Room" + actionPrevues[i].cible.ToString() + "</color> <color=#6289F3>protected for 50% of PROJECTILES damage</color> for 15s.";
             battleLog.AddNewBattleLog(s);
         }

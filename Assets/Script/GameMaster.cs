@@ -223,7 +223,7 @@ public class GameMaster : MonoBehaviour
             UpdatePasPhaseLente();
         }
 
-        if(isPaused)
+        if (isPaused)
         {
             XML_PlaytestAnalyse.TimePaused += Time.deltaTime;
         }
@@ -400,6 +400,14 @@ public class GameMaster : MonoBehaviour
 
                         if (Mathf.Abs(moletteSouris) > 0)
                         {
+                            if (!XML_PlaytestAnalyse.firstFight)
+                            {
+                                XML_PlaytestAnalyse.RotationSlot2premiercombat[mm.MySalleNumber] += 1;
+                            }
+                            else
+                            {
+                                XML_PlaytestAnalyse.RotationSlot2deuxiemecombat[mm.MySalleNumber] += 1;
+                            }
                             mm.MyModules[1].transform.Rotate(0, 0, -90 * (moletteSouris * 10));
                             if (moletteSouris < 0 && mm.rotationCompteur == 0)
                             {
@@ -665,7 +673,7 @@ public class GameMaster : MonoBehaviour
         ennemiManager.NEST.SetActive(false);
 
         allSetupsActions.firstActionTimer = 0.0f;
-        allSetupsActions.secondActionTimer = 0.0f;        
+        allSetupsActions.secondActionTimer = 0.0f;
 
         CartesManager.PhaseLente = true;
         for (int i = 0; i < cartesManager.allCards.Count; i++)

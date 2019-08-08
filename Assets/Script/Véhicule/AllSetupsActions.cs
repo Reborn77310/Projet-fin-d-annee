@@ -36,6 +36,18 @@ public class AllSetupsActions : MonoBehaviour
             cooldown = 11;
             if (superEffect)
             {
+                if (!XML_PlaytestAnalyse.firstFight)
+                {
+                    XML_PlaytestAnalyse.NumberOfOverdriveCombat1 += 1;
+                    XML_PlaytestAnalyse.NumberOverdriveSetupsCombat1[0] += 1;
+                }
+                else
+                {
+                    XML_PlaytestAnalyse.NumberOfOverdriveCombat2 += 1;
+                    XML_PlaytestAnalyse.NumberOverdriveSetupsCombat2[0] += 1;
+                }
+
+
                 if (mm.cartesModule[2].cartesTypes == 0)
                 {
                     damage = OverdriveEfficacity(mm.cartesModule[2].rarity, damage);
@@ -64,6 +76,17 @@ public class AllSetupsActions : MonoBehaviour
         }
         else if (wantedName == "Tourelle BK-2") // ATK
         {
+            if (!XML_PlaytestAnalyse.firstFight)
+            {
+                XML_PlaytestAnalyse.NumberOfOverdriveCombat1 += 1;
+                XML_PlaytestAnalyse.NumberOverdriveSetupsCombat1[1] += 1;
+            }
+            else
+            {
+                XML_PlaytestAnalyse.NumberOfOverdriveCombat2 += 1;
+                XML_PlaytestAnalyse.NumberOverdriveSetupsCombat2[1] += 1;
+            }
+
             float damage = 27;
             cooldown = 14;
             if (superEffect)
@@ -98,6 +121,17 @@ public class AllSetupsActions : MonoBehaviour
         }
         else if (wantedName == "CanonIEM") // ATK
         {
+            if (!XML_PlaytestAnalyse.firstFight)
+            {
+                XML_PlaytestAnalyse.NumberOfOverdriveCombat1 += 1;
+                XML_PlaytestAnalyse.NumberOverdriveSetupsCombat1[2] += 1;
+            }
+            else
+            {
+                XML_PlaytestAnalyse.NumberOfOverdriveCombat2 += 1;
+                XML_PlaytestAnalyse.NumberOverdriveSetupsCombat2[2] += 1;
+            }
+
             float debuffDuration = 18;
             if (superEffect)
             {
@@ -137,6 +171,17 @@ public class AllSetupsActions : MonoBehaviour
         }
         else if (wantedName == "Brouilleur") // DEF
         {
+            if (!XML_PlaytestAnalyse.firstFight)
+            {
+                XML_PlaytestAnalyse.NumberOfOverdriveCombat1 += 1;
+                XML_PlaytestAnalyse.NumberOverdriveSetupsCombat1[3] += 1;
+            }
+            else
+            {
+                XML_PlaytestAnalyse.NumberOfOverdriveCombat2 += 1;
+                XML_PlaytestAnalyse.NumberOverdriveSetupsCombat2[3] += 1;
+            }
+
             float buffDuration = 10;
             if (superEffect)
             {
@@ -173,6 +218,17 @@ public class AllSetupsActions : MonoBehaviour
         }
         else if (wantedName == "Turbine") // DEF
         {
+            if (!XML_PlaytestAnalyse.firstFight)
+            {
+                XML_PlaytestAnalyse.NumberOfOverdriveCombat1 += 1;
+                XML_PlaytestAnalyse.NumberOverdriveSetupsCombat1[4] += 1;
+            }
+            else
+            {
+                XML_PlaytestAnalyse.NumberOfOverdriveCombat2 += 1;
+                XML_PlaytestAnalyse.NumberOverdriveSetupsCombat2[4] += 1;
+            }
+
             float buffDuration = 6;
             if (superEffect)
             {
@@ -203,6 +259,17 @@ public class AllSetupsActions : MonoBehaviour
         }
         else if (wantedName == "hgOS") // DEF
         {
+            if (!XML_PlaytestAnalyse.firstFight)
+            {
+                XML_PlaytestAnalyse.NumberOfOverdriveCombat1 += 1;
+                XML_PlaytestAnalyse.NumberOverdriveSetupsCombat1[5] += 1;
+            }
+            else
+            {
+                XML_PlaytestAnalyse.NumberOfOverdriveCombat2 += 1;
+                XML_PlaytestAnalyse.NumberOverdriveSetupsCombat2[5] += 1;
+            }
+
             float amountTime = 8;
             if (superEffect)
             {

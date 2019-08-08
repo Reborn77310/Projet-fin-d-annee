@@ -344,6 +344,14 @@ public class CartesManager : MonoBehaviour
             var c = mm.cartesModule[mm.cartesModule.Count - 1];
             AjouterUneCarteDansLaMain(c.cartesTypes);
             mm.cartesModule.RemoveAt(mm.cartesModule.Count - 1);
+            if (!XML_PlaytestAnalyse.firstFight)
+            {
+                XML_PlaytestAnalyse.NumberOfCardRecupCombat1 += 1;
+            }
+            else
+            {
+                XML_PlaytestAnalyse.NumberOfCardRecupCombat2 += 1;
+            }
         }
     }
 
