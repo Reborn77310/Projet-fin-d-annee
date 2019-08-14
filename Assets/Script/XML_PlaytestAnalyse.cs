@@ -32,7 +32,16 @@ public class XML_PlaytestAnalyse : MonoBehaviour
     public static int[] NumberOverdriveSetupsCombat2 = new int[6];
     public static int NumberOfOverdriveCombat1 = 0;
     public static int NumberOfOverdriveCombat2 = 0;
-
+    public static int[] CompteurUtilisationEquipementCombat1 = new int[6];
+    public static int[] CompteurUtilisationEquipementCombat2 = new int[6];
+    public static int[] SalleAdverseViseePremierCombat = new int[4];
+    public static int[] SalleNestViseePremierCombat = new int[4];
+    public static int[] SalleAdverseViseeDeuxiemeCombat = new int[4];
+    public static int[] SalleNestViseeDeuxiemeCombat = new int[4];
+    public static int NombreActionEffectueSurSalleQuiPreparaitUneActionPremierCombat = 0;
+    public static int NombreActionEffectueSurSalleQuiPreparaitUneActionDeuxiemeCombat = 0;
+    public static int NombreActionEffectueSurSalleQuiRecevaitUneActionPremierCombat = 0;
+    public static int NombreActionEffectueSurSalleQuiRecevaitUneActionDeuxiemeCombat = 0;
 
     void Awake()
     {
@@ -40,11 +49,17 @@ public class XML_PlaytestAnalyse : MonoBehaviour
         {
             RotationSlot2premiercombat[i] = 0;
             RotationSlot2deuxiemecombat[i] = 0;
+            SalleAdverseViseeDeuxiemeCombat[i] = 0;
+            SalleAdverseViseePremierCombat[i] = 0;
+            SalleNestViseePremierCombat[i] = 0;
+            SalleNestViseeDeuxiemeCombat[i] = 0;
         }
         for (int i = 0; i < 6; i++)
         {
             NumberOverdriveSetupsCombat1[i] = 0;
             NumberOverdriveSetupsCombat2[i] = 0;
+            CompteurUtilisationEquipementCombat1[i] = 0;
+            CompteurUtilisationEquipementCombat2[i] = 0;
         }
     }
 
@@ -80,7 +95,7 @@ public class XML_PlaytestAnalyse : MonoBehaviour
     private void OnApplicationQuit()
     {
         SaveThis("Temps_en_secondes", "Durée_totale", Mathf.RoundToInt(Time.time).ToString());
-        SaveThis("Temps_en_secondes", "Durée_premier_combat", '\n' + '\n' + Mathf.RoundToInt(DureeDuCombat1).ToString());        
+        SaveThis("Temps_en_secondes", "Durée_premier_combat", Mathf.RoundToInt(DureeDuCombat1).ToString());
         SaveThis("Temps_en_secondes", "Durée_deuxieme_combat", Mathf.RoundToInt(DureeDuCombat2).ToString());
         SaveThis("Infos_véhicule", "Intégrité_après_premier_combat", IntegrityAfterFirstFight);
         SaveThis("Infos_véhicule", "Intégrité_après_deuxième_combat", IntegrityAfterSecondFight);
@@ -122,7 +137,44 @@ public class XML_PlaytestAnalyse : MonoBehaviour
         SaveThis("Infos_salles", "Turbine_nombre_overdrive_combat2", NumberOverdriveSetupsCombat2[4].ToString());
         SaveThis("Infos_salles", "HGoS_nombre_overdrive_combat2", NumberOverdriveSetupsCombat2[5].ToString());
 
-        
+        float totalCombat1 = 0;
+        float totalCombat2 = 0;
+        float pourcentageUtilisationEquipementSpecialCombat1 = 0;
+        float pourcentageUtilisationEquipementSpecialCombat2 = 0;
+
+        for (int i = 0; i < 6; i++)
+        {
+            totalCombat1 += CompteurUtilisationEquipementCombat1[i];
+            totalCombat2 += CompteurUtilisationEquipementCombat2[i];
+        }
+        pourcentageUtilisationEquipementSpecialCombat1 = CompteurUtilisationEquipementCombat1[4] + CompteurUtilisationEquipementCombat1[5];
+        pourcentageUtilisationEquipementSpecialCombat2 = CompteurUtilisationEquipementCombat2[4] + CompteurUtilisationEquipementCombat2[5];
+        SaveThis("Infos_salles", "Pourcentage_utilisation_equipement_special_combat1", pourcentageUtilisationEquipementSpecialCombat1 + " utilisations pour " + totalCombat1 + " actions totales" + "(" + (pourcentageUtilisationEquipementSpecialCombat1 / totalCombat1) * 100 + "%)");
+        SaveThis("Infos_salles", "Pourcentage_utilisation_equipement_special_combat2", pourcentageUtilisationEquipementSpecialCombat2 + " utilisations pour " + totalCombat2 + " actions totales" + "(" + (pourcentageUtilisationEquipementSpecialCombat2 / totalCombat2) * 100 + "%)");
+
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_0_adverse_a_été_visée_par_le_joueur_premier_combat", SalleAdverseViseePremierCombat[0].ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_1_adverse_a_été_visée_par_le_joueur_premier_combat", SalleAdverseViseePremierCombat[1].ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_2_adverse_a_été_visée_par_le_joueur_premier_combat", SalleAdverseViseePremierCombat[2].ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_3_adverse_a_été_visée_par_le_joueur_premier_combat", SalleAdverseViseePremierCombat[3].ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_0_nest_a_été_visée_par_le_joueur_premier_combat", SalleNestViseePremierCombat[0].ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_1_nest_a_été_visée_par_le_joueur_premier_combat", SalleNestViseePremierCombat[1].ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_2_nest_a_été_visée_par_le_joueur_premier_combat", SalleNestViseePremierCombat[2].ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_3_nest_a_été_visée_par_le_joueur_premier_combat", SalleNestViseePremierCombat[3].ToString());
+
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_0_adverse_a_été_visée_par_le_joueur_deuxieme_combat", SalleAdverseViseeDeuxiemeCombat[0].ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_1_adverse_a_été_visée_par_le_joueur_deuxieme_combat", SalleAdverseViseeDeuxiemeCombat[1].ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_2_adverse_a_été_visée_par_le_joueur_deuxieme_combat", SalleAdverseViseeDeuxiemeCombat[2].ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_3_adverse_a_été_visée_par_le_joueur_deuxieme_combat", SalleAdverseViseeDeuxiemeCombat[3].ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_0_nest_a_été_visée_par_le_joueur_deuxieme_combat", SalleNestViseeDeuxiemeCombat[0].ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_1_nest_a_été_visée_par_le_joueur_deuxieme_combat", SalleNestViseeDeuxiemeCombat[1].ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_2_nest_a_été_visée_par_le_joueur_deuxieme_combat", SalleNestViseeDeuxiemeCombat[2].ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_la_salle_3_nest_a_été_visée_par_le_joueur_deuxieme_combat", SalleNestViseeDeuxiemeCombat[3].ToString());
+
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_le_joueur_a_visé_une_salle_adverse_qui_préparait_une_action_premier_combat", NombreActionEffectueSurSalleQuiPreparaitUneActionPremierCombat.ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_le_joueur_a_visé_une_salle_adverse_qui_préparait_une_action_deuxieme_combat", NombreActionEffectueSurSalleQuiPreparaitUneActionDeuxiemeCombat.ToString());
+
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_le_joueur_a_visé_une_salle_du_nest_qui_recevait_une_attaque_premier_combat", NombreActionEffectueSurSalleQuiRecevaitUneActionPremierCombat.ToString());
+        SaveThis("Infos_joueurs", "Nombre_de_fois_que_le_joueur_a_visé_une_salle_du_nest_qui_recevait_une_attaque_deuxieme_combat", NombreActionEffectueSurSalleQuiRecevaitUneActionDeuxiemeCombat.ToString());
     }
 
     public void SaveThis(string groupeName, string elementName, string valueInt)

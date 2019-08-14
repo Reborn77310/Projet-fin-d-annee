@@ -575,9 +575,26 @@ public class GameMaster : MonoBehaviour
             for (int i = 0; i < sallesTouchees.Length; i++)
             {
                 if (ennemiManager.badGuy != null)
-                {
+                {                   
                     if (sallesTouchees[i] >= 0 && ennemiManager.ennemiRooms[sallesTouchees[i]].canBeTarget)
                     {
+                        if (!XML_PlaytestAnalyse.firstFight)
+                        {
+                            if (ennemiManager.ennemiRooms[sallesTouchees[i]].isAttacking)
+                            {
+                                XML_PlaytestAnalyse.NombreActionEffectueSurSalleQuiPreparaitUneActionPremierCombat += 1;
+                            }
+                            XML_PlaytestAnalyse.SalleAdverseViseePremierCombat[sallesTouchees[i]] += 1;
+                        }
+                        else
+                        {
+                            if (ennemiManager.ennemiRooms[sallesTouchees[i]].isAttacking)
+                            {
+                                XML_PlaytestAnalyse.NombreActionEffectueSurSalleQuiPreparaitUneActionDeuxiemeCombat += 1;
+                            }
+                            XML_PlaytestAnalyse.SalleAdverseViseeDeuxiemeCombat[sallesTouchees[i]] += 1;
+                        }
+
                         if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
                         {
                             allSetupsActions.FindEffect(wantedName, i, mm, true, equipementSelected);
@@ -607,6 +624,23 @@ public class GameMaster : MonoBehaviour
             {
                 if (sallesTouchees[i] >= 0)
                 {
+                    if (!XML_PlaytestAnalyse.firstFight)
+                    {
+                        if(salleManager.allSalles[sallesTouchees[i]].isAttacked)
+                        {
+                            XML_PlaytestAnalyse.NombreActionEffectueSurSalleQuiRecevaitUneActionPremierCombat += 1;
+                        }
+                        XML_PlaytestAnalyse.SalleNestViseePremierCombat[sallesTouchees[i]] += 1;
+                    }
+                    else
+                    {
+                        if(salleManager.allSalles[sallesTouchees[i]].isAttacked)
+                        {
+                            XML_PlaytestAnalyse.NombreActionEffectueSurSalleQuiRecevaitUneActionDeuxiemeCombat += 1;
+                        }
+                        XML_PlaytestAnalyse.SalleNestViseeDeuxiemeCombat[sallesTouchees[i]] += 1;
+                    }
+
                     if (mm.cartesModule[0].cartesTypes == mm.cartesModule[2].cartesTypes) // CHECK OVERDRIVE
                     {
                         allSetupsActions.FindEffect(wantedName, sallesTouchees[i], mm, true, equipementSelected);
