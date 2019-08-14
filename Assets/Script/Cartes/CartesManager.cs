@@ -113,12 +113,30 @@ public class CartesManager : MonoBehaviour
     #region Gestion Des Cartes
     public void DrawCards()
     {
-
+        if (!CheckHandisFull())
+        {
+            if (!XML_PlaytestAnalyse.firstFight)
+            {
+                XML_PlaytestAnalyse.CompteurDeDrawPremierCombat += 1;
+            }
+            else
+            {
+                XML_PlaytestAnalyse.CompteurDeDrawDeuxiemeCombat += 1;
+            }
+        }
         int[] toDraw = ennemiManager.GiveInfosForDraw();
         for (int i = 0; i < toDraw.Length; i++)
         {
             if (!CheckHandisFull())
             {
+                if (!XML_PlaytestAnalyse.firstFight)
+                {
+                    XML_PlaytestAnalyse.CompteurTypeCartePiochePremierCombat[toDraw[i]] += 1;
+                }
+                else
+                {
+                    XML_PlaytestAnalyse.CompteurTypeCartePiocheDeuxiemeCombat[toDraw[i]] += 1;
+                }
                 AjouterUneCarteDansLaMain(toDraw[i]);
             }
         }

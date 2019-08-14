@@ -42,6 +42,16 @@ public class XML_PlaytestAnalyse : MonoBehaviour
     public static int NombreActionEffectueSurSalleQuiPreparaitUneActionDeuxiemeCombat = 0;
     public static int NombreActionEffectueSurSalleQuiRecevaitUneActionPremierCombat = 0;
     public static int NombreActionEffectueSurSalleQuiRecevaitUneActionDeuxiemeCombat = 0;
+    public static float[] TempsPasseEnRecuperationSalleAdversePremierCombat = new float[4];
+    public static float[] TempsPasseEnRecuperationSalleAdverseDeuxiemeCombat = new float[4];
+
+    public static float[] TempsPasseEnRecuperationSalleNestPremierCombat = new float[4];
+    public static float[] TempsPasseEnRecuperationSalleNestDeuxiemeCombat = new float[4];
+    public static int CompteurDeDrawPremierCombat = 0;
+    public static int[] CompteurTypeCartePiochePremierCombat = new int[5];
+    public static int CompteurDeDrawDeuxiemeCombat = 0;
+    public static int[] CompteurTypeCartePiocheDeuxiemeCombat = new int[5];
+
 
     void Awake()
     {
@@ -53,6 +63,10 @@ public class XML_PlaytestAnalyse : MonoBehaviour
             SalleAdverseViseePremierCombat[i] = 0;
             SalleNestViseePremierCombat[i] = 0;
             SalleNestViseeDeuxiemeCombat[i] = 0;
+            TempsPasseEnRecuperationSalleAdversePremierCombat[i] = 0;
+            TempsPasseEnRecuperationSalleAdverseDeuxiemeCombat[i] = 0;
+            TempsPasseEnRecuperationSalleNestPremierCombat[i] = 0;
+            TempsPasseEnRecuperationSalleNestDeuxiemeCombat[i] = 0;
         }
         for (int i = 0; i < 6; i++)
         {
@@ -60,6 +74,11 @@ public class XML_PlaytestAnalyse : MonoBehaviour
             NumberOverdriveSetupsCombat2[i] = 0;
             CompteurUtilisationEquipementCombat1[i] = 0;
             CompteurUtilisationEquipementCombat2[i] = 0;
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            CompteurTypeCartePiochePremierCombat[i] = 0;
+            CompteurTypeCartePiocheDeuxiemeCombat[i] = 0;
         }
     }
 
@@ -175,6 +194,34 @@ public class XML_PlaytestAnalyse : MonoBehaviour
 
         SaveThis("Infos_joueurs", "Nombre_de_fois_que_le_joueur_a_visé_une_salle_du_nest_qui_recevait_une_attaque_premier_combat", NombreActionEffectueSurSalleQuiRecevaitUneActionPremierCombat.ToString());
         SaveThis("Infos_joueurs", "Nombre_de_fois_que_le_joueur_a_visé_une_salle_du_nest_qui_recevait_une_attaque_deuxieme_combat", NombreActionEffectueSurSalleQuiRecevaitUneActionDeuxiemeCombat.ToString());
+
+        for (int i = 0; i < 4; i++)
+        {
+            SaveThis("Infos_adversaire", "Temps_de_réparation_totale_salle_" + i + "_premier_combat", Mathf.RoundToInt(TempsPasseEnRecuperationSalleAdversePremierCombat[i]).ToString());
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            SaveThis("Infos_adversaire", "Temps_de_réparation_totale_salle_" + i + "_deuxieme_combat", Mathf.RoundToInt(TempsPasseEnRecuperationSalleAdverseDeuxiemeCombat[i]).ToString());
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            SaveThis("Infos_Nest", "Temps_de_réparation_totale_salle_" + i + "_premier_combat", Mathf.RoundToInt(TempsPasseEnRecuperationSalleNestPremierCombat[i]).ToString());
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            SaveThis("Infos_Nest", "Temps_de_réparation_totale_salle_" + i + "_deuxieme_combat", Mathf.RoundToInt(TempsPasseEnRecuperationSalleNestDeuxiemeCombat[i]).ToString());
+        }
+
+        SaveThis("Infos_Cartes", "Nombre_de_pioche_d_au_minimum_une_carte_premier_combat", CompteurDeDrawPremierCombat.ToString());
+        for (int i = 0; i < 5; i++)
+        {
+            SaveThis("Infos_Cartes", "Nombre_de_cartes_de_type_" + i + "_piochées_au_premier_combat", CompteurTypeCartePiochePremierCombat[i].ToString());
+        }
+        SaveThis("Infos_Cartes", "Nombre_de_pioche_d_au_minimum_une_carte_deuxieme_combat", CompteurDeDrawDeuxiemeCombat.ToString());
+        for (int i = 0; i < 5; i++)
+        {
+            SaveThis("Infos_Cartes", "Nombre_de_cartes_de_type_" + i + "_piochées_au_deuxieme_combat", CompteurTypeCartePiocheDeuxiemeCombat[i].ToString());
+        }
     }
 
     public void SaveThis(string groupeName, string elementName, string valueInt)

@@ -252,6 +252,15 @@ public class EnnemiManager : MonoBehaviour
 
             if (ennemiRooms[i].etat == 0)
             {
+                if (!XML_PlaytestAnalyse.firstFight)
+                {
+                    XML_PlaytestAnalyse.TempsPasseEnRecuperationSalleAdversePremierCombat[i] += Time.deltaTime;
+                }
+                else
+                {
+                    XML_PlaytestAnalyse.TempsPasseEnRecuperationSalleAdverseDeuxiemeCombat[i] += Time.deltaTime;
+                }
+
                 ennemiRooms[i].isAttacking = false;
                 ennemiRooms[i].pv += 5 * Time.deltaTime;
                 float fill = (ennemiRooms[i].pv / ennemiRooms[i].pvMax) * 100;

@@ -170,6 +170,14 @@ public class SalleManager : MonoBehaviour
             }
             else if (allSalles[i].etat == 2) // REPARATION
             {
+                if (!XML_PlaytestAnalyse.firstFight)
+                {
+                    XML_PlaytestAnalyse.TempsPasseEnRecuperationSalleNestPremierCombat[i] += Time.deltaTime;
+                }
+                else
+                {
+                    XML_PlaytestAnalyse.TempsPasseEnRecuperationSalleNestDeuxiemeCombat[i] += Time.deltaTime;
+                }
                 if (allSalles[i].timer > 0)
                 {
                     // if(animators[i].GetBool("cooldown"))
