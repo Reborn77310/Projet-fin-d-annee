@@ -51,7 +51,17 @@ public class XML_PlaytestAnalyse : MonoBehaviour
     public static int[] CompteurTypeCartePiochePremierCombat = new int[5];
     public static int CompteurDeDrawDeuxiemeCombat = 0;
     public static int[] CompteurTypeCartePiocheDeuxiemeCombat = new int[5];
-
+    public static int[] NombreDeFoisSalleUtilisePremierCombat = new int[4];
+    public static int[] NombreDeFoisSalleUtiliseDeuxiemeCombat = new int[4];
+    public static int[] NombreDeFoisCarteUtiliseeSurUnModuleUnPremierCombat = new int[5];
+    public static int[] NombreDeFoisCarteUtiliseeSurUnModuleUnDeuxiemeCombat = new int[5];
+    public static int[] NombreDeFoisCarteUtiliseeSurUnModuleDeuxPremierCombat = new int[5];
+    public static int[] NombreDeFoisCarteUtiliseeSurUnModuleDeuxDeuxiemeCombat = new int[5];
+    public static int[] NombreDeFoisCarteUtiliseeSurUnModuleTroisPremierCombat = new int[5];
+    public static int[] NombreDeFoisCarteUtiliseeSurUnModuleTroisDeuxiemeCombat = new int[5];
+    public static int[] NombreDeFoisQuuneCarteEstUtiliseePremierCombat = new int[5];
+    public static int[] NombreDeFoisQuuneCarteEstUtiliseeDeuxiemeCombat = new int[5];
+    public static bool CompteUneSeuleAction = false;
 
     void Awake()
     {
@@ -67,6 +77,8 @@ public class XML_PlaytestAnalyse : MonoBehaviour
             TempsPasseEnRecuperationSalleAdverseDeuxiemeCombat[i] = 0;
             TempsPasseEnRecuperationSalleNestPremierCombat[i] = 0;
             TempsPasseEnRecuperationSalleNestDeuxiemeCombat[i] = 0;
+            NombreDeFoisSalleUtilisePremierCombat[i] = 0;
+            NombreDeFoisSalleUtiliseDeuxiemeCombat[i] = 0;
         }
         for (int i = 0; i < 6; i++)
         {
@@ -79,6 +91,14 @@ public class XML_PlaytestAnalyse : MonoBehaviour
         {
             CompteurTypeCartePiochePremierCombat[i] = 0;
             CompteurTypeCartePiocheDeuxiemeCombat[i] = 0;
+            NombreDeFoisCarteUtiliseeSurUnModuleUnPremierCombat[i] = 0;
+            NombreDeFoisCarteUtiliseeSurUnModuleUnDeuxiemeCombat[i] = 0;
+            NombreDeFoisCarteUtiliseeSurUnModuleDeuxPremierCombat[i] = 0;
+            NombreDeFoisCarteUtiliseeSurUnModuleDeuxDeuxiemeCombat[i] = 0;
+            NombreDeFoisCarteUtiliseeSurUnModuleTroisPremierCombat[i] = 0;
+            NombreDeFoisCarteUtiliseeSurUnModuleTroisDeuxiemeCombat[i] = 0;
+            NombreDeFoisQuuneCarteEstUtiliseePremierCombat[i] = 0;
+            NombreDeFoisQuuneCarteEstUtiliseeDeuxiemeCombat[i] = 0;
         }
     }
 
@@ -222,6 +242,47 @@ public class XML_PlaytestAnalyse : MonoBehaviour
         {
             SaveThis("Infos_Cartes", "Nombre_de_cartes_de_type_" + i + "_piochées_au_deuxieme_combat", CompteurTypeCartePiocheDeuxiemeCombat[i].ToString());
         }
+        for (int i = 0; i < 4; i++)
+        {
+            SaveThis("Infos_salles", "Nombre_de_fois_salle_" + i + "_du_Nest_utilisée_premier_combat", NombreDeFoisSalleUtilisePremierCombat[i].ToString());
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            SaveThis("Infos_salles", "Nombre_de_fois_salle_" + i + "_du_Nest_utilisée_deuxieme_combat", NombreDeFoisSalleUtiliseDeuxiemeCombat[i].ToString());
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            SaveThis("Infos_Modules", "Nombre_de_fois_carte_type_" + i + "_utilisée_sur_un_module_un_premier_combat", NombreDeFoisCarteUtiliseeSurUnModuleUnPremierCombat[i].ToString());
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            SaveThis("Infos_Modules", "Nombre_de_fois_carte_type_" + i + "_utilisée_sur_un_module_un_deuxieme_combat", NombreDeFoisCarteUtiliseeSurUnModuleUnDeuxiemeCombat[i].ToString());
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            SaveThis("Infos_Modules", "Nombre_de_fois_carte_type_" + i + "_utilisée_sur_un_module_deux_premier_combat", NombreDeFoisCarteUtiliseeSurUnModuleDeuxPremierCombat[i].ToString());
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            SaveThis("Infos_Modules", "Nombre_de_fois_carte_type_" + i + "_utilisée_sur_un_module_deux_deuxieme_combat", NombreDeFoisCarteUtiliseeSurUnModuleDeuxDeuxiemeCombat[i].ToString());
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            SaveThis("Infos_Modules", "Nombre_de_fois_carte_type_" + i + "_utilisée_sur_un_module_trois_premier_combat", NombreDeFoisCarteUtiliseeSurUnModuleTroisPremierCombat[i].ToString());
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            SaveThis("Infos_Modules", "Nombre_de_fois_carte_type_" + i + "_utilisée_sur_un_module_trois_deuxieme_combat", NombreDeFoisCarteUtiliseeSurUnModuleTroisDeuxiemeCombat[i].ToString());
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            SaveThis("Infos_Cartes", "Nombre_de_fois_quune_carte_type_" + i + "_est_utilisée_dans_nimporte_quel_slot_premier_combat", NombreDeFoisQuuneCarteEstUtiliseePremierCombat[i].ToString());
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            SaveThis("Infos_Cartes", "Nombre_de_fois_quune_carte_type_" + i + "_est_utilisée_dans_nimporte_quel_slot_deuxieme_combat", NombreDeFoisQuuneCarteEstUtiliseeDeuxiemeCombat[i].ToString());
+        }
+
     }
 
     public void SaveThis(string groupeName, string elementName, string valueInt)

@@ -572,10 +572,11 @@ public class GameMaster : MonoBehaviour
             Destroy(zoneSelectionADV);
             zoneSelectionADV = null;
 
+            XML_PlaytestAnalyse.CompteUneSeuleAction = false;
             for (int i = 0; i < sallesTouchees.Length; i++)
             {
                 if (ennemiManager.badGuy != null)
-                {                   
+                {
                     if (sallesTouchees[i] >= 0 && ennemiManager.ennemiRooms[sallesTouchees[i]].canBeTarget)
                     {
                         if (!XML_PlaytestAnalyse.firstFight)
@@ -620,13 +621,14 @@ public class GameMaster : MonoBehaviour
             Destroy(zoneSelectionADV);
             zoneSelectionADV = null;
 
+            XML_PlaytestAnalyse.CompteUneSeuleAction = false;
             for (int i = 0; i < sallesTouchees.Length; i++)
             {
                 if (sallesTouchees[i] >= 0)
                 {
                     if (!XML_PlaytestAnalyse.firstFight)
                     {
-                        if(salleManager.allSalles[sallesTouchees[i]].isAttacked)
+                        if (salleManager.allSalles[sallesTouchees[i]].isAttacked)
                         {
                             XML_PlaytestAnalyse.NombreActionEffectueSurSalleQuiRecevaitUneActionPremierCombat += 1;
                         }
@@ -634,7 +636,7 @@ public class GameMaster : MonoBehaviour
                     }
                     else
                     {
-                        if(salleManager.allSalles[sallesTouchees[i]].isAttacked)
+                        if (salleManager.allSalles[sallesTouchees[i]].isAttacked)
                         {
                             XML_PlaytestAnalyse.NombreActionEffectueSurSalleQuiRecevaitUneActionDeuxiemeCombat += 1;
                         }
