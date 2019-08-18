@@ -9,6 +9,10 @@
       <e p="Assets" t="Include">
         <e p="Données playtest" t="Include">
           <e p="DonnéesPlaytest0.xml" t="Include" />
+          <e p="DonnéesPlaytest1.xml" t="Include" />
+          <e p="DonnéesPlaytest2.xml" t="Include" />
+          <e p="DonnéesPlaytest3.xml" t="Include" />
+          <e p="DonnéesPlaytest4.xml" t="Include" />
         </e>
         <e p="Editor" t="Include">
           <e p="FMODMigrationUtil.cs" t="Include" />

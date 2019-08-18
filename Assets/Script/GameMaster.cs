@@ -768,4 +768,9 @@ public class GameMaster : MonoBehaviour
         Camera.main.GetComponent<MusicSound>().StopCombat();
         Camera.main.GetComponent<MusicSound>().LancerPhaseLente();
     }
+    
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

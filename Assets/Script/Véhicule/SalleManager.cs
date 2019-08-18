@@ -56,7 +56,8 @@ public class SalleManager : MonoBehaviour
     public RectTransform[] sallesRT;
     public Animator[] animators;
     public Image[] fillCD;
-
+    public GameObject Defaite;
+    
     void Start()
     {
         salleSound = GameObject.Find("Salles V4").GetComponent<SalleSound>();
@@ -111,8 +112,21 @@ public class SalleManager : MonoBehaviour
                 allSalles[salleVisee].etat = 2;
             }
         }
-    }
 
+        if (pvDuVehicule <= 0)
+        {
+            if (!XML_PlaytestAnalyse.firstFight)
+            {
+                XML_PlaytestAnalyse.AsLostFirstFight = true;
+            }
+            else
+            {
+                XML_PlaytestAnalyse.AsLostSecondFight = true;
+            }
+            Defaite.SetActive(true);
+        }
+    }
+    
     public void EnterCooldown(int salleVisee, float cooldown)
     {
         allSalles[salleVisee].CanPlayHere = false;

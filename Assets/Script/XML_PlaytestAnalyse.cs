@@ -63,6 +63,9 @@ public class XML_PlaytestAnalyse : MonoBehaviour
     public static int[] NombreDeFoisQuuneCarteEstUtiliseeDeuxiemeCombat = new int[5];
     public static bool CompteUneSeuleAction = false;
 
+    public static bool AsLostFirstFight = false;
+    public static bool AsLostSecondFight = false;
+
     void Awake()
     {
         for (int i = 0; i < 4; i++)
@@ -283,6 +286,23 @@ public class XML_PlaytestAnalyse : MonoBehaviour
             SaveThis("Infos_Cartes", "Nombre_de_fois_quune_carte_type_" + i + "_est_utilisée_dans_nimporte_quel_slot_deuxieme_combat", NombreDeFoisQuuneCarteEstUtiliseeDeuxiemeCombat[i].ToString());
         }
 
+        if (AsLostFirstFight)
+        {
+            SaveThis("Infos_joueurs", "Le_joueur_a_il_perdu_son_premier_combat", "OUI");
+        }
+        else
+        {
+            SaveThis("Infos_joueurs", "Le_joueur_a_il_perdu_son_premier_combat", "NON");
+        }
+        
+        if (AsLostSecondFight)
+        {
+            SaveThis("Infos_joueurs", "Le_joueur_a_il_perdu_son_deuxieme_combat", "OUI");
+        }
+        else
+        {
+            SaveThis("Infos_joueurs", "Le_joueur_a_il_perdu_son_deuxieme_combat", "NON");
+        }
     }
 
     public void SaveThis(string groupeName, string elementName, string valueInt)
