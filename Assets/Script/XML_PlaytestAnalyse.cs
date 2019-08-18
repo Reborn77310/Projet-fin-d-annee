@@ -153,11 +153,11 @@ public class XML_PlaytestAnalyse : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            SaveThis("Infos_salles", "Rotation_module_2_premier_combat_salle_" + i, RotationSlot2premiercombat[i].ToString());
+            SaveThis("Infos_Modules", "Rotation_module_2_premier_combat_salle_" + i, RotationSlot2premiercombat[i].ToString());
         }
         for (int i = 0; i < 4; i++)
         {
-            SaveThis("Infos_salles", "Rotation_module_2_deuxieme_combat_salle_" + i, RotationSlot2deuxiemecombat[i].ToString());
+            SaveThis("Infos_Modules", "Rotation_module_2_deuxieme_combat_salle_" + i, RotationSlot2deuxiemecombat[i].ToString());
         }
 
         SaveThis("Infos_salles", "Nombre_overdrive_combat1", NumberOfOverdriveCombat1.ToString());
@@ -225,11 +225,11 @@ public class XML_PlaytestAnalyse : MonoBehaviour
         }
         for (int i = 0; i < 4; i++)
         {
-            SaveThis("Infos_Nest", "Temps_de_réparation_totale_salle_" + i + "_premier_combat", Mathf.RoundToInt(TempsPasseEnRecuperationSalleNestPremierCombat[i]).ToString());
+            SaveThis("Infos_salles", "Temps_de_réparation_totale_salle_" + i + "_premier_combat", Mathf.RoundToInt(TempsPasseEnRecuperationSalleNestPremierCombat[i]).ToString());
         }
         for (int i = 0; i < 4; i++)
         {
-            SaveThis("Infos_Nest", "Temps_de_réparation_totale_salle_" + i + "_deuxieme_combat", Mathf.RoundToInt(TempsPasseEnRecuperationSalleNestDeuxiemeCombat[i]).ToString());
+            SaveThis("Infos_salles", "Temps_de_réparation_totale_salle_" + i + "_deuxieme_combat", Mathf.RoundToInt(TempsPasseEnRecuperationSalleNestDeuxiemeCombat[i]).ToString());
         }
 
         SaveThis("Infos_Cartes", "Nombre_de_pioche_d_au_minimum_une_carte_premier_combat", CompteurDeDrawPremierCombat.ToString());
