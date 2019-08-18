@@ -15902,8 +15902,8 @@ MonoBehaviour:
   - {fileID: 2295460923758746424}
   - {fileID: 632750048861873501}
   pvDuVehiculeText: {fileID: 6457037409159080697}
-  pvDuVehicule: 600
-  pvDuVehiculeMax: 600
+  pvDuVehicule: 30
+  pvDuVehiculeMax: 30
   ennemiManager: {fileID: 1335090933}
   sallesRT:
   - {fileID: 3609528243432752744}
