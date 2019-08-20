@@ -7,13 +7,6 @@
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="Données playtest" t="Include">
-          <e p="DonnéesPlaytest0.xml" t="Include" />
-          <e p="DonnéesPlaytest1.xml" t="Include" />
-          <e p="DonnéesPlaytest2.xml" t="Include" />
-          <e p="DonnéesPlaytest3.xml" t="Include" />
-          <e p="DonnéesPlaytest4.xml" t="Include" />
-        </e>
         <e p="Editor" t="Include">
           <e p="FMODMigrationUtil.cs" t="Include" />
         </e>
@@ -293,6 +286,7 @@
           <e p="Menu-UI" t="Include">
             <e p="BattleLog.cs" t="Include" />
             <e p="GestionBoutonUi.cs" t="Include" />
+            <e p="GestionEquipement.cs" t="Include" />
           </e>
           <e p="parent.cs" t="Include" />
           <e p="Personnages" t="Include">
