@@ -165,8 +165,12 @@ public class EnnemiManager : MonoBehaviour
             }
         }
         PoolingDBM();
-
-        cartesManager.Prepot();
+        
+        if (!GameMaster.SceneTest)
+        {
+            cartesManager.Prepot(0, 2, 0);
+        }
+        
     }
 
     public void PerdrePvLocal(int wantedRoom, float wantedDamage)

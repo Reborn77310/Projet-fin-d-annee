@@ -22,15 +22,19 @@ public class movieTexture : MonoBehaviour
         GetComponent<RawImage>().enabled = true;
         movie = GetComponent<RawImage>().mainTexture as MovieTexture;
 
-        movie.Play();
-        FMOD.Studio.PLAYBACK_STATE fmodPbState;
-        soundevent.getPlaybackState(out fmodPbState);
+        
+            movie.Play();
+            FMOD.Studio.PLAYBACK_STATE fmodPbState;
+            soundevent.getPlaybackState(out fmodPbState);
 
-        soundevent.start();
+            soundevent.start();
+            StartCoroutine("Continue");
+        
+        
 
-        StartCoroutine("Continue");
+        
     }
-
+    
     IEnumerator Continue()
     {
         var gameMaster = GameObject.Find("GameMaster");

@@ -23,13 +23,21 @@ public class MovieTexturePersoUn : MonoBehaviour
         GetComponent<RawImage>().enabled = true;
         movie = GetComponent<RawImage>().mainTexture as MovieTexture;
 
-        movie.Play();
-        FMOD.Studio.PLAYBACK_STATE fmodPbState;
-        soundevent.getPlaybackState(out fmodPbState);
-        if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        if (GameMaster.SceneTest)
         {
-            soundevent.start();
+            GameObject.Find("SpecialSceneTest").GetComponent<MakePrepotGreatAgain>().StartPlayerChoice();
         }
+        else
+        {
+            movie.Play();
+            FMOD.Studio.PLAYBACK_STATE fmodPbState;
+            soundevent.getPlaybackState(out fmodPbState);
+            if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+            {
+                soundevent.start();
+            }
+        }
+        
     }
 
     public void Continue()

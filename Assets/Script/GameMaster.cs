@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using System.Linq;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
@@ -54,9 +55,15 @@ public class GameMaster : MonoBehaviour
     public GameObject pause;
     CameraShake cameraShake;
     public Animator[] consolesAnim;
-
+    
+    public bool SceneTestNonStatic = false;
+    public static bool SceneTest = false;
     void Awake()
     {
+        if (SceneTestNonStatic)
+        {
+            SceneTest = true;
+        }
         cameraShake = Camera.main.GetComponent<CameraShake>();
         cardSound = Camera.main.GetComponent<CardSound>();
         cartesManager = GetComponent<CartesManager>();
@@ -148,7 +155,7 @@ public class GameMaster : MonoBehaviour
     {
         Cursor.SetCursor(cursorBase, new Vector2(5, 0), CursorMode.Auto);
     }
-
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
@@ -183,9 +190,13 @@ public class GameMaster : MonoBehaviour
             else if (etat == 1)
             {
                 GameObject.Find("PictosCartes_3").transform.rotation = SecondCam.rotation;
-                if (!evenementProc.ActuallySeeking && CartesManager.PhaseLente)
+                if (!evenementProc.ActuallySeeking && CartesManager.PhaseLente && !SceneTest)
                 {
                     evenementProc.FindNewTimer(30); //Temps à donner = le temps de la destination
+                }
+                else if (!evenementProc.ActuallySeeking && CartesManager.PhaseLente && SceneTest)
+                {
+                    evenementProc.FindNewTimer(0.1f); //Temps à donner = le temps de la destination 
                 }
             }
             else if (etat == 2)

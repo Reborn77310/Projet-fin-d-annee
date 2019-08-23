@@ -373,9 +373,17 @@ public class CartesManager : MonoBehaviour
         }
     }
 
-    public void Prepot()
+    public void Prepot(int cardType1, int cardType2,int wantedRoom)
     {
-        var mm = GetComponent<SalleManager>().allSalles[0].MyGo.GetComponent<ModuleManager>();
+        ModuleManager mm;
+        if (!gameMaster.SceneTestNonStatic)
+        {
+            mm = GetComponent<SalleManager>().allSalles[0].MyGo.GetComponent<ModuleManager>();
+        }
+        else
+        {
+            mm = GetComponent<SalleManager>().allSalles[wantedRoom].MyGo.GetComponent<ModuleManager>();
+        }
 
         if (mm.cartesModule.Count > 0)
         {
@@ -386,12 +394,16 @@ public class CartesManager : MonoBehaviour
             }
         }
 
-        AjouterUneCarteDansLaMain(0);
+        AjouterUneCarteDansLaMain(cardType1);
         HandToModule(0, mm);
-        AjouterUneCarteDansLaMain(2);
+        AjouterUneCarteDansLaMain(cardType2);
         HandToModule(0, mm);
 
-        DrawCards();
+        if (!gameMaster.SceneTestNonStatic)
+        {
+            DrawCards();
+        }
+        
     }
 
 }
